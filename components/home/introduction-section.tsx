@@ -1,0 +1,90 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n";
+
+type IntroductionSectionProps = {
+  locale: Locale;
+  eyebrow: string;
+  title: string;
+  body: string;
+  note?: string;
+  action: string;
+};
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+export function IntroductionSection({
+  locale,
+  eyebrow,
+  title,
+  body,
+  note,
+  action,
+}: IntroductionSectionProps) {
+  const reduceMotion = useReducedMotion();
+  const imageOffset = locale === "ar" ? -36 : 36;
+
+  return (
+    <section className="overflow-hidden px-5 pt-16 pb-10 sm:px-8 lg:px-12 lg:pt-16 lg:pb-12">
+      <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-16 lg:grid-cols-[1.08fr_.92fr] lg:gap-24">
+        <motion.div
+          className="relative mx-auto w-full max-w-xl pt-9 pr-9 lg:col-start-2 lg:row-start-1"
+          initial={reduceMotion ? false : { opacity: 0, x: imageOffset }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.95, ease }}
+        >
+          <motion.div
+            className="absolute top-0 right-0 h-[calc(100%-2.25rem)] w-[calc(100%-2.25rem)] rounded-[2rem] border-2 border-copad-green bg-copad-green/[0.035] shadow-[14px_-14px_0_rgba(16,159,131,.06),0_28px_65px_rgba(15,61,57,.12)]"
+            initial={reduceMotion ? false : { opacity: 0, x: locale === "ar" ? -12 : 12, y: 12, scale: 0.97 }}
+            whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1.05, ease }}
+            aria-hidden="true"
+          >
+            <span className="absolute inset-3 rounded-[1.45rem] border border-copad-deep/8" />
+          </motion.div>
+          <motion.div
+            className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_30px_80px_rgba(15,61,57,.2)]"
+            whileHover={reduceMotion ? undefined : { x: locale === "ar" ? -8 : 8, y: -8 }}
+            transition={{ duration: 0.45, ease }}
+          >
+            <Image
+              className="object-cover transition-transform duration-1000 hover:scale-[1.035]"
+              src="/images/copad-campus-hero.png"
+              alt={title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 44vw"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-copad-deep/30 via-transparent to-transparent" aria-hidden="true" />
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          className="lg:col-start-1 lg:row-start-1"
+          initial={reduceMotion ? false : { opacity: 0, x: -imageOffset }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.95, delay: 0.08, ease }}
+        >
+          <p className="text-[11px] font-black tracking-[0.2em] text-copad-green uppercase">{eyebrow}</p>
+          <h2 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] tracking-[-0.04em] text-copad-deep lg:text-7xl">{title}</h2>
+          <p className="mt-8 max-w-2xl text-lg leading-9 text-copad-deep/72">{body}</p>
+          {note && <p className="mt-5 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-copad-deep/52">{note}</p>}
+
+          <Link
+            href={`/${locale}/about`}
+            className="group relative isolate mt-9 inline-flex min-w-48 justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(15,61,57,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(16,159,131,.24)]"
+          >
+            <span className="absolute inset-0 -z-10 -translate-x-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0 rtl:translate-x-full rtl:group-hover:translate-x-0" />
+            <span className="relative">{action}</span>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

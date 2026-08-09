@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# COPAD Pharma Egypt Corporate Website
 
-## Getting Started
+Bilingual corporate website built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## Where everything lives
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```text
+app/
+  globals.css                    Tailwind entry + centralized COPAD palette
+  [locale]/                     English and Arabic routes
+    page.tsx                    Home page
+    template.tsx                Route transition
+    about/
+      page.tsx                  About route
+      _components/              About-only components
+    divisions/                  Same pattern for every corporate page
+    therapeutic-areas/
+    products/
+    manufacturing-quality/
+    insights/
+    partner-with-us/
+    careers/
+    contact/
+components/
+  brand.tsx                     COPAD brand lockup
+  forms/                        Shared forms
+  layout/                       Header and footer
+  media/                        Images and media placeholders
+  motion/                       Framer Motion primitives
+  pages/                        Shared corporate page building blocks
+content/
+  site.ts                       Approved English and Arabic copy
+  types.ts                      CMS-ready content types
+docs/
+  content/                      Approved manuscript
+  planning/                     Roadmap, WBS, and dashboard references
+lib/
+  i18n.ts                       Locale and RTL helpers
+public/images/                  Runtime images only
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Each URL has an explicit `page.tsx`. Components that belong to only one page sit beside it in that route's `_components` folder. Truly reusable interface pieces live in the root `components` folder.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Brand colors
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All palette values are defined once in `app/globals.css` under `@theme`:
 
-## Learn More
+- `copad-deep` — `#0F3D39`
+- `copad-green` — `#109F83`
+- `copad-sand` — `#EEEBE5`
+- `copad-white` — `#F9F9F9`
 
-To learn more about Next.js, take a look at the following resources:
+Use Tailwind classes such as `bg-copad-deep`, `text-copad-green`, and `border-copad-sand`. Do not hardcode brand colors inside components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Content source
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The approved content source is `docs/content/copad-website-content-manuscript.docx`. Runtime copy lives in `content/site.ts`, which can later be replaced by a dashboard or CMS without changing the routes.
 
-## Deploy on Vercel
+## Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open `http://127.0.0.1:3000`. The root URL redirects to `/en` or `/ar` based on the browser language.
+
+## Validation
+
+```bash
+npm run lint
+npx next typegen
+npx tsc --noEmit
+npm run build
+```
