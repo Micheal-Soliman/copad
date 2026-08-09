@@ -17,8 +17,8 @@ export function AboutPageContent({ locale }: { locale: Locale }) {
   const values = content.blocks[3]!;
 
   return (
-    <main className="min-h-screen overflow-clip bg-copad-white">
-      <SiteHeader locale={locale} />
+    <main className="min-h-screen overflow-x-clip bg-copad-white">
+      <SiteHeader locale={locale} transparent />
       <AboutHero locale={locale} title={content.title} intro={content.intro} />
       <HistoryTimeline locale={locale} title={history.title} body={history.body} items={history.items ?? []} />
       <CorporateDirectionSection locale={locale} content={direction} />

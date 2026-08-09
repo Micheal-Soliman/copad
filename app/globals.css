@@ -17,13 +17,24 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
+    min-width: 320px;
+    overflow-x: clip;
     background: var(--color-copad-white);
     color: var(--color-copad-deep);
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
@@ -34,6 +45,12 @@
   :focus-visible {
     outline: 2px solid var(--color-copad-green);
     outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 

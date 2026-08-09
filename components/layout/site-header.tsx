@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Brand } from "@/components/brand";
 import { siteCopy } from "@/content/site";
 import { otherLocale, type Locale } from "@/lib/i18n";
@@ -27,9 +27,25 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
   const languageLabel = locale === "en" ? "AR" : "EN";
   const accessibility = copy.ui.accessibility;
 
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
+
   return (
     <header className={`fixed inset-x-0 top-0 z-50 border-b transition-[box-shadow,backdrop-filter] duration-500 ${overlay ? "copad-scroll-header text-white backdrop-blur-md" : "border-copad-deep/10 bg-copad-white/92 text-copad-deep shadow-[0_12px_40px_rgba(15,61,57,.08)] backdrop-blur-xl"}`}>
-      <div className="relative mx-auto flex h-20 w-full max-w-[1440px] items-center px-5 sm:px-8 lg:px-12">
+      <div className="relative mx-auto flex h-[4.5rem] w-full max-w-[1440px] items-center px-4 sm:h-20 sm:px-8 lg:px-12">
         <Brand locale={locale} inverted={overlay} />
 
         <nav className="absolute start-1/2 hidden -translate-x-1/2 items-center gap-1 xl:flex rtl:translate-x-1/2" aria-label={accessibility.primaryNavigation}>
@@ -71,14 +87,81 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
 
       <AnimatePresence>
         {open && (
-          <motion.div initial={reduceMotion ? false : { opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: reduceMotion ? 0 : 0.25 }} className="border-t border-copad-deep/10 bg-copad-white px-5 py-5 text-copad-deep shadow-2xl xl:hidden">
-            <nav className="mx-auto grid max-w-[1440px] gap-1" aria-label={accessibility.mobileNavigation}>
-              {navItems.map(([key, href]) => <Link key={key} href={`/${locale}/${href}`} className={`relative rounded-xl px-4 py-3 text-sm font-bold hover:bg-copad-sand ${pathname === `/${locale}/${href}` ? "text-copad-green" : ""}`}>{copy.nav[key]}</Link>)}
-              <div className="mt-3 flex items-center gap-3 border-t border-copad-deep/10 pt-4">
-                <Link href={localeHref} className="rounded-full border border-copad-green px-4 py-2 text-[10px] font-black tracking-widest">{languageLabel}</Link>
-                <Link href={`/${locale}/contact`} className="rounded-full bg-copad-green px-5 py-2.5 text-xs font-black text-white">{copy.nav.contact}</Link>
-              </div>
-            </nav>
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={accessibility.mobileNavigation}
+            initial={reduceMotion ? false : { clipPath: "inset(0 0 100% 0)", opacity: 0.7 }}
+            animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
+            exit={{ clipPath: "inset(0 0 100% 0)", opacity: 0.7 }}
+            transition={{ duration: reduceMotion ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[70] flex h-svh flex-col overflow-hidden bg-copad-deep text-white xl:hidden"
+          >
+            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(16,159,131,.22),transparent_28%),linear-gradient(145deg,#0f3d39_0%,#092f2c_100%)]" />
+            <motion.span
+              aria-hidden="true"
+              className="pointer-events-none absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[clamp(7rem,35vw,15rem)] leading-none tracking-[-0.08em] text-white/[.025] rtl:translate-x-1/2"
+              animate={reduceMotion ? undefined : { opacity: [0.018, 0.05, 0.018], scale: [0.98, 1.02, 0.98] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              COPAD
+            </motion.span>
+
+            <div className="relative z-10 flex h-[4.5rem] shrink-0 items-center justify-between border-b border-white/12 px-4 sm:h-20 sm:px-8">
+              <Brand locale={locale} inverted onClick={() => setOpen(false)} />
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label={accessibility.closeNavigation}
+                className="group flex size-11 items-center justify-center rounded-full border border-white/24 text-white transition duration-300 active:scale-90"
+              >
+                <span className="relative block size-5" aria-hidden="true">
+                  <span className="absolute start-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rotate-45 rounded-full bg-current transition-transform duration-300 group-hover:rotate-[135deg]" />
+                  <span className="absolute start-0 top-1/2 h-0.5 w-5 -translate-y-1/2 -rotate-45 rounded-full bg-current transition-transform duration-300 group-hover:rotate-45" />
+                </span>
+              </button>
+            </div>
+
+            <div className="relative z-10 min-h-0 flex-1 px-4 sm:px-8">
+              <nav className="absolute inset-x-4 top-[calc(50svh-4.5rem)] mx-auto flex max-h-[calc(100svh-11rem)] w-auto max-w-3xl -translate-y-1/2 flex-col justify-center gap-1 overflow-y-auto overscroll-contain py-2 sm:inset-x-8 sm:top-[calc(50svh-5rem)]" aria-label={accessibility.mobileNavigation}>
+                {navItems.map(([key, href], index) => {
+                  const active = pathname === `/${locale}/${href}`;
+                  const side = (index % 2 === 0 ? -1 : 1) * (locale === "ar" ? -1 : 1);
+
+                  return (
+                    <motion.div
+                      key={key}
+                      initial={reduceMotion ? false : { opacity: 0, x: side * 34 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.16 + index * 0.055, ease: [0.22, 1, 0.36, 1] }}
+                      className="text-center"
+                    >
+                      <Link
+                        onClick={() => setOpen(false)}
+                        href={`/${locale}/${href}`}
+                        className={`group relative flex min-h-12 items-center justify-center py-2.5 font-display text-[clamp(1.55rem,7vw,2.5rem)] leading-none tracking-[-0.035em] transition-colors duration-300 sm:min-h-16 sm:py-3 ${active ? "text-copad-green" : "text-white/78 hover:text-white"}`}
+                      >
+                        {copy.nav[key]}
+                        <span aria-hidden="true" className={`absolute bottom-0 start-1/2 h-px w-14 -translate-x-1/2 bg-copad-green transition-transform duration-500 rtl:translate-x-1/2 ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-active:scale-x-100"}`} />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-x-4 bottom-5 mx-auto flex w-auto max-w-3xl items-center gap-3 border-t border-white/12 pt-4 sm:inset-x-8 sm:bottom-7 sm:pt-5"
+              >
+                <Link onClick={() => setOpen(false)} href={localeHref} className="flex size-12 shrink-0 items-center justify-center rounded-full border border-copad-green text-[10px] font-black tracking-widest transition active:scale-90">{languageLabel}</Link>
+                <Link onClick={() => setOpen(false)} href={`/${locale}/contact`} className="group relative isolate flex min-h-12 flex-1 items-center justify-center overflow-hidden rounded-full bg-copad-green px-5 text-xs font-black text-white shadow-[0_14px_34px_rgba(16,159,131,.25)] transition active:scale-[.98]">
+                  <span aria-hidden="true" className="absolute inset-0 -z-10 origin-start scale-x-0 bg-white transition-transform duration-500 group-active:scale-x-100" />
+                  <span className="transition-colors duration-500 group-active:text-copad-deep">{copy.nav.contact}</span>
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

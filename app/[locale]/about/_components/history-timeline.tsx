@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
@@ -35,9 +35,32 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
 
   return (
     <section ref={sectionRef} className="relative bg-copad-sand/45 lg:h-[280vh]">
-      <div className="px-5 py-24 sm:px-8 lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-16">
+      <div className="px-4 pt-10 pb-2 sm:px-8 sm:pt-16 sm:pb-4 lg:hidden">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, x: isArabic ? 24 : -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.72, ease }}
+        >
+          <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
+          <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:text-5xl">{title}</h2>
+        </motion.div>
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.72, delay: 0.06, ease }}
+          className="mt-5 max-w-3xl text-sm leading-7 text-copad-deep/66 sm:mt-6 sm:text-base sm:leading-8"
+        >
+          {body}
+        </motion.p>
+      </div>
+
+      <MobileTimelineStack items={items} isArabic={isArabic} />
+
+      <div className="hidden lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-16">
         <div className="mx-auto w-full max-w-[1440px]">
-          <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, x: isArabic ? 24 : -24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -45,14 +68,14 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
               transition={{ duration: 0.72, ease }}
             >
               <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
-              <h2 className="mt-5 max-w-3xl font-display text-5xl leading-[1] tracking-[-0.045em] text-copad-deep lg:text-6xl xl:text-7xl">{title}</h2>
+              <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:mt-5 sm:text-5xl lg:text-6xl xl:text-7xl">{title}</h2>
             </motion.div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, x: isArabic ? -24 : 24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.72, delay: 0.06, ease }}
-              className="max-w-3xl text-base leading-8 text-copad-deep/66 lg:self-end lg:text-base lg:leading-8 xl:text-lg xl:leading-9"
+              className="max-w-3xl text-sm leading-7 text-copad-deep/66 sm:text-base sm:leading-8 lg:self-end xl:text-lg xl:leading-9"
             >
               {body}
             </motion.p>
@@ -101,40 +124,99 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
             })}
           </div>
 
-          <div className="relative mt-14 ps-9 lg:hidden">
-            {items.map((item, index) => {
-              const { label, description } = splitTimelineItem(item);
-              return (
-                <motion.article
-                  key={item}
-                  initial={reduceMotion ? false : { opacity: 0, x: isArabic ? -18 : 18 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.55 }}
-                  transition={{ duration: 0.55, ease }}
-                  className="relative border-b border-copad-deep/10 py-6 first:pt-0 last:border-b-0 last:pb-0"
-                >
-                  {index < items.length - 1 && (
-                    <motion.span
-                      aria-hidden="true"
-                      initial={reduceMotion ? false : { scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true, amount: 0.55 }}
-                      transition={{ duration: 0.55, delay: 0.18, ease }}
-                      className={`absolute -start-[1.95rem] w-px origin-top bg-copad-green ${index === 0 ? "top-2 -bottom-7" : "top-8 -bottom-7"}`}
-                    />
-                  )}
-                  <span className={`absolute -start-[2.42rem] flex size-4 items-center justify-center rounded-full border border-copad-green bg-copad-sand ${index === 0 ? "top-1" : "top-7"}`}>
-                    <span className="size-1.5 rounded-full bg-copad-green" />
-                  </span>
-                  <span className="text-[9px] font-black tracking-[0.16em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-2 font-display text-3xl tracking-[-0.03em] text-copad-deep">{label}</h3>
-                  {description && <p className="mt-2 max-w-xl text-sm leading-7 text-copad-deep/58">{description}</p>}
-                </motion.article>
-              );
-            })}
-          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function MobileTimelineStack({ items, isArabic }: { items: string[]; isArabic: boolean }) {
+  const stackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: stackRef, offset: ["start start", "end 80%"] });
+  const screens = Math.max(items.length, 1);
+
+  return (
+    <div ref={stackRef} className="relative lg:hidden" style={{ height: `${screens * 100}svh` }}>
+      <div className="sticky top-0 z-10 h-[80svh] overflow-visible px-4 sm:px-8">
+        <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto h-full max-w-2xl">
+          {items.map((item, index) => {
+            const { label, description } = splitTimelineItem(item);
+            return (
+              <MobileTimelineCard
+                key={item}
+                index={index}
+                total={items.length}
+                progress={scrollYProgress}
+                label={label}
+                description={description}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileTimelineCard({
+  index,
+  total,
+  progress,
+  label,
+  description,
+}: {
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+  label: string;
+  description: string;
+}) {
+  const segments = Math.max(total - 1, 1);
+  const enterStart = index === 0 ? 0 : (index - 1) / segments;
+  const enterEnd = index === 0 ? 1 : index / segments;
+  const nextStart = index / segments;
+  const nextEnd = Math.min((index + 1) / segments, 1);
+  const previewStart = Math.max(0, enterStart - 0.035);
+  const yInput = index === 0 ? [0, 1] : index === 1 ? [0, enterEnd] : [0, previewStart, enterStart, enterEnd];
+  const yOutput = index === 0 ? ["0%", "0%"] : index === 1 ? ["120%", "0%"] : ["210%", "210%", "120%", "0%"];
+  const y = useTransform(progress, yInput, yOutput);
+  const scale = useTransform(progress, index === total - 1 ? [0, 1] : [nextStart, nextEnd], index === total - 1 ? [1, 1] : [1, 0.955]);
+  const tone = index % 3;
+  const light = tone === 2;
+
+  return (
+    <motion.article
+      style={{ y, scale, zIndex: index + 1 }}
+      className={`absolute inset-x-0 top-[12svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_28px_75px_rgba(15,61,57,.2)] sm:rounded-[2rem] sm:p-7 ${
+        tone === 0
+          ? "border-white/12 bg-copad-deep text-white"
+          : tone === 1
+            ? "border-copad-green bg-copad-green text-white"
+            : "border-copad-deep/10 bg-copad-white text-copad-deep"
+      }`}
+    >
+      <div aria-hidden="true" className={`absolute -end-20 -top-24 size-64 rounded-full border ${light ? "border-copad-deep/8" : "border-white/10"}`} />
+      <span aria-hidden="true" className={`absolute -end-6 top-16 font-display text-[8rem] leading-none tracking-[-0.08em] ${light ? "text-copad-deep/[.035]" : "text-white/[.045]"}`}>
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <div className="relative flex items-center gap-4">
+        <span className={`rounded-full border px-3 py-1.5 text-[9px] font-black tracking-[0.18em] ${light ? "border-copad-green/30 text-copad-green" : "border-white/22 text-white/76"}`}>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className={`h-px flex-1 ${light ? "bg-copad-green/30" : "bg-white/22"}`} />
+        <div className="flex gap-1.5" aria-hidden="true">
+          {Array.from({ length: total }, (_, dotIndex) => (
+            <span key={dotIndex} className={`size-1.5 rounded-full ${dotIndex === index ? (light ? "bg-copad-green" : "bg-white") : light ? "bg-copad-deep/14" : "bg-white/22"}`} />
+          ))}
+        </div>
+      </div>
+
+      <div className="relative mt-auto pb-1 sm:pb-4">
+        <span aria-hidden="true" className={`mb-4 block h-px w-12 sm:w-16 ${light ? "bg-copad-green" : "bg-white/65"}`} />
+        <h3 className="max-w-[17rem] font-display text-[2rem] leading-[.96] tracking-[-0.045em] sm:max-w-md sm:text-4xl">{label}</h3>
+        {description && <p className={`mt-3 max-w-md text-[13px] leading-6 sm:mt-4 sm:text-sm sm:leading-7 ${light ? "text-copad-deep/64" : "text-white/70"}`}>{description}</p>}
+      </div>
+    </motion.article>
   );
 }

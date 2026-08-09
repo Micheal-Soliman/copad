@@ -21,8 +21,8 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section className="overflow-hidden bg-copad-white px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
-      <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
+    <section className="overflow-hidden bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+      <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: -48 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -31,8 +31,9 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="relative mx-auto w-full max-w-2xl lg:col-start-1 lg:row-start-1"
         >
           <motion.div
-            className="relative aspect-[5/4] overflow-hidden rounded-[2.5rem] rounded-bl-[6rem] border border-copad-deep/10 bg-copad-deep shadow-[0_30px_80px_rgba(15,61,57,.14)]"
+            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(15,61,57,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(15,61,57,.14)]"
             whileHover={reduceMotion ? undefined : { scale: 1.015 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.985 }}
             transition={{ duration: 0.6, ease }}
           >
             <Image
@@ -43,7 +44,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
               sizes="(max-width: 1024px) 100vw, 48vw"
             />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep/72 via-copad-deep/5 to-transparent" />
-            <div className="absolute inset-x-6 bottom-6 rounded-[1.5rem] border border-white/15 bg-copad-deep/62 p-5 text-white backdrop-blur-md lg:inset-x-8 lg:bottom-8 lg:p-6">
+            <div className="absolute inset-x-4 bottom-4 rounded-[1.25rem] border border-white/15 bg-copad-deep/62 p-4 text-white backdrop-blur-md sm:inset-x-6 sm:bottom-6 sm:rounded-[1.5rem] sm:p-5 lg:inset-x-8 lg:bottom-8 lg:p-6">
               <span className="text-[9px] font-black tracking-[0.2em] text-copad-green uppercase">{ui.manufacturingImageEyebrow}</span>
               <p className="mt-2 max-w-sm text-xs leading-6 font-bold text-white/82">{ui.manufacturingImageCaption}</p>
             </div>
@@ -67,8 +68,8 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="lg:col-start-2 lg:row-start-1"
         >
           <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-          <h2 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] tracking-[-0.045em] text-copad-deep lg:text-7xl">{title}</h2>
-          <p className="mt-8 max-w-2xl text-base leading-8 text-copad-deep/66 lg:text-lg lg:leading-9">{body}</p>
+          <h2 className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl">{title}</h2>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:text-lg lg:leading-9">{body}</p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3" aria-label={ui.manufacturingPrinciplesLabel}>
             {ui.manufacturingPrinciples.map((principle, index) => (
@@ -79,7 +80,8 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.6, delay: 0.16 + index * 0.1, ease }}
                 whileHover={reduceMotion ? undefined : { y: -5 }}
-                className="group/principle relative isolate overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-4 shadow-[0_10px_30px_rgba(15,61,57,.04)]"
+                whileTap={reduceMotion ? undefined : { y: -4, scale: 0.985 }}
+              className="group/principle relative isolate min-h-20 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-4 shadow-[0_10px_30px_rgba(15,61,57,.04)]"
               >
                 <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/principle:scale-y-100" />
                 <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
@@ -89,7 +91,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <Link href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-9 inline-flex min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)]">
+          <Link href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)] sm:mt-9 sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
           </Link>

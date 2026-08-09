@@ -21,7 +21,7 @@ export function SnapshotBar({ locale }: { locale: Locale }) {
   const pulseStart = locale === "ar" ? "90%" : "10%";
 
   return (
-    <section className="relative z-10 overflow-hidden px-5 py-12 sm:px-8 lg:px-12 lg:py-10">
+    <section className="relative z-10 overflow-hidden px-4 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-10">
       <div className="relative mx-auto max-w-[1440px]">
         <div className="relative hidden h-64 lg:block">
           <motion.div aria-hidden="true" className="absolute inset-0" initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.45 }}>
@@ -66,10 +66,12 @@ export function SnapshotBar({ locale }: { locale: Locale }) {
         </div>
 
         <div className="relative lg:hidden">
-          <motion.div aria-hidden="true" className="absolute top-2 bottom-2 start-[9px] w-px bg-copad-deep/15" initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.25 }}>
-            <motion.span className="absolute start-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-copad-green shadow-[0_0_14px_4px_rgba(16,159,131,.4)]" style={reduceMotion ? { top: "0%" } : undefined} variants={reduceMotion ? undefined : { hidden: { opacity: 0, top: "0%" }, visible: { opacity: 1, top: ["0%", "25%", "50%", "75%", "100%"], transition: { duration: 7, delay: 0.3, repeat: Infinity, repeatType: "reverse", ease: "linear", times: [0, 0.25, 0.5, 0.75, 1] } } }} />
+          <motion.div aria-hidden="true" className="absolute top-[.875rem] bottom-[5.125rem] start-[9px] w-px bg-copad-deep/18" initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.25 }}>
+            <motion.span className="absolute start-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-copad-white bg-copad-green shadow-[0_0_18px_6px_rgba(16,159,131,.52)]" style={reduceMotion ? { top: "0%" } : undefined} variants={reduceMotion ? undefined : { hidden: { opacity: 0, top: "0%" }, visible: { opacity: 1, top: ["0%", "25%", "50%", "75%", "100%"], transition: { duration: 7, delay: 0.3, repeat: Infinity, repeatType: "reverse", ease: "linear", times: [0, 0.25, 0.5, 0.75, 1] } } }}>
+              {!reduceMotion && <span className="absolute -inset-2 animate-ping rounded-full border border-copad-green/35" />}
+            </motion.span>
           </motion.div>
-          <motion.ol variants={reduceMotion ? undefined : list} initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="space-y-7">
+          <motion.ol variants={reduceMotion ? undefined : list} initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="grid auto-rows-[6rem]">
             {data.map((entry, index) => (
               <motion.li variants={reduceMotion ? undefined : item} key={entry} className="grid grid-cols-[1.25rem_1fr] gap-5">
                 <span className="relative mt-1 grid size-5 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)]"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(16,159,131,.32)]" /></span>
