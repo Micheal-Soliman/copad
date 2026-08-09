@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
@@ -133,6 +133,12 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
 function MobileTimelineStack({ items, isArabic }: { items: string[]; isArabic: boolean }) {
   const stackRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: stackRef, offset: ["start start", "end 80%"] });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 115,
+    damping: 28,
+    mass: 0.28,
+    restDelta: 0.0005,
+  });
   const screens = Math.max(items.length, 1);
 
   return (
@@ -146,7 +152,7 @@ function MobileTimelineStack({ items, isArabic }: { items: string[]; isArabic: b
                 key={item}
                 index={index}
                 total={items.length}
-                progress={scrollYProgress}
+                progress={smoothProgress}
                 label={label}
                 description={description}
               />
@@ -176,9 +182,9 @@ function MobileTimelineCard({
   const enterEnd = index === 0 ? 1 : index / segments;
   const nextStart = index / segments;
   const nextEnd = Math.min((index + 1) / segments, 1);
-  const previewStart = Math.max(0, enterStart - 0.035);
-  const yInput = index === 0 ? [0, 1] : index === 1 ? [0, enterEnd] : [0, previewStart, enterStart, enterEnd];
-  const yOutput = index === 0 ? ["0%", "0%"] : index === 1 ? ["120%", "0%"] : ["210%", "210%", "120%", "0%"];
+  const previewStart = Math.max(0, (index - 2) / segments);
+  const yInput = index === 0 ? [0, 1] : index === 1 ? [0, enterEnd] : index === 2 ? [0, enterStart, enterEnd] : [0, previewStart, enterStart, enterEnd];
+  const yOutput = index === 0 ? ["0%", "0%"] : index === 1 ? ["112%", "0%"] : index === 2 ? ["205%", "112%", "0%"] : ["205%", "205%", "112%", "0%"];
   const y = useTransform(progress, yInput, yOutput);
   const scale = useTransform(progress, index === total - 1 ? [0, 1] : [nextStart, nextEnd], index === total - 1 ? [1, 1] : [1, 0.955]);
   const tone = index % 3;
@@ -187,7 +193,7 @@ function MobileTimelineCard({
   return (
     <motion.article
       style={{ y, scale, zIndex: index + 1 }}
-      className={`absolute inset-x-0 top-[12svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_28px_75px_rgba(15,61,57,.2)] sm:rounded-[2rem] sm:p-7 ${
+      className={`absolute inset-x-0 top-[12svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_28px_75px_rgba(15,61,57,.2)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
         tone === 0
           ? "border-white/12 bg-copad-deep text-white"
           : tone === 1
