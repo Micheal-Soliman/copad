@@ -76,11 +76,11 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
               />
 
               <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 flex h-full flex-col">
-                <div className="flex items-start justify-between gap-6">
+                <div className="relative min-h-5">
                   <p className={`text-[10px] font-black tracking-[0.22em] uppercase ${dark ? "text-copad-green" : "text-copad-green"}`}>{card.eyebrow}</p>
                   <motion.span
                     aria-hidden="true"
-                    className={`font-display text-6xl leading-none ${dark ? "text-white/8" : "text-copad-deep/7"}`}
+                    className={`absolute -top-1 end-0 font-display text-6xl leading-none ${dark ? "text-white/8" : "text-copad-deep/7"}`}
                     animate={reduceMotion ? undefined : { y: isActive ? -8 : 0, opacity: isActive ? 1 : 0.65 }}
                     transition={{ duration: 0.6, ease }}
                   >
