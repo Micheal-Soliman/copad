@@ -16,8 +16,11 @@
   }
 
   html {
-    scroll-behavior: smooth;
     overflow-x: clip;
+  }
+
+  html:not(.lenis) {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -45,6 +48,26 @@
   :focus-visible {
     outline: 2px solid var(--color-copad-green);
     outline-offset: 4px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-magnetic] {
+    translate: var(--magnetic-x, 0px) var(--magnetic-y, 0px);
+    transition-property: translate, color, background-color, border-color, box-shadow;
+    transition-duration: 180ms, 500ms, 500ms, 500ms, 500ms;
+    transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+    will-change: translate;
+  }
+
+  body.copad-custom-cursor,
+  body.copad-custom-cursor a,
+  body.copad-custom-cursor button,
+  body.copad-custom-cursor input,
+  body.copad-custom-cursor textarea,
+  body.copad-custom-cursor select,
+  body.copad-custom-cursor [role="button"] {
+    cursor: none;
   }
 }
 

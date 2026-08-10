@@ -1,8 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import { ScrollAtmosphere } from "@/components/motion/scroll-atmosphere";
+import { ScrollImageReveal } from "@/components/motion/scroll-image-reveal";
+import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
+import { RevealHeading } from "@/components/motion/reveal-heading";
+import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 
@@ -18,23 +24,29 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function ManufacturingPreview({ locale, eyebrow, title, body, action }: ManufacturingPreviewProps) {
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isDesktop = useDesktopLayout();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const imageAccentWidth = useTransform(scrollYProgress, [0.54, 0.72], [0, 96]);
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section className="overflow-hidden bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
-      <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: -48 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.9, ease }}
+    <section id="manufacturing" ref={sectionRef} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[190vh] lg:px-12 lg:py-0">
+      <ScrollAtmosphere progress={scrollYProgress} chapter="04" />
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
+        <ScrollSceneItem
+          progress={scrollYProgress}
+          active={isDesktop}
+          side="left"
+          role="media"
           className="relative mx-auto w-full max-w-2xl lg:col-start-1 lg:row-start-1"
         >
-          <motion.div
+          <ScrollImageReveal
             className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(15,61,57,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(15,61,57,.14)]"
-            whileHover={reduceMotion ? undefined : { scale: 1.015 }}
-            whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-            transition={{ duration: 0.6, ease }}
+            direction="left"
+            progress={isDesktop ? scrollYProgress : undefined}
+            timeline={isDesktop}
+            cursorLabel={ui.interactionLabels.view}
           >
             <Image
               className="object-cover transition-transform duration-[1400ms] hover:scale-[1.035]"
@@ -51,32 +63,33 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             <motion.span
               aria-hidden="true"
               className="absolute top-7 right-7 h-px bg-copad-green"
-              initial={reduceMotion ? false : { width: 0 }}
-              whileInView={{ width: 96 }}
+              initial={reduceMotion || isDesktop ? false : { width: 0 }}
+              whileInView={isDesktop ? undefined : { width: 96 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, delay: 0.35, ease }}
+              style={isDesktop && !reduceMotion ? { width: imageAccentWidth } : undefined}
             />
-          </motion.div>
-        </motion.div>
+          </ScrollImageReveal>
+        </ScrollSceneItem>
 
-        <motion.div
+        <ScrollSceneItem
+          progress={scrollYProgress}
+          active={isDesktop}
+          side="right"
+          role="copy"
           dir={locale === "ar" ? "rtl" : "ltr"}
-          initial={reduceMotion ? false : { opacity: 0, x: 48 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.9, delay: 0.06, ease }}
           className="lg:col-start-2 lg:row-start-1"
         >
           <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-          <h2 className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl">{title}</h2>
+          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
           <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:text-lg lg:leading-9">{body}</p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3" aria-label={ui.manufacturingPrinciplesLabel}>
             {ui.manufacturingPrinciples.map((principle, index) => (
               <motion.div
                 key={principle}
-                initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={reduceMotion || isDesktop ? false : { opacity: 0, y: 18, scale: 0.96 }}
+                whileInView={isDesktop ? undefined : { opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.6, delay: 0.16 + index * 0.1, ease }}
                 whileHover={reduceMotion ? undefined : { y: -5 }}
@@ -91,11 +104,11 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <Link href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)] sm:mt-9 sm:w-auto">
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)] sm:mt-9 sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
           </Link>
-        </motion.div>
+        </ScrollSceneItem>
       </div>
     </section>
   );

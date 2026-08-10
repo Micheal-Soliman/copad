@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 
@@ -19,6 +19,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export function ClosingPreviews({ locale, insights, partnership }: ClosingPreviewsProps) {
   const [active, setActive] = useState(0);
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const sectionLineScale = useTransform(scrollYProgress, [0.04, 0.32], [0, 1]);
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.home;
   const cards = [
@@ -39,14 +42,19 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
   ] as const;
 
   return (
-    <section className="overflow-hidden bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+    <section id="connect" ref={sectionRef} className="relative scroll-mt-20 overflow-hidden bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.985 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.9, ease }}
-        className="mx-auto flex max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(15,61,57,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(15,61,57,.16)] lg:h-[34rem] lg:flex-row"
+        className="relative z-10 mx-auto flex max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(15,61,57,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(15,61,57,.16)] lg:h-[34rem] lg:flex-row"
       >
+        <motion.span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[2px] origin-left bg-linear-to-r from-copad-green via-copad-green to-copad-green/45 shadow-[0_0_14px_rgba(16,159,131,.28)] rtl:origin-right"
+          style={{ scaleX: reduceMotion ? 1 : sectionLineScale }}
+        />
         {cards.map((card, index) => {
           const isActive = active === index;
           const dark = index === 0;
@@ -107,6 +115,8 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
                       <p className={`mt-4 max-w-xl text-sm leading-7 ${dark ? "text-white/64" : "text-copad-deep/62"}`}>{card.body}</p>
 
                       <Link
+                        data-magnetic
+                        data-cursor-label={ui.interactionLabels.go}
                         href={`/${locale}/${card.href}`}
                         className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(15,61,57,.16)] transition duration-500 hover:-translate-y-1 sm:w-auto ${dark ? "bg-white text-copad-deep hover:text-white" : "bg-copad-deep text-white"}`}
                       >
@@ -117,13 +127,6 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
                   </div>
                 </div>
               </div>
-
-              <motion.span
-                aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-1 origin-left bg-copad-green rtl:origin-right"
-                animate={reduceMotion ? undefined : { scaleX: isActive ? 1 : 0 }}
-                transition={{ duration: 0.75, ease }}
-              />
             </motion.article>
           );
         })}

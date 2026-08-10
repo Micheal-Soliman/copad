@@ -12,6 +12,17 @@ const english: SiteCopy = {
   ui: {
     home: {
       heroImageAlt: "COPAD Pharma Egypt facility",
+      sectionNavigationLabel: "Homepage sections",
+      sectionNavigation: [
+        { id: "home", label: "Home" },
+        { id: "snapshot", label: "Snapshot" },
+        { id: "introduction", label: "Company" },
+        { id: "divisions", label: "Divisions" },
+        { id: "therapy", label: "Therapy" },
+        { id: "manufacturing", label: "Manufacturing" },
+        { id: "connect", label: "Connect" },
+      ],
+      interactionLabels: { view: "VIEW", open: "OPEN", go: "GO" },
       introductionEyebrow: "Corporate Introduction",
       divisionsEyebrow: "Divisions Overview",
       divisionLabel: "Division",
@@ -153,6 +164,17 @@ const arabic: SiteCopy = {
   ui: {
     home: {
       heroImageAlt: "منشأة كوباد فارما مصر",
+      sectionNavigationLabel: "أقسام الصفحة الرئيسية",
+      sectionNavigation: [
+        { id: "home", label: "الرئيسية" },
+        { id: "snapshot", label: "لمحة" },
+        { id: "introduction", label: "عن كوباد" },
+        { id: "divisions", label: "القطاعات" },
+        { id: "therapy", label: "المجالات العلاجية" },
+        { id: "manufacturing", label: "التصنيع" },
+        { id: "connect", label: "تواصل" },
+      ],
+      interactionLabels: { view: "شاهد", open: "افتح", go: "اذهب" },
       introductionEyebrow: "مقدمة مؤسسية",
       divisionsEyebrow: "نظرة عامة على القطاعات",
       divisionLabel: "القطاع",

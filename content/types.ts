@@ -46,6 +46,9 @@ export type HomeContent = {
 export type UiCopy = {
   home: {
     heroImageAlt: string;
+    sectionNavigationLabel: string;
+    sectionNavigation: Array<{ id: string; label: string }>;
+    interactionLabels: { view: string; open: string; go: string };
     introductionEyebrow: string;
     divisionsEyebrow: string;
     divisionLabel: string;

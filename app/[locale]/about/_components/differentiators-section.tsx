@@ -18,7 +18,7 @@ export function DifferentiatorsSection({ locale, content }: DifferentiatorsSecti
   const ui = siteCopy[locale].ui.about;
 
   return (
-    <section className="overflow-hidden bg-copad-deep px-4 py-14 text-white sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+    <section className="overflow-hidden bg-copad-deep px-4 py-14 text-white sm:px-8 sm:py-20 lg:px-12 lg:py-24">
       <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: -36, scale: 0.985 }}

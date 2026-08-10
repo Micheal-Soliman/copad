@@ -37,19 +37,19 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
     <section ref={sectionRef} className="relative bg-copad-sand/45 lg:h-[280vh]">
       <div className="px-4 pt-10 pb-2 sm:px-8 sm:pt-16 sm:pb-4 lg:hidden">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: isArabic ? 24 : -24 }}
+          initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.72, ease }}
+          transition={{ duration: 0.6, ease }}
         >
           <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
           <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:text-5xl">{title}</h2>
         </motion.div>
         <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          initial={reduceMotion ? false : { opacity: 0.2, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.72, delay: 0.06, ease }}
+          transition={{ duration: 0.6, delay: 0.04, ease }}
           className="mt-5 max-w-3xl text-sm leading-7 text-copad-deep/66 sm:mt-6 sm:text-base sm:leading-8"
         >
           {body}
@@ -58,23 +58,23 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
 
       <MobileTimelineStack items={items} isArabic={isArabic} />
 
-      <div className="hidden lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-16">
+      <div className="hidden lg:sticky lg:top-20 lg:flex lg:min-h-[calc(100vh-5rem)] lg:items-center lg:px-12 lg:py-12">
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="grid gap-6 sm:gap-10 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, x: isArabic ? 24 : -24 }}
+              initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.72, ease }}
+              transition={{ duration: 0.6, ease }}
             >
               <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
               <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:mt-5 sm:text-5xl lg:text-6xl xl:text-7xl">{title}</h2>
             </motion.div>
             <motion.p
-              initial={reduceMotion ? false : { opacity: 0, x: isArabic ? -24 : 24 }}
+              initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? -24 : 24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.72, delay: 0.06, ease }}
+              transition={{ duration: 0.6, delay: 0.04, ease }}
               className="max-w-3xl text-sm leading-7 text-copad-deep/66 sm:text-base sm:leading-8 lg:self-end xl:text-lg xl:leading-9"
             >
               {body}
@@ -82,6 +82,7 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
           </div>
 
           <div dir={isArabic ? "rtl" : "ltr"} className="relative mt-14 hidden lg:grid lg:grid-cols-5">
+            <span aria-hidden="true" className="absolute top-[9px] right-[10%] left-[10%] h-px bg-copad-deep/10" />
             {items.map((item, index) => {
               const { label, description } = splitTimelineItem(item);
               const isVisible = reduceMotion || index <= activeIndex;
@@ -143,7 +144,7 @@ function MobileTimelineStack({ items, isArabic }: { items: string[]; isArabic: b
 
   return (
     <div ref={stackRef} className="relative lg:hidden" style={{ height: `${screens * 100}svh` }}>
-      <div className="sticky top-0 z-10 h-[80svh] overflow-visible px-4 sm:px-8">
+      <div className="sticky top-0 z-10 h-[64svh] overflow-visible px-4 sm:px-8">
         <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto h-full max-w-2xl">
           {items.map((item, index) => {
             const { label, description } = splitTimelineItem(item);
@@ -193,7 +194,7 @@ function MobileTimelineCard({
   return (
     <motion.article
       style={{ y, scale, zIndex: index + 1 }}
-      className={`absolute inset-x-0 top-[12svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_28px_75px_rgba(15,61,57,.2)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
+      className={`absolute inset-x-0 top-[10svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_24px_62px_rgba(15,61,57,.18)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
         tone === 0
           ? "border-white/12 bg-copad-deep text-white"
           : tone === 1

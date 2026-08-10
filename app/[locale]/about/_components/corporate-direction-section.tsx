@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { ScrollImageReveal } from "@/components/motion/scroll-image-reveal";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import type { AboutStoryBlock } from "./about-types";
@@ -19,7 +20,7 @@ export function CorporateDirectionSection({ locale, content }: CorporateDirectio
   const ui = siteCopy[locale].ui.about;
 
   return (
-    <section className="overflow-hidden border-b border-copad-deep/10 bg-copad-white px-4 py-14 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+    <section className="overflow-hidden border-b border-copad-deep/10 bg-copad-white px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-20 lg:px-12 lg:pt-24 lg:pb-20">
       <div dir="ltr" className="mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:grid-cols-[.88fr_1.12fr] lg:gap-20">
         <motion.div
           dir={isArabic ? "rtl" : "ltr"}
@@ -49,12 +50,8 @@ export function CorporateDirectionSection({ locale, content }: CorporateDirectio
           </div>
         </motion.div>
 
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: 36, scale: 0.985 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.85, delay: 0.06, ease }}
-          whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+        <ScrollImageReveal
+          direction="right"
           className="group relative min-h-[23rem] overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_22px_60px_rgba(15,61,57,.13)] sm:min-h-[35rem] sm:rounded-[2rem] sm:shadow-[0_28px_80px_rgba(15,61,57,.14)] lg:min-h-[43rem]"
         >
           <Image className="object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-[1.025]" src="/images/copad-cleanroom.png" alt={ui.directionImageAlt} fill sizes="(max-width: 1024px) 100vw, 56vw" />
@@ -64,7 +61,7 @@ export function CorporateDirectionSection({ locale, content }: CorporateDirectio
             <p className="mt-2 font-display text-4xl leading-none tracking-[-0.05em] sm:text-5xl">{ui.ambitionValue}</p>
             <p className="mt-3 text-xs leading-6 text-white/68">{ui.ambitionBody}</p>
           </div>
-        </motion.div>
+        </ScrollImageReveal>
       </div>
     </section>
   );

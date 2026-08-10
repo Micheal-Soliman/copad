@@ -20,7 +20,7 @@ export function CorporateValuesSection({ locale, content, cta }: CorporateValues
   const ui = siteCopy[locale].ui.about;
 
   return (
-    <section className="overflow-hidden bg-copad-sand/45 px-3 py-12 sm:px-8 sm:py-20 lg:px-12 lg:py-28">
+    <section className="overflow-hidden bg-copad-sand/45 px-3 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 34, scale: 0.99 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
