@@ -33,7 +33,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
   return (
     <section id="divisions" className="relative scroll-mt-20 overflow-hidden bg-copad-white px-4 pt-10 pb-16 sm:px-8 sm:pb-20 lg:px-12 lg:pt-12 lg:pb-24">
       <div className="relative z-10 mx-auto max-w-[1440px]">
-        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.7 }} className="grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
+        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.4 }} transition={{ duration: 0.7 }} className="grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
           <div>
             <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
             <RevealHeading text={title} className="mt-5 max-w-3xl font-display text-4xl leading-[1] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
@@ -59,7 +59,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                   key={isDesktop ? "desktop-entrance" : "mobile-entrance"}
                   initial={reduceMotion ? false : isDesktop ? index === 0 ? { opacity: 0, x: 180 } : index === 1 ? { opacity: 0, y: -120 } : index === 2 ? { opacity: 0, y: 120 } : { opacity: 0, x: -180 } : { opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true, amount: isDesktop ? 0.4 : 0.55, margin: isDesktop ? "0px 0px -12% 0px" : "0px" }}
+                  viewport={{ once: false, amount: isDesktop ? 0.4 : 0.55, margin: isDesktop ? "0px 0px -12% 0px" : "0px" }}
                   transition={{ duration: isDesktop ? 0.95 : 0.65, delay: isDesktop ? index * 0.13 : index * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full w-full"
                 >

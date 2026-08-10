@@ -1,19 +1,27 @@
 "use client";
 
-import { motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type NavigatorItem = { id: string; label: string };
 
 export function HomeSectionNavigator({ label, items }: { label: string; items: NavigatorItem[] }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "home");
+  const [dockVisible, setDockVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const lenis = useLenis();
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 125, damping: 28, mass: 0.3 });
 
+  const updateDockVisibility = useCallback(() => {
+    const hero = document.getElementById("home");
+    const shouldShow = hero ? hero.getBoundingClientRect().bottom <= window.innerHeight + 2 : window.scrollY > window.innerHeight;
+    setDockVisible((current) => current === shouldShow ? current : shouldShow);
+  }, []);
+
   useMotionValueEvent(scrollYProgress, "change", () => {
+    updateDockVisibility();
     const marker = window.innerHeight * 0.46;
     let closest = items[0]?.id;
     let distance = Number.POSITIVE_INFINITY;
@@ -33,6 +41,11 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
   });
 
   useEffect(() => {
+    const frame = window.requestAnimationFrame(updateDockVisibility);
+    return () => window.cancelAnimationFrame(frame);
+  }, [updateDockVisibility]);
+
+  useEffect(() => {
     const activeButton = navRef.current?.querySelector<HTMLElement>(`[data-section-id="${activeId}"]`);
     activeButton?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [activeId]);
@@ -49,15 +62,25 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
   }
 
   return (
-    <motion.nav
+    <AnimatePresence>
+      {dockVisible && <motion.nav
+      key="home-section-dock"
       ref={navRef}
       aria-label={label}
-      initial={{ opacity: 0, y: 28, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 bottom-2 z-[75] mx-auto w-[calc(100%-1.5rem)] overflow-hidden rounded-full border border-white/16 bg-linear-to-r from-copad-deep/94 via-copad-deep/89 to-copad-deep/94 text-white shadow-[0_10px_30px_rgba(15,61,57,.2)] backdrop-blur-xl sm:bottom-3 sm:w-[calc(100%-3rem)] sm:max-w-[680px]"
+      initial={{ opacity: 0, y: 64, scale: 0.82, rotateX: -22, filter: "blur(14px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)" }}
+      exit={{ opacity: 0, y: 38, scale: 0.9, rotateX: -12, filter: "blur(8px)" }}
+      transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-x-0 bottom-2 z-[75] mx-auto w-[calc(100%-1.5rem)] origin-bottom overflow-hidden rounded-full border border-white/16 bg-linear-to-r from-copad-deep/94 via-copad-deep/89 to-copad-deep/94 text-white shadow-[0_10px_30px_rgba(15,61,57,.2)] backdrop-blur-xl [perspective:1000px] sm:bottom-3 sm:w-[calc(100%-3rem)] sm:max-w-[680px]"
     >
       <span aria-hidden="true" className="absolute inset-x-[8%] top-0 h-px bg-linear-to-r from-transparent via-white/28 to-transparent" />
+      <motion.span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 w-24 -skew-x-12 bg-linear-to-r from-transparent via-white/18 to-transparent blur-sm"
+        initial={{ x: "-140%" }}
+        animate={{ x: "760%" }}
+        transition={{ duration: 1.15, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+      />
       <div className="relative flex items-center gap-0.5 overflow-x-auto px-1.5 pt-1.5 pb-2 [scrollbar-width:none] sm:gap-1 sm:px-2 sm:pt-2 sm:pb-2.5 [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const active = activeId === item.id;
@@ -81,6 +104,7 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10">
         <motion.span className="block h-full origin-left bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.75)] rtl:origin-right" style={{ scaleX: progress }} />
       </div>
-    </motion.nav>
+      </motion.nav>}
+    </AnimatePresence>
   );
 }

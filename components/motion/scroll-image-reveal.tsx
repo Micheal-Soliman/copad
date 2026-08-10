@@ -25,11 +25,13 @@ export function ScrollImageReveal({ children, className = "", direction = "right
   const smoothTiltY = useSpring(tiltY, { stiffness: 180, damping: 24, mass: 0.35 });
   const closedClip = direction === "right" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
   const openClip = "inset(0 0 0 0)";
-  const timelineClip = useTransform(progress, [0.4, 0.64], [closedClip, openClip]);
+  const timelineClip = useTransform(progress, [0.4, 0.64, 0.82, 1], [closedClip, openClip, openClip, closedClip]);
   const timelineCurtainClip = useTransform(
     progress,
-    [0.4, 0.64],
-    direction === "right" ? ["inset(0 0 0 0)", "inset(0 0 0 100%)"] : ["inset(0 0 0 0)", "inset(0 100% 0 0)"],
+    [0.4, 0.64, 0.82, 1],
+    direction === "right"
+      ? ["inset(0 0 0 0)", "inset(0 0 0 100%)", "inset(0 0 0 100%)", "inset(0 0 0 0)"]
+      : ["inset(0 0 0 0)", "inset(0 100% 0 0)", "inset(0 100% 0 0)", "inset(0 0 0 0)"],
   );
   const mediaScale = useTransform(progress, [0, 0.58], [1.045, 1]);
   const mediaY = useTransform(progress, [0, 0.62, 1], [10, 0, -6]);
