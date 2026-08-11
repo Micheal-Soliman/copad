@@ -68,6 +68,8 @@ export type UiCopy = {
     partnershipAction: string;
   };
   about: {
+    sectionNavigationLabel: string;
+    sectionNavigation: Array<{ id: string; label: string }>;
     heroFacts: Array<{ label: string; value: string }>;
     heroImageAlt: string;
     heroCaption: string;

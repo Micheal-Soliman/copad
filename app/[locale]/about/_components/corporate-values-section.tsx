@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import Link from "next/link";
+import { useRef } from "react";
+import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import type { AboutStoryBlock } from "./about-types";
@@ -15,17 +17,27 @@ type CorporateValuesSectionProps = {
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function CorporateValuesSection({ locale, content, cta }: CorporateValuesSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const isDesktop = useDesktopLayout();
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.about;
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const cardOpacity = useTransform(scrollYProgress, [0, 0.14, 1], [0.35, 1, 1]);
+  const cardY = useTransform(scrollYProgress, [0, 0.16, 1], [44, 0, 0]);
+  const cardScale = useTransform(scrollYProgress, [0, 0.18, 1], [0.975, 1, 1]);
+  const copyOpacity = useTransform(scrollYProgress, [0.08, 0.25, 1], [0, 1, 1]);
+  const finaleOpacity = useTransform(scrollYProgress, [0.66, 0.82, 1], [0, 1, 1]);
 
   return (
-    <section className="overflow-hidden bg-copad-sand/45 px-3 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+    <section id="values" ref={sectionRef} className="relative scroll-mt-20 overflow-hidden bg-copad-sand/45 px-3 py-10 sm:px-8 sm:py-16 lg:h-[190vh] lg:px-12 lg:py-0">
+      <div className="lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center">
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 34, scale: 0.99 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        initial={reduceMotion || isDesktop ? false : { opacity: 0, y: 34, scale: 0.99 }}
+        whileInView={isDesktop ? undefined : { opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.16 }}
         transition={{ duration: 0.85, ease }}
+        style={isDesktop && !reduceMotion ? { opacity: cardOpacity, y: cardY, scale: cardScale } : undefined}
         className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[1.75rem] bg-copad-deep text-white shadow-[0_24px_70px_rgba(15,61,57,.16)] sm:rounded-[2.5rem] sm:shadow-[0_30px_90px_rgba(15,61,57,.18)] lg:px-14 lg:py-16"
       >
         <div aria-hidden="true" className="absolute top-0 end-0 h-px w-2/5 bg-linear-to-l from-copad-green via-copad-green/45 to-transparent" />
@@ -114,10 +126,11 @@ export function CorporateValuesSection({ locale, content, cta }: CorporateValues
 
         <div className="relative hidden gap-10 sm:gap-14 lg:grid lg:grid-cols-[.88fr_1.12fr] lg:gap-20">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, x: isArabic ? 26 : -26 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={reduceMotion || isDesktop ? false : { opacity: 0, x: isArabic ? 26 : -26 }}
+            whileInView={isDesktop ? undefined : { opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
+            style={isDesktop && !reduceMotion ? { opacity: copyOpacity } : undefined}
             className="lg:flex lg:flex-col lg:justify-between"
           >
             <div>
@@ -126,36 +139,38 @@ export function CorporateValuesSection({ locale, content, cta }: CorporateValues
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/66 sm:mt-7 sm:text-base sm:leading-8 lg:text-lg lg:leading-9">{content.body}</p>
             </div>
 
+            <motion.div style={isDesktop && !reduceMotion ? { opacity: finaleOpacity } : undefined}>
             <Link href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-green px-7 py-4 text-xs font-black text-white transition duration-500 hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(16,159,131,.28)] sm:mt-9 sm:w-fit">
               <span aria-hidden="true" className="absolute inset-0 -z-10 origin-start scale-x-0 bg-white transition-transform duration-500 group-hover:scale-x-100" />
               <span className="transition-colors duration-500 group-hover:text-copad-deep">{cta}</span>
             </Link>
+            </motion.div>
           </motion.div>
 
           <div className="self-start">
             <div className="h-fit overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[.035] backdrop-blur-sm">
               {ui.principles.map((principle, index) => (
-                <motion.article
+                <AboutValuePrinciple
                   key={principle}
-                  initial={reduceMotion ? false : { opacity: 0, x: isArabic ? -22 : 22 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.55 }}
-                  transition={{ duration: 0.62, delay: 0.12 + index * 0.09, ease }}
-                  whileTap={reduceMotion ? undefined : { x: isArabic ? -4 : 4 }}
+                  progress={scrollYProgress}
+                  active={isDesktop && !reduceMotion}
+                  index={index}
+                  direction={isArabic ? -1 : 1}
                   className={`group relative grid min-h-20 grid-cols-[2.5rem_1fr] items-center gap-3 px-4 py-5 transition-colors duration-500 hover:bg-white/[.055] sm:min-h-32 sm:grid-cols-[5rem_1fr] sm:px-8 sm:py-7 ${index > 0 ? "border-t border-white/12" : ""}`}
                 >
                   <span className="text-[10px] font-black tracking-[0.18em] text-copad-green">0{index + 1}</span>
                   <h3 className="font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-white/88 transition-colors group-hover:text-white sm:text-3xl">{principle}</h3>
                   <span aria-hidden="true" className="absolute inset-y-0 start-0 w-0.5 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 group-hover:scale-y-100" />
-                </motion.article>
+                </AboutValuePrinciple>
               ))}
             </div>
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduceMotion || isDesktop ? false : { opacity: 0, y: 14 }}
+              whileInView={isDesktop ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.62, delay: 0.2, ease }}
+              style={isDesktop && !reduceMotion ? { opacity: finaleOpacity } : undefined}
               className="mt-8 border-t border-white/12 pt-6"
             >
               <p className="text-[9px] font-black tracking-[0.18em] text-copad-green uppercase">{ui.complianceEyebrow}</p>
@@ -168,6 +183,21 @@ export function CorporateValuesSection({ locale, content, cta }: CorporateValues
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
+  );
+}
+
+function AboutValuePrinciple({ progress, active, index, direction, className, children }: { progress: MotionValue<number>; active: boolean; index: number; direction: number; className: string; children: React.ReactNode }) {
+  const start = 0.26 + index * 0.13;
+  const opacity = useTransform(progress, [start, start + 0.12, 1], [0, 1, 1]);
+  const x = useTransform(progress, [start, start + 0.12, 1], [direction * 28, 0, 0]);
+  const accentScale = useTransform(progress, [start + 0.04, start + 0.16, 1], [0, 1, 1]);
+
+  return (
+    <motion.article className={className} initial={active ? false : { opacity: 0, x: direction * 22 }} whileInView={active ? undefined : { opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.55 }} transition={{ duration: 0.62, delay: index * 0.09, ease }} style={active ? { opacity, x } : undefined}>
+      {children}
+      <motion.span aria-hidden="true" className="absolute inset-y-0 start-0 w-0.5 origin-bottom bg-copad-green" style={active ? { scaleY: accentScale } : undefined} />
+    </motion.article>
   );
 }

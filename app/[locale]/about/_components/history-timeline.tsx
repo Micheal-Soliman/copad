@@ -34,7 +34,7 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
   });
 
   return (
-    <section ref={sectionRef} className="relative bg-copad-sand/45 lg:h-[280vh]">
+    <section id="history" ref={sectionRef} className="relative scroll-mt-20 bg-copad-sand/45 lg:h-[280vh]">
       <div className="px-4 pt-10 pb-2 sm:px-8 sm:pt-16 sm:pb-4 lg:hidden">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}

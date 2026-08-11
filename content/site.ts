@@ -42,6 +42,14 @@ const english: SiteCopy = {
       partnershipAction: "Partner With Us",
     },
     about: {
+      sectionNavigationLabel: "About page sections",
+      sectionNavigation: [
+        { id: "home", label: "About" },
+        { id: "history", label: "History" },
+        { id: "direction", label: "Direction" },
+        { id: "specialization", label: "Specialization" },
+        { id: "values", label: "Values" },
+      ],
       heroFacts: [
         { label: "Established", value: "1989" },
         { label: "Headquarters", value: "Egypt" },
@@ -194,6 +202,14 @@ const arabic: SiteCopy = {
       partnershipAction: "كن شريكًا لنا",
     },
     about: {
+      sectionNavigationLabel: "أقسام صفحة عن كوباد",
+      sectionNavigation: [
+        { id: "home", label: "عن كوباد" },
+        { id: "history", label: "التاريخ" },
+        { id: "direction", label: "الاتجاه" },
+        { id: "specialization", label: "التخصص" },
+        { id: "values", label: "القيم" },
+      ],
       heroFacts: [
         { label: "تأسست", value: "1989" },
         { label: "المقر الرئيسي", value: "مصر" },
