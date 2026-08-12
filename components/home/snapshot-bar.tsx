@@ -5,7 +5,7 @@ import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 
-export function SnapshotBar({ locale }: { locale: Locale }) {
+export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const data = siteCopy[locale].home.snapshot;
@@ -34,7 +34,17 @@ export function SnapshotBar({ locale }: { locale: Locale }) {
 
   return (
     <section id="snapshot" ref={sectionRef} className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-8 sm:py-12 lg:h-[165vh] lg:px-12 lg:py-0">
-      <div className="relative mx-auto w-full max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center">
+      <div className="relative mx-auto w-full max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 mx-auto mb-9 max-w-5xl text-center sm:mb-12 lg:mb-16"
+        >
+          <p className="text-base leading-8 text-pretty text-copad-deep/68 sm:text-lg sm:leading-9 lg:text-xl lg:leading-10">{intro}</p>
+        </motion.div>
+
         <div className="relative z-10 hidden h-64 w-full lg:block">
           <motion.div aria-hidden="true" className="absolute inset-0" initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.45 }}>
             {[0, 1, 2, 3].map((segment) => {

@@ -30,12 +30,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         eyebrow={home.eyebrow}
         title={home.title}
         subheadline={home.subheadline}
-        body={home.body}
         primaryCta={home.primaryCta}
         secondaryCta={home.secondaryCta}
       />
 
-      <SnapshotBar locale={locale} />
+      <SnapshotBar locale={locale} intro={home.body} />
 
       <IntroductionSection
         locale={locale}

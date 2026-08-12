@@ -22,7 +22,7 @@ export function AboutPageContent({ locale }: { locale: Locale }) {
     <main className="min-h-screen overflow-x-clip bg-copad-white">
       <SiteHeader locale={locale} transparent />
       <AboutHero locale={locale} title={content.title} intro={content.intro} />
-      <HistoryTimeline locale={locale} title={history.title} body={history.body} items={history.items ?? []} />
+      <HistoryTimeline locale={locale} title={history.title} intro={history.body} items={history.items ?? []} />
       <CorporateDirectionSection locale={locale} content={direction} />
       <DifferentiatorsSection locale={locale} content={distinction} />
       <CorporateValuesSection locale={locale} content={values} cta={content.cta ?? copy.nav.manufacturing} />

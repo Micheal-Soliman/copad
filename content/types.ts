@@ -90,6 +90,31 @@ export type UiCopy = {
     complianceEyebrow: string;
     regulators: string[];
   };
+  divisions: {
+    sectionNavigationLabel: string;
+    sectionNavigation: Array<{ id: string; label: string }>;
+    heroImageAlt: string;
+    heroKicker: string;
+    chapterLabel: string;
+    bookEyebrow: string;
+    bookInstruction: string;
+    imageAlts: string[];
+    nextEyebrow: string;
+    nextBody: string;
+  };
+  therapyAreas: {
+    sectionNavigationLabel: string;
+    sectionNavigation: Array<{ id: string; label: string }>;
+    heroKicker: string;
+    heroMetricLabel: string;
+    heroImageAlt: string;
+    mapEyebrow: string;
+    mapInstruction: string;
+    areaLabel: string;
+    progressLabel: string;
+    nextEyebrow: string;
+    nextBody: string;
+  };
   footer: {
     navigationLabel: string;
     explore: string;

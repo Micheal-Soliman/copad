@@ -13,7 +13,6 @@ type HomeHeroProps = {
   eyebrow: string;
   title: string;
   subheadline: string;
-  body: string;
   primaryCta: string;
   secondaryCta: string;
 };
@@ -52,15 +51,12 @@ export function HomeHero(props: HomeHeroProps) {
   const titleClip = useTransform(timelineProgress, [0.08, 0.18], ["inset(0% 0% 0% 0%)", "inset(100% 0% 0% 0%)"]);
   const titleY = useTransform(timelineProgress, [0, 0.25], [0, -105]);
   const titleRotateX = useTransform(timelineProgress, [0.08, 0.25], [0, -72]);
-  const secondOpacity = useTransform(timelineProgress, [0.2, 0.31, 0.46, 0.5], [0, 1, 1, 0]);
-  const secondClip = useTransform(timelineProgress, [0.2, 0.31, 0.46, 0.5], ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(100% 0% 0% 0%)"]);
-  const secondY = useTransform(timelineProgress, [0.2, 0.31, 0.5], [90, 0, -65]);
-  const secondRotateX = useTransform(timelineProgress, [0.2, 0.31, 0.5], [68, 0, -38]);
-  const thirdOpacity = useTransform(timelineProgress, [0.51, 0.62], [0, 1]);
-  const thirdY = useTransform(timelineProgress, [0.51, 0.64, 1], [76, 0, -12]);
-  const thirdRotateX = useTransform(timelineProgress, [0.51, 0.64], [58, 0]);
-  const buttonOpacity = useTransform(timelineProgress, [0.68, 0.8], [0, 1]);
-  const buttonY = useTransform(timelineProgress, [0.68, 0.82], [28, 0]);
+  const secondOpacity = useTransform(timelineProgress, [0.2, 0.34, 1], [0, 1, 1]);
+  const secondClip = useTransform(timelineProgress, [0.2, 0.34, 1], ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]);
+  const secondY = useTransform(timelineProgress, [0.2, 0.34, 1], [90, 0, 0]);
+  const secondRotateX = useTransform(timelineProgress, [0.2, 0.34, 1], [68, 0, 0]);
+  const buttonOpacity = useTransform(timelineProgress, [0.28, 0.42, 1], [0, 1, 1]);
+  const buttonY = useTransform(timelineProgress, [0.28, 0.42, 1], [110, 0, 0]);
   const sweepX = useTransform(timelineProgress, [0, 1], ["-38%", "78%"]);
   const handoffScale = useTransform(timelineProgress, [0.78, 1], [0, 1]);
   const handoffOpacity = useTransform(timelineProgress, [0.74, 1], [0, 1]);
@@ -118,7 +114,7 @@ export function HomeHero(props: HomeHeroProps) {
   const secondaryHref = `/${props.locale}/therapeutic-areas`;
 
   return (
-    <section ref={sectionRef} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[260vh]">
+    <section ref={sectionRef} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[190vh]">
       <div className="relative flex min-h-svh items-center overflow-hidden px-4 pt-24 pb-14 text-center sm:px-8 sm:pb-10 lg:sticky lg:top-0 lg:h-screen lg:px-12">
         <motion.div className="absolute inset-0 transform-gpu will-change-transform" style={motionEnabled ? { y: mediaY, scale: mediaScale } : undefined}>
           <Image className="object-cover opacity-90 saturate-[.72] contrast-[1.04]" src="/images/copad-campus-hero.png" alt={ui.heroImageAlt} fill priority sizes="100vw" />
@@ -136,7 +132,6 @@ export function HomeHero(props: HomeHeroProps) {
           <motion.p variants={mobileLine} custom={-1 * direction} className="text-[10px] font-black tracking-[0.24em] text-copad-green uppercase">{props.eyebrow}</motion.p>
           <motion.h1 variants={mobileLine} custom={1 * direction} className="mt-4 font-display text-[3.15rem] leading-[.94] tracking-[-0.055em] text-balance sm:text-7xl">{props.title}</motion.h1>
           <motion.p variants={mobileLine} custom={-1 * direction} className="mt-5 max-w-4xl text-lg leading-snug font-bold text-balance text-white/95 drop-shadow-[0_2px_12px_rgba(15,61,57,.38)] sm:text-2xl">{props.subheadline}</motion.p>
-          <motion.p variants={mobileLine} custom={1 * direction} className="mt-4 max-w-4xl text-sm leading-7 text-pretty text-white/78 drop-shadow-[0_2px_10px_rgba(15,61,57,.38)]">{props.body}</motion.p>
           <motion.div variants={mobileActions} className="mt-7 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4">
             <HeroButtons primaryHref={primaryHref} secondaryHref={secondaryHref} primary={props.primaryCta} secondary={props.secondaryCta} cursorLabel={ui.interactionLabels.go} />
           </motion.div>
@@ -153,11 +148,7 @@ export function HomeHero(props: HomeHeroProps) {
             <h2 className="max-w-5xl text-5xl leading-[1.02] font-bold text-balance text-white drop-shadow-[0_4px_22px_rgba(15,61,57,.45)] xl:text-6xl">{props.subheadline}</h2>
           </motion.div>
 
-          <motion.div className="absolute inset-x-0 top-[28%] flex flex-col items-center" style={{ opacity: thirdOpacity, y: thirdY, rotateX: thirdRotateX }}>
-            <p className="max-w-4xl text-xl leading-9 text-pretty text-white/88 drop-shadow-[0_3px_18px_rgba(15,61,57,.45)]">{props.body}</p>
-          </motion.div>
-
-          <motion.div className="absolute inset-x-0 bottom-20 flex items-center justify-center gap-4" style={{ opacity: buttonOpacity, y: buttonY }}>
+          <motion.div className="absolute inset-x-0 bottom-16 flex items-center justify-center gap-4" style={{ opacity: buttonOpacity, y: buttonY }}>
             <HeroButtons primaryHref={primaryHref} secondaryHref={secondaryHref} primary={props.primaryCta} secondary={props.secondaryCta} cursorLabel={ui.interactionLabels.go} />
           </motion.div>
         </div>

@@ -8,7 +8,7 @@ import type { Locale } from "@/lib/i18n";
 type HistoryTimelineProps = {
   locale: Locale;
   title: string;
-  body: string;
+  intro: string;
   items: string[];
 };
 
@@ -19,7 +19,7 @@ function splitTimelineItem(item: string) {
   return { label, description: description.join(" — ") };
 }
 
-export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineProps) {
+export function HistoryTimeline({ locale, title, intro, items }: HistoryTimelineProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const isArabic = locale === "ar";
@@ -52,7 +52,7 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
           transition={{ duration: 0.6, delay: 0.04, ease }}
           className="mt-5 max-w-3xl text-sm leading-7 text-copad-deep/66 sm:mt-6 sm:text-base sm:leading-8"
         >
-          {body}
+          {intro}
         </motion.p>
       </div>
 
@@ -77,7 +77,7 @@ export function HistoryTimeline({ locale, title, body, items }: HistoryTimelineP
               transition={{ duration: 0.6, delay: 0.04, ease }}
               className="max-w-3xl text-sm leading-7 text-copad-deep/66 sm:text-base sm:leading-8 lg:self-end xl:text-lg xl:leading-9"
             >
-              {body}
+              {intro}
             </motion.p>
           </div>
 
