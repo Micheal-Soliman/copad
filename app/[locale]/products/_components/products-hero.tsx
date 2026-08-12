@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
@@ -31,7 +30,6 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3 text-[9px] font-black tracking-[.22em] text-copad-green uppercase"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.8)]" />{isArabic ? "طيف المنتجات / أربع فئات" : "Product spectrum / Four categories"}</motion.p>
           <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 28, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 1, delay: .18, ease }} className={`${isArabic ? "mt-5 font-sans text-[clamp(3.8rem,16vw,6rem)] leading-none font-black tracking-[-.055em] lg:text-[clamp(5.2rem,7.2vw,7.8rem)]" : "mt-5 font-display text-[clamp(5rem,19vw,7.2rem)] leading-[.76] tracking-[-.075em] lg:text-[clamp(6.8rem,9.5vw,9.8rem)]"}`}>{content.title}</motion.h1>
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .36, ease }} className="mt-7 max-w-xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8 lg:text-[1.02rem]">{content.intro}</motion.p>
-          {content.cta && <Link href={`/${locale}/contact`} className="group relative mt-7 inline-flex min-h-12 items-center overflow-hidden rounded-full border border-white/18 px-6 text-xs font-black transition hover:border-copad-green"><span className="absolute inset-0 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 group-hover:scale-y-100" /><span className="relative">{content.cta}</span></Link>}
         </motion.div>
 
         <div className="relative mx-auto h-[28rem] w-full max-w-[48rem] [perspective:1800px] sm:h-[38rem] lg:h-[min(39rem,calc(100vh-7rem))] lg:min-h-[31rem]">

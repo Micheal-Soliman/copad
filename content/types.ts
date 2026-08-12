@@ -17,6 +17,8 @@ export type ContentBlock = {
   body: string;
   items?: string[];
   note?: string;
+  cta?: string;
+  href?: string;
 };
 
 export type Section = {

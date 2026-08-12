@@ -9,7 +9,7 @@ import type { Locale } from "@/lib/i18n";
 
 const tones = ["bg-copad-sand text-copad-deep", "bg-copad-deep text-white", "bg-[#dcece8] text-copad-deep", "bg-copad-white text-copad-deep"];
 
-export function ProductPortfolioArchive({ locale, blocks, cta }: { locale: Locale; blocks: ContentBlock[]; cta?: string }) {
+export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; blocks: ContentBlock[]; cta?: string }) {
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
@@ -35,19 +35,19 @@ export function ProductPortfolioArchive({ locale, blocks, cta }: { locale: Local
 
       <motion.div aria-hidden="true" className="absolute bottom-[8%] start-0 z-30 h-px w-[160%] bg-linear-to-r from-transparent via-copad-green/55 to-transparent" style={reduceMotion?undefined:{x:horizonX}} />
       <motion.div dir="ltr" className="absolute inset-y-0 left-0 flex w-[400%]" style={reduceMotion?{x:-viewportWidth*active}:{x:trackX}}>
-        {blocks.map((block,index)=><PortfolioWorld key={block.title} locale={locale} block={block} index={index} cta={cta} />)}
+        {blocks.map((block,index)=><PortfolioWorld key={block.title} locale={locale} block={block} index={index} />)}
       </motion.div>
     </div>
   </section>;
 }
 
-function PortfolioWorld({ locale, block, index, cta }: { locale:Locale; block:ContentBlock; index:number; cta?:string }) {
+function PortfolioWorld({ locale, block, index }: { locale:Locale; block:ContentBlock; index:number }) {
   const isArabic=locale==="ar";
   return <article dir={isArabic?"rtl":"ltr"} className={`relative h-full w-1/4 shrink-0 overflow-hidden ${tones[index]}`}>
     <WorldObject index={index} />
     <div className="relative z-20 mx-auto grid h-full max-w-[1440px] items-end px-4 pt-40 pb-20 sm:px-8 sm:pt-44 lg:grid-cols-[.72fr_1.28fr] lg:items-center lg:px-12 lg:pt-36 lg:pb-14">
       <div className="relative"><span className="text-[9px] font-black tracking-[.22em] text-copad-green">SPECTRUM / 0{index+1}</span><h2 className={`${isArabic?"font-sans font-black":"font-display"} mt-5 max-w-4xl text-[clamp(2.8rem,11vw,7.6rem)] leading-[.84] tracking-[-.065em]`}>{block.title}</h2></div>
-      <div className={`mt-8 max-w-3xl lg:mt-0 lg:ps-14 ${index===1?"border-white/14":"border-copad-deep/12"} lg:border-s`}><p className={`text-sm leading-7 sm:text-base sm:leading-8 ${index===1?"text-white/62":"text-copad-deep/65"}`}>{block.body}</p>{block.note&&<p className="mt-5 border-s-2 border-copad-green ps-4 text-xs leading-6 opacity-55">{block.note}</p>}{block.items&&<div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-3">{block.items.slice(0,9).map(item=><span key={item} className="flex gap-2 text-[9px] leading-4 font-bold opacity-65"><i className="mt-1.5 size-1 shrink-0 rounded-full bg-copad-green" />{item}</span>)}</div>}{cta&&<Link href={`/${locale}/contact`} className={`mt-6 inline-flex min-h-11 items-center rounded-full px-5 text-[10px] font-black transition hover:-translate-y-0.5 ${index===1?"bg-copad-green text-white":"bg-copad-deep text-white hover:bg-copad-green"}`}>{cta}</Link>}</div>
+      <div className={`mt-8 max-w-3xl lg:mt-0 lg:ps-14 ${index===1?"border-white/14":"border-copad-deep/12"} lg:border-s`}><p className={`text-sm leading-7 sm:text-base sm:leading-8 ${index===1?"text-white/62":"text-copad-deep/65"}`}>{block.body}</p>{block.items&&<div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-3">{block.items.map(item=><span key={item} className="flex gap-2 text-[9px] leading-4 font-bold opacity-65"><i className="mt-1.5 size-1 shrink-0 rounded-full bg-copad-green" />{item}</span>)}</div>}{block.cta&&block.href&&<Link href={`/${locale}/${block.href}`} className={`mt-6 inline-flex min-h-11 items-center rounded-full px-5 text-[10px] font-black transition hover:-translate-y-0.5 ${index===1?"bg-copad-green text-white":"bg-copad-deep text-white hover:bg-copad-green"}`}>{block.cta}</Link>}</div>
     </div>
     <span aria-hidden="true" className={`absolute -end-8 bottom-[-12%] font-display text-[22rem] leading-none tracking-[-.1em] ${index===1?"text-white/[.025]":"text-copad-deep/[.03]"}`}>0{index+1}</span>
   </article>;

@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useLenis } from "lenis/react";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
@@ -138,6 +139,15 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     </div>
                     <h2 className={`mt-3 max-w-full text-balance break-words text-copad-deep sm:mt-5 ${isArabic ? "font-sans text-[clamp(1.8rem,7.5vw,3rem)] leading-[1.08] font-black tracking-[-0.035em] lg:text-[4.4rem]" : "font-display text-[clamp(2.2rem,9vw,3.6rem)] leading-[.95] tracking-[-0.05em] lg:text-[4.8rem]"}`}>{active.title}</h2>
                     <p className="mt-3 max-w-2xl text-[11px] leading-[1.7] text-copad-deep/68 sm:mt-5 sm:text-sm sm:leading-7 lg:text-[15px] lg:leading-8">{active.body}</p>
+                    {active.cta && active.href && (
+                      <Link
+                        href={`/${locale}/${active.href}`}
+                        className="group relative mt-5 inline-flex min-h-10 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-5 text-[10px] font-black text-white shadow-[0_12px_28px_rgba(15,61,57,.16)] transition duration-500 hover:-translate-y-1 sm:mt-6 sm:min-h-11 sm:px-6 sm:text-xs"
+                      >
+                        <span className="absolute inset-0 translate-y-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
+                        <span className="relative">{active.cta}</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
 

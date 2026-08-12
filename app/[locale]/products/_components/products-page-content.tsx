@@ -21,7 +21,7 @@ export function ProductsPageContent({ locale }: { locale: Locale }) {
     <main className="min-h-screen overflow-x-clip bg-copad-white">
       <SiteHeader locale={locale} transparent />
       <ProductsHero locale={locale} content={content} />
-      <ProductPortfolioArchive locale={locale} blocks={content.blocks} cta={content.cta} />
+      <ProductPortfolioArchive locale={locale} blocks={content.blocks} />
       <ProductsNextChapter locale={locale} />
       <HomeSectionNavigator label={isArabic ? "أقسام صفحة المنتجات" : "Products page sections"} items={navigation} />
       <SiteFooter locale={locale} />
