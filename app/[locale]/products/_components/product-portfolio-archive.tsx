@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 const tones = ["bg-copad-sand text-copad-deep", "bg-copad-deep text-white", "bg-[#dcece8] text-copad-deep", "bg-copad-white text-copad-deep"];
 
@@ -17,9 +18,10 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
   const lenis = useLenis();
   const isArabic = locale === "ar";
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const trackX = useTransform(scrollYProgress, [0, 1], [0, -viewportWidth * 3]);
-  const horizonX = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
-  useMotionValueEvent(scrollYProgress, "change", v => setActive(Math.min(3, Math.max(0, Math.round(v*3)))));
+  const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
+  const trackX = useTransform(sceneProgress, [0, 1], [0, -viewportWidth * 3]);
+  const horizonX = useTransform(sceneProgress, [0, 1], ["0%", "-35%"]);
+  useMotionValueEvent(sceneProgress, "change", v => setActive(Math.min(3, Math.max(0, Math.round(v*3)))));
   useEffect(() => {
     const update = () => setViewportWidth(document.documentElement.clientWidth);
     update();
@@ -27,11 +29,11 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  function goTo(index:number) { const s=ref.current;if(!s)return;const top=s.offsetTop+(s.offsetHeight-innerHeight)*(index/3);if(lenis)lenis.scrollTo(top,{duration:.9,easing:v=>1-Math.pow(1-v,4)});else scrollTo({top,behavior:"smooth"}); }
+  function goTo(index:number) { const s=ref.current;if(!s)return;const top=s.offsetTop+(s.offsetHeight-innerHeight)*scrollSceneIndex(index,blocks.length);if(lenis)lenis.scrollTo(top,{duration:scrollSystem.scene.navigationDuration,easing:v=>1-Math.pow(1-v,4)});else scrollTo({top,behavior:"smooth"}); }
 
-  return <section id="portfolio" ref={ref} className="relative h-[430vh]">
+  return <section id="portfolio" ref={ref} style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)]">
     <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic?"رحلة داخل المحفظة":"Journey through the portfolio"}</span><span dir="ltr" className="font-display text-4xl text-copad-deep">0{active+1}<small className="ms-1 font-sans text-xs opacity-30">/04</small></span></div><div className="mt-3 h-1 bg-copad-deep/8"><motion.span className="block h-full origin-left bg-copad-green rtl:origin-right" style={{scaleX:scrollYProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition ${active===i?"text-copad-deep":"text-copad-deep/32"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-green":"bg-copad-deep/15"}`} />{b.title}</button>)}</nav></header>
+      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic?"رحلة داخل المحفظة":"Journey through the portfolio"}</span><span dir="ltr" className="font-display text-4xl text-copad-deep">0{active+1}<small className="ms-1 font-sans text-xs opacity-30">/04</small></span></div><div className="mt-3 h-1 bg-copad-deep/8"><motion.span className="block h-full origin-left bg-copad-green rtl:origin-right" style={{scaleX:sceneProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition ${active===i?"text-copad-deep":"text-copad-deep/32"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-green":"bg-copad-deep/15"}`} />{b.title}</button>)}</nav></header>
 
       <motion.div aria-hidden="true" className="absolute bottom-[8%] start-0 z-30 h-px w-[160%] bg-linear-to-r from-transparent via-copad-green/55 to-transparent" style={reduceMotion?undefined:{x:horizonX}} />
       <motion.div dir="ltr" className="absolute inset-y-0 left-0 flex w-[400%]" style={reduceMotion?{x:-viewportWidth*active}:{x:trackX}}>

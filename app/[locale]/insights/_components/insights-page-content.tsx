@@ -1,6 +1,26 @@
-import { CorporateSectionPage } from "@/components/pages/corporate-section-page";
+import { HomeSectionNavigator } from "@/components/home/home-section-navigator";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { InsightsHero } from "./insights-hero";
+import { InsightsChannels } from "./insights-channels";
+import { InsightsClosing } from "./insights-closing";
 
 export function InsightsPageContent({ locale }: { locale: Locale }) {
-  return <CorporateSectionPage locale={locale} section="insights" nextSection="partner-with-us" visual="/images/copad-campus-hero.png" layout="cards" />;
+  const copy = siteCopy[locale];
+  const content = copy.sections.insights;
+  const ar = locale === "ar";
+  return <main className="min-h-screen overflow-x-clip bg-copad-white">
+    <SiteHeader locale={locale} transparent />
+    <InsightsHero locale={locale} content={content} />
+    <InsightsChannels locale={locale} blocks={content.blocks} />
+    <InsightsClosing locale={locale} />
+    <HomeSectionNavigator label={ar ? "أقسام صفحة المعرفة والأخبار" : "Insights page sections"} items={[
+      { id: "home", label: ar ? "منظور المعرفة" : "Knowledge Lens" },
+      { id: "channels", label: ar ? "المسارات" : "Editorial Streams" },
+      { id: "responsibility", label: ar ? "المسؤولية" : "Responsibility" },
+    ]} />
+    <SiteFooter locale={locale} />
+  </main>;
 }

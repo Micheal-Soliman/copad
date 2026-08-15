@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -20,7 +21,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
   const coreTilt = useTransform(scrollYProgress, [0, .5, 1], [12, 0, -7]);
   const coreScale = useTransform(scrollYProgress, [0, .45, 1], [.82, 1, 1.04]);
 
-  return <section id="home" ref={sectionRef} className="relative bg-copad-deep lg:h-[205vh]">
+  return <section id="home" ref={sectionRef} style={scrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
       <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_76%_42%,rgba(16,159,131,.24),transparent_28%),radial-gradient(circle_at_10%_90%,rgba(238,235,229,.08),transparent_30%),linear-gradient(135deg,#072c2a,#0f3d39_55%,#072a27)]" />
       <motion.span aria-hidden="true" className="absolute inset-y-0 -z-20 w-[34vw] -skew-x-12 bg-linear-to-r from-transparent via-white/[.055] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-40vw", "125vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />

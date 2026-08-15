@@ -7,6 +7,7 @@ import { useLayoutEffect, useRef, type PointerEvent as ReactPointerEvent } from 
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type HomeHeroProps = {
   locale: Locale;
@@ -114,7 +115,7 @@ export function HomeHero(props: HomeHeroProps) {
   const secondaryHref = `/${props.locale}/therapeutic-areas`;
 
   return (
-    <section ref={sectionRef} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[190vh]">
+    <section ref={sectionRef} style={scrollSceneStyle(2)} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative flex min-h-svh items-center overflow-hidden px-4 pt-24 pb-14 text-center sm:px-8 sm:pb-10 lg:sticky lg:top-0 lg:h-screen lg:px-12">
         <motion.div className="absolute inset-0 transform-gpu will-change-transform" style={motionEnabled ? { y: mediaY, scale: mediaScale } : undefined}>
           <Image className="object-cover opacity-90 saturate-[.72] contrast-[1.04]" src="/images/copad-campus-hero.png" alt={ui.heroImageAlt} fill priority sizes="100vw" />

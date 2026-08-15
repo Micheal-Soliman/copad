@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type TherapyAreasHeroProps = { locale: Locale; title: string; intro: string; areas: string[] };
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -28,7 +29,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
   const ruleScale = useTransform(scrollYProgress, [0.08, 0.38], [0, 1]);
 
   return (
-    <section id="home" ref={sectionRef} className="relative bg-copad-deep lg:h-[205vh]">
+    <section id="home" ref={sectionRef} style={scrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
         <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(16,159,131,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(238,235,229,.07),transparent_28%),linear-gradient(132deg,#082f2c_0%,#0f3d39_56%,#092c29_100%)]" />
         <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[36vw] bg-linear-to-r from-transparent via-copad-green/[.06] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-45vw", "120vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />

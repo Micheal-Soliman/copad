@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { AboutStoryBlock } from "./about-types";
 
 const positions = ["0%", "0%", "0%"];
@@ -16,7 +17,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
 
   return (
-    <section id="specialization" ref={sectionRef} className="relative min-h-[72rem] scroll-mt-20 bg-copad-deep text-white lg:h-[260vh] lg:min-h-0">
+    <section id="specialization" ref={sectionRef} style={scrollSceneStyle(3)} className="relative min-h-[72rem] scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)] lg:min-h-0">
       <div className="relative flex min-h-[72rem] items-start overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-0 lg:items-center lg:px-12">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(16,159,131,.25),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,.06),transparent_30%)]" />
         <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">

@@ -10,6 +10,7 @@ import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type TherapyAreasPreviewProps = {
   locale: Locale;
@@ -26,7 +27,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="therapy" ref={sectionRef} className="relative scroll-mt-20 bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[190vh] lg:px-12 lg:py-0">
+    <section id="therapy" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} reverse chapter="03" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.02fr_.98fr] lg:gap-20">
         <ScrollSceneItem

@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 type TherapyExpertiseMapProps = {
   locale: Locale;
@@ -16,36 +17,41 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const reduceMotion = useReducedMotion();
   const lenis = useLenis();
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.therapyAreas;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.36, restDelta: 0.0005 });
+  const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
+  const smoothProgress = useSpring(sceneProgress, { stiffness: 76, damping: 29, mass: 0.46, restDelta: 0.0005 });
   const orbitRotate = useTransform(smoothProgress, [0, 1], isArabic ? [12, -150] : [-12, 150]);
   const ambientX = useTransform(smoothProgress, [0, 1], isArabic ? ["18%", "-22%"] : ["-22%", "18%"]);
   const activeProgress = (activeIndex + 1) / areas.length;
 
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
+  useMotionValueEvent(sceneProgress, "change", (value) => {
     const next = Math.min(areas.length - 1, Math.max(0, Math.round(value * (areas.length - 1))));
-    setActiveIndex((current) => current === next ? current : next);
+    if (next === activeIndexRef.current) return;
+    setDirection(next > activeIndexRef.current ? 1 : -1);
+    activeIndexRef.current = next;
+    setActiveIndex(next);
   });
 
   function goToArea(index: number) {
     const section = sectionRef.current;
     if (!section) return;
     const travel = Math.max(0, section.offsetHeight - window.innerHeight);
-    const target = section.offsetTop + travel * (index / Math.max(1, areas.length - 1));
-    setActiveIndex(index);
-    if (lenis) lenis.scrollTo(target, { duration: 0.82, easing: (value) => 1 - Math.pow(1 - value, 4) });
+    const target = section.offsetTop + travel * scrollSceneIndex(index, areas.length);
+    if (lenis) lenis.scrollTo(target, { duration: scrollSystem.scene.navigationDuration, easing: (value) => 1 - Math.pow(1 - value, 4) });
     else window.scrollTo({ top: target, behavior: "smooth" });
   }
 
   const active = areas[activeIndex]!;
 
   return (
-    <section id="expertise" ref={sectionRef} className="relative h-[470vh] scroll-mt-20 bg-copad-sand lg:h-[500vh]">
+    <section id="expertise" ref={sectionRef} style={scrollSceneStyle(areas.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(16,159,131,.16),transparent_24%),radial-gradient(circle_at_82%_72%,rgba(15,61,57,.08),transparent_28%)]" />
         <motion.div aria-hidden="true" className="absolute top-[18%] -end-36 size-[28rem] rounded-full border border-copad-green/22 sm:size-[42rem] lg:-end-28 lg:size-[52rem]" style={reduceMotion ? undefined : { rotate: orbitRotate }}>
@@ -92,14 +98,20 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
               </div>
             </nav>
 
-            <div className="order-1 min-h-0 min-w-0 lg:order-2 lg:h-[min(29rem,calc(100vh-15rem))]">
-              <AnimatePresence mode="wait" initial={false}>
+            <div className="order-1 min-h-0 min-w-0 overflow-hidden rounded-[1.65rem] sm:rounded-[2rem] lg:order-2 lg:h-[min(29rem,calc(100vh-15rem))]">
+              <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.article
-                  key={active.title}
-                  initial={reduceMotion ? false : { opacity: 0, rotateY: (activeIndex % 2 === 0 ? 1 : -1) * (isArabic ? -20 : 20), x: (activeIndex % 2 === 0 ? 1 : -1) * (isArabic ? -24 : 24), scale: .96, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, rotateY: 0, x: 0, scale: 1, filter: "blur(0px)" }}
-                  exit={reduceMotion ? undefined : { opacity: 0, rotateY: (activeIndex % 2 === 0 ? -1 : 1) * (isArabic ? -16 : 16), x: (activeIndex % 2 === 0 ? -1 : 1) * (isArabic ? -18 : 18), scale: .97, filter: "blur(4px)" }}
-                  transition={{ duration: reduceMotion ? 0 : 0.52, ease }}
+                  key={activeIndex}
+                  custom={direction}
+                  variants={{
+                    enter: (travel: number) => ({ opacity: 0, rotateY: travel * (isArabic ? -7 : 7), x: travel * (isArabic ? -28 : 28), y: 14, scale: .987, filter: "blur(6px)" }),
+                    center: { opacity: 1, rotateY: 0, x: 0, y: 0, scale: 1, filter: "blur(0px)" },
+                    exit: (travel: number) => ({ opacity: 0, rotateY: travel * (isArabic ? 5 : -5), x: travel * (isArabic ? 20 : -20), y: -8, scale: .99, filter: "blur(5px)" }),
+                  }}
+                  initial={reduceMotion ? false : "enter"}
+                  animate="center"
+                  exit={reduceMotion ? undefined : "exit"}
+                  transition={{ duration: reduceMotion ? 0 : .66, ease }}
                   style={{ transformOrigin: isArabic ? "right center" : "left center", transformStyle: "preserve-3d" }}
                   className="relative overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white/88 p-5 shadow-[0_24px_70px_rgba(15,61,57,.1)] backdrop-blur-md sm:rounded-[2rem] sm:p-8 lg:h-full lg:min-h-0 lg:p-10"
                 >

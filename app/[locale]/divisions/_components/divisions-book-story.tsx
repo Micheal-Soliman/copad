@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 type DivisionsBookStoryProps = {
   locale: Locale;
@@ -28,7 +29,8 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.divisions;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.36, restDelta: 0.0005 });
+  const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
+  const smoothProgress = useSpring(sceneProgress, { stiffness: 78, damping: 29, mass: 0.46, restDelta: 0.0005 });
   const backgroundX = useTransform(smoothProgress, [0, 1], isArabic ? ["18%", "-18%"] : ["-18%", "18%"]);
   const ringRotate = useTransform(smoothProgress, [0, 1], isArabic ? [20, -80] : [-20, 80]);
   const active = divisions[activeIndex]!;
@@ -37,7 +39,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
   const cueDirection: 1 | -1 = activeIndex === 0 ? 1 : activeIndex === finalIndex ? -1 : scrollDirection;
   const cueRemaining = cueDirection > 0 ? finalIndex - activeIndex : activeIndex;
 
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
+  useMotionValueEvent(sceneProgress, "change", (value) => {
     const movement = value - previousProgress.current;
     if (Math.abs(movement) > 0.001) {
       setScrollDirection(movement > 0 ? 1 : -1);
@@ -55,16 +57,13 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
     const section = sectionRef.current;
     if (!section) return;
     const travel = Math.max(0, section.offsetHeight - window.innerHeight);
-    const target = section.offsetTop + travel * (index / Math.max(1, divisions.length - 1));
-    setDirection(index >= activeIndex ? 1 : -1);
-    previousIndex.current = index;
-    setActiveIndex(index);
-    if (lenis) lenis.scrollTo(target, { duration: 0.82, easing: (value) => 1 - Math.pow(1 - value, 4) });
+    const target = section.offsetTop + travel * scrollSceneIndex(index, divisions.length);
+    if (lenis) lenis.scrollTo(target, { duration: scrollSystem.scene.navigationDuration, easing: (value) => 1 - Math.pow(1 - value, 4) });
     else window.scrollTo({ top: target, behavior: "smooth" });
   }
 
   return (
-    <section id="division-story" ref={sectionRef} className="relative h-[300vh] scroll-mt-20 bg-copad-sand lg:h-[320vh]">
+    <section id="division-story" ref={sectionRef} style={scrollSceneStyle(divisions.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(16,159,131,.16),transparent_25%),radial-gradient(circle_at_86%_82%,rgba(15,61,57,.08),transparent_27%)]" />
         <motion.div aria-hidden="true" className="absolute top-[10%] -end-48 size-[34rem] rounded-full border border-copad-green/20 sm:size-[50rem]" style={reduceMotion ? undefined : { rotate: ringRotate }}>
@@ -110,10 +109,10 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
               <motion.article
                 key={active.title}
                 custom={direction}
-                initial={reduceMotion ? false : { opacity: 0.35, rotateY: direction > 0 ? -82 : 82, x: direction * 44, scale: 0.985 }}
+                initial={reduceMotion ? false : { opacity: 0.55, rotateY: direction > 0 ? -48 : 48, x: direction * 28, scale: 0.99 }}
                 animate={{ opacity: 1, rotateY: 0, x: 0, scale: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0, rotateY: direction > 0 ? 82 : -82, x: direction * -38, scale: 0.985 }}
-                transition={{ duration: reduceMotion ? 0 : 0.62, ease }}
+                exit={reduceMotion ? undefined : { opacity: 0.18, rotateY: direction > 0 ? 48 : -48, x: direction * -24, scale: 0.99 }}
+                transition={{ duration: reduceMotion ? 0 : scrollSystem.scene.transitionDuration, ease }}
                 style={{ transformOrigin: direction > 0 ? (isArabic ? "right center" : "left center") : (isArabic ? "left center" : "right center"), transformStyle: "preserve-3d" }}
                 className="absolute inset-0 grid min-h-0 overflow-hidden rounded-[1.65rem] border border-copad-deep/12 bg-copad-white shadow-[0_24px_70px_rgba(15,61,57,.14)] sm:rounded-[2rem] lg:grid-cols-2 lg:rounded-[2.4rem]"
               >
@@ -190,7 +189,7 @@ function BookScrollCue({
       className="pointer-events-none absolute top-[8.9rem] right-3 z-30 flex size-13 items-center justify-center rounded-full sm:top-[9.5rem] sm:right-5 sm:size-14 lg:top-[10rem] lg:right-8"
       initial={reduceMotion ? false : { opacity: 0, scale: 0.72, y: -10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.55, ease }}
+      transition={{ duration: scrollSystem.scene.transitionDuration, ease }}
     >
       <motion.span
         aria-hidden="true"

@@ -10,6 +10,7 @@ import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
 import { RevealHeading } from "@/components/motion/reveal-heading";
 import { siteCopy } from "@/content/site";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { Locale } from "@/lib/i18n";
 
 type IntroductionSectionProps = {
@@ -38,7 +39,7 @@ export function IntroductionSection({
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="introduction" ref={sectionRef} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[190vh] lg:px-12 lg:py-0">
+    <section id="introduction" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="01" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.08fr_.92fr] lg:gap-24">
         <ScrollSceneItem

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type DivisionsHeroProps = {
   locale: Locale;
@@ -27,7 +28,7 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
   const introLines = splitIntro(intro, 3);
 
   return (
-    <section ref={sectionRef} id="home" className="relative bg-copad-deep lg:h-[225vh]">
+    <section ref={sectionRef} id="home" style={scrollSceneStyle(3)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
         <motion.div
           aria-hidden="true"

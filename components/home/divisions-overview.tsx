@@ -29,7 +29,6 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
   const reduceMotion = useReducedMotion();
   const isDesktop = useDesktopLayout();
   const ui = siteCopy[locale].ui.home;
-
   return (
     <section id="divisions" className="relative scroll-mt-20 overflow-hidden bg-copad-white px-4 pt-10 pb-16 sm:px-8 sm:pb-20 lg:px-12 lg:pt-12 lg:pb-24">
       <div className="relative z-10 mx-auto max-w-[1440px]">

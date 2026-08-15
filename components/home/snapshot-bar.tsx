@@ -4,6 +4,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,7 +13,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
   const pulseLeft = locale === "ar" ? ["90%", "70%", "50%", "30%", "10%"] : ["10%", "30%", "50%", "70%", "90%"];
   const pulseStart = locale === "ar" ? "90%" : "10%";
   const { scrollYProgress: pinnedScrollProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const revealProgress = pinnedScrollProgress;
+  const revealProgress = useTransform(pinnedScrollProgress, [0, scrollSystem.scene.completion], [0, 1]);
   const [activeStage, setActiveStage] = useState(1);
   const desktopPulseLeft = useTransform(revealProgress, [0, 0.25, 0.5, 0.75, 1], pulseLeft);
   const desktopPulseY = useTransform(revealProgress, [0, 0.25, 0.5, 0.75, 1], [-24, 24, -24, 24, -24]);
@@ -33,7 +34,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
   }, [data.length, revealProgress]);
 
   return (
-    <section id="snapshot" ref={sectionRef} className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-8 sm:py-12 lg:h-[165vh] lg:px-12 lg:py-0">
+    <section id="snapshot" ref={sectionRef} style={scrollSceneStyle(data.length)} className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-8 sm:py-12 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <div className="relative mx-auto w-full max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -60,7 +61,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
                     style={style}
                     initial={false}
                     animate={{ scaleX: reduceMotion || activeStage > segment + 1 ? 1 : 0 }}
-                    transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: scrollSystem.scene.transitionDuration, ease: [0.22, 1, 0.36, 1] }}
                   />
                 </Fragment>
               );
@@ -84,7 +85,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
                   className="group relative text-center"
                   initial={false}
                   animate={{ opacity: reduceMotion || index < activeStage ? 1 : 0, y: reduceMotion || index < activeStage ? 0 : 20 }}
-                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: scrollSystem.scene.transitionDuration, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className={`absolute inset-x-3 transition-transform duration-300 group-hover:-translate-y-1 ${above ? "bottom-[calc(50%_+_3rem)]" : "top-[calc(50%_+_3rem)] group-hover:translate-y-1"}`}>
                     <span className="text-[9px] font-black tracking-[0.2em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>

@@ -4,6 +4,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, us
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 type HistoryTimelineProps = {
   locale: Locale;
@@ -26,15 +27,16 @@ export function HistoryTimeline({ locale, title, intro, items }: HistoryTimeline
   const ui = siteCopy[locale].ui.about;
   const [activeIndex, setActiveIndex] = useState(0);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const timelineProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
 
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
+  useMotionValueEvent(timelineProgress, "change", (value) => {
     if (reduceMotion || items.length === 0) return;
     const nextIndex = Math.min(items.length - 1, Math.floor(value * items.length + 0.06));
     setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
   });
 
   return (
-    <section id="history" ref={sectionRef} className="relative scroll-mt-20 bg-copad-sand/45 lg:h-[280vh]">
+    <section id="history" ref={sectionRef} style={scrollSceneStyle(items.length)} className="relative scroll-mt-20 bg-copad-sand/45 lg:h-[var(--scroll-scene-height)]">
       <div className="px-4 pt-10 pb-2 sm:px-8 sm:pt-16 sm:pb-4 lg:hidden">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}

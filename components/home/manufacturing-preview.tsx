@@ -10,6 +10,7 @@ import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
 import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
+import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { Locale } from "@/lib/i18n";
 
 type ManufacturingPreviewProps = {
@@ -31,7 +32,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="manufacturing" ref={sectionRef} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[190vh] lg:px-12 lg:py-0">
+    <section id="manufacturing" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="04" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
         <ScrollSceneItem
