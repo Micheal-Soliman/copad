@@ -10,7 +10,7 @@ import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
 import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { Locale } from "@/lib/i18n";
 
 type ManufacturingPreviewProps = {
@@ -32,7 +32,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="manufacturing" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id="manufacturing" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="04" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
         <ScrollSceneItem
@@ -43,7 +43,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="relative mx-auto w-full max-w-2xl lg:col-start-1 lg:row-start-1"
         >
           <ScrollImageReveal
-            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(15,61,57,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(15,61,57,.14)]"
+            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.14)]"
             direction="left"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -95,7 +95,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
                 transition={{ duration: 0.6, delay: 0.16 + index * 0.1, ease }}
                 whileHover={reduceMotion ? undefined : { y: -5 }}
                 whileTap={reduceMotion ? undefined : { y: -4, scale: 0.985 }}
-              className="group/principle relative isolate min-h-20 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-4 shadow-[0_10px_30px_rgba(15,61,57,.04)]"
+              className="group/principle relative isolate min-h-20 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-4 shadow-[0_10px_30px_rgba(1,61,96,.04)]"
               >
                 <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/principle:scale-y-100" />
                 <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
@@ -105,7 +105,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)] sm:mt-9 sm:w-auto">
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:mt-9 sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
           </Link>

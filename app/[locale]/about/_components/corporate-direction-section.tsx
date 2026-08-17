@@ -20,7 +20,7 @@ export function CorporateDirectionSection({ locale, content }: { locale: Locale;
 
   return (
     <section id="direction" ref={sectionRef} className="relative scroll-mt-20 overflow-hidden bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_86%_15%,rgba(16,159,131,.12),transparent_27%),linear-gradient(180deg,transparent,rgba(238,235,229,.5))]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_86%_15%,rgba(0,144,175,.12),transparent_27%),linear-gradient(180deg,transparent,rgba(238,235,229,.5))]" />
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto max-w-[1440px]">
         <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-20">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .8, ease }}>

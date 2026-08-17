@@ -71,7 +71,7 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
       animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)" }}
       exit={{ opacity: 0, y: 38, scale: 0.9, rotateX: -12, filter: "blur(8px)" }}
       transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 bottom-2 z-[75] mx-auto w-[calc(100%-1.5rem)] origin-bottom overflow-hidden rounded-full border border-white/16 bg-linear-to-r from-copad-deep/94 via-copad-deep/89 to-copad-deep/94 text-white shadow-[0_10px_30px_rgba(15,61,57,.2)] backdrop-blur-xl [perspective:1000px] sm:bottom-3 sm:w-[calc(100%-3rem)] sm:max-w-[680px]"
+      className="fixed inset-x-0 bottom-2 z-[75] mx-auto w-[calc(100%-1.5rem)] origin-bottom overflow-hidden rounded-full border border-white/16 bg-linear-to-r from-copad-deep/94 via-copad-deep/89 to-copad-deep/94 text-white shadow-[0_10px_30px_rgba(1,61,96,.2)] backdrop-blur-xl [perspective:1000px] sm:bottom-3 sm:w-[calc(100%-3rem)] sm:max-w-[680px]"
     >
       <span aria-hidden="true" className="absolute inset-x-[8%] top-0 h-px bg-linear-to-r from-transparent via-white/28 to-transparent" />
       <motion.span
@@ -94,15 +94,15 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
               onClick={() => goToSection(item.id)}
               className={`group relative isolate flex min-h-8 min-w-max flex-1 items-center justify-center gap-1.5 rounded-full px-2 py-1 text-[8px] font-black tracking-[0.04em] transition-colors duration-500 sm:px-2 sm:text-[7.5px] ${active ? "text-copad-deep" : "text-white/54 hover:text-white"}`}
             >
-              {active && <motion.span layoutId="home-section-active" className="absolute inset-0 -z-10 rounded-full bg-copad-white shadow-[0_7px_20px_rgba(0,0,0,.14),inset_0_-2px_0_rgba(16,159,131,.16)]" transition={{ type: "spring", stiffness: 380, damping: 34 }} />}
-              <span className={`size-1.25 shrink-0 rounded-full transition-all duration-500 ${active ? "bg-copad-green shadow-[0_0_10px_rgba(16,159,131,.7)]" : "bg-white/22 group-hover:bg-copad-green"}`} />
+              {active && <motion.span layoutId="home-section-active" className="absolute inset-0 -z-10 rounded-full bg-copad-white shadow-[0_7px_20px_rgba(0,0,0,.14),inset_0_-2px_0_rgba(0,144,175,.16)]" transition={{ type: "spring", stiffness: 380, damping: 34 }} />}
+              <span className={`size-1.25 shrink-0 rounded-full transition-all duration-500 ${active ? "bg-copad-green shadow-[0_0_10px_rgba(0,144,175,.7)]" : "bg-white/22 group-hover:bg-copad-green"}`} />
               <span>{item.label}</span>
             </button>
           );
         })}
       </div>
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10">
-        <motion.span className="block h-full origin-left bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.75)] rtl:origin-right" style={{ scaleX: progress }} />
+        <motion.span className="block h-full origin-left bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.75)] rtl:origin-right" style={{ scaleX: progress }} />
       </div>
       </motion.nav>}
     </AnimatePresence>

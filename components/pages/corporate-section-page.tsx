@@ -60,7 +60,7 @@ export function CorporateSectionPage({
               <article
                 className={
                   layout === "cards"
-                    ? "h-full rounded-[1.5rem] border border-copad-deep/10 bg-white p-5 shadow-[0_16px_45px_rgba(15,61,57,.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(15,61,57,.11)] sm:rounded-[1.75rem] sm:p-7 lg:p-9"
+                    ? "h-full rounded-[1.5rem] border border-copad-deep/10 bg-white p-5 shadow-[0_16px_45px_rgba(1,61,96,.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(1,61,96,.11)] sm:rounded-[1.75rem] sm:p-7 lg:p-9"
                     : "grid gap-3 border-t border-copad-deep/12 py-8 sm:gap-5 sm:py-10 md:grid-cols-[7rem_1fr] lg:py-14"
                 }
               >

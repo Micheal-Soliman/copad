@@ -4,13 +4,15 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, us
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 type HistoryTimelineProps = {
   locale: Locale;
   title: string;
   intro: string;
   items: string[];
+  sectionId?: string;
+  homepage?: boolean;
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -20,7 +22,7 @@ function splitTimelineItem(item: string) {
   return { label, description: description.join(" — ") };
 }
 
-export function HistoryTimeline({ locale, title, intro, items }: HistoryTimelineProps) {
+export function HistoryTimeline({ locale, title, intro, items, sectionId = "history", homepage = false }: HistoryTimelineProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const isArabic = locale === "ar";
@@ -36,7 +38,7 @@ export function HistoryTimeline({ locale, title, intro, items }: HistoryTimeline
   });
 
   return (
-    <section id="history" ref={sectionRef} style={scrollSceneStyle(items.length)} className="relative scroll-mt-20 bg-copad-sand/45 lg:h-[var(--scroll-scene-height)]">
+    <section id={sectionId} ref={sectionRef} style={homepage ? homeScrollSceneStyle(items.length) : scrollSceneStyle(items.length)} className="relative scroll-mt-20 bg-copad-sand/45 lg:h-[var(--scroll-scene-height)]">
       <div className="px-4 pt-10 pb-2 sm:px-8 sm:pt-16 sm:pb-4 lg:hidden">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}
@@ -196,7 +198,7 @@ function MobileTimelineCard({
   return (
     <motion.article
       style={{ y, scale, zIndex: index + 1 }}
-      className={`absolute inset-x-0 top-[10svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_24px_62px_rgba(15,61,57,.18)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
+      className={`absolute inset-x-0 top-[10svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_24px_62px_rgba(1,61,96,.18)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
         tone === 0
           ? "border-white/12 bg-copad-deep text-white"
           : tone === 1

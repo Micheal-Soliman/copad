@@ -15,7 +15,7 @@ const english: SiteCopy = {
       sectionNavigationLabel: "Homepage sections",
       sectionNavigation: [
         { id: "home", label: "Home" },
-        { id: "snapshot", label: "Snapshot" },
+        { id: "snapshot", label: "History" },
         { id: "introduction", label: "Company" },
         { id: "divisions", label: "Divisions" },
         { id: "therapy", label: "Therapy" },
@@ -45,7 +45,7 @@ const english: SiteCopy = {
       sectionNavigationLabel: "About page sections",
       sectionNavigation: [
         { id: "home", label: "About" },
-        { id: "history", label: "History" },
+        { id: "history", label: "Snapshot" },
         { id: "direction", label: "Direction" },
         { id: "specialization", label: "Specialization" },
         { id: "values", label: "Values" },
@@ -213,7 +213,7 @@ const arabic: SiteCopy = {
       sectionNavigationLabel: "أقسام الصفحة الرئيسية",
       sectionNavigation: [
         { id: "home", label: "الرئيسية" },
-        { id: "snapshot", label: "لمحة" },
+        { id: "snapshot", label: "التاريخ" },
         { id: "introduction", label: "عن كوباد" },
         { id: "divisions", label: "القطاعات" },
         { id: "therapy", label: "المجالات العلاجية" },
@@ -243,7 +243,7 @@ const arabic: SiteCopy = {
       sectionNavigationLabel: "أقسام صفحة عن كوباد",
       sectionNavigation: [
         { id: "home", label: "عن كوباد" },
-        { id: "history", label: "التاريخ" },
+        { id: "history", label: "لمحة" },
         { id: "direction", label: "الاتجاه" },
         { id: "specialization", label: "التخصص" },
         { id: "values", label: "القيم" },

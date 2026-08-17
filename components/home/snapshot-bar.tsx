@@ -4,9 +4,9 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
-export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }) {
+export function SnapshotBar({ locale, intro, sectionId = "snapshot", homepage = true }: { locale: Locale; intro: string; sectionId?: string; homepage?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const data = siteCopy[locale].home.snapshot;
@@ -34,7 +34,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
   }, [data.length, revealProgress]);
 
   return (
-    <section id="snapshot" ref={sectionRef} style={scrollSceneStyle(data.length)} className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-8 sm:py-12 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id={sectionId} ref={sectionRef} style={homepage ? homeScrollSceneStyle(data.length) : scrollSceneStyle(data.length)} className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-8 sm:py-12 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <div className="relative mx-auto w-full max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -70,7 +70,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
               className="absolute top-1/2 z-20 size-0"
               style={reduceMotion ? { left: pulseStart, y: -24 } : { left: desktopPulseLeft, y: desktopPulseY, opacity: pulseOpacity }}
             >
-              <span className="absolute -top-1.5 -left-1.5 size-3 rounded-full bg-copad-green shadow-[0_0_18px_5px_rgba(16,159,131,.45)]">
+              <span className="absolute -top-1.5 -left-1.5 size-3 rounded-full bg-copad-green shadow-[0_0_18px_5px_rgba(0,144,175,.45)]">
                 {!reduceMotion && <span className="absolute inset-0 animate-ping rounded-full bg-copad-green/75" />}
               </span>
             </motion.span>
@@ -93,7 +93,7 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
                   </div>
 
                   <span aria-hidden="true" className={`absolute left-1/2 grid size-5 -translate-x-1/2 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)] ${above ? "top-[calc(50%_-_34px)]" : "top-[calc(50%_+_14px)]"}`}>
-                    <span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(16,159,131,.32)]" />
+                    <span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(0,144,175,.32)]" />
                   </span>
                 </motion.li>
               );
@@ -103,14 +103,14 @@ export function SnapshotBar({ locale, intro }: { locale: Locale; intro: string }
 
         <div className="relative z-10 lg:hidden">
           <motion.div aria-hidden="true" className="absolute top-[.875rem] bottom-[5.125rem] start-[9px] w-px origin-top bg-copad-deep/18" initial={reduceMotion ? false : { scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-            <motion.span className="absolute start-1/2 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-copad-white bg-copad-green shadow-[0_0_18px_6px_rgba(16,159,131,.52)]">
+            <motion.span className="absolute start-1/2 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-copad-white bg-copad-green shadow-[0_0_18px_6px_rgba(0,144,175,.52)]">
               {!reduceMotion && <span className="absolute -inset-2 animate-ping rounded-full border border-copad-green/35" />}
             </motion.span>
           </motion.div>
           <ol className="grid auto-rows-[6rem]">
             {data.map((entry, index) => (
               <SnapshotMobilePoint key={entry} index={index} reduceMotion={Boolean(reduceMotion)} className="grid grid-cols-[1.25rem_1fr] gap-5">
-                <span className="relative mt-1 grid size-5 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)]"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(16,159,131,.32)]" /></span>
+                <span className="relative mt-1 grid size-5 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)]"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(0,144,175,.32)]" /></span>
                 <div>
                   <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
                   <p className="mt-2 text-sm leading-6 font-bold text-copad-deep/68">{entry}</p>

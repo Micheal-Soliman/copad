@@ -40,7 +40,7 @@ export function AboutHero({ locale, title, intro }: AboutHeroProps) {
   return (
     <section ref={sectionRef} id="home" style={scrollSceneStyle(3)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep px-4 pt-20 pb-5 text-white sm:px-8 sm:pt-28 sm:pb-8 lg:sticky lg:top-0 lg:h-screen lg:px-12 lg:pt-24 lg:pb-6">
-      <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_12%_18%,rgba(16,159,131,.16),transparent_28%),linear-gradient(125deg,#0f3d39_0%,#0a302d_62%,#082724_100%)]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_12%_18%,rgba(0,144,175,.16),transparent_28%),linear-gradient(125deg,#013d60_0%,#0a302d_62%,#082724_100%)]" />
 
       <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid max-w-[1440px] items-stretch gap-7 sm:gap-10 lg:h-full lg:grid-cols-[.82fr_1.18fr] lg:gap-0">
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 flex flex-col justify-center py-4 sm:py-8 lg:py-6 lg:pe-10 xl:pe-14">

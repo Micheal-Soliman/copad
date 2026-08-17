@@ -51,8 +51,8 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                 key={division.title}
                 style={reduceMotion ? { flexGrow: isActive ? 2.5 : closedWeight } : undefined}
                 animate={reduceMotion ? undefined : { flexGrow: isActive ? 2.5 : closedWeight }}
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:h-auto lg:min-w-0 lg:basis-0"
+                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 72, damping: 20, mass: 0.85 }}
+                className="lg:h-auto lg:min-w-0 lg:basis-0 lg:will-change-[flex-grow]"
               >
                 <motion.div
                   key={isDesktop ? "desktop-entrance" : "mobile-entrance"}
@@ -64,26 +64,26 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                 >
                   <motion.article
                     animate={reduceMotion ? undefined : { y: isActive ? -6 : 0 }}
-                    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                    transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 92, damping: 22, mass: 0.7 }}
                     onMouseEnter={() => setActive(index)}
                     onFocusCapture={() => setActive(index)}
                     onTap={() => setActive(index)}
                     data-cursor="interactive"
                     data-cursor-label={ui.interactionLabels.open}
                     tabIndex={0}
-                    className={`group relative w-full overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_18px_50px_rgba(15,61,57,.08)] transition-[height,box-shadow] duration-700 ease-[cubic-bezier(.22,1,.36,1)] hover:shadow-[0_32px_80px_rgba(15,61,57,.2)] sm:rounded-[1.75rem] lg:h-full ${isActive ? "h-[22rem]" : "h-36"}`}
+                    className={`group relative w-full overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_18px_50px_rgba(1,61,96,.08)] transition-[height,box-shadow] duration-1000 ease-[cubic-bezier(.22,1,.36,1)] hover:shadow-[0_32px_80px_rgba(1,61,96,.2)] sm:rounded-[1.75rem] lg:h-full ${isActive ? "h-[22rem]" : "h-36"}`}
                   >
                 <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-copad-deep">
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 1 : 1.08, filter: isActive ? "brightness(1) saturate(1)" : "brightness(.72) saturate(.72)" }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "auto 100%", backgroundPosition: `${positions[index]} center` }}
                   />
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1.015 : 1.08, filter: isActive ? "saturate(1.08)" : "saturate(1)" }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
                     style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "400% auto", backgroundPosition: `${positions[index]} center` }}
                   />
                 </div>
@@ -95,7 +95,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                     </span>
                   </div>
                   <h3 className={`mt-3 ms-2 flex max-w-full items-start text-wrap font-display leading-[1.08] tracking-[-0.035em] text-white transition-[transform,font-size] duration-500 sm:mt-4 sm:ms-3 lg:min-h-32 ${isActive ? "-translate-y-1 text-[2rem] sm:text-3xl xl:text-4xl" : `translate-y-0 ${closedTitleSize}`}`}>{division.title}</h3>
-                  <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                  <div className={`grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="ms-2 overflow-hidden sm:ms-3">
                       <p className="max-w-xl pt-3 text-sm leading-6 text-white/66 sm:pt-4 sm:leading-7">{division.description}</p>
                     </div>
@@ -111,7 +111,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
         </div>
 
         <div className="mt-10 flex justify-center">
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/divisions`} className="group relative isolate inline-flex min-h-11 w-full min-w-56 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_16px_36px_rgba(15,61,57,.16)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_24px_46px_rgba(16,159,131,.24)] sm:w-auto">
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/divisions`} className="group relative isolate inline-flex min-h-11 w-full min-w-56 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_16px_36px_rgba(1,61,96,.16)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_24px_46px_rgba(0,144,175,.24)] sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-y-100" />
             <span aria-hidden="true" className="absolute top-0 -start-16 h-full w-12 skew-x-[-18deg] bg-white/25 blur-sm transition-transform duration-700 group-hover:translate-x-[19rem] rtl:group-hover:-translate-x-[19rem]" />
             <span className="relative text-center">{action}</span>

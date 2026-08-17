@@ -3,9 +3,9 @@ import { ClosingPreviews } from "@/components/home/closing-previews";
 import { DivisionsOverview } from "@/components/home/divisions-overview";
 import { HomeHero } from "@/components/home/home-hero";
 import { HomeSectionNavigator } from "@/components/home/home-section-navigator";
+import { HistoryTimeline } from "@/components/corporate/history-timeline";
 import { IntroductionSection } from "@/components/home/introduction-section";
 import { ManufacturingPreview } from "@/components/home/manufacturing-preview";
-import { SnapshotBar } from "@/components/home/snapshot-bar";
 import { TherapyAreasPreview } from "@/components/home/therapy-areas-preview";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -19,6 +19,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const copy = siteCopy[locale];
   const { home } = copy;
   const ui = copy.ui.home;
+  const history = copy.sections.about.blocks[0]!;
 
   return (
     <main className="bg-copad-white">
@@ -34,7 +35,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         secondaryCta={home.secondaryCta}
       />
 
-      <SnapshotBar locale={locale} intro={home.body} />
+      <HistoryTimeline
+        locale={locale}
+        sectionId="snapshot"
+        homepage
+        title={history.title}
+        intro={history.body}
+        items={history.items ?? []}
+      />
 
       <IntroductionSection
         locale={locale}

@@ -1,11 +1,10 @@
 "use client";
 
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
 type PreviewCopy = { title: string; body: string };
 
@@ -20,10 +19,6 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export function ClosingPreviews({ locale, insights, partnership }: ClosingPreviewsProps) {
   const [active, setActive] = useState(0);
   const reduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
-  const sectionLineScale = useTransform(sceneProgress, [0, 0.7], [0, 1]);
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.home;
   const cards = [
@@ -31,17 +26,11 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
     { eyebrow: ui.partnershipEyebrow, title: partnership.title, body: partnership.body, action: ui.partnershipAction, href: "partner-with-us" },
   ] as const;
 
-  useMotionValueEvent(sceneProgress, "change", (value) => {
-    if (reduceMotion) return;
-    const next = value < 0.5 ? 0 : 1;
-    setActive((current) => current === next ? current : next);
-  });
-
   return (
-    <section id="connect" ref={sectionRef} style={scrollSceneStyle(cards.length)} className="relative scroll-mt-20 overflow-clip bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
-      <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
-        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.9, ease }} className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(15,61,57,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(15,61,57,.16)] lg:h-[min(64vh,34rem)] lg:flex-row">
-          <motion.span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[2px] origin-left bg-linear-to-r from-copad-green via-copad-green to-copad-green/45 shadow-[0_0_14px_rgba(16,159,131,.28)] rtl:origin-right" style={{ scaleX: reduceMotion ? 1 : sectionLineScale }} />
+    <section id="connect" className="relative scroll-mt-20 overflow-clip bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
+      <div>
+        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.9, ease }} className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(1,61,96,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(1,61,96,.16)] lg:h-[min(64vh,34rem)] lg:flex-row">
+          <motion.span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[2px] origin-left bg-linear-to-r from-copad-green via-copad-sky to-copad-green/45 shadow-[0_0_14px_rgba(0,144,175,.28)] rtl:origin-right" initial={reduceMotion ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, amount: 0.45 }} transition={{ duration: 1.1, ease }} />
           {cards.map((card, index) => {
             const isActive = active === index;
             const dark = index === 0;
@@ -61,7 +50,7 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
                     <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out lg:grid-rows-[1fr] lg:opacity-100 ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                       <div className="overflow-hidden">
                         <p className={`mt-4 max-w-xl text-sm leading-7 ${dark ? "text-white/64" : "text-copad-deep/62"}`}>{card.body}</p>
-                        <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/${card.href}`} className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(15,61,57,.16)] transition duration-500 hover:-translate-y-1 sm:w-auto ${dark ? "bg-white text-copad-deep hover:text-white" : "bg-copad-deep text-white"}`}>
+                        <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/${card.href}`} className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(1,61,96,.16)] transition duration-500 hover:-translate-y-1 sm:w-auto ${dark ? "bg-white text-copad-deep hover:text-white" : "bg-copad-deep text-white"}`}>
                           <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/button:scale-y-100" />
                           <span>{card.action}</span>
                         </Link>

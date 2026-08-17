@@ -10,7 +10,7 @@ import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
 import { RevealHeading } from "@/components/motion/reveal-heading";
 import { siteCopy } from "@/content/site";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { Locale } from "@/lib/i18n";
 
 type IntroductionSectionProps = {
@@ -39,7 +39,7 @@ export function IntroductionSection({
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="introduction" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id="introduction" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="01" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.08fr_.92fr] lg:gap-24">
         <ScrollSceneItem
@@ -50,7 +50,7 @@ export function IntroductionSection({
           className="relative mx-auto w-full max-w-xl pt-6 pr-6 sm:pt-9 sm:pr-9 lg:col-start-2 lg:row-start-1"
         >
           <motion.div
-            className="absolute top-0 right-0 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-[1.5rem] border-2 border-copad-green bg-copad-green/[0.035] shadow-[10px_-10px_0_rgba(16,159,131,.06),0_20px_50px_rgba(15,61,57,.12)] sm:h-[calc(100%-2.25rem)] sm:w-[calc(100%-2.25rem)] sm:rounded-[2rem] sm:shadow-[14px_-14px_0_rgba(16,159,131,.06),0_28px_65px_rgba(15,61,57,.12)]"
+            className="absolute top-0 right-0 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-[1.5rem] border-2 border-copad-green bg-copad-green/[0.035] shadow-[10px_-10px_0_rgba(0,144,175,.06),0_20px_50px_rgba(1,61,96,.12)] sm:h-[calc(100%-2.25rem)] sm:w-[calc(100%-2.25rem)] sm:rounded-[2rem] sm:shadow-[14px_-14px_0_rgba(0,144,175,.06),0_28px_65px_rgba(1,61,96,.12)]"
             initial={reduceMotion || isDesktop ? false : { opacity: 0, x: locale === "ar" ? -12 : 12, y: 12, scale: 0.97 }}
             whileInView={isDesktop ? undefined : { opacity: 1, x: 0, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -60,7 +60,7 @@ export function IntroductionSection({
             <span className="absolute inset-2 rounded-[1.1rem] border border-copad-deep/8 sm:inset-3 sm:rounded-[1.45rem]" />
           </motion.div>
           <ScrollImageReveal
-            className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_22px_60px_rgba(15,61,57,.18)] sm:aspect-[4/5] sm:rounded-[2rem] sm:shadow-[0_30px_80px_rgba(15,61,57,.2)]"
+            className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.18)] sm:aspect-[4/5] sm:rounded-[2rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.2)]"
             direction="right"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -94,7 +94,7 @@ export function IntroductionSection({
             data-magnetic
             data-cursor-label={ui.interactionLabels.go}
             href={`/${locale}/about`}
-            className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(15,61,57,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(16,159,131,.24)] sm:mt-9 sm:w-auto"
+            className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(1,61,96,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(0,144,175,.24)] sm:mt-9 sm:w-auto"
           >
             <span className="absolute inset-0 -z-10 -translate-x-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0 rtl:translate-x-full rtl:group-hover:translate-x-0" />
             <span className="relative">{action}</span>

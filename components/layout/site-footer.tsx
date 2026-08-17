@@ -21,7 +21,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <motion.p
           className="absolute inset-0 select-none bg-clip-text text-[clamp(5rem,25vw,18rem)] leading-none font-black tracking-[-0.075em] text-transparent"
           style={{
-            backgroundImage: "linear-gradient(100deg, transparent 38%, rgba(255,255,255,.12) 48%, rgba(16,159,131,.16) 52%, transparent 62%)",
+            backgroundImage: "linear-gradient(100deg, transparent 38%, rgba(255,255,255,.12) 48%, rgba(0,144,175,.16) 52%, transparent 62%)",
             backgroundSize: "220% 100%",
           }}
           animate={reduceMotion ? undefined : { backgroundPosition: ["180% 50%", "-180% 50%"] }}
@@ -83,7 +83,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <motion.p
             className="absolute inset-x-0 bottom-0 select-none whitespace-nowrap bg-clip-text text-[clamp(4.25rem,22vw,6rem)] leading-[.82] font-black tracking-[-0.075em] text-transparent"
             style={{
-              backgroundImage: "linear-gradient(100deg, transparent 36%, rgba(255,255,255,.22) 48%, rgba(16,159,131,.28) 53%, transparent 64%)",
+              backgroundImage: "linear-gradient(100deg, transparent 36%, rgba(255,255,255,.22) 48%, rgba(0,144,175,.28) 53%, transparent 64%)",
               backgroundSize: "220% 100%",
             }}
             animate={reduceMotion ? undefined : { backgroundPosition: ["180% 50%", "-180% 50%"] }}

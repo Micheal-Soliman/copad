@@ -31,14 +31,14 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
   return (
     <section id="home" ref={sectionRef} style={scrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(16,159,131,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(238,235,229,.07),transparent_28%),linear-gradient(132deg,#082f2c_0%,#0f3d39_56%,#092c29_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(0,144,175,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(238,235,229,.07),transparent_28%),linear-gradient(132deg,#082f2c_0%,#013d60_56%,#092c29_100%)]" />
         <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[36vw] bg-linear-to-r from-transparent via-copad-green/[.06] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-45vw", "120vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-20 h-1/2 bg-linear-to-t from-black/18 to-transparent" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-9 px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.82fr_1.18fr] lg:gap-12 lg:px-12 lg:pt-[5.75rem] lg:pb-4">
           <motion.div className="relative z-20" style={scrollDriven ? { y: copyY } : undefined}>
             <motion.div initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3">
-              <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.8)]" />
+              <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.8)]" />
               <p className="text-[9px] font-black tracking-[.22em] text-copad-green uppercase sm:text-[10px]">{ui.heroKicker}</p>
             </motion.div>
 

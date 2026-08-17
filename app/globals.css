@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-copad-deep: #0f3d39;
-  --color-copad-green: #109f83;
-  --color-copad-sand: #eeebe5;
-  --color-copad-white: #f9f9f9;
+  /* COPAD brand palette — edit these tokens to update the full experience. */
+  --color-copad-deep: #013d60;
+  --color-copad-green: #0090af;
+  --color-copad-sky: #7bcded;
+  --color-copad-sand: #e8f5fd;
+  --color-copad-white: #f9fcff;
   --font-sans: Arial, Tahoma, "Segoe UI", sans-serif;
   --font-display: Georgia, "Times New Roman", serif;
   --animate-spin-slow: spin 8s linear infinite;
@@ -79,15 +81,15 @@
 
 @keyframes copad-header-scroll {
   from {
-    background-color: rgb(15 61 57 / 0%);
+    background-color: rgb(1 61 96 / 0%);
     border-color: rgb(255 255 255 / 10%);
-    box-shadow: 0 0 0 rgb(15 61 57 / 0%);
+    box-shadow: 0 0 0 rgb(1 61 96 / 0%);
   }
 
   to {
-    background-color: rgb(15 61 57 / 96%);
+    background-color: rgb(1 61 96 / 96%);
     border-color: rgb(255 255 255 / 14%);
-    box-shadow: 0 14px 38px rgb(15 61 57 / 18%);
+    box-shadow: 0 14px 38px rgb(1 61 96 / 18%);
   }
 }
 

@@ -31,7 +31,7 @@ export function PartnershipModels({ locale, blocks }: { locale: Locale; blocks: 
 
   return <section ref={sectionRef} id="models" style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)] bg-copad-sand">
     <div className="sticky top-0 h-[100svh] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_105%,rgba(16,159,131,.15),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_105%,rgba(0,144,175,.15),transparent_34%)]" />
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col px-4 pb-20 pt-24 sm:px-8 lg:px-12 lg:pb-24 lg:pt-28">
         <header className="flex shrink-0 items-end justify-between border-b border-copad-deep/12 pb-4">
           <div>
@@ -44,12 +44,12 @@ export function PartnershipModels({ locale, blocks }: { locale: Locale; blocks: 
         </header>
 
         <div className="relative mt-5 grid min-h-0 flex-1 grid-rows-3 gap-3 lg:grid-cols-3 lg:grid-rows-1">
-          {!reducedMotion && <motion.div aria-hidden="true" className="pointer-events-none absolute -top-3 bottom-0 z-20 hidden w-px bg-copad-green/70 shadow-[0_0_28px_8px_rgba(16,159,131,.18)] lg:block" style={{ left: focusX }} />}
+          {!reducedMotion && <motion.div aria-hidden="true" className="pointer-events-none absolute -top-3 bottom-0 z-20 hidden w-px bg-copad-green/70 shadow-[0_0_28px_8px_rgba(0,144,175,.18)] lg:block" style={{ left: focusX }} />}
           {blocks.map((block, index) => <MatrixCard key={block.title} block={block} index={index} progress={sceneProgress} image={images[index]} isArabic={isArabic} reducedMotion={!!reducedMotion} />)}
         </div>
 
         <div className="mt-4 h-[3px] shrink-0 overflow-hidden rounded-full bg-copad-deep/10">
-          <motion.span className="block h-full origin-start bg-copad-green shadow-[0_0_15px_rgba(16,159,131,.5)] rtl:origin-right" style={{ scaleX: overallLine }} />
+          <motion.span className="block h-full origin-start bg-copad-green shadow-[0_0_15px_rgba(0,144,175,.5)] rtl:origin-right" style={{ scaleX: overallLine }} />
         </div>
       </div>
     </div>
@@ -67,13 +67,13 @@ function MatrixCard({ block, index, progress, image, isArabic, reducedMotion }: 
   const contentY = useTransform(contentOpacity, [0, 1], [10, 0]);
   const imageScale = useTransform(contentOpacity, [0, 1], [1.07, 1]);
 
-  return <motion.article style={reducedMotion ? undefined : { opacity: cardOpacity, scale: cardScale }} className="group relative min-h-0 overflow-hidden rounded-[1.7rem] border border-copad-green/35 bg-copad-deep shadow-[0_28px_70px_rgba(15,61,57,.14)]">
+  return <motion.article style={reducedMotion ? undefined : { opacity: cardOpacity, scale: cardScale }} className="group relative min-h-0 overflow-hidden rounded-[1.7rem] border border-copad-green/35 bg-copad-deep shadow-[0_28px_70px_rgba(1,61,96,.14)]">
     <motion.div className="absolute inset-0" style={reducedMotion ? undefined : { scale: imageScale }}>
       <Image src={image} alt="" fill className="object-cover opacity-65" sizes="(min-width:1024px) 33vw, 100vw" />
     </motion.div>
     <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/55 to-transparent" />
     <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-7 lg:p-8">
-      <div className="flex items-center justify-between"><span className="text-[8px] font-black uppercase tracking-[.2em] text-copad-green">{isArabic ? "مجال" : "Area"} · 0{index + 1}</span><span className="size-2 rounded-full bg-copad-green shadow-[0_0_16px_rgba(16,159,131,.8)]" /></div>
+      <div className="flex items-center justify-between"><span className="text-[8px] font-black uppercase tracking-[.2em] text-copad-green">{isArabic ? "مجال" : "Area"} · 0{index + 1}</span><span className="size-2 rounded-full bg-copad-green shadow-[0_0_16px_rgba(0,144,175,.8)]" /></div>
       <div className="relative">
         <h3 className={`${isArabic ? "font-sans font-black leading-[1.08]" : "font-display leading-[.94]"} max-w-full text-[clamp(1.65rem,2.65vw,3rem)] tracking-[-.05em] text-white`}>{block.title}</h3>
         <motion.div style={reducedMotion ? undefined : { opacity: contentOpacity, y: contentY }} className="mt-5 overflow-hidden">

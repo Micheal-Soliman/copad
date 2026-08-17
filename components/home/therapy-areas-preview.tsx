@@ -10,7 +10,7 @@ import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type TherapyAreasPreviewProps = {
   locale: Locale;
@@ -27,7 +27,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="therapy" ref={sectionRef} style={scrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id="therapy" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} reverse chapter="03" />
       <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.02fr_.98fr] lg:gap-20">
         <ScrollSceneItem
@@ -38,7 +38,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
           className="relative mx-auto w-full max-w-2xl lg:col-start-2 lg:row-start-1"
         >
           <ScrollImageReveal
-            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-tr-[4rem] border border-copad-deep/10 bg-copad-deep bg-no-repeat shadow-[0_22px_60px_rgba(15,61,57,.13)] sm:rounded-[2.5rem] sm:rounded-tr-[6rem] sm:shadow-[0_30px_80px_rgba(15,61,57,.14)]"
+            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-tr-[4rem] border border-copad-deep/10 bg-copad-deep bg-no-repeat shadow-[0_22px_60px_rgba(1,61,96,.13)] sm:rounded-[2.5rem] sm:rounded-tr-[6rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.14)]"
             direction="right"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -65,7 +65,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
           <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
           <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:text-lg lg:leading-9">{body}</p>
 
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/therapeutic-areas`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-52 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(15,61,57,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(16,159,131,.22)] sm:mt-9 sm:w-auto">
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/therapeutic-areas`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-52 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:mt-9 sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-right" />
             <span>{action}</span>
           </Link>

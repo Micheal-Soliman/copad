@@ -42,7 +42,7 @@ export function FinalPageCta({
   return (
     <section ref={sectionRef} id={id} dir={isArabic ? "rtl" : "ltr"} className="relative flex min-h-svh scroll-mt-20 items-center overflow-hidden border-t border-copad-green/25 bg-copad-deep px-4 py-20 text-white sm:px-8 lg:px-12 lg:pt-16 lg:pb-28">
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(16,159,131,.19),transparent_28%),linear-gradient(115deg,rgba(255,255,255,.025),transparent_45%)] rtl:bg-[radial-gradient(circle_at_22%_42%,rgba(16,159,131,.19),transparent_28%),linear-gradient(245deg,rgba(255,255,255,.025),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(0,144,175,.19),transparent_28%),linear-gradient(115deg,rgba(255,255,255,.025),transparent_45%)] rtl:bg-[radial-gradient(circle_at_22%_42%,rgba(0,144,175,.19),transparent_28%),linear-gradient(245deg,rgba(255,255,255,.025),transparent_45%)]" />
         <motion.div className="absolute -bottom-[18vw] -start-[8vw] size-[44vw] rounded-full border border-copad-green/12" style={reduceMotion ? undefined : { scale: gatewayScale }} />
         <p className="absolute -bottom-[.17em] end-[-.04em] font-display text-[22vw] leading-none tracking-[-.09em] text-white/[.024]">NEXT</p>
       </div>

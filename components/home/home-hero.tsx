@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef, type PointerEvent as ReactPointerEvent } from 
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type HomeHeroProps = {
   locale: Locale;
@@ -115,7 +115,7 @@ export function HomeHero(props: HomeHeroProps) {
   const secondaryHref = `/${props.locale}/therapeutic-areas`;
 
   return (
-    <section ref={sectionRef} style={scrollSceneStyle(2)} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
+    <section ref={sectionRef} style={homeScrollSceneStyle(2)} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative flex min-h-svh items-center overflow-hidden px-4 pt-24 pb-14 text-center sm:px-8 sm:pb-10 lg:sticky lg:top-0 lg:h-screen lg:px-12">
         <motion.div className="absolute inset-0 transform-gpu will-change-transform" style={motionEnabled ? { y: mediaY, scale: mediaScale } : undefined}>
           <Image className="object-cover opacity-90 saturate-[.72] contrast-[1.04]" src="/images/copad-campus-hero.png" alt={ui.heroImageAlt} fill priority sizes="100vw" />
@@ -124,15 +124,15 @@ export function HomeHero(props: HomeHeroProps) {
         <div className="absolute inset-0 bg-copad-green/16 mix-blend-color" />
         <div className="absolute inset-0 bg-linear-to-b from-copad-deep/18 via-copad-deep/28 to-copad-deep/76" />
 
-        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden origin-bottom bg-[linear-gradient(180deg,rgba(15,61,57,.2),rgba(8,39,36,.94))] lg:block" style={motionEnabled ? { y: mediaCurtainY } : { y: "-104%" }} />
+        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden origin-bottom bg-[linear-gradient(180deg,rgba(1,61,96,.2),rgba(8,39,36,.94))] lg:block" style={motionEnabled ? { y: mediaCurtainY } : { y: "-104%" }} />
         <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_46%,rgba(255,255,255,.22),transparent_48%)] mix-blend-screen lg:block" style={motionEnabled ? { opacity: mediaLight } : { opacity: 0 }} />
-        <motion.div aria-hidden="true" className="pointer-events-none absolute start-1/2 top-[46%] size-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.14),rgba(16,159,131,.08)_34%,transparent_68%)] mix-blend-screen blur-2xl" style={motionEnabled ? { x: glowX, y: glowY } : undefined} />
+        <motion.div aria-hidden="true" className="pointer-events-none absolute start-1/2 top-[46%] size-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.14),rgba(0,144,175,.08)_34%,transparent_68%)] mix-blend-screen blur-2xl" style={motionEnabled ? { x: glowX, y: glowY } : undefined} />
         <motion.div aria-hidden="true" className="pointer-events-none absolute inset-y-0 hidden w-[28%] -skew-x-12 bg-linear-to-r from-transparent via-white/[.055] to-transparent lg:block" style={motionEnabled ? { x: sweepX } : undefined} />
 
         <motion.div className="relative mx-auto flex w-full max-w-5xl flex-col items-center lg:hidden" variants={mobileSequence} initial={reduceMotion ? false : "hidden"} animate="visible">
           <motion.p variants={mobileLine} custom={-1 * direction} className="text-[10px] font-black tracking-[0.24em] text-copad-green uppercase">{props.eyebrow}</motion.p>
           <motion.h1 variants={mobileLine} custom={1 * direction} className="mt-4 font-display text-[3.15rem] leading-[.94] tracking-[-0.055em] text-balance sm:text-7xl">{props.title}</motion.h1>
-          <motion.p variants={mobileLine} custom={-1 * direction} className="mt-5 max-w-4xl text-lg leading-snug font-bold text-balance text-white/95 drop-shadow-[0_2px_12px_rgba(15,61,57,.38)] sm:text-2xl">{props.subheadline}</motion.p>
+          <motion.p variants={mobileLine} custom={-1 * direction} className="mt-5 max-w-4xl text-lg leading-snug font-bold text-balance text-white/95 drop-shadow-[0_2px_12px_rgba(1,61,96,.38)] sm:text-2xl">{props.subheadline}</motion.p>
           <motion.div variants={mobileActions} className="mt-7 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4">
             <HeroButtons primaryHref={primaryHref} secondaryHref={secondaryHref} primary={props.primaryCta} secondary={props.secondaryCta} cursorLabel={ui.interactionLabels.go} />
           </motion.div>
@@ -146,7 +146,7 @@ export function HomeHero(props: HomeHeroProps) {
           </motion.div>
 
           <motion.div className="absolute inset-0 flex items-center justify-center" style={{ clipPath: secondClip, opacity: secondOpacity, y: secondY, rotateX: secondRotateX }}>
-            <h2 className="max-w-5xl text-5xl leading-[1.02] font-bold text-balance text-white drop-shadow-[0_4px_22px_rgba(15,61,57,.45)] xl:text-6xl">{props.subheadline}</h2>
+            <h2 className="max-w-5xl text-5xl leading-[1.02] font-bold text-balance text-white drop-shadow-[0_4px_22px_rgba(1,61,96,.45)] xl:text-6xl">{props.subheadline}</h2>
           </motion.div>
 
           <motion.div className="absolute inset-x-0 bottom-16 flex items-center justify-center gap-4" style={{ opacity: buttonOpacity, y: buttonY }}>
@@ -158,7 +158,7 @@ export function HomeHero(props: HomeHeroProps) {
           <motion.span className="absolute inset-x-0 top-0 h-1/2 bg-copad-green" animate={reduceMotion ? undefined : { y: ["-100%", "200%"] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} />
         </span>
         <motion.div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-copad-white/20 to-transparent" style={motionEnabled ? { opacity: handoffOpacity } : undefined} />
-        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-x-[6%] bottom-0 h-[3px] origin-left bg-linear-to-r from-transparent via-copad-green to-transparent shadow-[0_0_24px_rgba(16,159,131,.65)] rtl:origin-right" style={motionEnabled ? { scaleX: handoffScale } : undefined} />
+        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-x-[6%] bottom-0 h-[3px] origin-left bg-linear-to-r from-transparent via-copad-green to-transparent shadow-[0_0_24px_rgba(0,144,175,.65)] rtl:origin-right" style={motionEnabled ? { scaleX: handoffScale } : undefined} />
       </div>
     </section>
   );

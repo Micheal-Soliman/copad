@@ -33,7 +33,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
   return (
     <section ref={sectionRef} id="home" style={scrollSceneStyle(7)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_70%_42%,rgba(16,159,131,.34),transparent_34%),radial-gradient(circle_at_16%_88%,rgba(238,235,229,.09),transparent_26%),linear-gradient(135deg,#062522,#0f3d39_55%,#061f1d)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_70%_42%,rgba(0,144,175,.34),transparent_34%),radial-gradient(circle_at_16%_88%,rgba(238,235,229,.09),transparent_26%),linear-gradient(135deg,#062522,#013d60_55%,#061f1d)]" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-20 mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-10 px-4 pt-24 pb-12 sm:px-8 lg:grid-cols-[.88fr_1.12fr] lg:px-12">
           <div className="relative z-10 max-w-3xl">
@@ -55,7 +55,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
 
         <motion.div dir={isArabic ? "rtl" : "ltr"} className="absolute inset-x-4 bottom-7 z-30 mx-auto flex max-w-[1344px] items-end justify-between gap-6 border-t border-white/28 pt-4 sm:inset-x-8 lg:inset-x-12 lg:bottom-9" style={driven ? { opacity: statusOpacity, y: statusY } : undefined}>
           <div><span className="block text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic ? "حالة المنشأة" : "Facility status"}</span><strong className="mt-1 block text-sm text-white sm:text-base">{isArabic ? "منظومة التصنيع مكتملة" : "Manufacturing system assembled"}</strong></div>
-          <div dir="ltr" className="flex items-center gap-3"><span className="relative size-2 rounded-full bg-copad-green shadow-[0_0_16px_rgba(16,159,131,.8)]"><span className="absolute -inset-2 animate-ping rounded-full border border-copad-green/40" /></span><span className="text-[9px] font-black tracking-[.18em] text-white/60">04 / 04</span></div>
+          <div dir="ltr" className="flex items-center gap-3"><span className="relative size-2 rounded-full bg-copad-green shadow-[0_0_16px_rgba(0,144,175,.8)]"><span className="absolute -inset-2 animate-ping rounded-full border border-copad-green/40" /></span><span className="text-[9px] font-black tracking-[.18em] text-white/60">04 / 04</span></div>
         </motion.div>
       </div>
     </section>
@@ -80,7 +80,7 @@ function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: 
   return (
     <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 z-25 hidden overflow-hidden lg:block" style={{ opacity, clipPath: frameClip }}>
       <div className="absolute inset-0 [perspective:1600px]">
-        <motion.div className="absolute inset-0 overflow-hidden border border-copad-green/65 bg-[#082c29] shadow-[0_45px_110px_rgba(0,0,0,.44),0_0_75px_rgba(16,159,131,.18)] [transform-style:preserve-3d]" style={{ scale, rotateY }}>
+        <motion.div className="absolute inset-0 overflow-hidden border border-copad-green/65 bg-[#082c29] shadow-[0_45px_110px_rgba(0,0,0,.44),0_0_75px_rgba(0,144,175,.18)] [transform-style:preserve-3d]" style={{ scale, rotateY }}>
           <motion.div className="absolute inset-0" style={{ opacity: finalImageOpacity }}>
             <Image src="/images/copad-cleanroom.png" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center saturate-[.84] contrast-[1.1]" />
           </motion.div>
@@ -93,13 +93,13 @@ function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: 
           <motion.span className="absolute inset-y-0 w-[16%] -skew-x-12 bg-linear-to-r from-transparent via-white/28 to-transparent blur-md" style={{ x: scanX }} />
 
           <motion.div className="absolute inset-x-7 top-7 flex items-center justify-between" style={{ opacity: chromeOpacity }}>
-            <div className="flex items-center gap-3"><span className="relative size-3 rounded-full bg-copad-green shadow-[0_0_20px_rgba(16,159,131,.95)]"><span className="absolute -inset-2 rounded-full border border-copad-green/45" /></span><span className="text-[9px] font-black tracking-[.22em] text-white uppercase">{isArabic ? "تجميع منشأة كوباد" : "COPAD facility assembly"}</span></div>
+            <div className="flex items-center gap-3"><span className="relative size-3 rounded-full bg-copad-green shadow-[0_0_20px_rgba(0,144,175,.95)]"><span className="absolute -inset-2 rounded-full border border-copad-green/45" /></span><span className="text-[9px] font-black tracking-[.22em] text-white uppercase">{isArabic ? "تجميع منشأة كوباد" : "COPAD facility assembly"}</span></div>
             <div className="flex gap-2"><SystemBadge Icon={FactoryIcon} /><SystemBadge Icon={GearSixIcon} /><SystemBadge Icon={ShieldCheckIcon} /></div>
           </motion.div>
 
           <motion.div className="absolute inset-x-7 bottom-7" style={{ opacity: chromeOpacity }}>
             <div className="mb-3 flex items-center justify-between text-[9px] font-black tracking-[.18em] text-white uppercase"><span>{isArabic ? "من المخطط إلى التشغيل" : "Blueprint to operation"}</span><span className="text-copad-green">04 / 04</span></div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/17"><motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.85)] rtl:origin-right" style={{ scaleX: completion }} /></div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-white/17"><motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.85)] rtl:origin-right" style={{ scaleX: completion }} /></div>
           </motion.div>
         </motion.div>
       </div>

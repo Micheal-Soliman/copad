@@ -19,7 +19,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   return (
     <section id="specialization" ref={sectionRef} style={scrollSceneStyle(3)} className="relative min-h-[72rem] scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)] lg:min-h-0">
       <div className="relative flex min-h-[72rem] items-start overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-0 lg:items-center lg:px-12">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(16,159,131,.25),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,.06),transparent_30%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(0,144,175,.25),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,.06),transparent_30%)]" />
         <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
           <div>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.distinctionEyebrow}</p>
@@ -52,7 +52,7 @@ function DepthCard({ index, title, progress, reduceMotion, position }: { index: 
       <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
         <div className="flex items-end justify-between gap-5 border-t border-white/25 pt-5">
           <div><p className="text-[9px] font-black tracking-[.18em] text-copad-green">0{index + 1}</p><h3 className="mt-2 font-display text-3xl leading-none sm:text-5xl">{title}</h3></div>
-          <span className="size-3 rounded-full border border-copad-green bg-copad-green/30 shadow-[0_0_24px_rgba(16,159,131,.8)]" />
+          <span className="size-3 rounded-full border border-copad-green bg-copad-green/30 shadow-[0_0_24px_rgba(0,144,175,.8)]" />
         </div>
       </div>
     </motion.article>

@@ -52,10 +52,10 @@ export function ManufacturingProcess({ locale, blocks, cta }: { locale: Locale; 
   return (
     <section ref={sectionRef} id="process" style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(16,159,131,.14),transparent_24%),radial-gradient(circle_at_88%_82%,rgba(15,61,57,.08),transparent_27%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(0,144,175,.14),transparent_24%),radial-gradient(circle_at_88%_82%,rgba(1,61,96,.08),transparent_27%)]" />
         <motion.div aria-hidden="true" className="absolute inset-x-[-16%] top-[64%] h-28 opacity-80" style={reduceMotion ? undefined : { x: beltX }}>
-          <span className="absolute inset-x-0 top-0 h-3 rounded-full border border-copad-deep/14 bg-copad-deep/8 shadow-[0_18px_35px_rgba(15,61,57,.1)]" />
-          <div className="absolute inset-x-0 top-4 flex justify-around">{Array.from({ length: 18 }, (_, index) => <motion.span key={index} className="relative size-11 rounded-full border-2 border-copad-deep/16 bg-copad-white shadow-[inset_0_0_0_7px_rgba(15,61,57,.035)]" style={reduceMotion ? undefined : { rotate: rollerRotate }}><span className="absolute start-1/2 top-1/2 h-px w-[70%] -translate-x-1/2 -translate-y-1/2 bg-copad-green/45" /></motion.span>)}</div>
+          <span className="absolute inset-x-0 top-0 h-3 rounded-full border border-copad-deep/14 bg-copad-deep/8 shadow-[0_18px_35px_rgba(1,61,96,.1)]" />
+          <div className="absolute inset-x-0 top-4 flex justify-around">{Array.from({ length: 18 }, (_, index) => <motion.span key={index} className="relative size-11 rounded-full border-2 border-copad-deep/16 bg-copad-white shadow-[inset_0_0_0_7px_rgba(1,61,96,.035)]" style={reduceMotion ? undefined : { rotate: rollerRotate }}><span className="absolute start-1/2 top-1/2 h-px w-[70%] -translate-x-1/2 -translate-y-1/2 bg-copad-green/45" /></motion.span>)}</div>
           <span className="absolute inset-x-0 top-[3.9rem] h-3 rounded-full border border-copad-deep/14 bg-copad-deep/8" />
         </motion.div>
 
@@ -64,12 +64,12 @@ export function ManufacturingProcess({ locale, blocks, cta }: { locale: Locale; 
             <div className="relative mx-auto hidden aspect-square w-full max-w-[21rem] [perspective:1100px] lg:block xl:max-w-[23rem]">
               <motion.div className="absolute inset-[10%] rounded-full border border-copad-green/30" style={reduceMotion ? undefined : { rotate: wheelRotate }}>
                 <span className="absolute inset-[16%] rounded-full border border-copad-deep/12" />
-                <span className="absolute inset-[35%] rounded-full bg-copad-deep shadow-[0_25px_60px_rgba(15,61,57,.2)]" />
-                {[0, 120, 240].map((rotation, index) => <button key={rotation} onClick={() => goTo(index)} aria-label={blocks[index]?.title} className="absolute start-1/2 top-1/2 size-13 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white bg-copad-white shadow-[0_12px_30px_rgba(15,61,57,.13)]" style={{ transform: `translate(-50%,-50%) rotate(${rotation}deg) translateY(-8.2rem) rotate(${-rotation}deg)` }}><span className={`mx-auto block size-2 rounded-full ${index === activeIndex ? "bg-copad-green shadow-[0_0_14px_rgba(16,159,131,.8)]" : "bg-copad-deep/18"}`} /></button>)}
+                <span className="absolute inset-[35%] rounded-full bg-copad-deep shadow-[0_25px_60px_rgba(1,61,96,.2)]" />
+                {[0, 120, 240].map((rotation, index) => <button key={rotation} onClick={() => goTo(index)} aria-label={blocks[index]?.title} className="absolute start-1/2 top-1/2 size-13 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white bg-copad-white shadow-[0_12px_30px_rgba(1,61,96,.13)]" style={{ transform: `translate(-50%,-50%) rotate(${rotation}deg) translateY(-8.2rem) rotate(${-rotation}deg)` }}><span className={`mx-auto block size-2 rounded-full ${index === activeIndex ? "bg-copad-green shadow-[0_0_14px_rgba(0,144,175,.8)]" : "bg-copad-deep/18"}`} /></button>)}
               </motion.div>
             </div>
 
-            <motion.article className="relative z-10 max-h-[57svh] min-h-[21rem] overflow-hidden rounded-[1.7rem] border border-copad-deep/10 bg-copad-white/96 p-5 shadow-[0_28px_68px_rgba(15,61,57,.14)] backdrop-blur-md sm:min-h-[23rem] sm:p-6 lg:max-h-[58svh] lg:min-h-0 lg:p-7">
+            <motion.article className="relative z-10 max-h-[57svh] min-h-[21rem] overflow-hidden rounded-[1.7rem] border border-copad-deep/10 bg-copad-white/96 p-5 shadow-[0_28px_68px_rgba(1,61,96,.14)] backdrop-blur-md sm:min-h-[23rem] sm:p-6 lg:max-h-[58svh] lg:min-h-0 lg:p-7">
               <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.div
                   key={activeIndex}
@@ -94,7 +94,7 @@ export function ManufacturingProcess({ locale, blocks, cta }: { locale: Locale; 
                   />
                   <span aria-hidden="true" className="absolute -end-4 -top-10 font-display text-[10rem] leading-none text-copad-deep/[.035] lg:text-[14rem]">0{activeIndex + 1}</span>
                   <div className="relative z-10">
-                    <motion.span key={`stage-icon-${activeIndex}`} initial={reduceMotion ? false : { opacity: 0, scale: .65, rotateY: 35 }} animate={{ opacity: 1, scale: 1, rotateY: 0 }} transition={{ duration: .78, ease }} className="mb-2 grid size-11 place-items-center rounded-xl border border-copad-green/25 bg-copad-green/8 text-copad-green shadow-[0_12px_30px_rgba(16,159,131,.12)]"><StageIcon size={25} weight="duotone" /></motion.span>
+                    <motion.span key={`stage-icon-${activeIndex}`} initial={reduceMotion ? false : { opacity: 0, scale: .65, rotateY: 35 }} animate={{ opacity: 1, scale: 1, rotateY: 0 }} transition={{ duration: .78, ease }} className="mb-2 grid size-11 place-items-center rounded-xl border border-copad-green/25 bg-copad-green/8 text-copad-green shadow-[0_12px_30px_rgba(0,144,175,.12)]"><StageIcon size={25} weight="duotone" /></motion.span>
                     <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic ? "مرحلة تشغيل" : "Operating stage"} · 0{activeIndex + 1}</span>
                     <h3 className={`${isArabic ? "font-sans font-black leading-[1.08]" : "font-display leading-[.96]"} mt-2.5 max-w-3xl text-[clamp(1.9rem,4.2vw,3.35rem)] tracking-[-.05em] text-copad-deep`}>{active.title}</h3>
                     <p className="mt-3 max-w-3xl text-[13px] leading-[1.55rem] text-copad-deep/66 sm:text-sm sm:leading-6">{active.body}</p>

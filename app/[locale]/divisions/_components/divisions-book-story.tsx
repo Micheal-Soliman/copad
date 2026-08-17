@@ -65,12 +65,12 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
   return (
     <section id="division-story" ref={sectionRef} style={scrollSceneStyle(divisions.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(16,159,131,.16),transparent_25%),radial-gradient(circle_at_86%_82%,rgba(15,61,57,.08),transparent_27%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(0,144,175,.16),transparent_25%),radial-gradient(circle_at_86%_82%,rgba(1,61,96,.08),transparent_27%)]" />
         <motion.div aria-hidden="true" className="absolute top-[10%] -end-48 size-[34rem] rounded-full border border-copad-green/20 sm:size-[50rem]" style={reduceMotion ? undefined : { rotate: ringRotate }}>
           <span className="absolute inset-16 rounded-full border border-copad-deep/10" />
-          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(16,159,131,.65)]" />
+          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(0,144,175,.65)]" />
         </motion.div>
-        <motion.div aria-hidden="true" className="absolute inset-y-[18%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(16,159,131,.14),transparent_65%)] blur-3xl" style={reduceMotion ? undefined : { x: backgroundX }} />
+        <motion.div aria-hidden="true" className="absolute inset-y-[18%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,144,175,.14),transparent_65%)] blur-3xl" style={reduceMotion ? undefined : { x: backgroundX }} />
 
         <BookScrollCue
           direction={cueDirection}
@@ -100,7 +100,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
               })}
             </div>
             <div aria-hidden="true" className="mt-2 h-1 overflow-hidden rounded-full bg-copad-deep/8">
-              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(16,159,131,.55)] rtl:origin-right" animate={{ scaleX: chapterProgress }} transition={{ duration: 0.65, ease }} />
+              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(0,144,175,.55)] rtl:origin-right" animate={{ scaleX: chapterProgress }} transition={{ duration: 0.65, ease }} />
             </div>
           </nav>
 
@@ -114,7 +114,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                 exit={reduceMotion ? undefined : { opacity: 0.18, rotateY: direction > 0 ? 48 : -48, x: direction * -24, scale: 0.99 }}
                 transition={{ duration: reduceMotion ? 0 : scrollSystem.scene.transitionDuration, ease }}
                 style={{ transformOrigin: direction > 0 ? (isArabic ? "right center" : "left center") : (isArabic ? "left center" : "right center"), transformStyle: "preserve-3d" }}
-                className="absolute inset-0 grid min-h-0 overflow-hidden rounded-[1.65rem] border border-copad-deep/12 bg-copad-white shadow-[0_24px_70px_rgba(15,61,57,.14)] sm:rounded-[2rem] lg:grid-cols-2 lg:rounded-[2.4rem]"
+                className="absolute inset-0 grid min-h-0 overflow-hidden rounded-[1.65rem] border border-copad-deep/12 bg-copad-white shadow-[0_24px_70px_rgba(1,61,96,.14)] sm:rounded-[2rem] lg:grid-cols-2 lg:rounded-[2.4rem]"
               >
                 <div className="group relative min-h-[11rem] overflow-hidden bg-copad-deep sm:min-h-[15rem] lg:min-h-0">
                   <motion.div
@@ -130,10 +130,10 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                 </div>
 
                 <div className="relative flex min-h-0 flex-col justify-center overflow-hidden px-5 py-5 sm:px-8 sm:py-7 lg:px-12 lg:py-10">
-                  <span aria-hidden="true" className="absolute inset-y-0 start-0 hidden w-8 bg-[linear-gradient(90deg,rgba(15,61,57,.13),transparent)] lg:block" />
+                  <span aria-hidden="true" className="absolute inset-y-0 start-0 hidden w-8 bg-[linear-gradient(90deg,rgba(1,61,96,.13),transparent)] lg:block" />
                   <div className="relative z-10">
                     <div className="flex items-center gap-3">
-                      <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(16,159,131,.65)]" />
+                      <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.65)]" />
                       <p className="text-[8px] font-black tracking-[0.2em] text-copad-green uppercase sm:text-[9px]">{ui.chapterLabel} · {String(activeIndex + 1).padStart(2, "0")}</p>
                     </div>
                     <h2 className={`mt-3 max-w-full text-balance break-words text-copad-deep sm:mt-5 ${isArabic ? "font-sans text-[clamp(1.8rem,7.5vw,3rem)] leading-[1.08] font-black tracking-[-0.035em] lg:text-[4.4rem]" : "font-display text-[clamp(2.2rem,9vw,3.6rem)] leading-[.95] tracking-[-0.05em] lg:text-[4.8rem]"}`}>{active.title}</h2>
@@ -141,7 +141,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     {active.cta && active.href && (
                       <Link
                         href={`/${locale}/${active.href}`}
-                        className="group relative mt-5 inline-flex min-h-10 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-5 text-[10px] font-black text-white shadow-[0_12px_28px_rgba(15,61,57,.16)] transition duration-500 hover:-translate-y-1 sm:mt-6 sm:min-h-11 sm:px-6 sm:text-xs"
+                        className="group relative mt-5 inline-flex min-h-10 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-5 text-[10px] font-black text-white shadow-[0_12px_28px_rgba(1,61,96,.16)] transition duration-500 hover:-translate-y-1 sm:mt-6 sm:min-h-11 sm:px-6 sm:text-xs"
                       >
                         <span className="absolute inset-0 translate-y-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
                         <span className="relative">{active.cta}</span>
@@ -159,7 +159,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     transition={{ duration: 0.9, ease }}
                   />
                 )}
-                <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 start-1/2 hidden w-px bg-linear-to-b from-transparent via-copad-deep/18 to-transparent shadow-[0_0_18px_rgba(15,61,57,.12)] lg:block" />
+                <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 start-1/2 hidden w-px bg-linear-to-b from-transparent via-copad-deep/18 to-transparent shadow-[0_0_18px_rgba(1,61,96,.12)] lg:block" />
               </motion.article>
             </AnimatePresence>
           </div>
@@ -193,7 +193,7 @@ function BookScrollCue({
     >
       <motion.span
         aria-hidden="true"
-        className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0_38%,rgba(16,159,131,.9)_50%,transparent_62%_100%)] p-px"
+        className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0_38%,rgba(0,144,175,.9)_50%,transparent_62%_100%)] p-px"
         animate={reduceMotion ? undefined : { rotate: 360 }}
         transition={{ duration: 3.2, repeat: Infinity, ease: "linear" }}
       >

@@ -35,7 +35,7 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
           className="absolute inset-0 -z-20 bg-[url('/images/copad-divisions-atlas.png')] bg-cover bg-center"
           style={motionEnabled ? { clipPath: imageClip, scale: imageScale } : undefined}
         />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,39,37,.62),rgba(7,39,37,.82)),linear-gradient(90deg,rgba(15,61,57,.9),transparent_48%,rgba(15,61,57,.48))]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,39,37,.62),rgba(7,39,37,.82)),linear-gradient(90deg,rgba(1,61,96,.9),transparent_48%,rgba(1,61,96,.48))]" />
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,transparent_0%,rgba(5,32,30,.18)_42%,rgba(5,32,30,.64)_100%)]" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-center px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:px-12 lg:pt-24">

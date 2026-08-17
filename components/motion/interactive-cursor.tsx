@@ -93,7 +93,7 @@ export function InteractiveCursor() {
       />
       <motion.span
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-[101] -mt-[3px] -ml-[3px] size-1.5 rounded-full bg-copad-green shadow-[0_0_10px_rgba(16,159,131,.55)]"
+        className="pointer-events-none fixed top-0 left-0 z-[101] -mt-[3px] -ml-[3px] size-1.5 rounded-full bg-copad-green shadow-[0_0_10px_rgba(0,144,175,.55)]"
         style={{ x: pointerX, y: pointerY }}
         initial={false}
         animate={{ opacity: visible ? 1 : 0, scale: interactive ? 0 : pressed ? 1.5 : 1 }}

@@ -24,7 +24,7 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
 
   return <section ref={ref} id="home" style={scrollSceneStyle(5)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(115deg,#061f1d,#0f3d39_55%,#082c29)]" />
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(115deg,#061f1d,#013d60_55%,#082c29)]" />
       <div className="absolute inset-y-0 start-[48%] w-px bg-white/[.06]" />
       <div dir={ar ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-10 px-4 pt-24 pb-12 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12">
         <motion.div className="relative z-20 max-w-xl" style={reduce ? undefined : { opacity: introOpacity, x: introX }}>
@@ -38,11 +38,11 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
           <motion.div className="absolute inset-0 grid grid-cols-2 overflow-hidden rounded-[.35rem_1.6rem_1.6rem_.35rem] bg-copad-white text-copad-deep shadow-[0_45px_120px_rgba(0,0,0,.42)] rtl:rounded-[1.6rem_.35rem_.35rem_1.6rem]" style={{ opacity: spreadOpacity }}>
             <JournalPage ar={ar} side="first" />
             <JournalPage ar={ar} side="second" />
-            <span className="absolute inset-y-0 start-1/2 z-10 w-px bg-copad-deep/10 shadow-[0_0_18px_rgba(15,61,57,.22)]" />
+            <span className="absolute inset-y-0 start-1/2 z-10 w-px bg-copad-deep/10 shadow-[0_0_18px_rgba(1,61,96,.22)]" />
           </motion.div>
 
           <motion.div className="absolute inset-y-0 end-0 z-20 w-1/2 origin-left rounded-e-[1.6rem] border border-white/12 bg-copad-green text-white shadow-[0_35px_95px_rgba(0,0,0,.48)] [backface-visibility:hidden] [transform-style:preserve-3d] rtl:origin-right rtl:rounded-e-none rtl:rounded-s-[1.6rem]" style={reduce ? undefined : { rotateY: coverRotate, opacity: coverShadow }}>
-            <div className="absolute inset-0 overflow-hidden rounded-[inherit] bg-[linear-gradient(145deg,#109f83,#0f3d39_72%)] p-6 sm:p-9">
+            <div className="absolute inset-0 overflow-hidden rounded-[inherit] bg-[linear-gradient(145deg,#0090af,#013d60_72%)] p-6 sm:p-9">
               <span className="text-[8px] font-black tracking-[.22em] text-white/65 uppercase">COPAD / 01</span>
               <span className={`${ar ? "font-sans font-black" : "font-display"} mt-16 block text-[clamp(2.7rem,6vw,5rem)] leading-[.86] tracking-[-.055em]`}>{ar ? "المعرفة الصحية" : "Healthcare Insights"}</span>
               <span className="absolute inset-x-6 bottom-8 border-t border-white/24 pt-4 text-[8px] font-black tracking-[.16em] text-white/55 uppercase sm:inset-x-9">{ar ? "وعي • تغذية • قطاع" : "Awareness · Nutrition · Industry"}</span>

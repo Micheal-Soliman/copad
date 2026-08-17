@@ -17,12 +17,22 @@ const navItems = [
   ["insights", "insights"],
 ] as const;
 
+const homeSectionIds = {
+  about: ["introduction", "snapshot"],
+  divisions: ["divisions"],
+  areas: ["therapy"],
+  manufacturing: ["manufacturing"],
+  insights: ["connect"],
+} as const;
+
 export function SiteHeader({ locale, transparent = false }: { locale: Locale; transparent?: boolean }) {
   const copy = siteCopy[locale];
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
+  const [activeHomeKey, setActiveHomeKey] = useState<string | null>(null);
   const overlay = transparent && !open;
+  const isHomepage = /^\/(en|ar)\/?$/.test(pathname);
   const localeHref = pathname.replace(/^\/(en|ar)/, `/${otherLocale(locale)}`);
   const languageLabel = locale === "en" ? "AR" : "EN";
   const accessibility = copy.ui.accessibility;
@@ -43,21 +53,56 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!isHomepage) return;
+
+    const updateActiveSection = () => {
+      const marker = window.innerHeight * 0.42;
+      let next: string | null = null;
+
+      for (const [key, ids] of Object.entries(homeSectionIds)) {
+        for (const id of ids) {
+          const section = document.getElementById(id);
+          if (!section) continue;
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= marker && rect.bottom >= marker) {
+            next = key;
+            break;
+          }
+        }
+        if (next) break;
+      }
+
+      setActiveHomeKey((current) => current === next ? current : next);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [isHomepage]);
+
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-[box-shadow,backdrop-filter] duration-500 ${overlay ? "copad-scroll-header text-white backdrop-blur-md" : "border-copad-deep/10 bg-copad-white/92 text-copad-deep shadow-[0_12px_40px_rgba(15,61,57,.08)] backdrop-blur-xl"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-[box-shadow,backdrop-filter] duration-500 ${overlay ? "copad-scroll-header text-white backdrop-blur-md" : "border-copad-deep/10 bg-copad-white/92 text-copad-deep shadow-[0_12px_40px_rgba(1,61,96,.08)] backdrop-blur-xl"}`}>
       <div className="relative mx-auto flex h-[4.5rem] w-full max-w-[1440px] items-center px-4 sm:h-20 sm:px-8 lg:px-12">
         <Brand locale={locale} inverted={overlay} />
 
         <nav className="absolute start-1/2 hidden -translate-x-1/2 items-center gap-1 xl:flex rtl:translate-x-1/2" aria-label={accessibility.primaryNavigation}>
           {navItems.map(([key, href]) => {
-            const active = pathname === `/${locale}/${href}`;
+            const route = `/${locale}/${href}`;
+            const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
             return (
               <Link key={key} href={`/${locale}/${href}`} className={`group relative px-3 py-3 text-[11px] font-bold whitespace-nowrap transition-colors ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`}>
                 {copy.nav[key]}
-                <span className={`absolute inset-x-3 bottom-1 h-[2px] origin-start overflow-hidden rounded-full transition-transform duration-500 ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}>
-                  <span className="absolute inset-0 bg-copad-green" />
-                  {active && !reduceMotion && <motion.span className="absolute inset-y-0 w-1/2 bg-linear-to-r from-transparent via-white/90 to-transparent" animate={{ x: ["-120%", "240%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.35 }} />}
-                </span>
+                {active && (
+                  <motion.span layoutId="primary-nav-active" className="absolute inset-x-3 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-sky shadow-[0_0_12px_rgba(123,205,237,.58)]" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
+                    {!reduceMotion && <motion.span className="absolute inset-y-0 w-1/2 bg-linear-to-r from-transparent via-white to-transparent" animate={{ x: ["-120%", "240%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.35 }} />}
+                  </motion.span>
+                )}
+                {!active && <span className="absolute inset-x-3 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100" />}
               </Link>
             );
           })}
@@ -69,7 +114,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
             <span className={`relative flex size-full items-center justify-center rounded-full text-[10px] font-black tracking-[0.14em] transition duration-300 group-hover:scale-[.88] ${overlay ? "bg-copad-deep/80 text-white" : "bg-copad-white text-copad-deep group-hover:text-copad-green"}`}>{languageLabel}</span>
           </Link>
 
-          <Link href={`/${locale}/contact`} className="group relative isolate min-w-32 overflow-hidden rounded-full bg-copad-green px-6 py-3 text-center text-[11px] font-black text-white shadow-[0_12px_28px_rgba(16,159,131,.2)] transition duration-500 hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(16,159,131,.34)]">
+          <Link href={`/${locale}/contact`} className="group relative isolate min-w-32 overflow-hidden rounded-full bg-copad-green px-6 py-3 text-center text-[11px] font-black text-white shadow-[0_12px_28px_rgba(0,144,175,.2)] transition duration-500 hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(0,144,175,.34)]">
             <span className="absolute inset-0 -z-10 translate-y-full rounded-full bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
             <motion.span aria-hidden="true" className="absolute inset-y-0 -z-10 w-10 -skew-x-12 bg-white/18 blur-sm" animate={reduceMotion ? undefined : { x: ["-300%", "500%"] }} transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }} />
             <span className="relative">{copy.nav.contact}</span>
@@ -97,7 +142,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
             transition={{ duration: reduceMotion ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[70] flex h-svh flex-col overflow-hidden bg-copad-deep text-white xl:hidden"
           >
-            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(16,159,131,.22),transparent_28%),linear-gradient(145deg,#0f3d39_0%,#092f2c_100%)]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(0,144,175,.22),transparent_28%),linear-gradient(145deg,#013d60_0%,#092f2c_100%)]" />
             <motion.span
               aria-hidden="true"
               className="pointer-events-none absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[clamp(7rem,35vw,15rem)] leading-none tracking-[-0.08em] text-white/[.025] rtl:translate-x-1/2"
@@ -125,7 +170,8 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
             <div className="relative z-10 min-h-0 flex-1 px-4 sm:px-8">
               <nav className="absolute inset-x-4 top-[calc(50svh-4.5rem)] mx-auto flex max-h-[calc(100svh-11rem)] w-auto max-w-3xl -translate-y-1/2 flex-col justify-center gap-1 overflow-y-auto overscroll-contain py-2 sm:inset-x-8 sm:top-[calc(50svh-5rem)]" aria-label={accessibility.mobileNavigation}>
                 {navItems.map(([key, href], index) => {
-                  const active = pathname === `/${locale}/${href}`;
+                  const route = `/${locale}/${href}`;
+                  const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
                   const side = (index % 2 === 0 ? -1 : 1) * (locale === "ar" ? -1 : 1);
 
                   return (
@@ -156,7 +202,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
                 className="absolute inset-x-4 bottom-5 mx-auto flex w-auto max-w-3xl items-center gap-3 border-t border-white/12 pt-4 sm:inset-x-8 sm:bottom-7 sm:pt-5"
               >
                 <Link onClick={() => setOpen(false)} href={localeHref} className="flex size-12 shrink-0 items-center justify-center rounded-full border border-copad-green text-[10px] font-black tracking-widest transition active:scale-90">{languageLabel}</Link>
-                <Link onClick={() => setOpen(false)} href={`/${locale}/contact`} className="group relative isolate flex min-h-12 flex-1 items-center justify-center overflow-hidden rounded-full bg-copad-green px-5 text-xs font-black text-white shadow-[0_14px_34px_rgba(16,159,131,.25)] transition active:scale-[.98]">
+                <Link onClick={() => setOpen(false)} href={`/${locale}/contact`} className="group relative isolate flex min-h-12 flex-1 items-center justify-center overflow-hidden rounded-full bg-copad-green px-5 text-xs font-black text-white shadow-[0_14px_34px_rgba(0,144,175,.25)] transition active:scale-[.98]">
                   <span aria-hidden="true" className="absolute inset-0 -z-10 origin-start scale-x-0 bg-white transition-transform duration-500 group-active:scale-x-100" />
                   <span className="transition-colors duration-500 group-active:text-copad-deep">{copy.nav.contact}</span>
                 </Link>
