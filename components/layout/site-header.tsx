@@ -95,11 +95,11 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
             const route = `/${locale}/${href}`;
             const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
             return (
-              <Link key={key} href={`/${locale}/${href}`} className={`group relative px-3 py-3 text-[11px] font-bold whitespace-nowrap transition-colors ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`}>
+              <Link key={key} href={`/${locale}/${href}`} aria-current={active ? "page" : undefined} className={`group relative px-3 py-3 text-[11px] font-bold whitespace-nowrap transition-colors ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`}>
                 {copy.nav[key]}
                 {active && (
-                  <motion.span layoutId="primary-nav-active" className="absolute inset-x-3 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-sky shadow-[0_0_12px_rgba(123,205,237,.58)]" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
-                    {!reduceMotion && <motion.span className="absolute inset-y-0 w-1/2 bg-linear-to-r from-transparent via-white to-transparent" animate={{ x: ["-120%", "240%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.35 }} />}
+                  <motion.span layoutId="primary-nav-active" className="absolute inset-x-3 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-green shadow-[0_0_13px_rgba(0,144,175,.78)]" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
+                    {!reduceMotion && <motion.span className="absolute inset-y-0 w-1/3 bg-linear-to-r from-transparent via-white/90 to-transparent" animate={{ x: ["-130%", "380%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.45 }} />}
                   </motion.span>
                 )}
                 {!active && <span className="absolute inset-x-3 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100" />}

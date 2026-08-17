@@ -1,8 +1,5 @@
 "use client";
 
-import { FactoryIcon } from "@phosphor-icons/react/dist/csr/Factory";
-import { GearSixIcon } from "@phosphor-icons/react/dist/csr/GearSix";
-import { ShieldCheckIcon } from "@phosphor-icons/react/dist/csr/ShieldCheck";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useLenis } from "lenis/react";
 import Link from "next/link";
@@ -47,7 +44,6 @@ export function ManufacturingProcess({ locale, blocks, cta }: { locale: Locale; 
   }
 
   const active = blocks[activeIndex]!;
-  const StageIcon = activeIndex === 0 ? FactoryIcon : activeIndex === 1 ? ShieldCheckIcon : GearSixIcon;
 
   return (
     <section ref={sectionRef} id="process" style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
@@ -94,7 +90,6 @@ export function ManufacturingProcess({ locale, blocks, cta }: { locale: Locale; 
                   />
                   <span aria-hidden="true" className="absolute -end-4 -top-10 font-display text-[10rem] leading-none text-copad-deep/[.035] lg:text-[14rem]">0{activeIndex + 1}</span>
                   <div className="relative z-10">
-                    <motion.span key={`stage-icon-${activeIndex}`} initial={reduceMotion ? false : { opacity: 0, scale: .65, rotateY: 35 }} animate={{ opacity: 1, scale: 1, rotateY: 0 }} transition={{ duration: .78, ease }} className="mb-2 grid size-11 place-items-center rounded-xl border border-copad-green/25 bg-copad-green/8 text-copad-green shadow-[0_12px_30px_rgba(0,144,175,.12)]"><StageIcon size={25} weight="duotone" /></motion.span>
                     <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic ? "مرحلة تشغيل" : "Operating stage"} · 0{activeIndex + 1}</span>
                     <h3 className={`${isArabic ? "font-sans font-black leading-[1.08]" : "font-display leading-[.96]"} mt-2.5 max-w-3xl text-[clamp(1.9rem,4.2vw,3.35rem)] tracking-[-.05em] text-copad-deep`}>{active.title}</h3>
                     <p className="mt-3 max-w-3xl text-[13px] leading-[1.55rem] text-copad-deep/66 sm:text-sm sm:leading-6">{active.body}</p>
