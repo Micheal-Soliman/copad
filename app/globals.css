@@ -2,6 +2,7 @@
 
 @theme {
   /* COPAD brand palette — edit these tokens to update the full experience. */
+  --breakpoint-lg: 60rem;
   --color-copad-deep: #013d60;
   --color-copad-green: #0090af;
   --color-copad-sky: #7bcded;

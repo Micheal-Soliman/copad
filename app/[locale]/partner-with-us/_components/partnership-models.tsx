@@ -69,7 +69,7 @@ function MatrixCard({ block, index, progress, image, isArabic, reducedMotion }: 
 
   return <motion.article style={reducedMotion ? undefined : { opacity: cardOpacity, scale: cardScale }} className="group relative min-h-0 overflow-hidden rounded-[1.7rem] border border-copad-green/35 bg-copad-deep shadow-[0_28px_70px_rgba(1,61,96,.14)]">
     <motion.div className="absolute inset-0" style={reducedMotion ? undefined : { scale: imageScale }}>
-      <Image src={image} alt="" fill className="object-cover opacity-65" sizes="(min-width:1024px) 33vw, 100vw" />
+      <Image src={image} alt="" fill className="object-cover opacity-65" sizes="(min-width:960px) 33vw, 100vw" />
     </motion.div>
     <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/55 to-transparent" />
     <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-7 lg:p-8">

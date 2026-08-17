@@ -54,7 +54,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
               src="/images/copad-cleanroom.png"
               alt={ui.manufacturingImageAlt}
               fill
-              sizes="(max-width: 1024px) 100vw, 48vw"
+              sizes="(max-width: 960px) 100vw, 48vw"
             />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep/72 via-copad-deep/5 to-transparent" />
             <div className="absolute inset-x-4 bottom-4 rounded-[1.25rem] border border-white/15 bg-copad-deep/62 p-4 text-white backdrop-blur-md sm:inset-x-6 sm:bottom-6 sm:rounded-[1.5rem] sm:p-5 lg:inset-x-8 lg:bottom-8 lg:p-6">

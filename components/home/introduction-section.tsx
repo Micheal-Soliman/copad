@@ -71,7 +71,7 @@ export function IntroductionSection({
               src="/images/copad-campus-hero.png"
               alt={title}
               fill
-              sizes="(max-width: 1024px) 100vw, 44vw"
+              sizes="(max-width: 960px) 100vw, 44vw"
             />
             <div className="absolute inset-0 bg-linear-to-t from-copad-deep/30 via-transparent to-transparent" aria-hidden="true" />
           </ScrollImageReveal>
