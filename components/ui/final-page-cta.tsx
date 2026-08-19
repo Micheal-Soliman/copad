@@ -2,6 +2,7 @@
 
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import type { Locale } from "@/lib/i18n";
@@ -17,6 +18,8 @@ export function FinalPageCta({
   label,
   details,
   note,
+  imageSrc,
+  imageAlt = "",
 }: {
   id: string;
   locale: Locale;
@@ -27,6 +30,8 @@ export function FinalPageCta({
   label: string;
   details?: string[];
   note?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
@@ -74,7 +79,13 @@ export function FinalPageCta({
           <motion.div className="relative mx-auto h-[20rem] w-full max-w-[22rem] [perspective:1600px] sm:h-[23rem] lg:h-[23rem]" style={reduceMotion ? undefined : { y: gatewayY, rotateY: gatewayRotate, scale: gatewayScale, opacity: contentOpacity }}>
             <motion.div aria-hidden="true" className="absolute inset-8 translate-x-10 translate-y-8 rounded-[2rem] border border-copad-green/25 bg-copad-green/[.045] rtl:-translate-x-10" animate={reduceMotion ? undefined : { y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} />
             <div aria-hidden="true" className="absolute inset-4 translate-x-5 translate-y-4 rounded-[2rem] border border-white/12 bg-white/[.025] rtl:-translate-x-5" />
-            <Link href={href} aria-label={label} className="group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(0,24,21,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep">
+            <Link href={href} aria-label={label} className="group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(1,61,96,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep">
+              {imageSrc ? (
+                <>
+                  <Image src={imageSrc} alt={imageAlt} fill sizes="(max-width: 1024px) 22rem, 24vw" className="object-cover opacity-70 transition duration-1000 ease-out group-hover/gateway:scale-105 group-hover/gateway:opacity-85" />
+                  <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/50 to-copad-deep/10" />
+                </>
+              ) : null}
               <div className="absolute inset-0 flex flex-col justify-between p-7 text-white">
                 <div className="ms-auto flex w-[56%] items-center justify-between gap-3">
                   <span className="text-[8px] font-black tracking-[.25em] text-white/65 uppercase">{isArabic ? "ادخل الفصل التالي" : "Enter the next chapter"}</span>
@@ -87,7 +98,7 @@ export function FinalPageCta({
                 </div>
               </div>
 
-              <div aria-hidden="true" className="absolute inset-0 origin-left bg-[#164b46] p-8 shadow-[20px_0_50px_rgba(0,20,18,.3)] transition-transform duration-1000 ease-[cubic-bezier(.22,1,.36,1)] [backface-visibility:hidden] [transform-style:preserve-3d] group-hover/gateway:[transform:perspective(1200px)_rotateY(-72deg)] group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(-72deg)] rtl:origin-right rtl:group-hover/gateway:[transform:perspective(1200px)_rotateY(72deg)] rtl:group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(72deg)]">
+              <div aria-hidden="true" className="absolute inset-0 origin-left bg-[#013d60] p-8 shadow-[20px_0_50px_rgba(1,61,96,.3)] transition-transform duration-1000 ease-[cubic-bezier(.22,1,.36,1)] [backface-visibility:hidden] [transform-style:preserve-3d] group-hover/gateway:[transform:perspective(1200px)_rotateY(-72deg)] group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(-72deg)] rtl:origin-right rtl:group-hover/gateway:[transform:perspective(1200px)_rotateY(72deg)] rtl:group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(72deg)]">
                 <div className="flex h-full flex-col justify-between border border-white/10 p-6">
                   <div className="flex items-center justify-between">
                     <span className="text-[8px] font-black tracking-[.25em] text-copad-green uppercase">{isArabic ? "الوجهة التالية" : "Next destination"}</span>

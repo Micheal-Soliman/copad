@@ -24,7 +24,7 @@ export function PartnershipHero({ locale, content }: { locale: Locale; content: 
         <Image src="/images/copad-partnership-executive.png" alt="COPAD partnership strategy meeting in Cairo" fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <motion.div className="absolute inset-0 bg-copad-deep" style={{ opacity: shade }} />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,29,27,.96)_0%,rgba(4,29,27,.72)_38%,rgba(4,29,27,.04)_76%)] rtl:bg-[linear-gradient(270deg,rgba(4,29,27,.96)_0%,rgba(4,29,27,.72)_38%,rgba(4,29,27,.04)_76%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,61,96,.96)_0%,rgba(1,61,96,.72)_38%,rgba(1,61,96,.04)_76%)] rtl:bg-[linear-gradient(270deg,rgba(1,61,96,.96)_0%,rgba(1,61,96,.72)_38%,rgba(1,61,96,.04)_76%)]" />
 
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12">
         <div className="max-w-[47rem]">

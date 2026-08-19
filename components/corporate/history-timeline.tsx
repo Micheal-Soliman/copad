@@ -116,7 +116,7 @@ export function HistoryTimeline({ locale, title, intro, items, sectionId = "hist
                     initial={false}
                     animate={{ scale: isVisible ? 1 : 0.45, opacity: isVisible ? 1 : 0 }}
                     transition={{ duration: 0.42, ease }}
-                    className="absolute top-0 left-1/2 z-10 flex size-[18px] -translate-x-1/2 items-center justify-center rounded-full border border-copad-green bg-copad-sand shadow-[0_0_0_7px_rgba(238,235,229,.94)]"
+                    className="absolute top-0 left-1/2 z-10 flex size-[18px] -translate-x-1/2 items-center justify-center rounded-full border border-copad-green bg-copad-sand shadow-[0_0_0_7px_rgba(232,245,253,.94)]"
                   >
                     <span className="size-1.5 rounded-full bg-copad-green" />
                   </motion.span>
@@ -144,10 +144,10 @@ function MobileTimelineStack({ items, isArabic }: { items: string[]; isArabic: b
     mass: 0.28,
     restDelta: 0.0005,
   });
-  const screens = Math.max(items.length, 1);
+  const travel = Math.max(items.length, 1) * 72;
 
   return (
-    <div ref={stackRef} className="relative lg:hidden" style={{ height: `${screens * 100}svh` }}>
+    <div ref={stackRef} className="relative lg:hidden" style={{ height: `${travel}svh` }}>
       <div className="sticky top-0 z-10 h-[64svh] overflow-visible px-4 sm:px-8">
         <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto h-full max-w-2xl">
           {items.map((item, index) => {

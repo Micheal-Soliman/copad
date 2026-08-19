@@ -34,7 +34,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
   return (
     <section id="manufacturing" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="04" />
-      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[.98fr_1.02fr] lg:gap-20">
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:grid-cols-[.98fr_1.02fr] lg:gap-16 lg:pb-16 2xl:gap-20">
         <ScrollSceneItem
           progress={scrollYProgress}
           active={isDesktop}
@@ -82,8 +82,8 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="lg:col-start-2 lg:row-start-1"
         >
           <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
-          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:text-lg lg:leading-9">{body}</p>
+          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-6xl 2xl:text-7xl" />
+          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:mt-6 2xl:text-lg 2xl:leading-9">{body}</p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3" aria-label={ui.manufacturingPrinciplesLabel}>
             {ui.manufacturingPrinciples.map((principle, index) => (

@@ -62,7 +62,7 @@ export function ContactDispatchScene({ locale, content, channels, routingBody, o
   return (
     <section ref={sceneRef} id="home" style={scrollSceneStyle(9)} className="relative bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative min-h-svh overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(0,144,175,.2),transparent_30%),linear-gradient(145deg,#071f1d_0%,#013d60_54%,#082925_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(0,144,175,.2),transparent_30%),linear-gradient(145deg,#013d60_0%,#013d60_54%,#013d60_100%)]" />
         <motion.div aria-hidden="true" style={reducedMotion ? undefined : { x: backgroundWordX }} className="pointer-events-none absolute inset-x-[-8%] top-1/2 hidden -translate-y-1/2 whitespace-nowrap font-display text-[20vw] leading-none tracking-[-.08em] text-white/[.025] lg:block">
           {isArabic ? "تواصل" : "CONTACT"}
         </motion.div>
@@ -78,8 +78,8 @@ export function ContactDispatchScene({ locale, content, channels, routingBody, o
           <div className="relative z-10 mt-8 flex min-h-[28rem] items-center justify-center [perspective:1800px] lg:absolute lg:inset-0 lg:mt-0">
             <motion.div style={reducedMotion ? undefined : { x: envelopeX, y: envelopeY, scale: envelopeScale, rotateX: envelopeRotateX, rotateY: envelopeRotateY, opacity: envelopeOpacity }} className="relative h-[19rem] w-full max-w-[35rem] [transform-style:preserve-3d] sm:h-[22rem] lg:h-[32rem] lg:max-w-[72rem]">
               <div aria-hidden="true" className="absolute -inset-x-3 top-4 -bottom-3 rounded-[1.7rem] bg-black/35 shadow-[0_60px_120px_rgba(0,0,0,.46)] [transform:translateZ(-10px)]" />
-              <div className="absolute inset-0 rounded-[1.4rem] border border-white/12 bg-[#123f3a] shadow-[inset_0_1px_0_rgba(255,255,255,.12),0_30px_80px_rgba(0,0,0,.28)] [transform:translateZ(-2px)]" />
-              <motion.div style={{ y: reducedMotion ? "-108%" : letterY, scale: reducedMotion ? 1 : letterScale }} className="absolute inset-x-[4%] top-[4%] z-10 h-[92%] overflow-hidden bg-[#fbfaf6] p-6 text-copad-deep shadow-[0_38px_100px_rgba(0,0,0,.28)] sm:p-8 lg:p-10">
+              <div className="absolute inset-0 rounded-[1.4rem] border border-white/12 bg-[#013d60] shadow-[inset_0_1px_0_rgba(255,255,255,.12),0_30px_80px_rgba(0,0,0,.28)] [transform:translateZ(-2px)]" />
+              <motion.div style={{ y: reducedMotion ? "-108%" : letterY, scale: reducedMotion ? 1 : letterScale }} className="absolute inset-x-[4%] top-[4%] z-10 h-[92%] overflow-hidden bg-[#f9fcff] p-6 text-copad-deep shadow-[0_38px_100px_rgba(0,0,0,.28)] sm:p-8 lg:p-10">
                 <div className="flex items-start justify-between border-b border-copad-deep/12 pb-4"><strong className="text-xl font-black tracking-[-.04em] lg:text-2xl">COPAD</strong><span className="text-[8px] font-black tracking-[.2em] text-copad-green lg:text-[9px]">CONTACT / EGYPT</span></div>
                 <div className="mt-5 flex items-end justify-between gap-5">
                   <div><p className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase lg:text-[9px]">{content.blocks[0]?.title}</p><h2 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-2 text-2xl leading-none tracking-[-.04em] sm:text-4xl lg:text-5xl`}>{isArabic ? "تواصل مباشرة مع كوباد" : "Reach COPAD directly"}</h2></div>
@@ -93,7 +93,7 @@ export function ContactDispatchScene({ locale, content, channels, routingBody, o
                   <span className="grid size-10 place-items-center rounded-full border border-copad-green/35 text-xs font-black text-copad-green lg:size-12">C</span>
                 </div>
               </motion.div>
-              <div className="absolute inset-0 z-20 overflow-hidden rounded-[1.4rem] border border-white/8 bg-[linear-gradient(145deg,#164c46,#013d60)] [clip-path:polygon(0_0,50%_45%,100%_0,100%_100%,0_100%)] shadow-[inset_0_-30px_80px_rgba(0,0,0,.12)]">
+              <div className="absolute inset-0 z-20 overflow-hidden rounded-[1.4rem] border border-white/8 bg-[linear-gradient(145deg,#013d60,#013d60)] [clip-path:polygon(0_0,50%_45%,100%_0,100%_100%,0_100%)] shadow-[inset_0_-30px_80px_rgba(0,0,0,.12)]">
                 <span aria-hidden="true" className="absolute start-[-7%] top-[19%] h-px w-[64%] origin-start rotate-[24deg] bg-white/10" />
                 <span aria-hidden="true" className="absolute end-[-7%] top-[19%] h-px w-[64%] origin-end -rotate-[24deg] bg-white/10" />
                 <div className="absolute inset-x-8 bottom-7 flex items-end justify-between gap-6 border-t border-white/12 pt-5 text-white/48">
@@ -108,10 +108,10 @@ export function ContactDispatchScene({ locale, content, channels, routingBody, o
                 <span className="relative">C</span>
               </motion.div>
               <motion.div style={reducedMotion ? { rotateX: -166 } : { rotateX: flapRotate, z: flapZ }} className="absolute inset-x-0 top-0 z-30 h-[58%] origin-top [transform-style:preserve-3d]">
-                <div className="absolute inset-0 rounded-t-[1.4rem] bg-[linear-gradient(145deg,#13ad8f,#0c8d75)] [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,.28),0_12px_25px_rgba(4,28,26,.16)] [backface-visibility:hidden]">
+                <div className="absolute inset-0 rounded-t-[1.4rem] bg-[linear-gradient(145deg,#0090af,#0090af)] [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,.28),0_12px_25px_rgba(4,28,26,.16)] [backface-visibility:hidden]">
                   <span className="absolute inset-x-0 top-0 h-px bg-white/35" />
                 </div>
-                <div className="absolute inset-0 rounded-t-[1.4rem] border border-copad-deep/8 bg-[linear-gradient(160deg,#e7e3dc,#cfcfc9)] [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-[inset_0_-35px_70px_rgba(1,61,96,.08)] [backface-visibility:hidden] [transform:rotateX(180deg)_translateZ(1px)]">
+                <div className="absolute inset-0 rounded-t-[1.4rem] border border-copad-deep/8 bg-[linear-gradient(160deg,#e8f5fd,#7bcded)] [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-[inset_0_-35px_70px_rgba(1,61,96,.08)] [backface-visibility:hidden] [transform:rotateX(180deg)_translateZ(1px)]">
                   <span className="absolute left-1/2 top-[38%] -translate-x-1/2 text-[8px] font-black tracking-[.24em] text-copad-deep/24">COPAD / 1989</span>
                 </div>
               </motion.div>
@@ -119,7 +119,7 @@ export function ContactDispatchScene({ locale, content, channels, routingBody, o
           </div>
 
           <motion.div style={reducedMotion ? undefined : { opacity: finalOpacity, y: finalY, scale: finalScale, rotateX: finalRotateX }} className={`absolute inset-x-5 top-[11%] bottom-[8%] z-40 [perspective:1600px] sm:inset-x-8 lg:inset-x-12 ${formReady ? "pointer-events-auto" : "pointer-events-none"}`}>
-            <div className="relative h-full overflow-y-auto bg-[#fbfaf6] text-copad-deep shadow-[0_50px_140px_rgba(0,0,0,.36)] [clip-path:polygon(0_0,calc(100%_-_3rem)_0,100%_3rem,100%_100%,0_100%)] lg:overflow-hidden">
+            <div className="relative h-full overflow-y-auto bg-[#f9fcff] text-copad-deep shadow-[0_50px_140px_rgba(0,0,0,.36)] [clip-path:polygon(0_0,calc(100%_-_3rem)_0,100%_3rem,100%_100%,0_100%)] lg:overflow-hidden">
               <div aria-hidden="true" className="absolute end-0 top-0 size-12 bg-copad-green/15 [clip-path:polygon(0_0,100%_100%,0_100%)]" />
               <div className="grid min-h-full lg:grid-cols-[.8fr_1.2fr]">
                 <div className="flex flex-col border-b border-copad-deep/10 p-6 sm:p-9 lg:border-e lg:border-b-0 lg:p-12">

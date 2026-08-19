@@ -17,24 +17,25 @@ export function ScrollImageReveal({ children, className = "", direction = "right
   const reduceMotion = useReducedMotion();
   const entered = useInView(frameRef, { once: true, amount: 0.18 });
   const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start 92%", "end 38%"] });
-  const localProgress = useSpring(scrollYProgress, { stiffness: 105, damping: 28, mass: 0.32, restDelta: 0.0005 });
+  const localProgress = useSpring(scrollYProgress, { stiffness: 145, damping: 32, mass: 0.28, restDelta: 0.0005 });
   const progress = controlledProgress ?? localProgress;
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
   const smoothTiltX = useSpring(tiltX, { stiffness: 180, damping: 24, mass: 0.35 });
   const smoothTiltY = useSpring(tiltY, { stiffness: 180, damping: 24, mass: 0.35 });
   const closedClip = direction === "right" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
+  const timelineStartClip = direction === "right" ? "inset(0 78% 0 0)" : "inset(0 0 0 78%)";
   const openClip = "inset(0 0 0 0)";
-  const timelineClip = useTransform(progress, [0.4, 0.64, 1], [closedClip, openClip, openClip]);
+  const timelineClip = useTransform(progress, [0, 0.46, 1], [timelineStartClip, openClip, openClip]);
   const timelineCurtainClip = useTransform(
     progress,
-    [0.4, 0.64, 1],
+    [0, 0.46, 1],
     direction === "right"
-      ? ["inset(0 0 0 0)", "inset(0 0 0 100%)", "inset(0 0 0 100%)"]
-      : ["inset(0 0 0 0)", "inset(0 100% 0 0)", "inset(0 100% 0 0)"],
+      ? ["inset(0 0 0 22%)", "inset(0 0 0 100%)", "inset(0 0 0 100%)"]
+      : ["inset(0 22% 0 0)", "inset(0 100% 0 0)", "inset(0 100% 0 0)"],
   );
-  const mediaScale = useTransform(progress, [0, 0.58], [1.045, 1]);
-  const mediaY = useTransform(progress, [0, 0.62, 1], [10, 0, -6]);
+  const mediaScale = useTransform(progress, [0, 0.5], [1.035, 1]);
+  const mediaY = useTransform(progress, [0, 0.54, 1], [8, 0, 0]);
   const glowOpacity = useTransform(progress, [0, 0.18, 0.5, 0.62], [0.25, 1, 0.7, 0]);
   const scanPosition = useTransform(progress, [0.08, 0.7], ["12%", "88%"]);
   const scanOpacity = useTransform(progress, [0.04, 0.16, 0.58, 0.72], [0, 0.72, 0.72, 0]);
@@ -64,14 +65,14 @@ export function ScrollImageReveal({ children, className = "", direction = "right
       style={reduceMotion ? undefined : { rotateX: smoothTiltX, rotateY: smoothTiltY, transformPerspective: 1100 }}
       whileHover={reduceMotion ? undefined : { scale: 1.008 }}
       whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div
         key={timeline ? "timeline-media" : "entrance-media"}
         className="absolute inset-0 transform-gpu will-change-transform [backface-visibility:hidden]"
         initial={false}
         animate={timeline ? undefined : { clipPath: reduceMotion || entered ? openClip : closedClip }}
-        transition={{ duration: reduceMotion ? 0 : 0.74, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: reduceMotion ? 0 : 0.62, ease: [0.22, 1, 0.36, 1] }}
         style={reduceMotion ? { clipPath: openClip } : timeline ? { clipPath: timelineClip } : { scale: mediaScale, y: mediaY }}
       >
         {children}
@@ -84,7 +85,7 @@ export function ScrollImageReveal({ children, className = "", direction = "right
           className={`pointer-events-none absolute inset-0 z-30 bg-linear-to-r from-copad-deep via-copad-deep/94 to-copad-green/60 ${direction === "left" ? "-scale-x-100" : ""}`}
           initial={false}
           animate={timeline ? undefined : { x: entered ? (direction === "right" ? "102%" : "-102%") : "0%" }}
-          transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.66, ease: [0.22, 1, 0.36, 1] }}
           style={timeline ? { clipPath: timelineCurtainClip } : undefined}
         >
           <motion.span

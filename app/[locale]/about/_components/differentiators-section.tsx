@@ -1,13 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { scrollSceneStyle } from "@/lib/motion/scroll-system";
 import type { AboutStoryBlock } from "./about-types";
 
-const positions = ["0%", "0%", "0%"];
+const specialtyImages = [
+  "/images/about/about-microscope.png",
+  "/images/about/about-formulation.png",
+  "/images/about/about-laboratory.png",
+] as const;
 
 export function DifferentiatorsSection({ locale, content }: { locale: Locale; content: AboutStoryBlock }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,7 +34,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
 
           <div className="relative h-[25rem] [perspective:1400px] sm:h-[34rem] lg:h-[38rem]">
             {ui.specialties.map((specialty, index) => (
-              <DepthCard key={specialty} index={index} title={specialty} progress={scrollYProgress} reduceMotion={Boolean(reduceMotion)} position={positions[index]} />
+              <DepthCard key={specialty} index={index} title={specialty} progress={scrollYProgress} reduceMotion={Boolean(reduceMotion)} imageSrc={specialtyImages[index]!} />
             ))}
             <div aria-hidden="true" className="absolute inset-x-[12%] bottom-2 h-16 rounded-[50%] bg-black/45 blur-2xl" />
           </div>
@@ -39,7 +44,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   );
 }
 
-function DepthCard({ index, title, progress, reduceMotion, position }: { index: number; title: string; progress: ReturnType<typeof useScroll>["scrollYProgress"]; reduceMotion: boolean; position: string }) {
+function DepthCard({ index, title, progress, reduceMotion, imageSrc }: { index: number; title: string; progress: ReturnType<typeof useScroll>["scrollYProgress"]; reduceMotion: boolean; imageSrc: string }) {
   const start = .1 + index * .2;
   const y = useTransform(progress, [start, start + .2, 1], [150 + index * 30, index * 34, index * 34]);
   const rotateX = useTransform(progress, [start, start + .2, 1], [20, -4 + index * 2, -4 + index * 2]);
@@ -47,7 +52,15 @@ function DepthCard({ index, title, progress, reduceMotion, position }: { index: 
   const opacity = useTransform(progress, [start, start + .12, 1], [0, 1, 1]);
   return (
     <motion.article style={reduceMotion ? { top: `${index * 2.2}rem` } : { y, rotateX, rotateZ, opacity, z: index * 35 }} className="absolute inset-x-[4%] top-[8%] h-[72%] origin-bottom overflow-hidden rounded-[1.6rem] border border-white/18 bg-copad-deep shadow-[0_32px_80px_rgba(0,0,0,.35)] [transform-style:preserve-3d] sm:inset-x-[8%] sm:rounded-[2rem]">
-      <div className="absolute inset-0 bg-[url('/images/copad-divisions-atlas.png')] bg-no-repeat" style={{ backgroundSize: "400% 100%", backgroundPosition: `${position} center` }} />
+      <Image
+        src={imageSrc}
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 92vw, 52vw"
+        className="object-cover transition-transform duration-[1600ms] ease-out"
+        style={{ objectPosition: "center" }}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(1,61,96,.08),rgba(0,144,175,.2))] mix-blend-multiply" />
       <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/30 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
         <div className="flex items-end justify-between gap-5 border-t border-white/25 pt-5">

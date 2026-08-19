@@ -33,7 +33,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
   return (
     <section ref={sectionRef} id="home" style={scrollSceneStyle(7)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_70%_42%,rgba(0,144,175,.34),transparent_34%),radial-gradient(circle_at_16%_88%,rgba(238,235,229,.09),transparent_26%),linear-gradient(135deg,#062522,#013d60_55%,#061f1d)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_70%_42%,rgba(0,144,175,.34),transparent_34%),radial-gradient(circle_at_16%_88%,rgba(232,245,253,.09),transparent_26%),linear-gradient(135deg,#013d60,#013d60_55%,#013d60)]" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-20 mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-10 px-4 pt-24 pb-12 sm:px-8 lg:grid-cols-[.88fr_1.12fr] lg:px-12">
           <div className="relative z-10 max-w-3xl">
@@ -80,7 +80,7 @@ function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: 
   return (
     <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 z-25 hidden overflow-hidden lg:block" style={{ opacity, clipPath: frameClip }}>
       <div className="absolute inset-0 [perspective:1600px]">
-        <motion.div className="absolute inset-0 overflow-hidden border border-copad-green/65 bg-[#082c29] shadow-[0_45px_110px_rgba(0,0,0,.44),0_0_75px_rgba(0,144,175,.18)] [transform-style:preserve-3d]" style={{ scale, rotateY }}>
+        <motion.div className="absolute inset-0 overflow-hidden border border-copad-green/65 bg-[#013d60] shadow-[0_45px_110px_rgba(0,0,0,.44),0_0_75px_rgba(0,144,175,.18)] [transform-style:preserve-3d]" style={{ scale, rotateY }}>
           <motion.div className="absolute inset-0" style={{ opacity: finalImageOpacity }}>
             <Image src="/images/copad-cleanroom.png" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center saturate-[.84] contrast-[1.1]" />
           </motion.div>

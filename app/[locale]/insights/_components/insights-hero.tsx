@@ -24,7 +24,7 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
 
   return <section ref={ref} id="home" style={scrollSceneStyle(5)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(115deg,#061f1d,#013d60_55%,#082c29)]" />
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(115deg,#013d60,#013d60_55%,#013d60)]" />
       <div className="absolute inset-y-0 start-[48%] w-px bg-white/[.06]" />
       <div dir={ar ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-10 px-4 pt-24 pb-12 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12">
         <motion.div className="relative z-20 max-w-xl" style={reduce ? undefined : { opacity: introOpacity, x: introX }}>

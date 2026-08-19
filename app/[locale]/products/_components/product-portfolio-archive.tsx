@@ -8,7 +8,7 @@ import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
 import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
-const tones = ["bg-copad-sand text-copad-deep", "bg-copad-deep text-white", "bg-[#dcece8] text-copad-deep", "bg-copad-white text-copad-deep"];
+const tones = ["bg-copad-sand text-copad-deep", "bg-copad-deep text-white", "bg-[#e8f5fd] text-copad-deep", "bg-copad-white text-copad-deep"];
 
 export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; blocks: ContentBlock[]; cta?: string }) {
   const ref = useRef<HTMLElement>(null);

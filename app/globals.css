@@ -8,8 +8,8 @@
   --color-copad-sky: #7bcded;
   --color-copad-sand: #e8f5fd;
   --color-copad-white: #f9fcff;
-  --font-sans: Arial, Tahoma, "Segoe UI", sans-serif;
-  --font-display: Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
+  --font-display: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --animate-spin-slow: spin 8s linear infinite;
 }
 

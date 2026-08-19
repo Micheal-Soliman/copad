@@ -41,7 +41,7 @@ export function IntroductionSection({
   return (
     <section id="introduction" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="01" />
-      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.08fr_.92fr] lg:gap-24">
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:grid-cols-[1.08fr_.92fr] lg:gap-20 lg:pb-16 2xl:gap-24">
         <ScrollSceneItem
           progress={scrollYProgress}
           active={isDesktop}
@@ -86,8 +86,8 @@ export function IntroductionSection({
           className="lg:col-start-1 lg:row-start-1"
         >
           <p className="text-[11px] font-black tracking-[0.2em] text-copad-green uppercase">{eyebrow}</p>
-          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.04em] text-copad-deep sm:text-5xl lg:text-7xl" />
-          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/72 sm:mt-8 sm:text-lg sm:leading-9">{body}</p>
+          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.04em] text-copad-deep sm:text-5xl lg:text-6xl 2xl:text-7xl" />
+          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/72 sm:mt-8 lg:mt-6 2xl:text-lg 2xl:leading-9">{body}</p>
           {note && <p className="mt-5 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-copad-deep/52">{note}</p>}
 
           <Link

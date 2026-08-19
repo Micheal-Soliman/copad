@@ -25,6 +25,8 @@ export function CorporateValuesSection({
       body={content.body}
       details={ui.principles}
       note={ui.regulators.join(locale === "ar" ? " • " : " · ")}
+      imageSrc="/images/about/about-microscope.png"
+      imageAlt=""
       href={`/${locale}/manufacturing-quality`}
       label={cta}
     />

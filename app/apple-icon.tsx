@@ -37,7 +37,7 @@ export default function AppleIcon() {
             height: 27,
             borderRadius: 99,
             background: "#0090AF",
-            boxShadow: "0 0 0 10px rgba(249,249,249,.12)",
+            boxShadow: "0 0 0 10px rgba(249,252,255,.12)",
           }}
         />
         <span

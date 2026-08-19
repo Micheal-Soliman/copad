@@ -142,7 +142,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
             transition={{ duration: reduceMotion ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[70] flex h-svh flex-col overflow-hidden bg-copad-deep text-white xl:hidden"
           >
-            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(0,144,175,.22),transparent_28%),linear-gradient(145deg,#013d60_0%,#092f2c_100%)]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(0,144,175,.22),transparent_28%),linear-gradient(145deg,#013d60_0%,#013d60_100%)]" />
             <motion.span
               aria-hidden="true"
               className="pointer-events-none absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[clamp(7rem,35vw,15rem)] leading-none tracking-[-0.08em] text-white/[.025] rtl:translate-x-1/2"

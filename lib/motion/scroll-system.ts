@@ -4,19 +4,19 @@ export const scrollSystem = {
   lenis: {
     // One deliberate global rhythm for every page. Large wheel/trackpad spikes
     // are capped by SmoothScroll before this multiplier is applied.
-    lerp: 0.06,
-    wheelMultiplier: 0.44,
-    maxWheelDelta: 80,
-    homepageLerp: 0.075,
-    homepageWheelMultiplier: 0.58,
+    lerp: 0.14,
+    wheelMultiplier: 0.95,
+    maxWheelDelta: 260,
+    homepageLerp: 0.18,
+    homepageWheelMultiplier: 1.16,
   },
   scene: {
     // Complete the story early enough to leave a readable final hold.
-    completion: 0.78,
-    stageTravelVh: 92,
-    navigationDuration: 1.4,
-    transitionDuration: 1,
-    homepageStageTravelVh: 72,
+    completion: 0.86,
+    stageTravelVh: 54,
+    navigationDuration: 0.72,
+    transitionDuration: 0.58,
+    homepageStageTravelVh: 30,
   },
 } as const;
 

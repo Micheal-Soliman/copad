@@ -37,7 +37,7 @@ export default function Icon() {
             height: 5,
             borderRadius: 99,
             background: "#0090AF",
-            boxShadow: "0 0 0 2px rgba(249,249,249,.16)",
+            boxShadow: "0 0 0 2px rgba(249,252,255,.16)",
           }}
         />
         <span

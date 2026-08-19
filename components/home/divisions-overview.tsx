@@ -45,13 +45,12 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
             const isActive = active === index;
             const longestWord = division.title.split(/\s+/).reduce((length, word) => Math.max(length, word.length), 0);
             const closedWeight = Math.min(1.7, Math.max(1, longestWord / 9));
-            const closedTitleSize = longestWord >= 16 ? "text-[1.35rem] xl:text-[1.55rem]" : longestWord >= 13 ? "text-[1.5rem] xl:text-[1.7rem]" : "text-[1.75rem] xl:text-3xl";
             return (
               <motion.div
                 key={division.title}
                 style={reduceMotion ? { flexGrow: isActive ? 2.5 : closedWeight } : undefined}
                 animate={reduceMotion ? undefined : { flexGrow: isActive ? 2.5 : closedWeight }}
-                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 72, damping: 20, mass: 0.85 }}
+                transition={reduceMotion ? { duration: 0 } : { duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
                 className="lg:h-auto lg:min-w-0 lg:basis-0 lg:will-change-[flex-grow]"
               >
                 <motion.div
@@ -59,45 +58,47 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                   initial={reduceMotion ? false : isDesktop ? index === 0 ? { opacity: 0, x: 180 } : index === 1 ? { opacity: 0, y: -120 } : index === 2 ? { opacity: 0, y: 120 } : { opacity: 0, x: -180 } : { opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: false, amount: isDesktop ? 0.4 : 0.55, margin: isDesktop ? "0px 0px -12% 0px" : "0px" }}
-                  transition={{ duration: isDesktop ? 0.95 : 0.65, delay: isDesktop ? index * 0.13 : index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: isDesktop ? 0.72 : 0.55, delay: isDesktop ? index * 0.08 : index * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full w-full"
                 >
                   <motion.article
-                    animate={reduceMotion ? undefined : { y: isActive ? -6 : 0 }}
-                    transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 92, damping: 22, mass: 0.7 }}
                     onMouseEnter={() => setActive(index)}
                     onFocusCapture={() => setActive(index)}
                     onTap={() => setActive(index)}
                     data-cursor="interactive"
                     data-cursor-label={ui.interactionLabels.open}
                     tabIndex={0}
-                    className={`group relative w-full overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_18px_50px_rgba(1,61,96,.08)] transition-[height,box-shadow] duration-1000 ease-[cubic-bezier(.22,1,.36,1)] hover:shadow-[0_32px_80px_rgba(1,61,96,.2)] sm:rounded-[1.75rem] lg:h-full ${isActive ? "h-[22rem]" : "h-36"}`}
+                    className={`group relative w-full overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_18px_50px_rgba(1,61,96,.08)] transition-[height,box-shadow] duration-700 ease-[cubic-bezier(.22,1,.36,1)] [container-type:inline-size] hover:shadow-[0_32px_80px_rgba(1,61,96,.2)] sm:rounded-[1.75rem] lg:h-full ${isActive ? "h-[22rem]" : "h-36"}`}
                   >
                 <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-copad-deep">
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 1 : 1.08, filter: isActive ? "brightness(1) saturate(1)" : "brightness(.72) saturate(.72)" }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                     style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "auto 100%", backgroundPosition: `${positions[index]} center` }}
                   />
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1.015 : 1.08, filter: isActive ? "saturate(1.08)" : "saturate(1)" }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "400% auto", backgroundPosition: `${positions[index]} center` }}
                   />
                 </div>
                 <div aria-hidden="true" className={`absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/35 to-transparent transition-opacity duration-500 ${isActive ? "opacity-88" : "opacity-95"}`} />
-                <div className="absolute inset-0 z-10 flex h-full flex-col justify-end p-5 sm:p-6 lg:p-8">
+                <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 sm:p-6 lg:p-8">
                   <div className="flex items-center">
-                    <span className={`rounded-full border px-3 py-1.5 text-[9px] font-black tracking-[0.16em] uppercase transition-all duration-500 ${isActive ? "border-copad-green bg-copad-green text-white" : "border-white/18 bg-white/8 text-white/64"}`}>
+                    <span className={`rounded-full border px-3 py-1.5 text-[9px] font-black tracking-[0.16em] uppercase transition-[color,background-color,border-color] duration-500 ${isActive ? "border-copad-green bg-copad-green text-white" : "border-white/18 bg-white/8 text-white/64"}`}>
                       {ui.divisionLabel} {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className={`mt-3 ms-2 flex max-w-full items-start text-wrap font-display leading-[1.08] tracking-[-0.035em] text-white transition-[transform,font-size] duration-500 sm:mt-4 sm:ms-3 lg:min-h-32 ${isActive ? "-translate-y-1 text-[2rem] sm:text-3xl xl:text-4xl" : `translate-y-0 ${closedTitleSize}`}`}>{division.title}</h3>
-                  <div className={`grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                    <div className="ms-2 overflow-hidden sm:ms-3">
-                      <p className="max-w-xl pt-3 text-sm leading-6 text-white/66 sm:pt-4 sm:leading-7">{division.description}</p>
+                  <h3 className="mt-4 ms-3 max-w-full text-wrap font-display text-[clamp(1.45rem,7cqw,2.25rem)] leading-[1.08] tracking-[-0.035em] text-white">
+                    {division.title}
+                  </h3>
+                  <div className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${isActive ? "translate-y-0 grid-rows-[1fr] opacity-100 delay-150" : "translate-y-2 grid-rows-[0fr] opacity-0 delay-0"}`}>
+                    <div className="ms-3 overflow-hidden">
+                      <p className="max-w-xl pt-4 text-sm leading-6 text-white/66 sm:leading-7">
+                        {division.description}
+                      </p>
                     </div>
                   </div>
                 </div>

@@ -124,7 +124,7 @@ export function HomeHero(props: HomeHeroProps) {
         <div className="absolute inset-0 bg-copad-green/16 mix-blend-color" />
         <div className="absolute inset-0 bg-linear-to-b from-copad-deep/18 via-copad-deep/28 to-copad-deep/76" />
 
-        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden origin-bottom bg-[linear-gradient(180deg,rgba(1,61,96,.2),rgba(8,39,36,.94))] lg:block" style={motionEnabled ? { y: mediaCurtainY } : { y: "-104%" }} />
+        <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden origin-bottom bg-[linear-gradient(180deg,rgba(1,61,96,.2),rgba(1,61,96,.94))] lg:block" style={motionEnabled ? { y: mediaCurtainY } : { y: "-104%" }} />
         <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_46%,rgba(255,255,255,.22),transparent_48%)] mix-blend-screen lg:block" style={motionEnabled ? { opacity: mediaLight } : { opacity: 0 }} />
         <motion.div aria-hidden="true" className="pointer-events-none absolute start-1/2 top-[46%] size-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.14),rgba(0,144,175,.08)_34%,transparent_68%)] mix-blend-screen blur-2xl" style={motionEnabled ? { x: glowX, y: glowY } : undefined} />
         <motion.div aria-hidden="true" className="pointer-events-none absolute inset-y-0 hidden w-[28%] -skew-x-12 bg-linear-to-r from-transparent via-white/[.055] to-transparent lg:block" style={motionEnabled ? { x: sweepX } : undefined} />

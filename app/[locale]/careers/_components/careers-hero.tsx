@@ -20,7 +20,7 @@ export function CareersHero({ locale, content }: { locale: Locale; content: Sect
   return <section ref={ref} id="home" style={scrollSceneStyle(3)} className="relative h-[var(--scroll-scene-height)] bg-copad-deep text-white">
     <div className="sticky top-0 h-[100svh] overflow-hidden">
       <motion.div className="absolute inset-0" style={reducedMotion ? undefined : { scale: imageScale, x: imageX }}><Image src="/images/copad-careers-team.png" alt="A multidisciplinary COPAD team collaborating" fill priority className="object-cover" sizes="100vw" /></motion.div>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,29,27,.96)_0%,rgba(4,29,27,.78)_35%,rgba(4,29,27,.08)_76%)] rtl:bg-[linear-gradient(270deg,rgba(4,29,27,.96)_0%,rgba(4,29,27,.78)_35%,rgba(4,29,27,.08)_76%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,61,96,.96)_0%,rgba(1,61,96,.78)_35%,rgba(1,61,96,.08)_76%)] rtl:bg-[linear-gradient(270deg,rgba(1,61,96,.96)_0%,rgba(1,61,96,.78)_35%,rgba(1,61,96,.08)_76%)]" />
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center px-5 pb-20 pt-28 sm:px-8 lg:px-12">
         <motion.div className="max-w-[49rem]" style={reducedMotion ? undefined : { y: titleY }}>
           <p className="text-[9px] font-black uppercase tracking-[.26em] text-copad-green">{isArabic ? "الموهبة تصنع التقدم" : "People power progress"}</p>

@@ -92,7 +92,7 @@ export function SnapshotBar({ locale, intro, sectionId = "snapshot", homepage = 
                     <p className="mx-auto mt-3 max-w-52 text-sm leading-6 font-bold text-copad-deep/68 transition-colors duration-300 group-hover:text-copad-deep xl:text-base">{entry}</p>
                   </div>
 
-                  <span aria-hidden="true" className={`absolute left-1/2 grid size-5 -translate-x-1/2 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)] ${above ? "top-[calc(50%_-_34px)]" : "top-[calc(50%_+_14px)]"}`}>
+                  <span aria-hidden="true" className={`absolute left-1/2 grid size-5 -translate-x-1/2 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,252,255,.95)] ${above ? "top-[calc(50%_-_34px)]" : "top-[calc(50%_+_14px)]"}`}>
                     <span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(0,144,175,.32)]" />
                   </span>
                 </motion.li>
@@ -110,7 +110,7 @@ export function SnapshotBar({ locale, intro, sectionId = "snapshot", homepage = 
           <ol className="grid auto-rows-[6rem]">
             {data.map((entry, index) => (
               <SnapshotMobilePoint key={entry} index={index} reduceMotion={Boolean(reduceMotion)} className="grid grid-cols-[1.25rem_1fr] gap-5">
-                <span className="relative mt-1 grid size-5 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,249,249,.95)]"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(0,144,175,.32)]" /></span>
+                <span className="relative mt-1 grid size-5 place-items-center rounded-full border-[1.5px] border-copad-green/65 bg-copad-white shadow-[0_0_0_4px_rgba(249,252,255,.95)]"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_8px_rgba(0,144,175,.32)]" /></span>
                 <div>
                   <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
                   <p className="mt-2 text-sm leading-6 font-bold text-copad-deep/68">{entry}</p>

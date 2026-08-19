@@ -29,7 +29,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
   return (
     <section id="therapy" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} reverse chapter="03" />
-      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-0 lg:min-h-screen lg:grid-cols-[1.02fr_.98fr] lg:gap-20">
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:grid-cols-[1.02fr_.98fr] lg:gap-16 lg:pb-16 2xl:gap-20">
         <ScrollSceneItem
           progress={scrollYProgress}
           active={isDesktop}
@@ -62,8 +62,8 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
           className="lg:col-start-1 lg:row-start-1"
         >
           <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
-          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:text-lg lg:leading-9">{body}</p>
+          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-6xl 2xl:text-7xl" />
+          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:mt-6 2xl:text-lg 2xl:leading-9">{body}</p>
 
           <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/therapeutic-areas`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-52 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:mt-9 sm:w-auto">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-right" />
