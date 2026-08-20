@@ -7,8 +7,8 @@ export const scrollSystem = {
     lerp: 0.14,
     wheelMultiplier: 0.95,
     maxWheelDelta: 260,
-    homepageLerp: 0.18,
-    homepageWheelMultiplier: 1.16,
+    homepageLerp: 0.15,
+    homepageWheelMultiplier: 1.22,
   },
   scene: {
     // Complete the story early enough to leave a readable final hold.
@@ -17,6 +17,7 @@ export const scrollSystem = {
     navigationDuration: 0.72,
     transitionDuration: 0.58,
     homepageStageTravelVh: 30,
+    editorialStageTravelVh: 18,
   },
 } as const;
 
@@ -35,6 +36,12 @@ export function scrollSceneStyle(stages: number): SceneStyle {
 export function homeScrollSceneStyle(stages: number): SceneStyle {
   const safeStages = Math.max(1, stages);
   const travel = safeStages * scrollSystem.scene.homepageStageTravelVh / scrollSystem.scene.completion;
+  return { "--scroll-scene-height": `${Math.round(100 + travel)}vh` };
+}
+
+export function editorialScrollSceneStyle(stages: number): SceneStyle {
+  const safeStages = Math.max(1, stages);
+  const travel = safeStages * scrollSystem.scene.editorialStageTravelVh / scrollSystem.scene.completion;
   return { "--scroll-scene-height": `${Math.round(100 + travel)}vh` };
 }
 

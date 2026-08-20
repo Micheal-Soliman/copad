@@ -1,14 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { editorialScrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 import type { AboutStoryBlock } from "./about-types";
 
-const specialtyImages = [
+const visualItems = [
   "/images/about/about-microscope.png",
   "/images/about/about-formulation.png",
   "/images/about/about-laboratory.png",
@@ -19,24 +19,48 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   const reduceMotion = useReducedMotion();
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.about;
+  const [activeStage, setActiveStage] = useState(0);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 115, damping: 29, mass: 0.3, restDelta: 0.0005 });
+
+  useMotionValueEvent(smoothProgress, "change", (latest) => {
+    const normalized = Math.min(1, latest / scrollSystem.scene.completion);
+    const nextStage = Math.min(visualItems.length - 1, Math.floor(normalized * visualItems.length));
+    setActiveStage((current) => current === nextStage ? current : nextStage);
+  });
 
   return (
-    <section id="specialization" ref={sectionRef} style={scrollSceneStyle(3)} className="relative min-h-[72rem] scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)] lg:min-h-0">
-      <div className="relative flex min-h-[72rem] items-start overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-0 lg:items-center lg:px-12">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(0,144,175,.25),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,.06),transparent_30%)]" />
-        <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
-          <div>
+    <section ref={sectionRef} id="specialization" dir={isArabic ? "rtl" : "ltr"} style={editorialScrollSceneStyle(visualItems.length)} className="relative scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
+      <div className="relative overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-20">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,144,175,.15),transparent_28%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,144,175,.15),transparent_28%)]" />
+        <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.distinctionEyebrow}</p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2.5rem,6vw,5.7rem)] leading-[.92] tracking-[-.055em]">{content.title}</h2>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/65 sm:text-base sm:leading-8">{content.body}</p>
+            <h2 className={`mt-5 max-w-3xl font-display font-bold ${isArabic ? "text-[clamp(2.7rem,5vw,4.8rem)] leading-[1.12] tracking-normal" : "text-[clamp(2.8rem,5.2vw,5rem)] leading-[.98] tracking-[-.035em]"}`}>{content.title}</h2>
+            <p className="mt-7 max-w-2xl text-sm leading-7 text-white/66 sm:text-base sm:leading-8">{content.body}</p>
+          </motion.div>
+
+          <div className="grid gap-4 lg:hidden">
+            {visualItems.map((src, index) => <VisualCard key={src} src={src} title={ui.specialties[index]!} index={index} className="relative h-64" />)}
           </div>
 
-          <div className="relative h-[25rem] [perspective:1400px] sm:h-[34rem] lg:h-[38rem]">
-            {ui.specialties.map((specialty, index) => (
-              <DepthCard key={specialty} index={index} title={specialty} progress={scrollYProgress} reduceMotion={Boolean(reduceMotion)} imageSrc={specialtyImages[index]!} />
-            ))}
-            <div aria-hidden="true" className="absolute inset-x-[12%] bottom-2 h-16 rounded-[50%] bg-black/45 blur-2xl" />
+          <div className="relative hidden h-[29rem] w-full max-w-[35rem] justify-self-end [perspective:1400px] lg:block">
+            {visualItems.map((src, index) => {
+              const visible = Boolean(reduceMotion) || index <= activeStage;
+              const depth = Math.max(0, activeStage - index);
+              return (
+                <motion.div
+                  key={src}
+                  initial={false}
+                  animate={{ opacity: visible ? 1 : 0, x: visible ? (isArabic ? depth * 10 : -depth * 10) : (isArabic ? -24 : 24), y: visible ? depth * 8 : 20, scale: 1 - depth * 0.022, rotateZ: visible ? (isArabic ? depth * 0.35 : -depth * 0.35) : 0 }}
+                  transition={{ duration: 0.74, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ zIndex: index }}
+                  className="absolute inset-0 origin-bottom"
+                >
+                  <VisualCard src={src} title={ui.specialties[index]!} index={index} className="relative h-full" />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -44,30 +68,15 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   );
 }
 
-function DepthCard({ index, title, progress, reduceMotion, imageSrc }: { index: number; title: string; progress: ReturnType<typeof useScroll>["scrollYProgress"]; reduceMotion: boolean; imageSrc: string }) {
-  const start = .1 + index * .2;
-  const y = useTransform(progress, [start, start + .2, 1], [150 + index * 30, index * 34, index * 34]);
-  const rotateX = useTransform(progress, [start, start + .2, 1], [20, -4 + index * 2, -4 + index * 2]);
-  const rotateZ = useTransform(progress, [start, start + .2, 1], [index % 2 ? 7 : -7, index % 2 ? 2.2 : -2.2, index % 2 ? 2.2 : -2.2]);
-  const opacity = useTransform(progress, [start, start + .12, 1], [0, 1, 1]);
+function VisualCard({ src, title, index, className }: { src: string; title: string; index: number; className: string }) {
   return (
-    <motion.article style={reduceMotion ? { top: `${index * 2.2}rem` } : { y, rotateX, rotateZ, opacity, z: index * 35 }} className="absolute inset-x-[4%] top-[8%] h-[72%] origin-bottom overflow-hidden rounded-[1.6rem] border border-white/18 bg-copad-deep shadow-[0_32px_80px_rgba(0,0,0,.35)] [transform-style:preserve-3d] sm:inset-x-[8%] sm:rounded-[2rem]">
-      <Image
-        src={imageSrc}
-        alt=""
-        fill
-        sizes="(max-width: 1024px) 92vw, 52vw"
-        className="object-cover transition-transform duration-[1600ms] ease-out"
-        style={{ objectPosition: "center" }}
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(1,61,96,.08),rgba(0,144,175,.2))] mix-blend-multiply" />
-      <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/30 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-        <div className="flex items-end justify-between gap-5 border-t border-white/25 pt-5">
-          <div><p className="text-[9px] font-black tracking-[.18em] text-copad-green">0{index + 1}</p><h3 className="mt-2 font-display text-3xl leading-none sm:text-5xl">{title}</h3></div>
-          <span className="size-3 rounded-full border border-copad-green bg-copad-green/30 shadow-[0_0_24px_rgba(0,144,175,.8)]" />
-        </div>
+    <article className={`${className} group overflow-hidden rounded-[1.6rem] border border-white/16 bg-copad-deep shadow-[0_28px_70px_rgba(0,0,0,.28)]`}>
+      <Image src={src} alt="" fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-contain p-2 transition-transform duration-1000 ease-out group-hover:scale-[1.025]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep/88 via-transparent to-copad-deep/5" />
+      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+        <span className="text-[8px] font-black tracking-[.18em] text-copad-green">0{index + 1}</span>
+        <h3 className="mt-2 text-sm leading-5 font-bold text-white/92 sm:text-base">{title}</h3>
       </div>
-    </motion.article>
+    </article>
   );
 }

@@ -17,8 +17,7 @@ export function ScrollImageReveal({ children, className = "", direction = "right
   const reduceMotion = useReducedMotion();
   const entered = useInView(frameRef, { once: true, amount: 0.18 });
   const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start 92%", "end 38%"] });
-  const localProgress = useSpring(scrollYProgress, { stiffness: 145, damping: 32, mass: 0.28, restDelta: 0.0005 });
-  const progress = controlledProgress ?? localProgress;
+  const progress = useSpring(controlledProgress ?? scrollYProgress, { stiffness: 125, damping: 30, mass: 0.3, restDelta: 0.0005 });
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
   const smoothTiltX = useSpring(tiltX, { stiffness: 180, damping: 24, mass: 0.35 });
@@ -64,7 +63,6 @@ export function ScrollImageReveal({ children, className = "", direction = "right
       onPointerLeave={resetTilt}
       style={reduceMotion ? undefined : { rotateX: smoothTiltX, rotateY: smoothTiltY, transformPerspective: 1100 }}
       whileHover={reduceMotion ? undefined : { scale: 1.008 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
       transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div

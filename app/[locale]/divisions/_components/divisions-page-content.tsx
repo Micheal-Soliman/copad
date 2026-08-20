@@ -5,7 +5,6 @@ import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { DivisionsBookStory } from "./divisions-book-story";
 import { DivisionsHero } from "./divisions-hero";
-import { DivisionsNextChapter } from "./divisions-next-chapter";
 
 export function DivisionsPageContent({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale];
@@ -17,7 +16,6 @@ export function DivisionsPageContent({ locale }: { locale: Locale }) {
       <SiteHeader locale={locale} transparent />
       <DivisionsHero locale={locale} title={content.title} intro={content.intro} blocks={content.blocks} />
       <DivisionsBookStory locale={locale} divisions={content.blocks} />
-      <DivisionsNextChapter locale={locale} />
       <HomeSectionNavigator label={ui.sectionNavigationLabel} items={ui.sectionNavigation} />
       <SiteFooter locale={locale} />
     </main>

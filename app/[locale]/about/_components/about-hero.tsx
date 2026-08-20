@@ -1,12 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { editorialScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 type AboutHeroProps = {
   locale: Locale;
@@ -23,22 +23,23 @@ export function AboutHero({ locale, title, intro }: AboutHeroProps) {
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.about;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.05, 0.2, 1], [0.42, 1, 1, 1]);
-  const titleY = useTransform(scrollYProgress, [0, 0.18, 1], [36, 0, 0]);
-  const introOpacity = useTransform(scrollYProgress, [0.12, 0.28, 1], [0, 1, 1]);
-  const introY = useTransform(scrollYProgress, [0.12, 0.28, 1], [26, 0, 0]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3, restDelta: 0.0005 });
+  const titleOpacity = useTransform(smoothProgress, [0, 0.05, 0.2, 1], [0.42, 1, 1, 1]);
+  const titleY = useTransform(smoothProgress, [0, 0.18, 1], [36, 0, 0]);
+  const introOpacity = useTransform(smoothProgress, [0.12, 0.28, 1], [0, 1, 1]);
+  const introY = useTransform(smoothProgress, [0.12, 0.28, 1], [26, 0, 0]);
   const imageClip = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0.08, 0.36, 1],
     isArabic ? ["inset(0 100% 0 0)", "inset(0 0% 0 0)", "inset(0 0% 0 0)"] : ["inset(0 0 0 100%)", "inset(0 0 0 0%)", "inset(0 0 0 0%)"],
   );
-  const imageScale = useTransform(scrollYProgress, [0, 0.42, 1], [1.08, 1, 1.025]);
-  const captionOpacity = useTransform(scrollYProgress, [0.48, 0.62, 1], [0, 1, 1]);
-  const captionY = useTransform(scrollYProgress, [0.48, 0.62, 1], [20, 0, 0]);
+  const imageScale = useTransform(smoothProgress, [0, 0.42, 1], [1.08, 1, 1.025]);
+  const captionOpacity = useTransform(smoothProgress, [0.48, 0.62, 1], [0, 1, 1]);
+  const captionY = useTransform(smoothProgress, [0.48, 0.62, 1], [20, 0, 0]);
   const motionEnabled = isDesktop && !reduceMotion;
 
   return (
-    <section ref={sectionRef} id="home" style={scrollSceneStyle(3)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
+    <section ref={sectionRef} id="home" style={editorialScrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep px-4 pt-20 pb-5 text-white sm:px-8 sm:pt-28 sm:pb-8 lg:sticky lg:top-0 lg:h-screen lg:px-12 lg:pt-24 lg:pb-6">
       <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_12%_18%,rgba(0,144,175,.16),transparent_28%),linear-gradient(125deg,#013d60_0%,#013d60_62%,#013d60_100%)]" />
 
@@ -80,7 +81,7 @@ export function AboutHero({ locale, title, intro }: AboutHeroProps) {
             className="mt-5 grid max-w-xl grid-cols-2 gap-x-4 gap-y-4 border-t border-white/16 pt-4 sm:mt-7 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-5 sm:pt-5"
           >
             {ui.heroFacts.map((fact, index) => (
-              <AboutHeroFact key={`${motionEnabled ? "desktop" : "mobile"}-${fact.label}`} index={index} progress={scrollYProgress} active={motionEnabled} className={`${index === 1 ? "border-s border-white/12 ps-5" : ""} ${index === 2 ? "col-span-2 border-t border-white/12 pt-4 sm:col-span-1 sm:border-s sm:border-t-0 sm:ps-5 sm:pt-0" : ""}`}>
+              <AboutHeroFact key={`${motionEnabled ? "desktop" : "mobile"}-${fact.label}`} index={index} progress={smoothProgress} active={motionEnabled} className={`${index === 1 ? "border-s border-white/12 ps-5" : ""} ${index === 2 ? "col-span-2 border-t border-white/12 pt-4 sm:col-span-1 sm:border-s sm:border-t-0 sm:ps-5 sm:pt-0" : ""}`}>
                 <span className="block text-[8px] font-black tracking-[0.18em] text-copad-green uppercase">{fact.label}</span>
                 <strong className={`mt-2 block font-normal text-white ${index === 0 ? "font-display text-3xl" : "text-xs leading-5"}`}>{fact.value}</strong>
               </AboutHeroFact>

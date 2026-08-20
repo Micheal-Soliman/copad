@@ -79,13 +79,12 @@ const english: SiteCopy = {
       sectionNavigation: [
         { id: "home", label: "Overview" },
         { id: "division-story", label: "Divisions" },
-        { id: "therapy-next", label: "Therapy Areas" },
       ],
       heroImageAlt: "COPAD healthcare divisions",
       heroKicker: "One structure / Four fields of healthcare",
       chapterLabel: "Division",
       bookEyebrow: "The corporate divisions book",
-      bookInstruction: "Scroll to turn the page",
+      bookInstruction: "Scroll through the divisions",
       imageAlts: [
         "COPAD pharmaceutical research",
         "COPAD consumer health portfolio",
@@ -277,13 +276,12 @@ const arabic: SiteCopy = {
       sectionNavigation: [
         { id: "home", label: "نظرة عامة" },
         { id: "division-story", label: "القطاعات" },
-        { id: "therapy-next", label: "المجالات العلاجية" },
       ],
       heroImageAlt: "قطاعات الرعاية الصحية في كوباد",
       heroKicker: "هيكل واحد / أربعة مجالات للرعاية الصحية",
       chapterLabel: "القطاع",
       bookEyebrow: "كتاب قطاعات كوباد",
-      bookInstruction: "مرّر لتقليب الصفحة",
+      bookInstruction: "مرّر لاستعراض القطاعات",
       imageAlts: [
         "البحث الدوائي في كوباد",
         "محفظة صحة المستهلك في كوباد",

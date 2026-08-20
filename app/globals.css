@@ -32,6 +32,7 @@
     background: var(--color-copad-white);
     color: var(--color-copad-deep);
     font-family: var(--font-sans);
+    font-synthesis: none;
     text-rendering: optimizeLegibility;
   }
 
