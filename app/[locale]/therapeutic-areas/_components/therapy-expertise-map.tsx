@@ -2,11 +2,12 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle, scrollSceneIndex, scrollSystem } from "@/lib/motion/scroll-system";
 
 type TherapyExpertiseMapProps = {
   locale: Locale;
@@ -31,7 +32,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
   const ambientX = useTransform(smoothProgress, [0, 1], isArabic ? ["18%", "-22%"] : ["-22%", "18%"]);
   const activeProgress = (activeIndex + 1) / areas.length;
 
-  useMotionValueEvent(sceneProgress, "change", (value) => {
+  useMotionValueEvent(smoothProgress, "change", (value) => {
     const next = Math.min(areas.length - 1, Math.max(0, Math.round(value * (areas.length - 1))));
     if (next === activeIndexRef.current) return;
     setDirection(next > activeIndexRef.current ? 1 : -1);
@@ -51,7 +52,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
   const active = areas[activeIndex]!;
 
   return (
-    <section id="expertise" ref={sectionRef} style={scrollSceneStyle(areas.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
+    <section id="expertise" ref={sectionRef} style={homeScrollSceneStyle(areas.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(0,144,175,.16),transparent_24%),radial-gradient(circle_at_82%_72%,rgba(1,61,96,.08),transparent_28%)]" />
         <motion.div aria-hidden="true" className="absolute top-[18%] -end-36 size-[28rem] rounded-full border border-copad-green/22 sm:size-[42rem] lg:-end-28 lg:size-[52rem]" style={reduceMotion ? undefined : { rotate: orbitRotate }}>
@@ -98,31 +99,44 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
               </div>
             </nav>
 
-            <div className="order-1 min-h-0 min-w-0 overflow-hidden rounded-[1.65rem] sm:rounded-[2rem] lg:order-2 lg:h-[min(29rem,calc(100vh-15rem))]">
-              <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+            <div className="relative order-1 min-h-[26rem] min-w-0 overflow-hidden rounded-[1.65rem] sm:min-h-[25rem] sm:rounded-[2rem] lg:order-2 lg:h-[min(27rem,calc(100vh-16.5rem))] lg:min-h-0">
+              <AnimatePresence mode="sync" initial={false} custom={direction}>
                 <motion.article
                   key={activeIndex}
                   custom={direction}
                   variants={{
-                    enter: (travel: number) => ({ opacity: 0, rotateY: travel * (isArabic ? -7 : 7), x: travel * (isArabic ? -28 : 28), y: 14, scale: .987, filter: "blur(6px)" }),
-                    center: { opacity: 1, rotateY: 0, x: 0, y: 0, scale: 1, filter: "blur(0px)" },
-                    exit: (travel: number) => ({ opacity: 0, rotateY: travel * (isArabic ? 5 : -5), x: travel * (isArabic ? 20 : -20), y: -8, scale: .99, filter: "blur(5px)" }),
+                    enter: (travel: number) => ({ opacity: 0, x: travel * (isArabic ? -12 : 12), y: 10, scale: .996 }),
+                    center: { opacity: 1, x: 0, y: 0, scale: 1 },
+                    exit: (travel: number) => ({ opacity: 0, x: travel * (isArabic ? 8 : -8), y: -4, scale: .998 }),
                   }}
                   initial={reduceMotion ? false : "enter"}
                   animate="center"
                   exit={reduceMotion ? undefined : "exit"}
-                  transition={{ duration: reduceMotion ? 0 : .66, ease }}
-                  style={{ transformOrigin: isArabic ? "right center" : "left center", transformStyle: "preserve-3d" }}
-                  className="relative overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white/88 p-5 shadow-[0_24px_70px_rgba(1,61,96,.1)] backdrop-blur-md sm:rounded-[2rem] sm:p-8 lg:h-full lg:min-h-0 lg:p-10"
+                  transition={{
+                    opacity: { duration: reduceMotion ? 0 : .68, ease },
+                    x: { duration: reduceMotion ? 0 : .76, ease },
+                    y: { duration: reduceMotion ? 0 : .76, ease },
+                    scale: { duration: reduceMotion ? 0 : .76, ease },
+                  }}
+                  style={{ transformOrigin: isArabic ? "right center" : "left center" }}
+                  className="absolute inset-0 overflow-hidden rounded-[1.65rem] border border-copad-sky/25 bg-copad-deep p-5 text-white shadow-[0_24px_70px_rgba(1,61,96,.18)] sm:rounded-[2rem] sm:p-8 lg:h-full lg:min-h-0 lg:p-10"
                 >
-                  <span aria-hidden="true" className="absolute -end-5 -top-12 font-display text-[10rem] leading-none tracking-[-0.08em] text-copad-deep/[.045] sm:text-[14rem] lg:text-[18rem]">{String(activeIndex + 1).padStart(2, "0")}</span>
+                  <Image
+                    src="/images/therapy-area/therapy-area.png"
+                    alt=""
+                    fill
+                    unoptimized
+                    sizes="(min-width: 1024px) 65vw, 100vw"
+                    className="object-cover object-center"
+                  />
+                  <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-copad-deep/25 via-copad-deep/8 to-transparent rtl:bg-linear-to-l" />
                   <div className="relative z-10 flex h-full flex-col justify-center">
                     <div className="flex items-center gap-3">
                       <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.6)]" />
                       <p className="text-[8px] font-black tracking-[0.2em] text-copad-green uppercase sm:text-[9px]">{ui.areaLabel} · {String(activeIndex + 1).padStart(2, "0")}</p>
                     </div>
-                    <h2 className={`mt-5 max-w-full text-balance break-words text-copad-deep ${isArabic ? "font-sans text-[clamp(1.75rem,7.4vw,3.8rem)] leading-[1.12] font-black tracking-[-0.035em] lg:text-[4.1rem]" : "font-display text-[clamp(2.2rem,9vw,4rem)] leading-[.98] tracking-[-0.05em] lg:text-[4.55rem]"}`}>{active.title}</h2>
-                    <p className="mt-5 max-w-3xl text-xs leading-6 text-copad-deep/68 sm:mt-7 sm:text-sm sm:leading-7 lg:mt-6 lg:text-[.95rem] lg:leading-8">{active.body}</p>
+                    <h2 className={`mt-5 max-w-full text-balance break-words text-white ${isArabic ? "font-sans text-[clamp(1.75rem,7.4vw,3.8rem)] leading-[1.12] font-black tracking-[-0.035em] lg:text-[4.1rem]" : "font-display text-[clamp(2.2rem,9vw,4rem)] leading-[.98] tracking-[-0.05em] lg:text-[4.55rem]"}`}>{active.title}</h2>
+                    <p className="mt-5 max-w-3xl text-xs leading-6 text-white/72 sm:mt-7 sm:text-sm sm:leading-7 lg:mt-6 lg:text-[.95rem] lg:leading-8">{active.body}</p>
                   </div>
                 </motion.article>
               </AnimatePresence>

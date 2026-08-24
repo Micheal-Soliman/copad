@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { ScrollAtmosphere } from "@/components/motion/scroll-atmosphere";
 import { ScrollImageReveal } from "@/components/motion/scroll-image-reveal";
 import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
-import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
@@ -32,9 +31,9 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="manufacturing" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id="manufacturing" ref={sectionRef} style={homeScrollSceneStyle(1)} className="relative scroll-mt-20 overflow-clip bg-copad-white px-4 py-16 sm:px-8 sm:py-24 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="04" />
-      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:grid-cols-[.98fr_1.02fr] lg:gap-16 lg:pb-16 2xl:gap-20">
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-14 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:overflow-hidden lg:grid-cols-[.98fr_1.02fr] lg:gap-12 lg:py-6 2xl:gap-20">
         <ScrollSceneItem
           progress={scrollYProgress}
           active={isDesktop}
@@ -43,7 +42,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="relative mx-auto w-full max-w-2xl lg:col-start-1 lg:row-start-1"
         >
           <ScrollImageReveal
-            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.14)]"
+            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.14)] lg:h-[min(64svh,34rem)] lg:aspect-auto"
             direction="left"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -82,10 +81,10 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="lg:col-start-2 lg:row-start-1"
         >
           <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-6xl 2xl:text-7xl" />
-          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-8 lg:mt-6 2xl:text-lg 2xl:leading-9">{body}</p>
+          <h2 className="mt-4 max-w-4xl text-pretty font-display text-[clamp(2.3rem,3.7vw,4.25rem)] leading-[1.06] font-bold tracking-[-0.035em] text-copad-deep">{title}</h2>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-7 lg:mt-5 lg:text-[15px] lg:leading-7 2xl:text-lg 2xl:leading-9">{body}</p>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3" aria-label={ui.manufacturingPrinciplesLabel}>
+          <div className="mt-5 grid gap-2.5 sm:grid-cols-3 2xl:mt-7" aria-label={ui.manufacturingPrinciplesLabel}>
             {ui.manufacturingPrinciples.map((principle, index) => (
               <motion.div
                 key={principle}
@@ -95,7 +94,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
                 transition={{ duration: 0.6, delay: 0.16 + index * 0.1, ease }}
                 whileHover={reduceMotion ? undefined : { y: -5 }}
                 whileTap={reduceMotion ? undefined : { y: -4, scale: 0.985 }}
-              className="group/principle relative isolate min-h-20 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-4 shadow-[0_10px_30px_rgba(1,61,96,.04)]"
+              className="group/principle relative isolate min-h-18 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-3 shadow-[0_10px_30px_rgba(1,61,96,.04)]"
               >
                 <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/principle:scale-y-100" />
                 <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
@@ -105,7 +104,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:mt-9 sm:w-auto">
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:w-auto 2xl:mt-7">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
           </Link>

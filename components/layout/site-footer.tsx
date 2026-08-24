@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Brand } from "@/components/brand";
 import { siteCopy } from "@/content/site";
@@ -16,19 +17,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="relative overflow-hidden border-t border-copad-green/35 bg-copad-deep px-4 pt-8 pb-5 text-white sm:px-8 sm:pt-12 sm:pb-7 lg:px-12 lg:pt-14">
       <div aria-hidden="true" className="absolute top-0 end-0 h-px w-1/3 bg-linear-to-l from-copad-green via-copad-green/40 to-transparent" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 z-0 hidden -translate-y-1/2 overflow-hidden text-center sm:block">
-        <p className="select-none text-[clamp(5rem,25vw,18rem)] leading-none font-black tracking-[-0.075em] text-white/[.018]">COPAD</p>
-        <motion.p
-          className="absolute inset-0 select-none bg-clip-text text-[clamp(5rem,25vw,18rem)] leading-none font-black tracking-[-0.075em] text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(100deg, transparent 38%, rgba(255,255,255,.12) 48%, rgba(0,144,175,.16) 52%, transparent 62%)",
-            backgroundSize: "220% 100%",
-          }}
-          animate={reduceMotion ? undefined : { backgroundPosition: ["180% 50%", "-180% 50%"] }}
-          transition={{ duration: 5.5, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-        >
-          COPAD
-        </motion.p>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <Image src="/logo.png" alt="" width={4500} height={4500} unoptimized className="absolute top-1/2 left-1/2 h-[clamp(28rem,62vw,54rem)] w-[clamp(28rem,62vw,54rem)] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain brightness-0 invert opacity-[.025]" />
+        <motion.span
+          className="absolute inset-y-0 w-[28%] -skew-x-12 bg-linear-to-r from-transparent via-white/9 to-transparent blur-xl"
+          animate={reduceMotion ? undefined : { x: ["-45vw", "125vw"] }}
+          transition={{ duration: 6.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        />
       </div>
 
       <motion.div
@@ -78,20 +73,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </nav>
 
-        <div aria-hidden="true" className="relative col-span-full overflow-hidden border-t border-white/10 pt-3 text-center sm:hidden">
-          <p className="select-none whitespace-nowrap text-[clamp(4.25rem,22vw,6rem)] leading-[.82] font-black tracking-[-0.075em] text-white/[.035]">COPAD</p>
-          <motion.p
-            className="absolute inset-x-0 bottom-0 select-none whitespace-nowrap bg-clip-text text-[clamp(4.25rem,22vw,6rem)] leading-[.82] font-black tracking-[-0.075em] text-transparent"
-            style={{
-              backgroundImage: "linear-gradient(100deg, transparent 36%, rgba(255,255,255,.22) 48%, rgba(0,144,175,.28) 53%, transparent 64%)",
-              backgroundSize: "220% 100%",
-            }}
-            animate={reduceMotion ? undefined : { backgroundPosition: ["180% 50%", "-180% 50%"] }}
-            transition={{ duration: 4.5, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-          >
-            COPAD
-          </motion.p>
-        </div>
       </motion.div>
 
       <div className="relative z-10 mx-auto flex max-w-[1440px] flex-col gap-1.5 pt-4 text-[9px] leading-4 text-white/42 sm:gap-2 sm:pt-6 sm:text-[10px] sm:leading-5 lg:flex-row lg:items-start lg:justify-between">

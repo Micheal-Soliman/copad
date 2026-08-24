@@ -6,7 +6,7 @@ export type { ContentBlock, Section, SectionSlug, SiteCopy } from "@/content/typ
 
 const english: SiteCopy = {
   localeName: "العربية",
-  nav: { about: "About COPAD", divisions: "Divisions", areas: "Therapy Areas", products: "Products", manufacturing: "Manufacturing & Quality", insights: "Insights", contact: "Contact Us" },
+  nav: { about: "About COPAD", divisions: "Divisions", areas: "Therapy Areas", products: "Products", manufacturing: "Manufacturing & Quality", insights: "Insights", partnership: "Partners", careers: "Careers", contact: "Contact Us" },
   utility: { allAreas: "Explore Therapy Areas", allDivisions: "View All Divisions", readProfile: "Read the Full Company Profile", next: "Next", submit: "Submit an Inquiry", formTitle: "How to Reach Us", formBody: "General inquiries, partnership requests, career applications, and product-related questions can each be submitted through the categories below. Medical professionals seeking product or safety information are directed to COPAD's dedicated medical information channel.", formLabels: ["Full name", "Work email", "Inquiry category", "Message"] },
   footer: { statement: "COPAD Pharma Egypt — Pharmaceuticals. Consumer Health. Manufacturing. Since 1989.", legal: "© 2026 COPAD Pharma Egypt. All rights reserved.", disclaimer: "Educational content is intended to inform and does not replace professional medical advice." },
   ui: {
@@ -99,7 +99,6 @@ const english: SiteCopy = {
       sectionNavigation: [
         { id: "home", label: "Overview" },
         { id: "expertise", label: "Clinical Map" },
-        { id: "products-next", label: "Products" },
       ],
       heroKicker: "Portfolio / Clinical expertise",
       heroMetricLabel: "Specialized therapeutic areas",
@@ -203,7 +202,7 @@ const english: SiteCopy = {
 const arabic: SiteCopy = {
   ...english,
   localeName: "English",
-  nav: { about: "عن كوباد", divisions: "القطاعات", areas: "المجالات العلاجية", products: "المنتجات", manufacturing: "التصنيع والجودة", insights: "المعرفة والأخبار", contact: "تواصل معنا" },
+  nav: { about: "عن كوباد", divisions: "القطاعات", areas: "المجالات العلاجية", products: "المنتجات", manufacturing: "التصنيع والجودة", insights: "المعرفة والأخبار", partnership: "الشراكات", careers: "الوظائف", contact: "تواصل معنا" },
   utility: { ...english.utility, allAreas: "استكشف المجالات العلاجية", allDivisions: "كل القطاعات", readProfile: "اقرأ الملف التعريفي الكامل", next: "التالي", submit: "أرسل الاستفسار", formTitle: "طرق التواصل", formBody: "يمكن إرسال الاستفسارات العامة وطلبات الشراكات وطلبات التوظيف والاستفسارات المتعلقة بالمنتجات من خلال التصنيفات التالية. ويوجّه المختصون في الرعاية الصحية إلى قناة المعلومات الطبية المخصصة.", formLabels: ["الاسم الكامل", "البريد الإلكتروني للعمل", "نوع الاستفسار", "الرسالة"] },
   footer: { statement: "كوباد فارما مصر — أدوية. صحة المستهلك. تصنيع. منذ 1989.", legal: "© 2026 كوباد فارما مصر. جميع الحقوق محفوظة.", disclaimer: "المحتوى التثقيفي يهدف إلى المعرفة ولا يغني عن استشارة المختصين." },
   ui: {
@@ -296,7 +295,6 @@ const arabic: SiteCopy = {
       sectionNavigation: [
         { id: "home", label: "نظرة عامة" },
         { id: "expertise", label: "الخريطة العلاجية" },
-        { id: "products-next", label: "المنتجات" },
       ],
       heroKicker: "المحفظة / الخبرة الإكلينيكية",
       heroMetricLabel: "مجالات علاجية متخصصة",

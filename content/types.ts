@@ -146,6 +146,8 @@ export type SiteCopy = {
     | "products"
     | "manufacturing"
     | "insights"
+    | "partnership"
+    | "careers"
     | "contact",
     string
   >;

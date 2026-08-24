@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -21,7 +21,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
   const coreTilt = useTransform(scrollYProgress, [0, .5, 1], [12, 0, -7]);
   const coreScale = useTransform(scrollYProgress, [0, .45, 1], [.82, 1, 1.04]);
 
-  return <section id="home" ref={sectionRef} style={scrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
+  return <section id="home" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
       <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_76%_42%,rgba(0,144,175,.24),transparent_28%),radial-gradient(circle_at_10%_90%,rgba(232,245,253,.08),transparent_30%),linear-gradient(135deg,#013d60,#013d60_55%,#013d60)]" />
       <motion.span aria-hidden="true" className="absolute inset-y-0 -z-20 w-[34vw] -skew-x-12 bg-linear-to-r from-transparent via-white/[.055] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-40vw", "125vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
@@ -29,7 +29,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
       <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-8 px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.8fr_1.2fr] lg:gap-12 lg:px-12 lg:pt-24 lg:pb-5">
         <motion.div className="relative z-20" style={driven ? { y: copyY } : undefined}>
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3 text-[9px] font-black tracking-[.22em] text-copad-green uppercase"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.8)]" />{isArabic ? "طيف المنتجات / أربع فئات" : "Product spectrum / Four categories"}</motion.p>
-          <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 28, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 1, delay: .18, ease }} className={`${isArabic ? "mt-5 font-sans text-[clamp(3.8rem,16vw,6rem)] leading-none font-black tracking-[-.055em] lg:text-[clamp(5.2rem,7.2vw,7.8rem)]" : "mt-5 font-display text-[clamp(5rem,19vw,7.2rem)] leading-[.76] tracking-[-.075em] lg:text-[clamp(6.8rem,9.5vw,9.8rem)]"}`}>{content.title}</motion.h1>
+          <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .78, delay: .08, ease }} className={`${isArabic ? "mt-5 font-sans text-[clamp(3.8rem,16vw,6rem)] leading-[1.1] font-black tracking-[-.035em] lg:text-[clamp(5.2rem,7.2vw,7.8rem)]" : "mt-5 text-pretty font-display text-[clamp(4.7rem,17vw,6.8rem)] leading-[1.02] tracking-[-.045em] lg:text-[clamp(6rem,8vw,8.2rem)]"}`}>{content.title}</motion.h1>
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .36, ease }} className="mt-7 max-w-xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8 lg:text-[1.02rem]">{content.intro}</motion.p>
         </motion.div>
 

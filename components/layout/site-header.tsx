@@ -15,6 +15,8 @@ const navItems = [
   ["products", "products"],
   ["manufacturing", "manufacturing-quality"],
   ["insights", "insights"],
+  ["partnership", "partner-with-us"],
+  ["careers", "careers"],
 ] as const;
 
 const homeSectionIds = {
@@ -90,19 +92,19 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
       <div className="relative mx-auto flex h-[4.5rem] w-full max-w-[1440px] items-center px-4 sm:h-20 sm:px-8 lg:px-12">
         <Brand locale={locale} inverted={overlay} />
 
-        <nav className="absolute start-1/2 hidden -translate-x-1/2 items-center gap-1 xl:flex rtl:translate-x-1/2" aria-label={accessibility.primaryNavigation}>
+        <nav className="absolute start-1/2 hidden -translate-x-1/2 items-center xl:flex rtl:translate-x-1/2" aria-label={accessibility.primaryNavigation}>
           {navItems.map(([key, href]) => {
             const route = `/${locale}/${href}`;
             const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
             return (
-              <Link key={key} href={`/${locale}/${href}`} aria-current={active ? "page" : undefined} className={`group relative px-3 py-3 text-[11px] font-bold whitespace-nowrap transition-colors ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`}>
+              <Link key={key} href={`/${locale}/${href}`} aria-current={active ? "page" : undefined} className={`group relative px-2 py-3 text-[9px] font-bold whitespace-nowrap transition-colors 2xl:px-3 2xl:text-[10px] ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`}>
                 {copy.nav[key]}
                 {active && (
-                  <motion.span layoutId="primary-nav-active" className="absolute inset-x-3 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-green shadow-[0_0_13px_rgba(0,144,175,.78)]" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
+                  <motion.span layoutId="primary-nav-active" className="absolute inset-x-2 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-green shadow-[0_0_13px_rgba(0,144,175,.78)] 2xl:inset-x-3" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
                     {!reduceMotion && <motion.span className="absolute inset-y-0 w-1/3 bg-linear-to-r from-transparent via-white/90 to-transparent" animate={{ x: ["-130%", "380%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.45 }} />}
                   </motion.span>
                 )}
-                {!active && <span className="absolute inset-x-3 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100" />}
+                {!active && <span className="absolute inset-x-2 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100 2xl:inset-x-3" />}
               </Link>
             );
           })}

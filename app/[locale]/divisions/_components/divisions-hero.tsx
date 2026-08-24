@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { ContentBlock } from "@/content/types";
@@ -23,19 +24,23 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
   const isArabic = locale === "ar";
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3, restDelta: 0.0005 });
-  const imageClip = useTransform(smoothProgress, [0.04, 0.34, 1], ["inset(5% 37% 5% 37% round 2.5rem)", "inset(0% 0% 0% 0% round 0rem)", "inset(0% 0% 0% 0% round 0rem)"]);
-  const imageScale = useTransform(smoothProgress, [0, 0.4, 1], [1.12, 1, 1.035]);
+  const imageScale = useTransform(smoothProgress, [0, 0.4, 1], [1.035, 1, 1.02]);
   const motionEnabled = isDesktop && !reduceMotion;
   const introLines = splitIntro(intro);
 
   return (
     <section ref={sectionRef} id="home" style={homeScrollSceneStyle(3)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-0 -z-20 bg-[url('/images/copad-divisions-atlas.png')] bg-cover bg-center"
-          style={motionEnabled ? { clipPath: imageClip, scale: imageScale } : undefined}
-        />
+        <motion.div aria-hidden="true" className="absolute inset-0 -z-20" style={motionEnabled ? { scale: imageScale } : undefined}>
+          <Image
+            src="/images/copad-divisions-atlas.png"
+            alt=""
+            fill
+            preload
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(1,61,96,.55),rgba(1,61,96,.84)),linear-gradient(90deg,rgba(1,61,96,.92),transparent_50%,rgba(1,61,96,.5))]" />
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,rgba(123,205,237,.08)_0%,rgba(1,61,96,.2)_46%,rgba(1,61,96,.68)_100%)]" />
 
@@ -46,7 +51,7 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
             transition={{ duration: 0.82, delay: 0.1, ease }}
             className="relative z-10"
           >
-            <h1 className={`max-w-5xl text-white ${isArabic ? "font-sans text-[clamp(3.5rem,15vw,5.5rem)] leading-[1.02] font-black tracking-[-0.04em] lg:text-[clamp(5rem,10vw,9rem)]" : "font-display text-[clamp(4.5rem,18vw,7rem)] leading-[.78] tracking-[-0.07em] lg:text-[clamp(7rem,13vw,12rem)]"}`}>
+            <h1 className={`max-w-5xl text-pretty text-white ${isArabic ? "font-sans text-[clamp(3.5rem,12vw,7rem)] leading-[1.08] font-black tracking-[-0.04em]" : "font-display text-[clamp(4.25rem,10vw,8.5rem)] leading-[1.02] font-bold tracking-[-0.05em]"}`}>
               {title}
             </h1>
           </motion.div>
@@ -56,7 +61,7 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
             className="relative z-10 mt-7 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/72 sm:mt-9 sm:text-base sm:leading-8 lg:text-lg lg:leading-9"
           >
             {introLines.map((line, index) => (
-              <HeroIntroLine key={`${line}-${index}`} index={index} progress={smoothProgress} active={motionEnabled} reduceMotion={Boolean(reduceMotion)}>
+              <HeroIntroLine key={`${line}-${index}`} index={index} reduceMotion={Boolean(reduceMotion)}>
                 <ProtectedIntroText text={line} />
               </HeroIntroLine>
             ))}
@@ -76,20 +81,14 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
   );
 }
 
-function HeroIntroLine({ index, progress, active, reduceMotion, children }: { index: number; progress: MotionValue<number>; active: boolean; reduceMotion: boolean; children: React.ReactNode }) {
-  const start = 0.1 + index * 0.1;
-  const opacity = useTransform(progress, [start, start + 0.1, 1], [0, 1, 1]);
-  const y = useTransform(progress, [start, start + 0.1, 1], [20, 0, 0]);
-
+function HeroIntroLine({ index, reduceMotion, children }: { index: number; reduceMotion: boolean; children: React.ReactNode }) {
   return (
     <motion.span
       aria-hidden="true"
       className="block"
-      initial={active || reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={active ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.7 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease }}
-      style={active ? { opacity, y } : undefined}
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.2 + index * 0.09, ease }}
     >
       {children}
     </motion.span>

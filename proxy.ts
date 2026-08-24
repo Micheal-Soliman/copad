@@ -20,5 +20,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|icon|apple-icon|images/).*)"],
+  // Locale routing is only for application routes. Public files (logo, fonts,
+  // documents, media, etc.) must keep their root URL and bypass the proxy.
+  matcher: ["/((?!api|_next|favicon.ico|icon|apple-icon|images/|.*\\..*).*)"],
 };

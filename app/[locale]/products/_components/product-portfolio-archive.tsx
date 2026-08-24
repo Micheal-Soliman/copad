@@ -2,13 +2,19 @@
 
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneIndex, scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
+import { homeScrollSceneStyle, scrollSceneIndex, scrollSystem } from "@/lib/motion/scroll-system";
 
-const tones = ["bg-copad-sand text-copad-deep", "bg-copad-deep text-white", "bg-[#e8f5fd] text-copad-deep", "bg-copad-white text-copad-deep"];
+const portfolioImages = [
+  "/images/products/Pharmaceutical Portfolio.png",
+  "/images/products/Supplements, Vitamins, and Wellness.png",
+  "/images/products/centravita.png",
+  "/images/products/Pediatric and Family Health.png",
+];
 
 export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; blocks: ContentBlock[]; cta?: string }) {
   const ref = useRef<HTMLElement>(null);
@@ -19,9 +25,14 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
   const isArabic = locale === "ar";
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
-  const trackX = useTransform(sceneProgress, [0, 1], [0, -viewportWidth * 3]);
+  const stagedProgress = useTransform(
+    sceneProgress,
+    [0, .2, .29, .43, .52, .66, .75, 1],
+    [0, 0, 1, 1, 2, 2, 3, 3],
+  );
+  const trackX = useTransform(stagedProgress, value => -viewportWidth * value);
   const horizonX = useTransform(sceneProgress, [0, 1], ["0%", "-35%"]);
-  useMotionValueEvent(sceneProgress, "change", v => setActive(Math.min(3, Math.max(0, Math.round(v*3)))));
+  useMotionValueEvent(stagedProgress, "change", v => setActive(Math.min(3, Math.max(0, Math.round(v)))));
   useEffect(() => {
     const update = () => setViewportWidth(document.documentElement.clientWidth);
     update();
@@ -29,11 +40,21 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  function goTo(index:number) { const s=ref.current;if(!s)return;const top=s.offsetTop+(s.offsetHeight-innerHeight)*scrollSceneIndex(index,blocks.length);if(lenis)lenis.scrollTo(top,{duration:scrollSystem.scene.navigationDuration,easing:v=>1-Math.pow(1-v,4)});else scrollTo({top,behavior:"smooth"}); }
+  function goTo(index:number) {
+    const section=ref.current;
+    if(!section)return;
+    const stageStops=[0,.36,.59,.88];
+    const progress=index < stageStops.length
+      ? stageStops[index] * scrollSystem.scene.completion
+      : scrollSceneIndex(index,blocks.length);
+    const top=section.offsetTop+(section.offsetHeight-innerHeight)*progress;
+    if(lenis)lenis.scrollTo(top,{duration:.92,easing:v=>v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2});
+    else scrollTo({top,behavior:"smooth"});
+  }
 
-  return <section id="portfolio" ref={ref} style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)]">
+  return <section id="portfolio" ref={ref} style={homeScrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)]">
     <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic?"رحلة داخل المحفظة":"Journey through the portfolio"}</span><span dir="ltr" className="font-display text-4xl text-copad-deep">0{active+1}<small className="ms-1 font-sans text-xs opacity-30">/04</small></span></div><div className="mt-3 h-1 bg-copad-deep/8"><motion.span className="block h-full origin-left bg-copad-green rtl:origin-right" style={{scaleX:sceneProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition ${active===i?"text-copad-deep":"text-copad-deep/32"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-green":"bg-copad-deep/15"}`} />{b.title}</button>)}</nav></header>
+      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 text-white sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-sky uppercase">{isArabic?"رحلة داخل المحفظة":"Journey through the portfolio"}</span><span dir="ltr" className="font-display text-4xl text-white">0{active+1}<small className="ms-1 font-sans text-xs opacity-40">/04</small></span></div><div className="mt-3 h-1 bg-white/14"><motion.span className="block h-full origin-left bg-copad-sky rtl:origin-right" style={{scaleX:sceneProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition-colors duration-500 ${active===i?"text-white":"text-white/48"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-sky":"bg-white/25"}`} />{b.title}</button>)}</nav></header>
 
       <motion.div aria-hidden="true" className="absolute bottom-[8%] start-0 z-30 h-px w-[160%] bg-linear-to-r from-transparent via-copad-green/55 to-transparent" style={reduceMotion?undefined:{x:horizonX}} />
       <motion.div dir="ltr" className="absolute inset-y-0 left-0 flex w-[400%]" style={reduceMotion?{x:-viewportWidth*active}:{x:trackX}}>
@@ -45,18 +66,27 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
 
 function PortfolioWorld({ locale, block, index }: { locale:Locale; block:ContentBlock; index:number }) {
   const isArabic=locale==="ar";
-  return <article dir={isArabic?"rtl":"ltr"} className={`relative h-full w-1/4 shrink-0 overflow-hidden ${tones[index]}`}>
-    <WorldObject index={index} />
-    <div className="relative z-20 mx-auto grid h-full max-w-[1440px] items-end px-4 pt-40 pb-20 sm:px-8 sm:pt-44 lg:grid-cols-[.72fr_1.28fr] lg:items-center lg:px-12 lg:pt-36 lg:pb-14">
-      <div className="relative"><span className="text-[9px] font-black tracking-[.22em] text-copad-green">SPECTRUM / 0{index+1}</span><h2 className={`${isArabic?"font-sans font-black":"font-display"} mt-5 max-w-4xl text-[clamp(2.8rem,11vw,7.6rem)] leading-[.84] tracking-[-.065em]`}>{block.title}</h2></div>
-      <div className={`mt-8 max-w-3xl lg:mt-0 lg:ps-14 ${index===1?"border-white/14":"border-copad-deep/12"} lg:border-s`}><p className={`text-sm leading-7 sm:text-base sm:leading-8 ${index===1?"text-white/62":"text-copad-deep/65"}`}>{block.body}</p>{block.items&&<div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-3">{block.items.map(item=><span key={item} className="flex gap-2 text-[9px] leading-4 font-bold opacity-65"><i className="mt-1.5 size-1 shrink-0 rounded-full bg-copad-green" />{item}</span>)}</div>}{block.cta&&block.href&&<Link href={`/${locale}/${block.href}`} className={`mt-6 inline-flex min-h-11 items-center rounded-full px-5 text-[10px] font-black transition hover:-translate-y-0.5 ${index===1?"bg-copad-green text-white":"bg-copad-deep text-white hover:bg-copad-green"}`}>{block.cta}</Link>}</div>
+  return <article dir={isArabic?"rtl":"ltr"} className="relative h-full w-1/4 shrink-0 overflow-hidden bg-copad-deep text-white">
+    <Image
+      src={portfolioImages[index]}
+      alt=""
+      fill
+      priority={index === 0}
+      unoptimized
+      sizes="100vw"
+      className="object-cover object-[68%_center] sm:object-center"
+    />
+    <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-copad-deep/45 via-copad-deep/10 to-transparent rtl:bg-linear-to-l" />
+    <div className="relative z-20 mx-auto grid h-full max-w-[1440px] content-end items-start gap-7 px-4 pt-44 pb-20 sm:px-8 lg:grid-cols-[.78fr_1.22fr] lg:content-center lg:gap-12 lg:px-12">
+      <div className="relative max-w-[34rem]">
+        <span className="text-[9px] font-black tracking-[.22em] text-copad-sky">SPECTRUM / 0{index+1}</span>
+        <h2 className={`${isArabic?"font-sans font-black leading-[1.2] tracking-[-.02em]":"font-display leading-[1.12] tracking-[-.03em]"} mt-4 max-w-[15ch] text-pretty text-[clamp(2.35rem,4.2vw,4.7rem)]`}>{block.title}</h2>
+      </div>
+      <div className="max-w-[48rem] border-white/18 lg:border-s lg:ps-10 xl:ps-14">
+        <p className="max-w-2xl text-[13px] leading-6 text-white/74 sm:text-sm sm:leading-7 lg:text-[15px] lg:leading-8">{block.body}</p>
+        {block.items&&<div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">{block.items.map(item=><span key={item} className="flex gap-2 text-[9px] leading-4 font-bold text-white/70"><i className="mt-1.5 size-1 shrink-0 rounded-full bg-copad-sky" />{item}</span>)}</div>}
+        {block.cta&&block.href&&<Link href={`/${locale}/${block.href}`} className="mt-5 inline-flex min-h-10 items-center rounded-full bg-white px-5 text-[10px] font-black text-copad-deep transition duration-300 hover:-translate-y-0.5 hover:bg-copad-sky">{block.cta}</Link>}
+      </div>
     </div>
-    <span aria-hidden="true" className={`absolute -end-8 bottom-[-12%] font-display text-[22rem] leading-none tracking-[-.1em] ${index===1?"text-white/[.025]":"text-copad-deep/[.03]"}`}>0{index+1}</span>
   </article>;
-}
-
-function WorldObject({index}:{index:number}) { if(index===0)return <div aria-hidden="true" className="absolute end-[6%] top-[20%] h-[46%] w-[26%] [perspective:1000px]"><div className="absolute inset-0 rotate-[-9deg] border border-copad-green/25 bg-white/25 shadow-[30px_35px_70px_rgba(1,61,96,.12)]" /><div className="absolute inset-[12%] rotate-[5deg] border border-copad-deep/10 bg-white/35" /><span className="absolute inset-x-[20%] top-1/2 h-px bg-copad-green" /></div>;
-  if(index===1)return <div aria-hidden="true" className="absolute end-[8%] top-[20%] size-[23rem]"><span className="absolute inset-[8%] rounded-full border border-copad-green/30"/><span className="absolute inset-[28%] rounded-full border border-white/15"/><motion.span className="absolute start-[12%] top-[8%] size-16 rounded-full bg-copad-green/70 shadow-[0_20px_45px_rgba(0,0,0,.28)]" animate={{y:[0,28,0]}} transition={{duration:4,repeat:Infinity,ease:"easeInOut"}}/><motion.span className="absolute end-[8%] bottom-[18%] h-20 w-40 rounded-full border border-white/20 bg-white/8 backdrop-blur-md" animate={{rotate:[-12,8,-12]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}}/></div>;
-  if(index===2)return <div aria-hidden="true" className="absolute inset-y-[18%] end-[4%] w-[36%] overflow-hidden"><span className="absolute inset-y-0 start-[12%] w-[16%] bg-copad-green/20"/><span className="absolute inset-y-0 start-[34%] w-[16%] bg-white/55"/><span className="absolute inset-y-0 start-[56%] w-[16%] bg-copad-deep/12"/><span className="absolute inset-y-0 start-[78%] w-[16%] bg-copad-green/35"/></div>;
-  return <div aria-hidden="true" className="absolute end-[5%] top-[18%] size-[25rem] rounded-full border border-copad-green/25"><span className="absolute inset-[16%] rounded-full border border-copad-deep/10"/><span className="absolute inset-[34%] rounded-full border border-copad-green/25"/><span className="absolute inset-[48%] rounded-full bg-copad-green shadow-[0_0_45px_rgba(0,144,175,.35)]"/></div>;
 }

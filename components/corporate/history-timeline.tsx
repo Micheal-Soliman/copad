@@ -47,7 +47,7 @@ export function HistoryTimeline({ locale, title, intro, items, sectionId = "hist
           transition={{ duration: 0.6, ease }}
         >
           <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
-          <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:text-5xl">{title}</h2>
+          <HistoryTitle title={title} isArabic={isArabic} className="mt-4" />
         </motion.div>
         <motion.p
           initial={reduceMotion ? false : { opacity: 0.2, y: 18 }}
@@ -64,7 +64,7 @@ export function HistoryTimeline({ locale, title, intro, items, sectionId = "hist
 
       <div className="hidden lg:sticky lg:top-20 lg:flex lg:min-h-[calc(100vh-5rem)] lg:items-center lg:px-12 lg:py-12">
         <div className="mx-auto w-full max-w-[1440px]">
-          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[.92fr_1.08fr] lg:gap-16 xl:gap-20">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? 24 : -24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -72,7 +72,7 @@ export function HistoryTimeline({ locale, title, intro, items, sectionId = "hist
               transition={{ duration: 0.6, ease }}
             >
               <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{ui.historyEyebrow}</p>
-              <h2 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1] tracking-[-0.045em] text-copad-deep sm:mt-5 sm:text-5xl lg:text-6xl xl:text-7xl">{title}</h2>
+              <HistoryTitle title={title} isArabic={isArabic} className="mt-4 sm:mt-5" />
             </motion.div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0.2, x: isArabic ? -24 : 24 }}
@@ -132,6 +132,20 @@ export function HistoryTimeline({ locale, title, intro, items, sectionId = "hist
         </div>
       </div>
     </section>
+  );
+}
+
+function HistoryTitle({ title, isArabic, className = "" }: { title: string; isArabic: boolean; className?: string }) {
+  const separator = isArabic ? /\s+إلى\s+/ : /\s+to\s+/i;
+  const parts = title.split(separator);
+  const lines = parts.length === 2
+    ? [parts[0]!, `${isArabic ? "إلى" : "to"} ${parts[1]!}`]
+    : [title];
+
+  return (
+    <h2 className={`${className} max-w-none font-display text-[clamp(2rem,6.3vw,3.75rem)] leading-[1.08] font-bold tracking-[-0.035em] text-copad-deep lg:text-[clamp(2.75rem,3.15vw,3.75rem)]`}>
+      {lines.map((line) => <span key={line} className="block whitespace-nowrap">{line}</span>)}
+    </h2>
   );
 }
 

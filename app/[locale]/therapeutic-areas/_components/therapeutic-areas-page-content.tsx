@@ -5,7 +5,6 @@ import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { TherapyAreasHero } from "./therapy-areas-hero";
 import { TherapyExpertiseMap } from "./therapy-expertise-map";
-import { TherapyNextChapter } from "./therapy-next-chapter";
 
 export function TherapeuticAreasPageContent({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale];
@@ -17,7 +16,6 @@ export function TherapeuticAreasPageContent({ locale }: { locale: Locale }) {
       <SiteHeader locale={locale} transparent />
       <TherapyAreasHero locale={locale} title={content.title} intro={content.intro} areas={content.blocks.map((block) => block.title)} />
       <TherapyExpertiseMap locale={locale} areas={content.blocks} />
-      <TherapyNextChapter locale={locale} />
       <HomeSectionNavigator label={ui.sectionNavigationLabel} items={ui.sectionNavigation} />
       <SiteFooter locale={locale} />
     </main>

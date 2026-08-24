@@ -6,6 +6,7 @@ type RevealHeadingProps = {
   text: string;
   className?: string;
   timeline?: boolean;
+  lines?: string[];
 };
 
 const container: Variants = {
@@ -18,8 +19,9 @@ const word: Variants = {
   visible: { opacity: 1, y: "0%", rotate: 0, transition: { duration: 0.54, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export function RevealHeading({ text, className = "", timeline = false }: RevealHeadingProps) {
+export function RevealHeading({ text, className = "", timeline = false, lines }: RevealHeadingProps) {
   const reduceMotion = useReducedMotion();
+  const headingLines = lines?.length ? lines : [text];
 
   return (
     <motion.h2
@@ -33,14 +35,21 @@ export function RevealHeading({ text, className = "", timeline = false }: Reveal
       viewport={{ once: true, amount: 0.38 }}
     >
       <span aria-hidden="true">
-        {text.trim().split(/\s+/).map((entry, index) => (
-          <span key={`${entry}-${index}`} className="inline-block overflow-hidden align-bottom">
-            <motion.span className="inline-block will-change-transform" variants={word}>
-              {entry}
-            </motion.span>
-            {index < text.trim().split(/\s+/).length - 1 && <span>&nbsp;</span>}
-          </span>
-        ))}
+        {headingLines.map((line, lineIndex) => {
+          const entries = line.trim().split(/\s+/);
+          return (
+            <span key={`${line}-${lineIndex}`} className={lines ? "block whitespace-nowrap" : undefined}>
+              {entries.map((entry, index) => (
+                <span key={`${entry}-${lineIndex}-${index}`} className="inline-block overflow-hidden align-bottom whitespace-nowrap">
+                  <motion.span className="inline-block will-change-transform" variants={word}>
+                    {entry}
+                  </motion.span>
+                  {index < entries.length - 1 && <span>&nbsp;</span>}
+                </span>
+              ))}
+            </span>
+          );
+        })}
       </span>
     </motion.h2>
   );

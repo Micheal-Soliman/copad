@@ -36,7 +36,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
         <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.distinctionEyebrow}</p>
-            <h2 className={`mt-5 max-w-3xl font-display font-bold ${isArabic ? "text-[clamp(2.7rem,5vw,4.8rem)] leading-[1.12] tracking-normal" : "text-[clamp(2.8rem,5.2vw,5rem)] leading-[.98] tracking-[-.035em]"}`}>{content.title}</h2>
+            <h2 className={`mt-5 max-w-4xl text-pretty font-display text-[clamp(2.35rem,4vw,4.5rem)] leading-[1.08] font-bold ${isArabic ? "tracking-normal" : "tracking-[-.035em]"}`}>{content.title}</h2>
             <p className="mt-7 max-w-2xl text-sm leading-7 text-white/66 sm:text-base sm:leading-8">{content.body}</p>
           </motion.div>
 
@@ -71,7 +71,13 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
 function VisualCard({ src, title, index, className }: { src: string; title: string; index: number; className: string }) {
   return (
     <article className={`${className} group overflow-hidden rounded-[1.6rem] border border-white/16 bg-copad-deep shadow-[0_28px_70px_rgba(0,0,0,.28)]`}>
-      <Image src={src} alt="" fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-contain p-2 transition-transform duration-1000 ease-out group-hover:scale-[1.025]" />
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 100vw, 42vw"
+        className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.025]"
+      />
       <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep/88 via-transparent to-copad-deep/5" />
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
         <span className="text-[8px] font-black tracking-[.18em] text-copad-green">0{index + 1}</span>

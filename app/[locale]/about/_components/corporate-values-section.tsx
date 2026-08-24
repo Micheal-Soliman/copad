@@ -29,7 +29,7 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
         <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-12 lg:grid-cols-[.92fr_1.08fr] lg:gap-20">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.valuesEyebrow}</p>
-            <h2 className={`mt-5 max-w-3xl font-display font-bold text-copad-deep ${isArabic ? "text-[clamp(2.7rem,5vw,4.8rem)] leading-[1.12]" : "text-[clamp(2.9rem,5.2vw,5.1rem)] leading-[.98] tracking-[-.035em]"}`}>{content.title}</h2>
+            <h2 className={`mt-5 max-w-4xl text-pretty font-display text-[clamp(2.35rem,4vw,4.5rem)] leading-[1.08] font-bold text-copad-deep ${isArabic ? "tracking-normal" : "tracking-[-.035em]"}`}>{content.title}</h2>
             <p className="mt-7 max-w-2xl text-sm leading-7 text-copad-deep/64 sm:text-base sm:leading-8">{content.body}</p>
             <p className="mt-6 max-w-xl border-s border-copad-green/45 ps-4 text-[9px] leading-5 font-bold text-copad-deep/38">{ui.regulators.join(isArabic ? " • " : " · ")}</p>
           </motion.div>

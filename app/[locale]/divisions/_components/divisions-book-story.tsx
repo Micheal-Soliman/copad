@@ -61,8 +61,8 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
         </motion.div>
         <motion.div aria-hidden="true" className="absolute inset-y-[18%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,144,175,.14),transparent_65%)] blur-3xl" style={reduceMotion ? undefined : { x: backgroundX }} />
 
-        <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-4 pt-19 pb-24 sm:px-8 sm:pt-24 sm:pb-20 lg:px-12 lg:pt-24 lg:pb-20">
-          <nav aria-label={ui.bookInstruction} className="shrink-0 pb-4 sm:pb-5">
+        <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-4 pt-19 pb-20 sm:px-8 sm:pt-22 sm:pb-18 lg:px-12 lg:pt-20 lg:pb-18">
+          <nav aria-label={ui.bookInstruction} className="shrink-0 pb-2 sm:pb-3">
             <div className="grid grid-cols-4 gap-1.5 rounded-[1.35rem] border border-copad-deep/10 bg-white/65 p-1.5 shadow-[0_10px_30px_rgba(1,61,96,.06)] backdrop-blur-md sm:gap-2 sm:rounded-full sm:p-2">
               {divisions.map((division, index) => {
                 const selected = index === activeIndex;
@@ -72,10 +72,10 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     type="button"
                     onClick={() => goToDivision(index)}
                     aria-current={selected ? "step" : undefined}
-                    className={`group relative flex min-h-10 items-center justify-center gap-2 overflow-hidden rounded-xl border px-2 py-2 text-[8px] font-black transition-[color,background-color,border-color,transform] duration-500 sm:rounded-full sm:px-4 sm:text-[9px] ${selected ? "border-copad-deep bg-copad-deep text-white shadow-[0_8px_20px_rgba(1,61,96,.16)]" : "border-transparent bg-transparent text-copad-deep/52 hover:-translate-y-0.5 hover:border-copad-sky/65 hover:bg-copad-ice/70 hover:text-copad-deep"}`}
+                    className={`group relative flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-xl border px-2 py-2 text-[9px] leading-tight font-black transition-[color,background-color,border-color,transform] duration-500 sm:rounded-full sm:px-3 sm:text-[10px] lg:px-4 lg:text-[11px] ${selected ? "border-copad-deep bg-copad-deep text-white shadow-[0_8px_20px_rgba(1,61,96,.16)]" : "border-transparent bg-transparent text-copad-deep/72 hover:-translate-y-0.5 hover:border-copad-sky/65 hover:bg-copad-ice/70 hover:text-copad-deep"}`}
                   >
                     <span className={`text-[7px] tracking-[0.12em] transition-colors sm:text-[8px] ${selected ? "text-copad-sky" : "text-copad-green"}`}>0{index + 1}</span>
-                    <span className="hidden truncate sm:block">{division.title}</span>
+                    <span className="hidden text-center sm:block">{division.title}</span>
                     <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 h-0.5 origin-start bg-copad-green transition-transform duration-500 rtl:origin-right ${selected ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
                   </button>
                 );
@@ -86,7 +86,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
             </div>
           </nav>
 
-          <article className="relative mt-3 grid min-h-0 flex-1 overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white shadow-[0_22px_64px_rgba(1,61,96,.12)] sm:mt-4 sm:rounded-[2rem] lg:grid-cols-[1.02fr_.98fr] lg:rounded-[2.4rem]">
+          <article className="relative mt-2 grid min-h-0 flex-1 overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white shadow-[0_22px_64px_rgba(1,61,96,.12)] sm:mt-3 sm:rounded-[2rem] lg:grid-cols-[.92fr_1.08fr] lg:rounded-[2.4rem]">
             <div className="relative min-h-[11rem] overflow-hidden bg-copad-deep sm:min-h-[15rem] lg:min-h-0">
               <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
@@ -129,19 +129,19 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                       x: { duration: reduceMotion ? 0 : 0.68, ease },
                     }}
                     style={{ backfaceVisibility: "hidden" }}
-                    className={`absolute inset-0 flex transform-gpu flex-col justify-center px-5 py-5 will-change-[transform,opacity] sm:px-8 sm:py-7 lg:px-12 lg:py-10 ${selected ? "z-10" : "pointer-events-none z-0"}`}
+                    className={`absolute inset-0 flex transform-gpu flex-col justify-center px-5 py-5 will-change-[transform,opacity] sm:px-8 sm:py-6 lg:px-10 lg:py-6 ${selected ? "z-10" : "pointer-events-none z-0"}`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="size-1.5 rounded-full bg-copad-green" />
                       <p className="text-[8px] font-black tracking-[0.2em] text-copad-green uppercase sm:text-[9px]">{ui.chapterLabel} · {String(index + 1).padStart(2, "0")}</p>
                     </div>
-                    <h2 className={`mt-3 max-w-full text-balance text-copad-deep [overflow-wrap:normal] [word-break:normal] sm:mt-5 ${isArabic ? "font-sans text-[clamp(1.8rem,7.5vw,3rem)] leading-[1.08] font-black tracking-[-0.035em] lg:text-[4rem]" : "font-display text-[clamp(2.1rem,8vw,3.35rem)] leading-[.98] tracking-[-0.045em] lg:text-[clamp(3.2rem,4.2vw,4rem)]"}`}>{division.title}</h2>
-                    <p className="mt-3 max-w-2xl text-[11px] leading-[1.7] text-copad-deep/68 sm:mt-5 sm:text-sm sm:leading-7 lg:text-[15px] lg:leading-8">{division.body}</p>
+                    <h2 className={`mt-3 max-w-[22ch] text-pretty text-copad-deep [overflow-wrap:normal] [word-break:normal] [hyphens:none] sm:mt-5 ${isArabic ? "font-sans text-[clamp(1.9rem,5vw,3.4rem)] leading-[1.1] font-black tracking-[-0.03em]" : "font-display text-[clamp(2.1rem,3.6vw,3.5rem)] leading-[1.06] font-bold tracking-[-0.035em]"}`}>{division.title}</h2>
+                    <p className="mt-3 max-w-2xl text-[11px] leading-[1.7] text-copad-deep/68 sm:mt-4 sm:text-sm sm:leading-7 lg:leading-[1.7rem]">{division.body}</p>
                     {division.cta && division.href && (
                       <Link
                         href={`/${locale}/${division.href}`}
                         tabIndex={selected ? 0 : -1}
-                        className="group mt-5 inline-flex min-h-10 w-fit items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] transition-[color,background-color,border-color,transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep hover:text-white hover:shadow-[0_12px_30px_rgba(1,61,96,.14)] sm:mt-6 sm:min-h-11 sm:px-6 sm:text-xs"
+                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] transition-[color,background-color,border-color,transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep hover:text-white hover:shadow-[0_12px_30px_rgba(1,61,96,.14)] sm:min-h-11 sm:px-6 sm:text-xs"
                       >
                         <span>{division.cta}</span>
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-[1.8]" />

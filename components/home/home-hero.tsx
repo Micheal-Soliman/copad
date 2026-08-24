@@ -49,14 +49,12 @@ export function HomeHero(props: HomeHeroProps) {
   const mediaScale = useTransform(smoothTimelineProgress, [0, 0.34, 1], [1, 1.045, 1.075]);
   const mediaCurtainY = useTransform(smoothTimelineProgress, [0.06, 0.3], ["0%", "-104%"]);
   const mediaLight = useTransform(smoothTimelineProgress, [0, 0.22, 0.42], [0.15, 0.55, 0]);
-  const titleOpacity = useTransform(smoothTimelineProgress, [0, 0.1, 0.25], [1, 1, 0]);
-  const titleY = useTransform(smoothTimelineProgress, [0, 0.25], [0, -54]);
-  const titleRotateX = useTransform(smoothTimelineProgress, [0.08, 0.25], [0, -24]);
-  const secondOpacity = useTransform(smoothTimelineProgress, [0.2, 0.34, 1], [0, 1, 1]);
-  const secondY = useTransform(smoothTimelineProgress, [0.2, 0.34, 1], [42, 0, 0]);
-  const secondRotateX = useTransform(smoothTimelineProgress, [0.2, 0.34, 1], [18, 0, 0]);
-  const buttonOpacity = useTransform(smoothTimelineProgress, [0.28, 0.42, 1], [0, 1, 1]);
-  const buttonY = useTransform(smoothTimelineProgress, [0.28, 0.42, 1], [44, 0, 0]);
+  const titleOpacity = useTransform(smoothTimelineProgress, [0, 0.1, 1], [0.82, 1, 1]);
+  const titleY = useTransform(smoothTimelineProgress, [0, 0.28, 1], [18, 0, -10]);
+  const secondOpacity = useTransform(smoothTimelineProgress, [0, 0.14, 0.3, 1], [0.72, 0.86, 1, 1]);
+  const secondY = useTransform(smoothTimelineProgress, [0, 0.3, 1], [26, 0, -4]);
+  const buttonOpacity = useTransform(smoothTimelineProgress, [0.08, 0.24, 1], [0.55, 1, 1]);
+  const buttonY = useTransform(smoothTimelineProgress, [0.08, 0.24, 1], [24, 0, 0]);
   const sweepX = useTransform(smoothTimelineProgress, [0, 1], ["-38%", "78%"]);
   const handoffScale = useTransform(smoothTimelineProgress, [0.78, 1], [0, 1]);
   const handoffOpacity = useTransform(smoothTimelineProgress, [0.74, 1], [0, 1]);
@@ -143,23 +141,24 @@ export function HomeHero(props: HomeHeroProps) {
           </motion.div>
         </motion.div>
 
-        <div className="relative z-10 mx-auto hidden h-[34rem] w-full max-w-6xl [perspective:1400px] lg:block">
-          <motion.p className="absolute inset-x-0 top-2 text-[10px] font-black tracking-[0.24em] text-copad-green uppercase" style={{ opacity: titleOpacity, y: titleY }}>{props.eyebrow}</motion.p>
+        <div className="relative z-10 mx-auto hidden w-full max-w-6xl lg:flex lg:flex-col lg:items-center lg:justify-center">
+          <motion.p className="text-[10px] font-black tracking-[0.24em] text-copad-green uppercase" style={{ opacity: titleOpacity, y: titleY }}>{props.eyebrow}</motion.p>
 
-          <motion.div initial={reduceMotion ? false : { opacity: 0.45 }} animate={{ opacity: 1 }} transition={{ duration: 0.72, ease }} className="absolute inset-0 flex items-center justify-center">
-            <motion.h1
-              className={`max-w-5xl origin-top px-6 font-display font-bold text-balance [backface-visibility:hidden] ${props.locale === "ar" ? "text-[clamp(3.7rem,5.4vw,5.5rem)] leading-[1.14] tracking-normal" : "text-[clamp(4.1rem,5.8vw,5.9rem)] leading-[1] tracking-[-0.025em]"}`}
-              style={{ opacity: titleOpacity, y: titleY, rotateX: titleRotateX }}
-            >
-              {props.title}
-            </motion.h1>
-          </motion.div>
+          <motion.h1
+            initial={reduceMotion ? false : { opacity: 0.72 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.72, ease }}
+            className={`mt-5 max-w-6xl px-6 font-display font-bold text-balance [backface-visibility:hidden] ${props.locale === "ar" ? "text-[clamp(3.7rem,5.4vw,5.5rem)] leading-[1.14] tracking-normal" : "text-[clamp(4rem,5.6vw,5.75rem)] leading-[.98] tracking-[-0.03em]"}`}
+            style={{ y: titleY }}
+          >
+            {props.title}
+          </motion.h1>
 
-          <motion.div className="absolute inset-0 flex items-center justify-center" style={{ opacity: secondOpacity, y: secondY, rotateX: secondRotateX }}>
-            <h2 className="max-w-5xl text-5xl leading-[1.02] font-bold text-balance text-white drop-shadow-[0_4px_22px_rgba(1,61,96,.45)] xl:text-6xl">{props.subheadline}</h2>
-          </motion.div>
+          <motion.p className="mt-6 max-w-4xl text-2xl leading-[1.18] font-bold text-balance text-white/94 drop-shadow-[0_4px_22px_rgba(1,61,96,.45)] xl:text-3xl" style={{ opacity: secondOpacity, y: secondY }}>
+            {props.subheadline}
+          </motion.p>
 
-          <motion.div className="absolute inset-x-0 bottom-16 flex items-center justify-center gap-4" style={{ opacity: buttonOpacity, y: buttonY }}>
+          <motion.div className="mt-8 flex items-center justify-center gap-4" style={{ opacity: buttonOpacity, y: buttonY }}>
             <HeroButtons primaryHref={primaryHref} secondaryHref={secondaryHref} primary={props.primaryCta} secondary={props.secondaryCta} cursorLabel={ui.interactionLabels.go} />
           </motion.div>
         </div>

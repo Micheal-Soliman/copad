@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { ScrollAtmosphere } from "@/components/motion/scroll-atmosphere";
 import { ScrollImageReveal } from "@/components/motion/scroll-image-reveal";
 import { ScrollSceneItem } from "@/components/motion/scroll-scene-item";
-import { RevealHeading } from "@/components/motion/reveal-heading";
 import { siteCopy } from "@/content/site";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
@@ -39,9 +38,9 @@ export function IntroductionSection({
   const ui = siteCopy[locale].ui.home;
 
   return (
-    <section id="introduction" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative scroll-mt-20 px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
+    <section id="introduction" ref={sectionRef} style={homeScrollSceneStyle(1)} className="relative scroll-mt-20 overflow-clip bg-copad-white px-4 py-14 sm:px-8 sm:pt-16 sm:pb-10 lg:h-[var(--scroll-scene-height)] lg:px-12 lg:py-0">
       <ScrollAtmosphere progress={scrollYProgress} chapter="01" />
-      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:grid-cols-[1.08fr_.92fr] lg:gap-20 lg:pb-16 2xl:gap-24">
+      <div dir="ltr" className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 sm:gap-16 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:min-h-0 lg:overflow-hidden lg:grid-cols-[1.08fr_.92fr] lg:gap-12 lg:py-6 2xl:gap-20">
         <ScrollSceneItem
           progress={scrollYProgress}
           active={isDesktop}
@@ -60,7 +59,7 @@ export function IntroductionSection({
             <span className="absolute inset-2 rounded-[1.1rem] border border-copad-deep/8 sm:inset-3 sm:rounded-[1.45rem]" />
           </motion.div>
           <ScrollImageReveal
-            className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.18)] sm:aspect-[4/5] sm:rounded-[2rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.2)]"
+            className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.18)] sm:aspect-[4/5] sm:rounded-[2rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.2)] lg:h-[min(66svh,35rem)] lg:aspect-auto"
             direction="right"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -86,15 +85,15 @@ export function IntroductionSection({
           className="lg:col-start-1 lg:row-start-1"
         >
           <p className="text-[11px] font-black tracking-[0.2em] text-copad-green uppercase">{eyebrow}</p>
-          <RevealHeading text={title} timeline={isDesktop} className="mt-5 max-w-3xl font-display text-4xl leading-[1.02] tracking-[-0.04em] text-copad-deep sm:text-5xl lg:text-6xl 2xl:text-7xl" />
-          <p className="mt-6 max-w-2xl text-base leading-8 text-copad-deep/72 sm:mt-8 lg:mt-6 2xl:text-lg 2xl:leading-9">{body}</p>
-          {note && <p className="mt-5 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-copad-deep/52">{note}</p>}
+          <h2 className="mt-4 max-w-4xl text-pretty font-display text-[clamp(2.3rem,3.7vw,4.25rem)] leading-[1.06] font-bold tracking-[-0.035em] text-copad-deep">{title}</h2>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-copad-deep/72 sm:mt-7 lg:mt-5 lg:text-[15px] lg:leading-7 2xl:text-lg 2xl:leading-9">{body}</p>
+          {note && <p className="mt-4 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-6 text-copad-deep/52">{note}</p>}
 
           <Link
             data-magnetic
             data-cursor-label={ui.interactionLabels.go}
             href={`/${locale}/about`}
-            className="group relative isolate mt-8 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(1,61,96,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(0,144,175,.24)] sm:mt-9 sm:w-auto"
+            className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(1,61,96,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(0,144,175,.24)] sm:w-auto 2xl:mt-7"
           >
             <span className="absolute inset-0 -z-10 -translate-x-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0 rtl:translate-x-full rtl:group-hover:translate-x-0" />
             <span className="relative">{action}</span>

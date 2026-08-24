@@ -29,13 +29,16 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
   const reduceMotion = useReducedMotion();
   const isDesktop = useDesktopLayout();
   const ui = siteCopy[locale].ui.home;
+  const titleLines = locale === "ar"
+    ? ["أربعة قطاعات ضمن", "هيكل مؤسسي واحد"]
+    : ["Four Divisions, One", "Corporate Structure"];
   return (
     <section id="divisions" className="relative scroll-mt-20 overflow-hidden bg-copad-white px-4 pt-10 pb-16 sm:px-8 sm:pb-20 lg:px-12 lg:pt-12 lg:pb-24">
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
           <div>
             <p className="text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
-            <RevealHeading text={title} className="mt-5 max-w-3xl font-display text-4xl leading-[1] tracking-[-0.045em] text-copad-deep sm:text-5xl lg:text-7xl" />
+            <RevealHeading text={title} lines={titleLines} className="mt-5 max-w-none font-display text-4xl leading-[1.08] font-bold tracking-[-0.035em] text-copad-deep sm:text-5xl lg:text-6xl" />
           </div>
           <p className="max-w-2xl text-base leading-8 text-copad-deep/62 lg:justify-self-end">{body}</p>
         </motion.div>
