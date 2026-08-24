@@ -8,7 +8,7 @@
   --color-copad-sky: #7bcded;
   --color-copad-sand: #e8f5fd;
   --color-copad-white: #f9fcff;
-  --font-sans: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
+  --font-sans: var(--font-tt-norms), var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --font-display: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --animate-spin-slow: spin 8s linear infinite;
 }
@@ -34,6 +34,15 @@
     font-family: var(--font-sans);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
   }
 
   a,

@@ -8,6 +8,15 @@ import { isLocale, localeDirection, locales } from "@/lib/i18n";
 import "lenis/dist/lenis.css";
 import "../globals.css";
 
+const ttNorms = localFont({
+  src: "../../public/TT Norms Pro v3.300/Variable/TTNormsProVariable.ttf",
+  variable: "--font-tt-norms",
+  display: "swap",
+  weight: "100 900",
+  style: "normal",
+  fallback: ["Arial", "Tahoma", "sans-serif"],
+});
+
 const bukra = localFont({
   src: [
     {
@@ -54,7 +63,11 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={locale} dir={localeDirection(locale)} className={bukra.variable}>
+    <html
+      lang={locale}
+      dir={localeDirection(locale)}
+      className={`${ttNorms.variable} ${bukra.variable}`}
+    >
       <body>
         <SmoothScroll />
         <MagneticInteractions />
