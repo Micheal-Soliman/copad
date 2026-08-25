@@ -61,13 +61,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </FooterColumn>
           <FooterColumn title={ui.portfolio}>
             <FooterLink href={`/${locale}/products`}>{copy.nav.products}</FooterLink>
-            <FooterLink href={`/${locale}/manufacturing-quality`}>{copy.nav.manufacturing}</FooterLink>
-            <FooterLink href={`/${locale}/insights`}>{copy.nav.insights}</FooterLink>
+            <FooterLink disabled href={`/${locale}/manufacturing-quality`}>{copy.nav.manufacturing}</FooterLink>
+            <FooterLink disabled href={`/${locale}/insights`}>{copy.nav.insights}</FooterLink>
           </FooterColumn>
           <div className="col-span-2 sm:col-span-1">
             <FooterColumn title={ui.company} compact>
-              <FooterLink href={`/${locale}/partner-with-us`}>{ui.partnership}</FooterLink>
-              <FooterLink href={`/${locale}/careers`}>{ui.careers}</FooterLink>
+              <FooterLink disabled href={`/${locale}/partner-with-us`}>{ui.partnership}</FooterLink>
+              <FooterLink disabled href={`/${locale}/careers`}>{ui.careers}</FooterLink>
               <FooterLink href={`/${locale}/contact`}>{copy.nav.contact}</FooterLink>
             </FooterColumn>
           </div>
@@ -92,9 +92,15 @@ function FooterColumn({ title, children, compact = false }: { title: string; chi
   );
 }
 
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+function FooterLink({ href, children, disabled = false }: { href: string; children: React.ReactNode; disabled?: boolean }) {
+  const className = "group relative inline-flex min-h-7 items-center text-[11px] font-bold text-white/58 transition-colors duration-300 sm:min-h-0 sm:text-sm";
+
+  if (disabled) {
+    return <span aria-disabled="true" className={`${className} cursor-default`}>{children}</span>;
+  }
+
   return (
-    <Link href={href} className="group relative inline-flex min-h-7 items-center text-[11px] font-bold text-white/58 transition-colors duration-300 hover:text-white sm:min-h-0 sm:text-sm">
+    <Link href={href} className={`${className} hover:text-white`}>
       {children}
       <span aria-hidden="true" className="absolute -bottom-1 start-0 h-px w-full origin-start scale-x-0 bg-copad-green transition-transform duration-300 group-hover:scale-x-100" />
     </Link>

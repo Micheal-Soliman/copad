@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { isPreviewOnlyRoute } from "@/lib/preview-only-routes";
 import { homeScrollSceneStyle, scrollSceneIndex, scrollSystem } from "@/lib/motion/scroll-system";
 
 type DivisionsBookStoryProps = {
@@ -113,6 +114,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
               {divisions.map((division, index) => {
                 const selected = index === activeIndex;
                 const restingOffset = (index < activeIndex ? -6 : 6) * (isArabic ? -1 : 1);
+                const previewOnly = division.href ? isPreviewOnlyRoute(division.href) : false;
 
                 return (
                   <motion.div
@@ -138,7 +140,15 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     <h2 className={`mt-3 max-w-[22ch] text-pretty text-copad-deep [overflow-wrap:normal] [word-break:normal] [hyphens:none] sm:mt-5 ${isArabic ? "font-sans text-[clamp(1.9rem,5vw,3.4rem)] leading-[1.1] font-black tracking-[-0.03em]" : "font-display text-[clamp(2.1rem,3.6vw,3.5rem)] leading-[1.06] font-bold tracking-[-0.035em]"}`}>{division.title}</h2>
                     <p className="mt-3 max-w-2xl text-[11px] leading-[1.7] text-copad-deep/68 sm:mt-4 sm:text-sm sm:leading-7 lg:leading-[1.7rem]">{division.body}</p>
                     {division.cta && division.href && (
-                      <Link
+                      previewOnly ? <button
+                        type="button"
+                        aria-disabled="true"
+                        tabIndex={selected ? 0 : -1}
+                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 cursor-default items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] sm:min-h-11 sm:px-6 sm:text-xs"
+                      >
+                        <span>{division.cta}</span>
+                        <span aria-hidden="true" className="size-1.5 rounded-full bg-copad-green" />
+                      </button> : <Link
                         href={`/${locale}/${division.href}`}
                         tabIndex={selected ? 0 : -1}
                         className="group mt-4 inline-flex min-h-10 w-fit shrink-0 items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] transition-[color,background-color,border-color,transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep hover:text-white hover:shadow-[0_12px_30px_rgba(1,61,96,.14)] sm:min-h-11 sm:px-6 sm:text-xs"
@@ -151,8 +161,6 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                 );
               })}
             </div>
-
-            <span aria-hidden="true" className="pointer-events-none absolute inset-y-[8%] start-[51%] hidden w-px bg-copad-deep/10 lg:block" />
           </article>
 
         </div>

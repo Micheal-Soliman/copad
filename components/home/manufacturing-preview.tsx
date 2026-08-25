@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 import { ScrollAtmosphere } from "@/components/motion/scroll-atmosphere";
 import { ScrollImageReveal } from "@/components/motion/scroll-image-reveal";
@@ -104,10 +103,10 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/manufacturing-quality`} className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-60 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,144,175,.22)] sm:w-auto 2xl:mt-7">
+          <button type="button" aria-disabled="true" className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-60 cursor-default items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] sm:w-auto 2xl:mt-7">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
-          </Link>
+          </button>
         </ScrollSceneItem>
       </div>
     </section>

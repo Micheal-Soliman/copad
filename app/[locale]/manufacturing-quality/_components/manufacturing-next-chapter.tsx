@@ -17,6 +17,7 @@ export function ManufacturingNextChapter({ locale }: { locale: Locale }) {
       body={copy.sections.insights.intro}
       href={`/${locale}/insights`}
       label={copy.sections.insights.cta ?? copy.nav.insights}
+      disabled
     />
   );
 }

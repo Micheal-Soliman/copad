@@ -10,7 +10,7 @@ import type { AboutStoryBlock } from "./about-types";
 
 const visualItems = [
   "/images/about/about-microscope.png",
-  "/images/about/about-formulation.png",
+  "/images/about/ChatGPT Image Aug 25, 2026, 01_20_26 PM.png",
   "/images/about/about-laboratory.png",
 ] as const;
 

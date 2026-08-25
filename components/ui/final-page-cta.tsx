@@ -20,6 +20,7 @@ export function FinalPageCta({
   note,
   imageSrc,
   imageAlt = "",
+  disabled = false,
 }: {
   id: string;
   locale: Locale;
@@ -32,6 +33,7 @@ export function FinalPageCta({
   note?: string;
   imageSrc?: string;
   imageAlt?: string;
+  disabled?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
@@ -73,13 +75,13 @@ export function FinalPageCta({
               ) : null}
               {note ? <p className="mt-5 border-s border-copad-green ps-4 text-[9px] leading-5 font-bold text-white/35">{note}</p> : null}
             </div>
-            <FinalCtaLink href={href} className="mt-8 sm:mt-10">{label}</FinalCtaLink>
+            <FinalCtaLink href={href} disabled={disabled} className="mt-8 sm:mt-10">{label}</FinalCtaLink>
           </motion.div>
 
           <motion.div className="relative mx-auto h-[20rem] w-full max-w-[22rem] [perspective:1600px] sm:h-[23rem] lg:h-[23rem]" style={reduceMotion ? undefined : { y: gatewayY, rotateY: gatewayRotate, scale: gatewayScale, opacity: contentOpacity }}>
             <motion.div aria-hidden="true" className="absolute inset-8 translate-x-10 translate-y-8 rounded-[2rem] border border-copad-green/25 bg-copad-green/[.045] rtl:-translate-x-10" animate={reduceMotion ? undefined : { y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} />
             <div aria-hidden="true" className="absolute inset-4 translate-x-5 translate-y-4 rounded-[2rem] border border-white/12 bg-white/[.025] rtl:-translate-x-5" />
-            <Link href={href} aria-label={label} className="group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(1,61,96,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep">
+            <Link href={disabled ? "#" : href} onClick={disabled ? (event) => event.preventDefault() : undefined} aria-disabled={disabled || undefined} aria-label={label} className={`group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(1,61,96,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep ${disabled ? "cursor-default" : ""}`}>
               {imageSrc ? (
                 <>
                   <Image src={imageSrc} alt={imageAlt} fill sizes="(max-width: 1024px) 22rem, 24vw" className="object-cover opacity-70 transition duration-1000 ease-out group-hover/gateway:scale-105 group-hover/gateway:opacity-85" />

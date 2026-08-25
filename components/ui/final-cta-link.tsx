@@ -38,11 +38,13 @@ export function FinalCtaLink({
   children,
   tone = "green",
   className = "",
+  disabled = false,
 }: {
   href: string;
   children: ReactNode;
   tone?: FinalCtaTone;
   className?: string;
+  disabled?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
   const styles = toneStyles[tone];
@@ -55,8 +57,10 @@ export function FinalCtaLink({
       transition={{ type: "spring", stiffness: 330, damping: 23 }}
     >
       <Link
-        href={href}
-        className={`group relative isolate grid min-h-14 w-full min-w-60 grid-cols-[1fr_2.75rem] items-center gap-4 overflow-hidden rounded-full p-px ps-7 text-xs font-black shadow-[0_18px_45px_rgba(4,42,38,.2)] outline-none transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(4,42,38,.3)] focus-visible:ring-2 focus-visible:ring-copad-green focus-visible:ring-offset-4 sm:w-auto ${styles.text}`}
+        href={disabled ? "#" : href}
+        onClick={disabled ? (event) => event.preventDefault() : undefined}
+        aria-disabled={disabled || undefined}
+        className={`group relative isolate grid min-h-14 w-full min-w-60 grid-cols-[1fr_2.75rem] items-center gap-4 overflow-hidden rounded-full p-px ps-7 text-xs font-black shadow-[0_18px_45px_rgba(4,42,38,.2)] outline-none transition-shadow duration-500 focus-visible:ring-2 focus-visible:ring-copad-green focus-visible:ring-offset-4 sm:w-auto ${disabled ? "cursor-default" : "hover:shadow-[0_25px_60px_rgba(4,42,38,.3)]"} ${styles.text}`}
       >
         <span
           aria-hidden="true"
