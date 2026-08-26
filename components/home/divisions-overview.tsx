@@ -78,7 +78,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 1 : 1.08, filter: isActive ? "brightness(1) saturate(1)" : "brightness(.72) saturate(.72)" }}
                     transition={reduceMotion ? { duration: 0 } : { duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "auto 100%", backgroundPosition: `${positions[index]} center` }}
+                    style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "400% auto", backgroundPosition: `${positions[index]} center` }}
                   />
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
