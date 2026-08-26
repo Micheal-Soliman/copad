@@ -21,7 +21,7 @@ export function ManufacturingQualityPageContent({ locale }: { locale: Locale }) 
     <main className="min-h-screen overflow-x-clip bg-copad-white">
       <SiteHeader locale={locale} transparent />
       <ManufacturingHero locale={locale} content={content} />
-      <ManufacturingProcess locale={locale} blocks={content.blocks} cta={content.cta} />
+      <ManufacturingProcess locale={locale} blocks={content.blocks} />
       <ManufacturingNextChapter locale={locale} />
       <HomeSectionNavigator label={isArabic ? "أقسام صفحة التصنيع والجودة" : "Manufacturing and quality page sections"} items={navigation} />
       <SiteFooter locale={locale} />
