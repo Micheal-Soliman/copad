@@ -5,7 +5,6 @@ import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { InsightsHero } from "./insights-hero";
 import { InsightsChannels } from "./insights-channels";
-import { InsightsClosing } from "./insights-closing";
 
 export function InsightsPageContent({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale];
@@ -15,11 +14,9 @@ export function InsightsPageContent({ locale }: { locale: Locale }) {
     <SiteHeader locale={locale} transparent />
     <InsightsHero locale={locale} content={content} />
     <InsightsChannels locale={locale} blocks={content.blocks} />
-    <InsightsClosing locale={locale} />
     <HomeSectionNavigator label={ar ? "أقسام صفحة المعرفة والأخبار" : "Insights page sections"} items={[
       { id: "home", label: ar ? "منظور المعرفة" : "Knowledge Lens" },
       { id: "channels", label: ar ? "المسارات" : "Editorial Streams" },
-      { id: "responsibility", label: ar ? "مبدأ النشر" : "Publishing Principle" },
     ]} />
     <SiteFooter locale={locale} />
   </main>;
