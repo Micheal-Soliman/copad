@@ -19,7 +19,7 @@ export function InsightsPageContent({ locale }: { locale: Locale }) {
     <HomeSectionNavigator label={ar ? "أقسام صفحة المعرفة والأخبار" : "Insights page sections"} items={[
       { id: "home", label: ar ? "منظور المعرفة" : "Knowledge Lens" },
       { id: "channels", label: ar ? "المسارات" : "Editorial Streams" },
-      { id: "responsibility", label: ar ? "المسؤولية" : "Responsibility" },
+      { id: "responsibility", label: ar ? "مبدأ النشر" : "Publishing Principle" },
     ]} />
     <SiteFooter locale={locale} />
   </main>;
