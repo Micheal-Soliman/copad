@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Brand } from "@/components/brand";
 import { siteCopy } from "@/content/site";
 import { otherLocale, type Locale } from "@/lib/i18n";
-import { isPreviewOnlyRoute } from "@/lib/preview-only-routes";
 
 const navItems = [
   ["about", "about"],
@@ -96,9 +95,8 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
         <nav className="absolute start-1/2 hidden -translate-x-1/2 items-center xl:flex rtl:translate-x-1/2" aria-label={accessibility.primaryNavigation}>
           {navItems.map(([key, href]) => {
             const route = `/${locale}/${href}`;
-            const previewOnly = isPreviewOnlyRoute(href);
             const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
-            const className = `group relative px-2 py-3 text-[9px] font-bold whitespace-nowrap transition-colors 2xl:px-3 2xl:text-[10px] ${previewOnly ? "cursor-default" : ""} ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`;
+            const className = `group relative px-2 py-3 text-[9px] font-bold whitespace-nowrap transition-colors 2xl:px-3 2xl:text-[10px] ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`;
             const content = <>
                 {copy.nav[key]}
                 {active && (
@@ -109,11 +107,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
                 {!active && <span className="absolute inset-x-2 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100 2xl:inset-x-3" />}
               </>;
 
-            return previewOnly ? (
-              <span key={key} aria-disabled="true" className={className}>{content}</span>
-            ) : (
-              <Link key={key} href={route} aria-current={active ? "page" : undefined} className={className}>{content}</Link>
-            );
+            return <Link key={key} href={route} aria-current={active ? "page" : undefined} className={className}>{content}</Link>;
           })}
         </nav>
 
@@ -180,7 +174,6 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
               <nav className="absolute inset-x-4 top-[calc(50svh-4.5rem)] mx-auto flex max-h-[calc(100svh-11rem)] w-auto max-w-3xl -translate-y-1/2 flex-col justify-center gap-1 overflow-y-auto overscroll-contain py-2 sm:inset-x-8 sm:top-[calc(50svh-5rem)]" aria-label={accessibility.mobileNavigation}>
                 {navItems.map(([key, href], index) => {
                   const route = `/${locale}/${href}`;
-                  const previewOnly = isPreviewOnlyRoute(href);
                   const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
                   const side = (index % 2 === 0 ? -1 : 1) * (locale === "ar" ? -1 : 1);
 
@@ -192,19 +185,14 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
                       transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.16 + index * 0.055, ease: [0.22, 1, 0.36, 1] }}
                       className="text-center"
                     >
-                      {previewOnly ? <span
-                        aria-disabled="true"
-                        className="group relative flex min-h-12 cursor-default items-center justify-center py-2.5 font-display text-[clamp(1.55rem,7vw,2.5rem)] leading-none tracking-[-0.035em] text-white/78 sm:min-h-16 sm:py-3"
-                      >
-                        {copy.nav[key]}
-                      </span> : <Link
+                      <Link
                         onClick={() => setOpen(false)}
                         href={route}
                         className={`group relative flex min-h-12 items-center justify-center py-2.5 font-display text-[clamp(1.55rem,7vw,2.5rem)] leading-none tracking-[-0.035em] transition-colors duration-300 sm:min-h-16 sm:py-3 ${active ? "text-copad-green" : "text-white/78 hover:text-white"}`}
                       >
                         {copy.nav[key]}
                         <span aria-hidden="true" className={`absolute bottom-0 start-1/2 h-px w-14 -translate-x-1/2 bg-copad-green transition-transform duration-500 rtl:translate-x-1/2 ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-active:scale-x-100"}`} />
-                      </Link>}
+                      </Link>
                     </motion.div>
                   );
                 })}
