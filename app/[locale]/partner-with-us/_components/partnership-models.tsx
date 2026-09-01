@@ -1,86 +1,76 @@
 "use client";
 
-import { motion, type MotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import Link from "next/link";
+import { useRef } from "react";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
 
+const ease = [0.22, 1, 0.36, 1] as const;
 const images = [
-  "/images/copad-partnership-executive.png",
-  "/images/copad-campus-hero.png",
-  "/images/copad-cleanroom.png",
+  "/images/partnerships/distribution-partnerships.png",
+  "/images/partnerships/export-collaboration.png",
+  "/images/partnerships/contract-manufacturing.png",
 ];
+const slugs = ["distribution-partnerships", "export-collaboration", "contract-toll-manufacturing"] as const;
+
+function PartnershipModelRow({ block, index, locale, ar }: { block: ContentBlock; index: number; locale: Locale; ar: boolean }) {
+  const rowRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: rowRef, offset: ["start 94%", "end 18%"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 78, damping: 27, mass: .44 });
+  const imageScale = useTransform(progress, [0, .48, 1], [1.045, 1.015, 1]);
+  const imageY = useTransform(progress, [0, 1], [-24, 24]);
+  const imageClip = useTransform(progress, [0, .42, 1], ["inset(9% 7% 9% 7% round 2rem)", "inset(0% 0% 0% 0% round 0rem)", "inset(0% 0% 0% 0% round 0rem)"]);
+  const copyY = useTransform(progress, [0, .42, 1], [44, 0, -10]);
+  const copyOpacity = useTransform(progress, [0, .24, 1], [.68, 1, 1]);
+  const lineScale = useTransform(progress, [0, .65], [0, 1]);
+  const dark = index !== 1;
+
+  return <motion.article id={`partnership-${index + 1}`} ref={rowRef} className={`relative grid min-h-[42rem] scroll-mt-40 overflow-hidden rounded-[2.25rem] border lg:min-h-[35rem] lg:grid-cols-12 ${dark ? "border-white/10 bg-copad-deep text-white" : "border-copad-deep/10 bg-white text-copad-deep"}`}>
+    <div className={`relative min-h-[19rem] overflow-hidden lg:col-span-7 lg:min-h-full ${index % 2 ? "lg:order-2" : ""}`}>
+      <motion.div className="absolute -inset-y-8 inset-x-0" style={reduceMotion ? undefined : { scale: imageScale, y: imageY, clipPath: imageClip }}>
+        <Image src={images[index]} alt="" fill priority={index === 0} quality={100} className="object-cover" sizes="(min-width:1024px) 58vw, 100vw" />
+      </motion.div>
+      <div className={`absolute inset-0 ${dark ? "bg-linear-to-t from-copad-deep/78 via-transparent to-transparent" : "bg-linear-to-t from-white/28 via-transparent to-transparent"}`} />
+      <div className="absolute start-6 top-6 rounded-full border border-white/30 bg-copad-deep/35 px-4 py-2 text-[8px] font-black uppercase tracking-[.2em] text-white backdrop-blur-md">COPAD / 0{index + 1}</div>
+    </div>
+
+    <motion.div style={reduceMotion ? undefined : { y: copyY, opacity: copyOpacity }} className={`relative flex flex-col justify-between p-7 sm:p-10 lg:col-span-5 lg:p-12 ${index % 2 ? "lg:order-1" : ""}`}>
+      <span aria-hidden="true" className={`absolute end-7 top-3 font-display text-[7rem] leading-none tracking-[-.08em] sm:text-[9rem] ${dark ? "text-white/[.035]" : "text-copad-deep/[.035]"}`}>0{index + 1}</span>
+      <div className="relative">
+        <p className="text-[8px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "نموذج شراكة" : "Partnership model"} · 0{index + 1}</p>
+        <h3 className="mt-6 max-w-[13ch] font-display text-[clamp(2.5rem,4vw,4.5rem)] leading-[.98] tracking-[-.045em]">{block.title}</h3>
+        <p className={`mt-7 max-w-xl text-sm leading-7 sm:text-base sm:leading-8 ${dark ? "text-white/68" : "text-copad-deep/62"}`}>{block.body}</p>
+      </div>
+      <div className="relative mt-10">
+        <div className={`mb-6 h-px ${dark ? "bg-white/14" : "bg-copad-deep/12"}`}><motion.div style={reduceMotion ? { scaleX: 1 } : { scaleX: lineScale }} className="h-full origin-start bg-copad-green rtl:origin-end" /></div>
+        <Link href={`/${locale}/partner-with-us/${slugs[index]}`} className={`group/link inline-flex min-h-12 items-center gap-4 rounded-full border px-6 text-[9px] font-black uppercase tracking-[.14em] transition duration-300 ${dark ? "border-white/22 bg-white/7 hover:border-copad-green hover:bg-copad-green" : "border-copad-deep/14 bg-copad-sand hover:border-copad-green hover:bg-copad-green hover:text-white"}`}>{ar ? "استكشف المسار" : "Explore this route"}<span aria-hidden="true" className="transition-transform group-hover/link:translate-x-1 rtl:rotate-180 rtl:group-hover/link:-translate-x-1">→</span></Link>
+      </div>
+    </motion.div>
+  </motion.article>;
+}
 
 export function PartnershipModels({ locale, blocks }: { locale: Locale; blocks: ContentBlock[] }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [counter, setCounter] = useState(0);
-  const reducedMotion = useReducedMotion();
-  const isArabic = locale === "ar";
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 62, damping: 32, mass: 0.68 });
-  const sceneProgress = useTransform(progress, [0, scrollSystem.scene.completion], [0, 1]);
-  const focusX = useTransform(sceneProgress, [0, .5, 1], isArabic ? ["83.33%", "50%", "16.66%"] : ["16.66%", "50%", "83.33%"]);
-  const overallLine = useTransform(sceneProgress, [0, 1], [0, 1]);
+  const reduceMotion = useReducedMotion();
+  const ar = locale === "ar";
 
-  useMotionValueEvent(sceneProgress, "change", value => {
-    const next = value < 1 / 3 ? 0 : value < 2 / 3 ? 1 : 2;
-    setCounter(current => current === next ? current : next);
-  });
+  return <section id="models" dir={ar ? "rtl" : "ltr"} className="relative overflow-clip bg-copad-sand px-4 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+    <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(123,205,237,.2),transparent_32%)]" />
+    <div className="relative mx-auto max-w-[1440px]">
+      <motion.header whileInView={reduceMotion ? undefined : { y: [14, 0] }} viewport={{ once: true, amount: .35 }} transition={{ duration: .65, ease }} className="grid gap-7 border-b border-copad-deep/12 pb-9 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
+        <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "مجالات الشراكة" : "Partnership areas"}</p><h2 className="mt-4 max-w-[18ch] font-display text-[2.1rem] leading-[1.06] tracking-[-.035em] text-copad-deep sm:text-[clamp(2.7rem,4.4vw,4.55rem)] lg:max-w-none">{ar ? <><span className="block lg:whitespace-nowrap">ثلاثة نماذج للشراكة</span><span className="block lg:whitespace-nowrap">ومسار واضح لكل منها</span></> : <><span className="block lg:whitespace-nowrap">Three partnership models.</span><span className="block lg:whitespace-nowrap">One clear route.</span></>}</h2></div>
+        <p className="max-w-2xl text-sm leading-7 text-copad-deep/60 sm:text-base sm:leading-8 lg:justify-self-end">{ar ? "اختر نموذج التعاون الأقرب لاحتياجك، ثم شارك فريقنا بالتفاصيل المطلوبة من خلال نموذج مخصص." : "Choose the collaboration model that fits your opportunity, then share the right details through its dedicated inquiry form."}</p>
+      </motion.header>
 
-  return <section ref={sectionRef} id="models" style={scrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)] bg-copad-sand">
-    <div className="sticky top-0 h-[100svh] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_105%,rgba(0,144,175,.15),transparent_34%)]" />
-      <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col px-4 pb-20 pt-24 sm:px-8 lg:px-12 lg:pb-24 lg:pt-28">
-        <header className="flex shrink-0 items-end justify-between border-b border-copad-deep/12 pb-4">
-          <div>
-            <p className="text-[8px] font-black uppercase tracking-[.22em] text-copad-green">{isArabic ? "مصفوفة الشراكة" : "Partnership Matrix"}</p>
-            <h2 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-2 text-3xl tracking-[-.045em] text-copad-deep sm:text-5xl`}>
-              {isArabic ? "ثلاث قدرات تعمل ضمن منظومة واحدة" : "Three capabilities in one operating structure"}
-            </h2>
-          </div>
-          <span dir="ltr" className="font-display text-4xl text-copad-deep">0{counter + 1}<small className="text-sm text-copad-deep/25"> / 03</small></span>
-        </header>
+      <nav aria-label={ar ? "انتقل إلى نموذج الشراكة" : "Jump to a partnership model"} className="sticky top-20 z-30 -mx-1 mt-5 flex gap-2 overflow-x-auto rounded-full border border-copad-deep/10 bg-white/78 p-1.5 shadow-[0_14px_35px_rgba(1,61,96,.08)] [scrollbar-width:none] backdrop-blur-xl [&::-webkit-scrollbar]:hidden">
+        {blocks.map((block, index) => <a key={block.title} href={`#partnership-${index + 1}`} className="flex min-h-10 shrink-0 items-center gap-3 rounded-full px-4 text-[9px] font-black uppercase tracking-[.1em] text-copad-deep/58 transition hover:bg-copad-deep hover:text-white"><span className="text-copad-green">0{index + 1}</span>{block.title}</a>)}
+      </nav>
 
-        <div className="relative mt-5 grid min-h-0 flex-1 grid-rows-3 gap-3 lg:grid-cols-3 lg:grid-rows-1">
-          {!reducedMotion && <motion.div aria-hidden="true" className="pointer-events-none absolute -top-3 bottom-0 z-20 hidden w-px bg-copad-green/70 shadow-[0_0_28px_8px_rgba(0,144,175,.18)] lg:block" style={{ left: focusX }} />}
-          {blocks.map((block, index) => <MatrixCard key={block.title} block={block} index={index} progress={sceneProgress} image={images[index]} isArabic={isArabic} reducedMotion={!!reducedMotion} />)}
-        </div>
-
-        <div className="mt-4 h-[3px] shrink-0 overflow-hidden rounded-full bg-copad-deep/10">
-          <motion.span className="block h-full origin-start bg-copad-green shadow-[0_0_15px_rgba(0,144,175,.5)] rtl:origin-right" style={{ scaleX: overallLine }} />
-        </div>
+      <div className="mt-8 space-y-6 lg:mt-10 lg:space-y-8">
+        {blocks.map((block, index) => <PartnershipModelRow key={block.title} block={block} index={index} locale={locale} ar={ar} />)}
       </div>
     </div>
   </section>;
-}
-
-function MatrixCard({ block, index, progress, image, isArabic, reducedMotion }: { block: ContentBlock; index: number; progress: MotionValue<number>; image: string; isArabic: boolean; reducedMotion: boolean }) {
-  const ranges = index === 0 ? [0, .26, .5] : index === 1 ? [0, .22, .5, .78, 1] : [.5, .74, 1];
-  const opacityValues = index === 0 ? [1, 1, .48] : index === 1 ? [.48, .48, 1, .48, .48] : [.48, 1, 1];
-  const scaleValues = index === 0 ? [1, 1, .975] : index === 1 ? [.975, .975, 1, .975, .975] : [.975, 1, 1];
-  const contentValues = index === 0 ? [1, 1, 0] : index === 1 ? [0, 0, 1, 0, 0] : [0, 1, 1];
-  const cardOpacity = useTransform(progress, ranges, opacityValues);
-  const cardScale = useTransform(progress, ranges, scaleValues);
-  const contentOpacity = useTransform(progress, ranges, contentValues);
-  const contentY = useTransform(contentOpacity, [0, 1], [10, 0]);
-  const imageScale = useTransform(contentOpacity, [0, 1], [1.07, 1]);
-
-  return <motion.article style={reducedMotion ? undefined : { opacity: cardOpacity, scale: cardScale }} className="group relative min-h-0 overflow-hidden rounded-[1.7rem] border border-copad-green/35 bg-copad-deep shadow-[0_28px_70px_rgba(1,61,96,.14)]">
-    <motion.div className="absolute inset-0" style={reducedMotion ? undefined : { scale: imageScale }}>
-      <Image src={image} alt="" fill className="object-cover opacity-65" sizes="(min-width:960px) 33vw, 100vw" />
-    </motion.div>
-    <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/55 to-transparent" />
-    <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-7 lg:p-8">
-      <div className="flex items-center justify-between"><span className="text-[8px] font-black uppercase tracking-[.2em] text-copad-green">{isArabic ? "مجال" : "Area"} · 0{index + 1}</span><span className="size-2 rounded-full bg-copad-green shadow-[0_0_16px_rgba(0,144,175,.8)]" /></div>
-      <div className="relative">
-        <h3 className={`${isArabic ? "font-sans font-black leading-[1.08]" : "font-display leading-[.94]"} max-w-full text-[clamp(1.65rem,2.65vw,3rem)] tracking-[-.05em] text-white`}>{block.title}</h3>
-        <motion.div style={reducedMotion ? undefined : { opacity: contentOpacity, y: contentY }} className="mt-5 overflow-hidden">
-          <p className="max-w-3xl text-sm leading-6 text-white/74 sm:text-base sm:leading-7">{block.body}</p>
-          <div className="mt-5 flex items-center gap-4 text-[8px] font-black uppercase tracking-[.18em] text-white/42"><span className="h-px w-16 bg-white/25" />COPAD / {String(index + 1).padStart(2, "0")}</div>
-        </motion.div>
-      </div>
-    </div>
-  </motion.article>;
 }

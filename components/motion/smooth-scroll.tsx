@@ -9,7 +9,7 @@ export function SmoothScroll() {
   const reduceMotion = useReducedMotion();
   const pathname = usePathname();
   const isHomepage = /^\/(en|ar)\/?$/.test(pathname);
-  const isFastEditorialPage = isHomepage || /^\/(en|ar)\/(about|divisions|therapeutic-areas|products|insights)\/?$/.test(pathname);
+  const isFastEditorialPage = isHomepage || /^\/(en|ar)\/(about|divisions|therapeutic-areas|products|insights|partner-with-us(?:\/[^/]+)?)\/?$/.test(pathname);
 
   return (
     <ReactLenis
