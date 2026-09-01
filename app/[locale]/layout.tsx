@@ -65,6 +65,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={localeDirection(locale)}
+      data-scroll-behavior="smooth"
       className={`${ttNorms.variable} ${bukra.variable}`}
     >
       <body>

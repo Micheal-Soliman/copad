@@ -1,39 +1,47 @@
 "use client";
 
-import { motion, type MotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { ArrowRightIcon, BriefcaseIcon, MapPinIcon } from "@phosphor-icons/react";
+import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
-import { scrollSceneStyle, scrollSystem } from "@/lib/motion/scroll-system";
+import { localizeVacancy, type CareerVacancy } from "../career-vacancies";
 
-const englishAreas = ["Manufacturing", "Quality Assurance", "Regulatory Affairs", "Commercial Operations", "Corporate Functions"];
-const arabicAreas = ["التصنيع", "ضمان الجودة", "الشؤون التنظيمية", "العمليات التجارية", "الوظائف المؤسسية"];
+const ease = [0.22, 1, 0.36, 1] as const;
 
-export function TalentSpectrum({ locale, block }: { locale: Locale; block: ContentBlock }) {
-  const ref = useRef<HTMLElement>(null); const reducedMotion = useReducedMotion(); const isArabic = locale === "ar"; const areas = isArabic ? arabicAreas : englishAreas;
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 48, damping: 30, mass: .76 });
-  const sceneProgress = useTransform(progress, [0, scrollSystem.scene.completion], [0, 1]);
-  return <section ref={ref} id="teams" style={scrollSceneStyle(areas.length)} className="relative h-[var(--scroll-scene-height)] bg-copad-sand"><div className="sticky top-0 h-[100svh] overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_110%,rgba(0,144,175,.17),transparent_36%)]" />
-    <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col px-5 pb-20 pt-24 sm:px-8 lg:px-12 lg:pb-24 lg:pt-28">
-      <header className="grid shrink-0 gap-5 border-b border-copad-deep/12 pb-5 lg:grid-cols-[.72fr_1.28fr] lg:items-end"><div><p className="text-[8px] font-black uppercase tracking-[.23em] text-copad-green">{isArabic ? "مجالات العمل" : "Talent Spectrum"}</p><h2 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-2 text-4xl tracking-[-.05em] text-copad-deep sm:text-6xl`}>{block.title}</h2></div><p className="max-w-3xl text-sm leading-7 text-copad-deep/62 sm:text-base sm:leading-8">{block.body}</p></header>
-      <div className="mt-5 grid min-h-0 flex-1 grid-cols-5 gap-2 sm:gap-3">
-        {areas.map((area, index) => <TalentLane key={area} area={area} index={index} progress={sceneProgress} reducedMotion={!!reducedMotion} />)}
+export function TalentSpectrum({ locale, block, vacancies }: { locale: Locale; block: ContentBlock; vacancies: CareerVacancy[] }) {
+  const reducedMotion = useReducedMotion();
+  const isArabic = locale === "ar";
+  const localizedVacancies = vacancies.map((vacancy) => localizeVacancy(vacancy, locale));
+
+  return <section id="vacancies" dir={isArabic ? "rtl" : "ltr"} className="relative scroll-mt-20 overflow-hidden bg-copad-sand px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+    <div aria-hidden="true" className="absolute -end-36 top-24 size-[34rem] rounded-full border border-copad-green/10" />
+    <div className="relative mx-auto max-w-[1320px]">
+      <header className="grid gap-7 border-b border-copad-deep/12 pb-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end lg:gap-20 lg:pb-14">
+        <motion.div initial={reducedMotion ? false : { y: 24, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .72, ease }}>
+          <p className="text-[9px] font-black uppercase tracking-[.23em] text-copad-green">{isArabic ? "الفرص الحالية" : "Current opportunities"}</p>
+          <h2 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-5 max-w-[16ch] text-[clamp(2.6rem,4.2vw,4.6rem)] leading-[1.04] tracking-[-.045em] text-copad-deep`}>{block.title}</h2>
+        </motion.div>
+        <motion.p initial={reducedMotion ? false : { y: 24, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .72, delay: .08, ease }} className="max-w-3xl text-sm leading-7 text-copad-deep/62 sm:text-base sm:leading-8 lg:justify-self-end">{block.body}</motion.p>
+      </header>
+
+      <div className="mt-8 divide-y divide-copad-deep/10 border-y border-copad-deep/10">
+        {localizedVacancies.map((vacancy, index) => <motion.div key={vacancy.id} initial={reducedMotion ? false : { y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: .28 }} transition={{ duration: .66, delay: Math.min(index * .06, .2), ease }}>
+          <Link href={`/${locale}/careers/${vacancy.id}`} className="group grid gap-5 py-7 transition-colors hover:bg-white/55 sm:grid-cols-[4rem_1fr] sm:px-4 sm:py-8 lg:grid-cols-[5rem_1.05fr_.95fr_auto] lg:items-center lg:gap-8 lg:px-6">
+            <span aria-hidden="true" className="font-display text-4xl tracking-[-.05em] text-copad-green/42">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-[.18em] text-copad-green">{vacancy.department}</p>
+              <h3 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-2 max-w-[22ch] text-[clamp(1.65rem,2.4vw,2.55rem)] leading-[1.08] tracking-[-.035em] text-copad-deep`}>{vacancy.title}</h3>
+            </div>
+            <p className="max-w-xl text-sm leading-7 text-copad-deep/58 sm:col-start-2 lg:col-start-auto">{vacancy.summary}</p>
+            <div className="flex flex-wrap items-center gap-3 sm:col-start-2 lg:col-start-auto lg:flex-col lg:items-end">
+              <span className="inline-flex items-center gap-2 rounded-full border border-copad-deep/10 bg-white px-4 py-2 text-[10px] font-black text-copad-deep/68"><MapPinIcon size={14} className="text-copad-green" />{vacancy.location}</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-copad-green/18 bg-copad-green/7 px-4 py-2 text-[10px] font-black text-copad-deep"><BriefcaseIcon size={14} className="text-copad-green" />{vacancy.employmentType}</span>
+              <span className="inline-flex items-center gap-2 text-[10px] font-black text-copad-deep transition-colors group-hover:text-copad-green">{isArabic ? "عرض الوظيفة" : "View position"}<ArrowRightIcon className="transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" /></span>
+            </div>
+          </Link>
+        </motion.div>)}
       </div>
-      <div className="mt-4 flex shrink-0 items-center justify-between text-[8px] font-black uppercase tracking-[.18em] text-copad-deep/38"><span>{isArabic ? "تخصصات متعددة" : "Multidisciplinary by design"}</span><span dir="ltr">01 — 05</span></div>
     </div>
-  </div></section>;
-}
-
-function TalentLane({ area, index, progress, reducedMotion }: { area: string; index: number; progress: MotionValue<number>; reducedMotion: boolean }) {
-  const center = index / 4; const start = Math.max(0, center - .18); const end = Math.min(1, center + .18);
-  const scaleY = useTransform(progress, [start, center, end], [.32, 1, .42]);
-  const opacity = useTransform(progress, [start, center, end], [.35, 1, .5]);
-  const numberY = useTransform(progress, [start, center, end], [40, 0, -30]);
-  return <motion.article style={reducedMotion ? undefined : { scaleY, opacity }} className="relative origin-bottom overflow-hidden rounded-[1.2rem] border border-copad-deep/10 bg-copad-white shadow-[0_22px_55px_rgba(1,61,96,.08)] sm:rounded-[1.7rem]">
-    <div className="absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/88 to-copad-green/75" />
-    <motion.span style={reducedMotion ? undefined : { y: numberY }} className="absolute start-3 top-4 font-display text-5xl text-white/16 sm:start-5 sm:top-6 sm:text-8xl">0{index + 1}</motion.span>
-    <div className="absolute inset-x-3 bottom-4 sm:inset-x-5 sm:bottom-6"><span className="mb-3 block h-px bg-white/24" /><h3 className="break-words text-[10px] leading-4 font-black text-white sm:text-sm sm:leading-5 lg:text-base">{area}</h3></div>
-  </motion.article>;
+  </section>;
 }

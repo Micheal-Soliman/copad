@@ -29,7 +29,7 @@ export function PartnershipHero({ locale, content }: { locale: Locale; content: 
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12">
         <div className="max-w-[47rem]">
           <p className="text-[9px] font-black uppercase tracking-[.26em] text-copad-green">{isArabic ? "نمو يبدأ من التوافق" : "Growth starts with alignment"}</p>
-          <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(3.7rem,13vw,6.4rem)] leading-[.98] tracking-[-.05em] lg:text-[clamp(5.2rem,6.8vw,7.4rem)]">
+          <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(4rem,13vw,6.4rem)] leading-[.99] tracking-[-.05em] lg:text-[clamp(5.6rem,6.8vw,7.2rem)]">
             {isArabic ? <><span className="block">شراكة</span><span className="block">مع كوباد</span></> : <><span className="block">Partner</span><span className="block">With Us</span></>}
           </h1>
           <motion.p className="mt-8 max-w-2xl text-sm leading-7 text-white/76 sm:text-lg sm:leading-9" style={reducedMotion ? undefined : { y: introY }}>{content.intro}</motion.p>

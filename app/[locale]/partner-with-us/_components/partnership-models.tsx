@@ -41,7 +41,7 @@ function PartnershipModelRow({ block, index, locale, ar }: { block: ContentBlock
       <span aria-hidden="true" className={`absolute end-7 top-3 font-display text-[7rem] leading-none tracking-[-.08em] sm:text-[9rem] ${dark ? "text-white/[.035]" : "text-copad-deep/[.035]"}`}>0{index + 1}</span>
       <div className="relative">
         <p className="text-[8px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "نموذج شراكة" : "Partnership model"} · 0{index + 1}</p>
-        <h3 className="mt-6 max-w-[13ch] font-display text-[clamp(2.5rem,4vw,4.5rem)] leading-[.98] tracking-[-.045em]">{block.title}</h3>
+        <h3 className="mt-6 max-w-[16ch] font-display text-[clamp(2.65rem,3.8vw,4.35rem)] leading-[1.02] tracking-[-.045em]">{block.title}</h3>
         <p className={`mt-7 max-w-xl text-sm leading-7 sm:text-base sm:leading-8 ${dark ? "text-white/68" : "text-copad-deep/62"}`}>{block.body}</p>
       </div>
       <div className="relative mt-10">
@@ -60,7 +60,7 @@ export function PartnershipModels({ locale, blocks }: { locale: Locale; blocks: 
     <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(123,205,237,.2),transparent_32%)]" />
     <div className="relative mx-auto max-w-[1440px]">
       <motion.header whileInView={reduceMotion ? undefined : { y: [14, 0] }} viewport={{ once: true, amount: .35 }} transition={{ duration: .65, ease }} className="grid gap-7 border-b border-copad-deep/12 pb-9 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
-        <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "مجالات الشراكة" : "Partnership areas"}</p><h2 className="mt-4 max-w-[18ch] font-display text-[2.1rem] leading-[1.06] tracking-[-.035em] text-copad-deep sm:text-[clamp(2.7rem,4.4vw,4.55rem)] lg:max-w-none">{ar ? <><span className="block lg:whitespace-nowrap">ثلاثة نماذج للشراكة</span><span className="block lg:whitespace-nowrap">ومسار واضح لكل منها</span></> : <><span className="block lg:whitespace-nowrap">Three partnership models.</span><span className="block lg:whitespace-nowrap">One clear route.</span></>}</h2></div>
+        <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "مجالات الشراكة" : "Partnership areas"}</p><h2 className="mt-4 max-w-[19ch] font-display text-[2.4rem] leading-[1.05] tracking-[-.04em] text-copad-deep sm:text-[clamp(3rem,4.5vw,4.8rem)]">{ar ? <><span className="block">ثلاثة نماذج للشراكة</span><span className="block">ومسار واضح لكل منها</span></> : <><span className="block">Three partnership models.</span><span className="block">One clear route.</span></>}</h2></div>
         <p className="max-w-2xl text-sm leading-7 text-copad-deep/60 sm:text-base sm:leading-8 lg:justify-self-end">{ar ? "اختر نموذج التعاون الأقرب لاحتياجك، ثم شارك فريقنا بالتفاصيل المطلوبة من خلال نموذج مخصص." : "Choose the collaboration model that fits your opportunity, then share the right details through its dedicated inquiry form."}</p>
       </motion.header>
 

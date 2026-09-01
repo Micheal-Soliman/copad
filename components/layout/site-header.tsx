@@ -103,7 +103,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
                 {copy.nav[key]}
                 {active && (
                   <motion.span layoutId="primary-nav-active" className="absolute inset-x-2 bottom-1 h-[3px] overflow-hidden rounded-full bg-copad-green shadow-[0_0_13px_rgba(0,144,175,.78)] 2xl:inset-x-3" transition={{ type: "spring", stiffness: 360, damping: 32 }}>
-                    {!reduceMotion && <motion.span className="absolute inset-y-0 w-1/3 bg-linear-to-r from-transparent via-white/90 to-transparent" animate={{ x: ["-130%", "380%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.45 }} />}
+                    <motion.span className="absolute inset-y-0 w-1/3 bg-linear-to-r from-transparent via-white/90 to-transparent" animate={reduceMotion ? undefined : { x: ["-130%", "380%"] }} transition={{ duration: 1.7, repeat: Infinity, ease: "linear", repeatDelay: 0.45 }} />
                   </motion.span>
                 )}
                 {!active && <span className="absolute inset-x-2 bottom-1 h-[2px] origin-start scale-x-0 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-x-100 2xl:inset-x-3" />}
