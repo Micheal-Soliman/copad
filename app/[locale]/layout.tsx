@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
-import { InteractiveCursor } from "@/components/motion/interactive-cursor";
 import { MagneticInteractions } from "@/components/motion/magnetic-interactions";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { isLocale, localeDirection, locales } from "@/lib/i18n";
@@ -72,7 +71,6 @@ export default async function LocaleLayout({
         <SmoothScroll />
         <MagneticInteractions />
         {children}
-        <InteractiveCursor />
       </body>
     </html>
   );

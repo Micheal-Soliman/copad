@@ -72,16 +72,6 @@
     transition-timing-function: cubic-bezier(.22, 1, .36, 1);
     will-change: translate;
   }
-
-  body.copad-custom-cursor,
-  body.copad-custom-cursor a,
-  body.copad-custom-cursor button,
-  body.copad-custom-cursor input,
-  body.copad-custom-cursor textarea,
-  body.copad-custom-cursor select,
-  body.copad-custom-cursor [role="button"] {
-    cursor: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
