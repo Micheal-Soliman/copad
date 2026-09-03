@@ -87,7 +87,7 @@ export function ScrollImageReveal({ children, className = "", direction = "right
           style={timeline ? { clipPath: timelineCurtainClip } : undefined}
         >
           <motion.span
-            className={`absolute inset-y-0 w-px bg-copad-green shadow-[0_0_24px_8px_rgba(0,144,175,.46)] ${direction === "right" ? "start-0" : "end-0"}`}
+            className={`absolute inset-y-0 w-px bg-copad-green shadow-[0_0_24px_8px_rgba(0,163,196,.46)] ${direction === "right" ? "start-0" : "end-0"}`}
             style={{ opacity: glowOpacity }}
           />
           <span className="absolute top-1/2 -end-8 h-px w-16 bg-linear-to-r from-transparent via-copad-green to-transparent" />
@@ -97,7 +97,7 @@ export function ScrollImageReveal({ children, className = "", direction = "right
       {!reduceMotion && (
         <motion.span
           aria-hidden="true"
-          className="pointer-events-none absolute -inset-[18%] z-20 bg-[radial-gradient(circle,rgba(255,255,255,.24),rgba(0,144,175,.09)_24%,transparent_58%)] mix-blend-soft-light"
+          className="pointer-events-none absolute -inset-[18%] z-20 bg-[radial-gradient(circle,rgba(255,255,255,.24),rgba(0,163,196,.09)_24%,transparent_58%)] mix-blend-soft-light"
           style={{ x: depthLightX, y: depthLightY }}
         />
       )}
@@ -105,7 +105,7 @@ export function ScrollImageReveal({ children, className = "", direction = "right
       {!reduceMotion && (
         <motion.span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-[8%] z-30 h-px bg-linear-to-r from-transparent via-white/80 to-transparent shadow-[0_0_18px_3px_rgba(0,144,175,.3)]"
+          className="pointer-events-none absolute inset-x-[8%] z-30 h-px bg-linear-to-r from-transparent via-white/80 to-transparent shadow-[0_0_18px_3px_rgba(0,163,196,.3)]"
           style={{ top: scanPosition, opacity: scanOpacity }}
         />
       )}

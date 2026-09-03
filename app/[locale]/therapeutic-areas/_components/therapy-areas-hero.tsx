@@ -29,14 +29,14 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
   return (
     <section id="home" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(0,144,175,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(232,245,253,.07),transparent_28%),linear-gradient(132deg,#013d60_0%,#013d60_56%,#013d60_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(0,163,196,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(232,245,253,.07),transparent_28%),linear-gradient(132deg,#064f78_0%,#064f78_56%,#064f78_100%)]" />
         <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[36vw] bg-linear-to-r from-transparent via-copad-green/[.06] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-45vw", "120vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-20 h-1/2 bg-linear-to-t from-black/18 to-transparent" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-9 px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.82fr_1.18fr] lg:gap-12 lg:px-12 lg:pt-[5.75rem] lg:pb-4">
           <motion.div className="relative z-20" style={scrollDriven ? { y: copyY } : undefined}>
             <motion.div initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3">
-              <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.8)]" />
+              <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.8)]" />
               <p className="text-[9px] font-black tracking-[.22em] text-copad-green uppercase sm:text-[10px]">{ui.heroKicker}</p>
             </motion.div>
 
@@ -69,7 +69,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
             >
               <motion.div className="relative h-[41%] overflow-hidden bg-copad-deep sm:h-[46%]">
                 <motion.div aria-hidden="true" className="absolute inset-0 bg-[url('/images/copad-divisions-atlas.png')] bg-[length:auto_100%] bg-left bg-no-repeat" style={scrollDriven ? { scale: photoScale } : undefined} />
-                <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,61,96,.72),rgba(1,61,96,.08)_58%,rgba(1,61,96,.2)),linear-gradient(0deg,rgba(1,61,96,.5),transparent_55%)]" />
+                <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,79,120,.72),rgba(6,79,120,.08)_58%,rgba(6,79,120,.2)),linear-gradient(0deg,rgba(6,79,120,.5),transparent_55%)]" />
                 <div className="absolute inset-x-5 top-5 flex items-center justify-between sm:inset-x-7 sm:top-7">
                   <span className="rounded-full border border-white/24 bg-copad-deep/45 px-3 py-2 text-[8px] font-black tracking-[.2em] text-white/78 uppercase backdrop-blur-md">COPAD / Clinical portfolio</span>
                   <span className="font-display text-5xl leading-none text-white/90 sm:text-6xl">09</span>

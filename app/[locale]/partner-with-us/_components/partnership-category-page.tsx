@@ -53,7 +53,7 @@ export function PartnershipCategoryPage({ locale, slug }: { locale: Locale; slug
     <SiteHeader locale={locale} transparent />
 
     <section ref={heroRef} className="relative overflow-hidden bg-copad-deep px-4 pb-5 pt-24 text-white sm:px-8 lg:px-12 lg:pb-8">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(0,144,175,.18),transparent_34%)] rtl:bg-[radial-gradient(circle_at_85%_10%,rgba(0,144,175,.18),transparent_34%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(0,163,196,.18),transparent_34%)] rtl:bg-[radial-gradient(circle_at_85%_10%,rgba(0,163,196,.18),transparent_34%)]" />
       <div dir={ar ? "rtl" : "ltr"} className="relative mx-auto grid min-h-[calc(100svh-7rem)] max-w-[1440px] overflow-hidden rounded-[2.25rem] border border-white/12 lg:grid-cols-2">
         <motion.div style={reduceMotion ? undefined : { y: copyY, opacity: copyOpacity }} className="relative order-2 flex flex-col justify-end p-7 sm:p-10 lg:order-1 lg:p-14">
           <span aria-hidden="true" className="absolute end-7 top-5 font-display text-[8rem] leading-none text-white/[.035] sm:text-[11rem]">{routeNumber}</span>
@@ -74,7 +74,7 @@ export function PartnershipCategoryPage({ locale, slug }: { locale: Locale; slug
     </section>
 
     <section id="pathway" ref={pathwayRef} dir={ar ? "rtl" : "ltr"} className="relative bg-copad-deep px-4 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,144,175,.14),transparent_34%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,163,196,.14),transparent_34%)]" />
       <div aria-hidden="true" className="absolute inset-y-0 end-5 hidden w-px bg-white/10 lg:block"><motion.div style={reduceMotion ? { scaleY: 1 } : { scaleY: pathwayLine }} className="h-full origin-top bg-copad-green" /></div>
       <div className="relative mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
         <div className="self-start lg:sticky lg:top-28">

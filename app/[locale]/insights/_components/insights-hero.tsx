@@ -25,14 +25,14 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
 
   return <section ref={sectionRef} id="home" style={homeScrollSceneStyle(4)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_35%,rgba(0,144,175,.18),transparent_31%),radial-gradient(circle_at_16%_88%,rgba(123,205,237,.07),transparent_26%),linear-gradient(125deg,#013d60,#013d60)]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_35%,rgba(0,163,196,.18),transparent_31%),radial-gradient(circle_at_16%_88%,rgba(142,220,245,.07),transparent_26%),linear-gradient(125deg,#064f78,#064f78)]" />
       <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[34vw] bg-linear-to-r from-transparent via-copad-green/[.065] to-transparent blur-3xl" animate={reduceMotion ? undefined : { x: ["-38vw", "120vw"] }} transition={{ duration: 11, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
       <div aria-hidden="true" className="absolute inset-y-0 start-[48%] hidden w-px bg-white/[.05] lg:block" />
 
       <div dir={ar ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-7 px-4 pt-24 pb-12 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.66fr_1.34fr] lg:gap-7 lg:px-12 lg:pt-[5.8rem] lg:pb-7">
         <motion.div className="relative z-20 max-w-xl" style={scrollDriven ? { opacity: introOpacity, x: introX } : undefined}>
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.08, ease }} className="flex items-center gap-3">
-            <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.85)]" />
+            <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.85)]" />
             <p className="text-[9px] font-black tracking-[.24em] text-copad-green uppercase">{ar ? "مكتبة كوباد الطبية" : "The COPAD Medical Library"}</p>
           </motion.div>
           <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.12, ease }} className="mt-5 font-display text-[clamp(3.75rem,15vw,6.25rem)] leading-[.95] tracking-[-.05em] lg:text-[clamp(4.75rem,6.5vw,6.8rem)]">{content.title}</motion.h1>

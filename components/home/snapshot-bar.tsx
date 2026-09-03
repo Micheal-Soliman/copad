@@ -36,14 +36,14 @@ export function SnapshotBar({ locale, intro, sectionId = "snapshot", homepage = 
           <p className="text-sm leading-7 text-pretty text-copad-deep/64 sm:text-base sm:leading-8 lg:text-lg lg:leading-9">{intro}</p>
         </motion.div>
 
-        <div className="relative hidden overflow-hidden rounded-[2rem] border border-copad-deep/10 bg-white/88 px-8 py-10 shadow-[0_24px_70px_rgba(1,61,96,.08)] backdrop-blur-sm lg:block">
-          <div aria-hidden="true" className="absolute inset-x-8 top-10 h-px bg-copad-deep/10"><motion.span className="block h-full origin-left bg-copad-green shadow-[0_0_14px_rgba(0,144,175,.28)] rtl:origin-right" style={reduceMotion ? { scaleX: 1 } : { scaleX: trackScale }} /></div>
+        <div className="relative hidden overflow-hidden rounded-[2rem] border border-copad-deep/10 bg-white/88 px-8 py-10 shadow-[0_24px_70px_rgba(6,79,120,.08)] backdrop-blur-sm lg:block">
+          <div aria-hidden="true" className="absolute inset-x-8 top-10 h-px bg-copad-deep/10"><motion.span className="block h-full origin-left bg-copad-green shadow-[0_0_14px_rgba(0,163,196,.28)] rtl:origin-right" style={reduceMotion ? { scaleX: 1 } : { scaleX: trackScale }} /></div>
           <ol className="grid grid-cols-5">
             {data.map((entry, index) => {
               const active = Boolean(reduceMotion) || index < activeStage;
               return (
                 <motion.li key={entry} initial={false} animate={{ opacity: active ? 1 : 0.2, y: active ? 0 : 8 }} transition={{ duration: 0.66, ease: [0.22, 1, 0.36, 1] }} className="group relative min-h-48 border-s border-copad-deep/8 px-6 pt-9 first:border-s-0">
-                  <span aria-hidden="true" className={`absolute top-[1px] start-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-copad-white transition-all duration-500 rtl:translate-x-1/2 ${active ? "bg-copad-green shadow-[0_0_0_5px_rgba(0,144,175,.12)]" : "bg-copad-deep/18"}`} />
+                  <span aria-hidden="true" className={`absolute top-[1px] start-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-copad-white transition-all duration-500 rtl:translate-x-1/2 ${active ? "bg-copad-green shadow-[0_0_0_5px_rgba(0,163,196,.12)]" : "bg-copad-deep/18"}`} />
                   <span className="text-[9px] font-black tracking-[0.2em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
                   <p className="mt-5 max-w-52 text-sm leading-6 font-bold text-copad-deep/72 transition-colors duration-300 group-hover:text-copad-deep xl:text-[15px] xl:leading-7">{entry}</p>
                 </motion.li>

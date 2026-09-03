@@ -28,8 +28,8 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
   return (
     <section id="connect" className="relative scroll-mt-20 overflow-clip bg-copad-sand/38 px-4 py-16 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
       <div>
-        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.9, ease }} className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(1,61,96,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(1,61,96,.16)] lg:h-[clamp(32rem,72vh,38rem)] lg:flex-row">
-          <motion.span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[2px] origin-left bg-linear-to-r from-copad-green via-copad-sky to-copad-green/45 shadow-[0_0_14px_rgba(0,144,175,.28)] rtl:origin-right" initial={reduceMotion ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, amount: 0.45 }} transition={{ duration: 1.1, ease }} />
+        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.985 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.9, ease }} className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[2rem] bg-copad-deep shadow-[0_26px_70px_rgba(6,79,120,.14)] sm:rounded-[3rem] sm:shadow-[0_34px_100px_rgba(6,79,120,.16)] lg:h-[clamp(32rem,72vh,38rem)] lg:flex-row">
+          <motion.span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[2px] origin-left bg-linear-to-r from-copad-green via-copad-sky to-copad-green/45 shadow-[0_0_14px_rgba(0,163,196,.28)] rtl:origin-right" initial={reduceMotion ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, amount: 0.45 }} transition={{ duration: 1.1, ease }} />
           {cards.map((card, index) => {
             const isActive = active === index;
             const dark = index === 0;
@@ -49,7 +49,7 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
                     <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out lg:grid-rows-[1fr] lg:opacity-100 ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                       <div className="overflow-hidden">
                         <p className={`mt-4 max-w-xl text-sm leading-7 ${dark ? "text-white/64" : "text-copad-deep/62"}`}>{card.body}</p>
-                        <button type="button" aria-disabled="true" className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 cursor-default items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(1,61,96,.16)] sm:w-auto ${dark ? "bg-white text-copad-deep" : "bg-copad-deep text-white"}`}>
+                        <button type="button" aria-disabled="true" className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 cursor-default items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(6,79,120,.16)] sm:w-auto ${dark ? "bg-white text-copad-deep" : "bg-copad-deep text-white"}`}>
                           <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/button:scale-y-100" />
                           <span>{card.action}</span>
                         </button>

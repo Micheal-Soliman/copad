@@ -41,8 +41,8 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
             className="object-cover object-center"
           />
         </motion.div>
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(1,61,96,.55),rgba(1,61,96,.84)),linear-gradient(90deg,rgba(1,61,96,.92),transparent_50%,rgba(1,61,96,.5))]" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,rgba(123,205,237,.08)_0%,rgba(1,61,96,.2)_46%,rgba(1,61,96,.68)_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(6,79,120,.55),rgba(6,79,120,.84)),linear-gradient(90deg,rgba(6,79,120,.92),transparent_50%,rgba(6,79,120,.5))]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,rgba(142,220,245,.08)_0%,rgba(6,79,120,.2)_46%,rgba(6,79,120,.68)_100%)]" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-center px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:px-12 lg:pt-24">
           <motion.div

@@ -212,7 +212,7 @@ function MobileTimelineCard({
   return (
     <motion.article
       style={{ y, scale, zIndex: index + 1 }}
-      className={`absolute inset-x-0 top-[10svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_24px_62px_rgba(1,61,96,.18)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
+      className={`absolute inset-x-0 top-[10svh] flex h-[48svh] min-h-[17rem] max-h-[24rem] transform-gpu flex-col overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_24px_62px_rgba(6,79,120,.18)] will-change-transform [backface-visibility:hidden] sm:rounded-[2rem] sm:p-7 ${
         tone === 0
           ? "border-white/12 bg-copad-deep text-white"
           : tone === 1

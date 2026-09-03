@@ -49,7 +49,7 @@ export function FinalPageCta({
   return (
     <section ref={sectionRef} id={id} dir={isArabic ? "rtl" : "ltr"} className="relative flex min-h-svh scroll-mt-20 items-center overflow-hidden border-t border-copad-green/25 bg-copad-deep px-4 py-20 text-white sm:px-8 lg:px-12 lg:pt-16 lg:pb-28">
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(0,144,175,.19),transparent_28%),linear-gradient(115deg,rgba(255,255,255,.025),transparent_45%)] rtl:bg-[radial-gradient(circle_at_22%_42%,rgba(0,144,175,.19),transparent_28%),linear-gradient(245deg,rgba(255,255,255,.025),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(0,163,196,.19),transparent_28%),linear-gradient(115deg,rgba(255,255,255,.025),transparent_45%)] rtl:bg-[radial-gradient(circle_at_22%_42%,rgba(0,163,196,.19),transparent_28%),linear-gradient(245deg,rgba(255,255,255,.025),transparent_45%)]" />
         <motion.div className="absolute -bottom-[18vw] -start-[8vw] size-[44vw] rounded-full border border-copad-green/12" style={reduceMotion ? undefined : { scale: gatewayScale }} />
         <p className="absolute -bottom-[.17em] end-[-.04em] font-display text-[22vw] leading-none tracking-[-.09em] text-white/[.024]">NEXT</p>
       </div>
@@ -81,7 +81,7 @@ export function FinalPageCta({
           <motion.div className="relative mx-auto h-[20rem] w-full max-w-[22rem] [perspective:1600px] sm:h-[23rem] lg:h-[23rem]" style={reduceMotion ? undefined : { y: gatewayY, rotateY: gatewayRotate, scale: gatewayScale, opacity: contentOpacity }}>
             <motion.div aria-hidden="true" className="absolute inset-8 translate-x-10 translate-y-8 rounded-[2rem] border border-copad-green/25 bg-copad-green/[.045] rtl:-translate-x-10" animate={reduceMotion ? undefined : { y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} />
             <div aria-hidden="true" className="absolute inset-4 translate-x-5 translate-y-4 rounded-[2rem] border border-white/12 bg-white/[.025] rtl:-translate-x-5" />
-            <Link href={disabled ? "#" : href} onClick={disabled ? (event) => event.preventDefault() : undefined} aria-disabled={disabled || undefined} aria-label={label} className={`group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(1,61,96,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep ${disabled ? "cursor-default" : ""}`}>
+            <Link href={disabled ? "#" : href} onClick={disabled ? (event) => event.preventDefault() : undefined} aria-disabled={disabled || undefined} aria-label={label} className={`group/gateway absolute inset-0 isolate overflow-hidden rounded-[2rem] border border-white/15 bg-copad-green shadow-[0_45px_90px_rgba(6,79,120,.42)] outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-copad-deep ${disabled ? "cursor-default" : ""}`}>
               {imageSrc ? (
                 <>
                   <Image src={imageSrc} alt={imageAlt} fill sizes="(max-width: 1024px) 22rem, 24vw" className="object-cover opacity-70 transition duration-1000 ease-out group-hover/gateway:scale-105 group-hover/gateway:opacity-85" />
@@ -100,7 +100,7 @@ export function FinalPageCta({
                 </div>
               </div>
 
-              <div aria-hidden="true" className="absolute inset-0 origin-left bg-[#013d60] p-8 shadow-[20px_0_50px_rgba(1,61,96,.3)] transition-transform duration-1000 ease-[cubic-bezier(.22,1,.36,1)] [backface-visibility:hidden] [transform-style:preserve-3d] group-hover/gateway:[transform:perspective(1200px)_rotateY(-72deg)] group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(-72deg)] rtl:origin-right rtl:group-hover/gateway:[transform:perspective(1200px)_rotateY(72deg)] rtl:group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(72deg)]">
+              <div aria-hidden="true" className="absolute inset-0 origin-left bg-[#064f78] p-8 shadow-[20px_0_50px_rgba(6,79,120,.3)] transition-transform duration-1000 ease-[cubic-bezier(.22,1,.36,1)] [backface-visibility:hidden] [transform-style:preserve-3d] group-hover/gateway:[transform:perspective(1200px)_rotateY(-72deg)] group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(-72deg)] rtl:origin-right rtl:group-hover/gateway:[transform:perspective(1200px)_rotateY(72deg)] rtl:group-focus-visible/gateway:[transform:perspective(1200px)_rotateY(72deg)]">
                 <div className="flex h-full flex-col justify-between border border-white/10 p-6">
                   <div className="flex items-center justify-between">
                     <span className="text-[8px] font-black tracking-[.25em] text-copad-green uppercase">{isArabic ? "الوجهة التالية" : "Next destination"}</span>

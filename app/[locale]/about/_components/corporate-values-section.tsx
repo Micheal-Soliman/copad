@@ -25,7 +25,7 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
   return (
     <section ref={sectionRef} id="values" dir={isArabic ? "rtl" : "ltr"} style={editorialScrollSceneStyle(2)} className="relative scroll-mt-20 bg-copad-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-20">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_24%,rgba(123,205,237,.2),transparent_28%),linear-gradient(180deg,rgba(232,245,253,.48),transparent_55%)] rtl:bg-[radial-gradient(circle_at_18%_24%,rgba(123,205,237,.2),transparent_28%),linear-gradient(180deg,rgba(232,245,253,.48),transparent_55%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_24%,rgba(142,220,245,.2),transparent_28%),linear-gradient(180deg,rgba(232,245,253,.48),transparent_55%)] rtl:bg-[radial-gradient(circle_at_18%_24%,rgba(142,220,245,.2),transparent_28%),linear-gradient(180deg,rgba(232,245,253,.48),transparent_55%)]" />
         <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-12 lg:grid-cols-[.92fr_1.08fr] lg:gap-20">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.valuesEyebrow}</p>
@@ -34,7 +34,7 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
             <p className="mt-6 max-w-xl border-s border-copad-green/45 ps-4 text-[9px] leading-5 font-bold text-copad-deep/38">{ui.regulators.join(isArabic ? " • " : " · ")}</p>
           </motion.div>
 
-          <ol className="relative overflow-hidden rounded-[1.8rem] border border-copad-deep/10 bg-copad-sand/48 shadow-[0_22px_55px_rgba(1,61,96,.07)]">
+          <ol className="relative overflow-hidden rounded-[1.8rem] border border-copad-deep/10 bg-copad-sand/48 shadow-[0_22px_55px_rgba(6,79,120,.07)]">
             {ui.principles.map((principle, index) => {
               const active = reduceMotion || index <= activeStage;
               const current = index === activeStage;

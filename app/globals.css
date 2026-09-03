@@ -3,11 +3,12 @@
 @theme {
   /* COPAD brand palette — edit these tokens to update the full experience. */
   --breakpoint-lg: 60rem;
-  --color-copad-deep: #013d60;
-  --color-copad-green: #0090af;
-  --color-copad-sky: #7bcded;
-  --color-copad-sand: #e8f5fd;
-  --color-copad-white: #f9fcff;
+  --color-copad-deep: #064f78;
+  --color-copad-green: #00a3c4;
+  --color-copad-sky: #8edcf5;
+  --color-copad-red: #e43d48;
+  --color-copad-sand: #eef9ff;
+  --color-copad-white: #ffffff;
   --font-sans: var(--font-tt-norms), var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --font-display: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --animate-spin-slow: spin 8s linear infinite;
@@ -54,7 +55,7 @@
   }
 
   ::selection {
-    background: var(--color-copad-green);
+    background: var(--color-copad-red);
     color: white;
   }
 
@@ -82,15 +83,15 @@
 
 @keyframes copad-header-scroll {
   from {
-    background-color: rgb(1 61 96 / 0%);
+    background-color: rgb(6 79 120 / 0%);
     border-color: rgb(255 255 255 / 10%);
-    box-shadow: 0 0 0 rgb(1 61 96 / 0%);
+    box-shadow: 0 0 0 rgb(6 79 120 / 0%);
   }
 
   to {
-    background-color: rgb(1 61 96 / 96%);
+    background-color: rgb(6 79 120 / 96%);
     border-color: rgb(255 255 255 / 14%);
-    box-shadow: 0 14px 38px rgb(1 61 96 / 18%);
+    box-shadow: 0 14px 38px rgb(6 79 120 / 18%);
   }
 }
 

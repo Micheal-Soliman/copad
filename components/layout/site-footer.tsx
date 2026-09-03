@@ -15,8 +15,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <footer className="relative overflow-hidden border-t border-copad-green/35 bg-copad-deep px-4 pt-8 pb-5 text-white sm:px-8 sm:pt-12 sm:pb-7 lg:px-12 lg:pt-14">
-      <div aria-hidden="true" className="absolute top-0 end-0 h-px w-1/3 bg-linear-to-l from-copad-green via-copad-green/40 to-transparent" />
+    <footer className="relative overflow-hidden border-t border-copad-red/45 bg-copad-deep px-4 pt-8 pb-5 text-white sm:px-8 sm:pt-12 sm:pb-7 lg:px-12 lg:pt-14">
+      <div aria-hidden="true" className="absolute top-0 end-0 h-[2px] w-1/2 bg-linear-to-l from-copad-red via-copad-green/70 to-transparent" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <Image src="/logo.png" alt="" width={4500} height={4500} unoptimized className="absolute top-1/2 left-1/2 h-[clamp(28rem,62vw,54rem)] w-[clamp(28rem,62vw,54rem)] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain brightness-0 invert opacity-[.025]" />
         <motion.span
@@ -45,7 +45,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className="group flex size-10 items-center justify-center rounded-full border border-white/18 text-[10px] font-black text-white/62 transition duration-300 hover:-translate-y-0.5 hover:border-copad-green hover:bg-copad-green hover:text-white sm:size-9 sm:text-[11px]"
+                className="group flex size-10 items-center justify-center rounded-full border border-white/18 text-[10px] font-black text-white/62 transition duration-300 hover:-translate-y-0.5 hover:border-copad-red hover:bg-copad-red hover:text-white sm:size-9 sm:text-[11px]"
               >
                 {social.shortLabel}
               </a>
@@ -86,7 +86,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 function FooterColumn({ title, children, compact = false }: { title: string; children: React.ReactNode; compact?: boolean }) {
   return (
     <div className={compact ? "grid grid-cols-2 items-start gap-x-6 gap-y-1 sm:flex sm:flex-col sm:gap-3" : "flex flex-col items-start gap-2 sm:gap-3"}>
-      <span className={`mb-1 text-[9px] font-black tracking-[0.18em] text-copad-green uppercase ${compact ? "col-span-2" : ""}`}>{title}</span>
+      <span className={`mb-1 flex items-center gap-2 text-[9px] font-black tracking-[0.18em] text-copad-sky uppercase before:size-1.5 before:shrink-0 before:rounded-full before:bg-copad-red ${compact ? "col-span-2" : ""}`}>{title}</span>
       {children}
     </div>
   );
@@ -102,7 +102,7 @@ function FooterLink({ href, children, disabled = false }: { href: string; childr
   return (
     <Link href={href} className={`${className} hover:text-white`}>
       {children}
-      <span aria-hidden="true" className="absolute -bottom-1 start-0 h-px w-full origin-start scale-x-0 bg-copad-green transition-transform duration-300 group-hover:scale-x-100" />
+      <span aria-hidden="true" className="absolute -bottom-1 start-0 h-px w-full origin-start scale-x-0 bg-linear-to-r from-copad-red to-copad-green transition-transform duration-300 group-hover:scale-x-100" />
     </Link>
   );
 }

@@ -32,7 +32,7 @@ export function DifferentiatorsSection({ locale, content }: { locale: Locale; co
   return (
     <section ref={sectionRef} id="specialization" dir={isArabic ? "rtl" : "ltr"} style={editorialScrollSceneStyle(visualItems.length)} className="relative scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative overflow-hidden px-4 py-16 sm:px-8 sm:py-20 lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center lg:px-12 lg:py-20">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,144,175,.15),transparent_28%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,144,175,.15),transparent_28%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,163,196,.15),transparent_28%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,163,196,.15),transparent_28%)]" />
         <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.distinctionEyebrow}</p>

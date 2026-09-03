@@ -57,14 +57,14 @@ export function PartnershipModels({ locale, blocks }: { locale: Locale; blocks: 
   const ar = locale === "ar";
 
   return <section id="models" dir={ar ? "rtl" : "ltr"} className="relative overflow-clip bg-copad-sand px-4 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
-    <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(123,205,237,.2),transparent_32%)]" />
+    <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(142,220,245,.2),transparent_32%)]" />
     <div className="relative mx-auto max-w-[1440px]">
       <motion.header whileInView={reduceMotion ? undefined : { y: [14, 0] }} viewport={{ once: true, amount: .35 }} transition={{ duration: .65, ease }} className="grid gap-7 border-b border-copad-deep/12 pb-9 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
         <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">{ar ? "مجالات الشراكة" : "Partnership areas"}</p><h2 className="mt-4 max-w-[19ch] font-display text-[2.4rem] leading-[1.05] tracking-[-.04em] text-copad-deep sm:text-[clamp(3rem,4.5vw,4.8rem)]">{ar ? <><span className="block">ثلاثة نماذج للشراكة</span><span className="block">ومسار واضح لكل منها</span></> : <><span className="block">Three partnership models.</span><span className="block">One clear route.</span></>}</h2></div>
         <p className="max-w-2xl text-sm leading-7 text-copad-deep/60 sm:text-base sm:leading-8 lg:justify-self-end">{ar ? "اختر نموذج التعاون الأقرب لاحتياجك، ثم شارك فريقنا بالتفاصيل المطلوبة من خلال نموذج مخصص." : "Choose the collaboration model that fits your opportunity, then share the right details through its dedicated inquiry form."}</p>
       </motion.header>
 
-      <nav aria-label={ar ? "انتقل إلى نموذج الشراكة" : "Jump to a partnership model"} className="sticky top-20 z-30 -mx-1 mt-5 flex gap-2 overflow-x-auto rounded-full border border-copad-deep/10 bg-white/78 p-1.5 shadow-[0_14px_35px_rgba(1,61,96,.08)] [scrollbar-width:none] backdrop-blur-xl [&::-webkit-scrollbar]:hidden">
+      <nav aria-label={ar ? "انتقل إلى نموذج الشراكة" : "Jump to a partnership model"} className="sticky top-20 z-30 -mx-1 mt-5 flex gap-2 overflow-x-auto rounded-full border border-copad-deep/10 bg-white/78 p-1.5 shadow-[0_14px_35px_rgba(6,79,120,.08)] [scrollbar-width:none] backdrop-blur-xl [&::-webkit-scrollbar]:hidden">
         {blocks.map((block, index) => <a key={block.title} href={`#partnership-${index + 1}`} className="flex min-h-10 shrink-0 items-center gap-3 rounded-full px-4 text-[9px] font-black uppercase tracking-[.1em] text-copad-deep/58 transition hover:bg-copad-deep hover:text-white"><span className="text-copad-green">0{index + 1}</span>{block.title}</a>)}
       </nav>
 

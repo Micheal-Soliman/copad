@@ -55,16 +55,16 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
   return (
     <section id="division-story" ref={sectionRef} style={homeScrollSceneStyle(divisions.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(0,144,175,.16),transparent_25%),radial-gradient(circle_at_86%_82%,rgba(1,61,96,.08),transparent_27%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(0,163,196,.16),transparent_25%),radial-gradient(circle_at_86%_82%,rgba(6,79,120,.08),transparent_27%)]" />
         <motion.div aria-hidden="true" className="absolute top-[10%] -end-48 size-[34rem] rounded-full border border-copad-green/20 sm:size-[50rem]" style={reduceMotion ? undefined : { rotate: ringRotate }}>
           <span className="absolute inset-16 rounded-full border border-copad-deep/10" />
-          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(0,144,175,.65)]" />
+          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(0,163,196,.65)]" />
         </motion.div>
-        <motion.div aria-hidden="true" className="absolute inset-y-[18%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,144,175,.14),transparent_65%)] blur-3xl" style={reduceMotion ? undefined : { x: backgroundX }} />
+        <motion.div aria-hidden="true" className="absolute inset-y-[18%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,163,196,.14),transparent_65%)] blur-3xl" style={reduceMotion ? undefined : { x: backgroundX }} />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-4 pt-19 pb-20 sm:px-8 sm:pt-22 sm:pb-18 lg:px-12 lg:pt-20 lg:pb-18">
           <nav aria-label={ui.bookInstruction} className="shrink-0 pb-2 sm:pb-3">
-            <div className="grid grid-cols-4 gap-1.5 rounded-[1.35rem] border border-copad-deep/10 bg-white/65 p-1.5 shadow-[0_10px_30px_rgba(1,61,96,.06)] backdrop-blur-md sm:gap-2 sm:rounded-full sm:p-2">
+            <div className="grid grid-cols-4 gap-1.5 rounded-[1.35rem] border border-copad-deep/10 bg-white/65 p-1.5 shadow-[0_10px_30px_rgba(6,79,120,.06)] backdrop-blur-md sm:gap-2 sm:rounded-full sm:p-2">
               {divisions.map((division, index) => {
                 const selected = index === activeIndex;
                 return (
@@ -73,7 +73,7 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                     type="button"
                     onClick={() => goToDivision(index)}
                     aria-current={selected ? "step" : undefined}
-                    className={`group relative flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-xl border px-2 py-2 text-[9px] leading-tight font-black transition-[color,background-color,border-color,transform] duration-500 sm:rounded-full sm:px-3 sm:text-[10px] lg:px-4 lg:text-[11px] ${selected ? "border-copad-deep bg-copad-deep text-white shadow-[0_8px_20px_rgba(1,61,96,.16)]" : "border-transparent bg-transparent text-copad-deep/72 hover:-translate-y-0.5 hover:border-copad-sky/65 hover:bg-copad-ice/70 hover:text-copad-deep"}`}
+                    className={`group relative flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-xl border px-2 py-2 text-[9px] leading-tight font-black transition-[color,background-color,border-color,transform] duration-500 sm:rounded-full sm:px-3 sm:text-[10px] lg:px-4 lg:text-[11px] ${selected ? "border-copad-deep bg-copad-deep text-white shadow-[0_8px_20px_rgba(6,79,120,.16)]" : "border-transparent bg-transparent text-copad-deep/72 hover:-translate-y-0.5 hover:border-copad-sky/65 hover:bg-copad-ice/70 hover:text-copad-deep"}`}
                   >
                     <span className={`text-[7px] tracking-[0.12em] transition-colors sm:text-[8px] ${selected ? "text-copad-sky" : "text-copad-green"}`}>0{index + 1}</span>
                     <span className="hidden text-center sm:block">{division.title}</span>
@@ -83,11 +83,11 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
               })}
             </div>
             <div aria-hidden="true" className="mt-2 h-1 overflow-hidden rounded-full bg-copad-deep/8">
-              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(0,144,175,.55)] rtl:origin-right" animate={{ scaleX: chapterProgress }} transition={{ duration: 0.65, ease }} />
+              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(0,163,196,.55)] rtl:origin-right" animate={{ scaleX: chapterProgress }} transition={{ duration: 0.65, ease }} />
             </div>
           </nav>
 
-          <article className="relative mt-2 grid min-h-0 flex-1 overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white shadow-[0_22px_64px_rgba(1,61,96,.12)] sm:mt-3 sm:rounded-[2rem] lg:grid-cols-[.92fr_1.08fr] lg:rounded-[2.4rem]">
+          <article className="relative mt-2 grid min-h-0 flex-1 overflow-hidden rounded-[1.65rem] border border-copad-deep/10 bg-copad-white shadow-[0_22px_64px_rgba(6,79,120,.12)] sm:mt-3 sm:rounded-[2rem] lg:grid-cols-[.92fr_1.08fr] lg:rounded-[2.4rem]">
             <div className="relative min-h-[11rem] overflow-hidden bg-copad-deep sm:min-h-[15rem] lg:min-h-0">
               <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
@@ -144,14 +144,14 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                         type="button"
                         aria-disabled="true"
                         tabIndex={selected ? 0 : -1}
-                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 cursor-default items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] sm:min-h-11 sm:px-6 sm:text-xs"
+                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 cursor-default items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(6,79,120,.06)] sm:min-h-11 sm:px-6 sm:text-xs"
                       >
                         <span>{division.cta}</span>
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-copad-green" />
                       </button> : <Link
                         href={`/${locale}/${division.href}`}
                         tabIndex={selected ? 0 : -1}
-                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(1,61,96,.06)] transition-[color,background-color,border-color,transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep hover:text-white hover:shadow-[0_12px_30px_rgba(1,61,96,.14)] sm:min-h-11 sm:px-6 sm:text-xs"
+                        className="group mt-4 inline-flex min-h-10 w-fit shrink-0 items-center gap-3 overflow-hidden rounded-full border border-copad-deep/16 bg-copad-white px-5 text-[10px] font-black text-copad-deep shadow-[0_8px_24px_rgba(6,79,120,.06)] transition-[color,background-color,border-color,transform,box-shadow] duration-500 hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep hover:text-white hover:shadow-[0_12px_30px_rgba(6,79,120,.14)] sm:min-h-11 sm:px-6 sm:text-xs"
                       >
                         <span>{division.cta}</span>
                         <span aria-hidden="true" className="size-1.5 rounded-full bg-copad-green transition-transform duration-500 group-hover:scale-[1.8]" />

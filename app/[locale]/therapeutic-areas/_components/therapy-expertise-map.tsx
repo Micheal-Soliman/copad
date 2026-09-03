@@ -54,13 +54,13 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
   return (
     <section id="expertise" ref={sectionRef} style={homeScrollSceneStyle(areas.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(0,144,175,.16),transparent_24%),radial-gradient(circle_at_82%_72%,rgba(1,61,96,.08),transparent_28%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(0,163,196,.16),transparent_24%),radial-gradient(circle_at_82%_72%,rgba(6,79,120,.08),transparent_28%)]" />
         <motion.div aria-hidden="true" className="absolute top-[18%] -end-36 size-[28rem] rounded-full border border-copad-green/22 sm:size-[42rem] lg:-end-28 lg:size-[52rem]" style={reduceMotion ? undefined : { rotate: orbitRotate }}>
           <span className="absolute inset-[13%] rounded-full border border-copad-deep/10" />
           <span className="absolute inset-[29%] rounded-full border border-copad-green/15" />
-          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(0,144,175,.65)]" />
+          <span className="absolute start-1/2 top-[-5px] size-2.5 rounded-full bg-copad-green shadow-[0_0_22px_rgba(0,163,196,.65)]" />
         </motion.div>
-        <motion.div aria-hidden="true" className="absolute inset-y-[16%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,144,175,.13),transparent_64%)] blur-3xl" style={reduceMotion ? undefined : { x: ambientX }} />
+        <motion.div aria-hidden="true" className="absolute inset-y-[16%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(0,163,196,.13),transparent_64%)] blur-3xl" style={reduceMotion ? undefined : { x: ambientX }} />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-4 pt-20 pb-5 sm:px-8 sm:pt-24 sm:pb-7 lg:px-12 lg:pt-24 lg:pb-8">
           <header className="shrink-0 border-b border-copad-deep/12 pb-4 sm:pb-5">
@@ -72,7 +72,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
               </div>
             </div>
             <div aria-hidden="true" className="mt-3 h-1 overflow-hidden rounded-full bg-copad-deep/8">
-              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(0,144,175,.55)] rtl:origin-right" animate={{ scaleX: activeProgress }} transition={{ duration: 0.65, ease }} />
+              <motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_15px_rgba(0,163,196,.55)] rtl:origin-right" animate={{ scaleX: activeProgress }} transition={{ duration: 0.65, ease }} />
             </div>
           </header>
 
@@ -88,7 +88,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
                       type="button"
                       onClick={() => goToArea(index)}
                       aria-current={selected ? "step" : undefined}
-                      className={`group relative flex min-w-[4.25rem] flex-col items-start rounded-[1rem] border px-3 py-3 text-start transition duration-500 sm:min-w-[5rem] lg:min-w-0 lg:rounded-[1.2rem] lg:px-4 lg:py-4 ${selected ? "border-copad-green bg-copad-deep text-white shadow-[0_18px_40px_rgba(1,61,96,.16)]" : "border-copad-deep/10 bg-white/55 text-copad-deep hover:border-copad-green/45 hover:bg-white"}`}
+                      className={`group relative flex min-w-[4.25rem] flex-col items-start rounded-[1rem] border px-3 py-3 text-start transition duration-500 sm:min-w-[5rem] lg:min-w-0 lg:rounded-[1.2rem] lg:px-4 lg:py-4 ${selected ? "border-copad-green bg-copad-deep text-white shadow-[0_18px_40px_rgba(6,79,120,.16)]" : "border-copad-deep/10 bg-white/55 text-copad-deep hover:border-copad-green/45 hover:bg-white"}`}
                     >
                       <span className={`text-[8px] font-black tracking-[0.16em] ${selected ? "text-copad-green" : passed ? "text-copad-green" : "text-copad-deep/30"}`}>{String(index + 1).padStart(2, "0")}</span>
                       <span className="mt-2 hidden text-[10px] leading-4 font-bold lg:block">{area.title}</span>
@@ -119,7 +119,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
                     scale: { duration: reduceMotion ? 0 : .76, ease },
                   }}
                   style={{ transformOrigin: isArabic ? "right center" : "left center" }}
-                  className="absolute inset-0 overflow-hidden rounded-[1.65rem] border border-copad-sky/25 bg-copad-deep p-5 text-white shadow-[0_24px_70px_rgba(1,61,96,.18)] sm:rounded-[2rem] sm:p-8 lg:h-full lg:min-h-0 lg:p-10"
+                  className="absolute inset-0 overflow-hidden rounded-[1.65rem] border border-copad-sky/25 bg-copad-deep p-5 text-white shadow-[0_24px_70px_rgba(6,79,120,.18)] sm:rounded-[2rem] sm:p-8 lg:h-full lg:min-h-0 lg:p-10"
                 >
                   <Image
                     src="/images/therapy-area/therapy-area.png"
@@ -132,7 +132,7 @@ export function TherapyExpertiseMap({ locale, areas }: TherapyExpertiseMapProps)
                   <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-copad-deep/25 via-copad-deep/8 to-transparent rtl:bg-linear-to-l" />
                   <div className="relative z-10 flex h-full flex-col justify-center">
                     <div className="flex items-center gap-3">
-                      <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.6)]" />
+                      <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.6)]" />
                       <p className="text-[8px] font-black tracking-[0.2em] text-copad-green uppercase sm:text-[9px]">{ui.areaLabel} · {String(activeIndex + 1).padStart(2, "0")}</p>
                     </div>
                     <h2 className={`mt-5 max-w-full text-balance break-words text-white ${isArabic ? "font-sans text-[clamp(1.75rem,7.4vw,3.8rem)] leading-[1.12] font-black tracking-[-0.035em] lg:text-[4.1rem]" : "font-display text-[clamp(2.2rem,9vw,4rem)] leading-[.98] tracking-[-0.05em] lg:text-[4.55rem]"}`}>{active.title}</h2>

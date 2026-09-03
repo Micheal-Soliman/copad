@@ -14,9 +14,9 @@
 
 .page {
   overflow: hidden;
-  color: #013d60;
+  color: #064f78;
   background: #fbfdff;
-  border: 1px solid rgba(1, 61, 96, 0.1);
+  border: 1px solid rgba(6, 79, 120, 0.1);
 }
 
 .page::after {
@@ -24,7 +24,7 @@
   inset: 0;
   pointer-events: none;
   content: "";
-  background: linear-gradient(90deg, rgba(1, 61, 96, 0.08), transparent 9%, transparent 91%, rgba(1, 61, 96, 0.035));
+  background: linear-gradient(90deg, rgba(6, 79, 120, 0.08), transparent 9%, transparent 91%, rgba(6, 79, 120, 0.035));
 }
 
 .pageInner {
@@ -38,8 +38,8 @@
 .cover {
   color: #fff;
   background:
-    radial-gradient(circle at 78% 22%, rgba(123, 205, 237, 0.25), transparent 26%),
-    linear-gradient(145deg, #007e9c 0%, #01567a 48%, #013d60 100%);
+    radial-gradient(circle at 78% 22%, rgba(142, 220, 245, 0.25), transparent 26%),
+    linear-gradient(145deg, #007e9c 0%, #01567a 48%, #064f78 100%);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -72,7 +72,7 @@
   width: 1.5rem;
   height: 1px;
   content: "";
-  background: #7bcded;
+  background: #8edcf5;
 }
 
 .coverTitle {
@@ -110,8 +110,8 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(1, 61, 96, 0.13);
-  color: #0090af;
+  border-bottom: 1px solid rgba(6, 79, 120, 0.13);
+  color: #00a3c4;
   font-size: 0.48rem;
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -120,7 +120,7 @@
 
 .kicker {
   margin-top: clamp(1.2rem, 4vh, 2.4rem);
-  color: #0090af;
+  color: #00a3c4;
   font-size: 0.52rem;
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -139,7 +139,7 @@
 .body {
   max-width: 31rem;
   margin-top: 1.1rem;
-  color: rgba(1, 61, 96, 0.63);
+  color: rgba(6, 79, 120, 0.63);
   font-size: clamp(0.65rem, 1.25vw, 0.82rem);
   line-height: 1.8;
 }
@@ -155,20 +155,20 @@
   align-items: center;
   gap: 0.85rem;
   padding-block: 0.75rem;
-  border-bottom: 1px solid rgba(1, 61, 96, 0.1);
+  border-bottom: 1px solid rgba(6, 79, 120, 0.1);
   font-size: clamp(0.62rem, 1.25vw, 0.78rem);
   font-weight: 700;
 }
 
 .stream span {
-  color: #0090af;
+  color: #00a3c4;
   font-size: 0.48rem;
   font-weight: 900;
 }
 
 .folio {
   margin-top: auto;
-  color: rgba(1, 61, 96, 0.32);
+  color: rgba(6, 79, 120, 0.32);
   font-size: 0.45rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -177,7 +177,7 @@
 
 .backCover {
   color: #fff;
-  background: linear-gradient(145deg, #013d60, #002c47);
+  background: linear-gradient(145deg, #064f78, #002c47);
 }
 
 @media (max-width: 959px) {

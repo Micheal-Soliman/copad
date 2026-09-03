@@ -20,8 +20,8 @@ export default function AppleIcon() {
           position: "relative",
           overflow: "hidden",
           borderRadius: 42,
-          background: "#013D60",
-          color: "#E8F5FD",
+          background: "#064F78",
+          color: "#EEF9FF",
           fontSize: 116,
           fontWeight: 800,
           letterSpacing: "-0.08em",
@@ -36,7 +36,7 @@ export default function AppleIcon() {
             width: 27,
             height: 27,
             borderRadius: 99,
-            background: "#0090AF",
+            background: "#00A3C4",
             boxShadow: "0 0 0 10px rgba(249,252,255,.12)",
           }}
         />
@@ -48,7 +48,7 @@ export default function AppleIcon() {
             width: 125,
             height: 125,
             borderRadius: 999,
-            border: "6px solid rgba(123,205,237,.65)",
+            border: "6px solid rgba(142,220,245,.65)",
           }}
         />
       </div>

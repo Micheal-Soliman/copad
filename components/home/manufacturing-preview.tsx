@@ -41,7 +41,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
           className="relative mx-auto w-full max-w-2xl lg:col-start-1 lg:row-start-1"
         >
           <ScrollImageReveal
-            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(1,61,96,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(1,61,96,.14)] lg:h-[min(64svh,34rem)] lg:aspect-auto"
+            className="relative aspect-[5/4] overflow-hidden rounded-[2rem] rounded-bl-[4rem] border border-copad-deep/10 bg-copad-deep shadow-[0_22px_60px_rgba(6,79,120,.13)] sm:rounded-[2.5rem] sm:rounded-bl-[6rem] sm:shadow-[0_30px_80px_rgba(6,79,120,.14)] lg:h-[min(64svh,34rem)] lg:aspect-auto"
             direction="left"
             progress={isDesktop ? scrollYProgress : undefined}
             timeline={isDesktop}
@@ -93,7 +93,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
                 transition={{ duration: 0.6, delay: 0.16 + index * 0.1, ease }}
                 whileHover={reduceMotion ? undefined : { y: -5 }}
                 whileTap={reduceMotion ? undefined : { y: -4, scale: 0.985 }}
-              className="group/principle relative isolate min-h-18 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-3 shadow-[0_10px_30px_rgba(1,61,96,.04)]"
+              className="group/principle relative isolate min-h-18 overflow-hidden rounded-2xl border border-copad-deep/10 bg-copad-sand/45 px-4 py-3 shadow-[0_10px_30px_rgba(6,79,120,.04)]"
               >
                 <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/principle:scale-y-100" />
                 <span className="text-[9px] font-black tracking-[0.18em] text-copad-green">{String(index + 1).padStart(2, "0")}</span>
@@ -103,7 +103,7 @@ export function ManufacturingPreview({ locale, eyebrow, title, body, action }: M
             ))}
           </div>
 
-          <button type="button" aria-disabled="true" className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-60 cursor-default items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(1,61,96,.17)] sm:w-auto 2xl:mt-7">
+          <button type="button" aria-disabled="true" className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-60 cursor-default items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(6,79,120,.17)] sm:w-auto 2xl:mt-7">
             <span aria-hidden="true" className="absolute inset-0 -z-10 origin-right scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-left" />
             <span>{action}</span>
           </button>

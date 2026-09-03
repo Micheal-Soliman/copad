@@ -18,7 +18,7 @@ export function ScrollAtmosphere({ progress, reverse = false }: ScrollAtmosphere
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <motion.div
-        className="absolute -top-36 start-[6%] size-[30rem] rounded-full bg-[radial-gradient(circle,rgba(123,205,237,.2),rgba(0,144,175,.055)_46%,transparent_72%)] blur-3xl sm:size-[38rem]"
+        className="absolute -top-36 start-[6%] size-[30rem] rounded-full bg-[radial-gradient(circle,rgba(142,220,245,.2),rgba(0,163,196,.055)_46%,transparent_72%)] blur-3xl sm:size-[38rem]"
         style={reduceMotion ? undefined : { x: washX, y: washY, scale: washScale }}
       />
       <motion.div

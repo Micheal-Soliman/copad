@@ -43,7 +43,7 @@ export function ManufacturingProcess({ locale, blocks }: { locale: Locale; block
   return (
     <section ref={sectionRef} id="process" style={homeScrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)] scroll-mt-20 bg-copad-sand">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(0,144,175,.14),transparent_24%),radial-gradient(circle_at_88%_82%,rgba(1,61,96,.08),transparent_27%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(0,163,196,.14),transparent_24%),radial-gradient(circle_at_88%_82%,rgba(6,79,120,.08),transparent_27%)]" />
         <div aria-hidden="true" className="absolute inset-x-0 top-[58%] h-px bg-linear-to-r from-transparent via-copad-green/22 to-transparent" />
 
         <div dir={isArabic ? "rtl" : "ltr"} className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-4 pt-[5rem] pb-[4.25rem] sm:px-8 lg:px-12 lg:pt-[5.5rem] lg:pb-[4.5rem]">
@@ -57,7 +57,7 @@ export function ManufacturingProcess({ locale, blocks }: { locale: Locale; block
               onSelect={goTo}
             />
 
-            <motion.article className="relative z-10 max-h-[57svh] min-h-[21rem] overflow-hidden rounded-[1.7rem] border border-copad-deep/10 bg-copad-white/96 p-5 shadow-[0_28px_68px_rgba(1,61,96,.14)] backdrop-blur-md sm:min-h-[23rem] sm:p-6 lg:max-h-[58svh] lg:min-h-0 lg:p-7">
+            <motion.article className="relative z-10 max-h-[57svh] min-h-[21rem] overflow-hidden rounded-[1.7rem] border border-copad-deep/10 bg-copad-white/96 p-5 shadow-[0_28px_68px_rgba(6,79,120,.14)] backdrop-blur-md sm:min-h-[23rem] sm:p-6 lg:max-h-[58svh] lg:min-h-0 lg:p-7">
               <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                 <motion.div
                   key={activeIndex}
@@ -123,11 +123,11 @@ function ManufacturingFlowConsole({
   return (
     <div className="relative mx-auto hidden h-[25rem] w-full max-w-[24rem] [perspective:1400px] lg:block">
       <motion.div
-        className="absolute inset-0 overflow-hidden rounded-[2rem] border border-copad-deep/12 bg-copad-deep shadow-[0_32px_75px_rgba(1,61,96,.2)] [transform-style:preserve-3d]"
+        className="absolute inset-0 overflow-hidden rounded-[2rem] border border-copad-deep/12 bg-copad-deep shadow-[0_32px_75px_rgba(6,79,120,.2)] [transform-style:preserve-3d]"
         style={reduceMotion ? undefined : { rotateY: panelRotate }}
       >
         <div aria-hidden="true" className="absolute inset-0 bg-[url('/images/copad-cleanroom.png')] bg-cover bg-center opacity-[.13] mix-blend-luminosity" />
-        <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(145deg,rgba(1,61,96,.72),rgba(1,61,96,.96)),radial-gradient(circle_at_90%_12%,rgba(0,144,175,.35),transparent_30%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(145deg,rgba(6,79,120,.72),rgba(6,79,120,.96)),radial-gradient(circle_at_90%_12%,rgba(0,163,196,.35),transparent_30%)]" />
 
         <div className="relative z-10 flex h-full flex-col p-5 xl:p-6">
           <header className="border-b border-white/14 pb-4">
@@ -136,8 +136,8 @@ function ManufacturingFlowConsole({
 
           <div className="relative mt-4 flex flex-1 flex-col justify-center gap-3 ps-9">
             <div aria-hidden="true" className="absolute inset-y-6 start-3 w-px bg-white/16">
-              <motion.span className="block h-full origin-top bg-copad-green shadow-[0_0_12px_rgba(0,144,175,.65)]" style={reduceMotion ? { scaleY: 1 } : { scaleY: lineScale }} />
-              {!reduceMotion && <motion.span className="absolute -start-[5px] size-[11px] rounded-full border-2 border-copad-deep bg-copad-green shadow-[0_0_18px_rgba(0,144,175,.9)]" style={{ top: carrierTop }} />}
+              <motion.span className="block h-full origin-top bg-copad-green shadow-[0_0_12px_rgba(0,163,196,.65)]" style={reduceMotion ? { scaleY: 1 } : { scaleY: lineScale }} />
+              {!reduceMotion && <motion.span className="absolute -start-[5px] size-[11px] rounded-full border-2 border-copad-deep bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.9)]" style={{ top: carrierTop }} />}
             </div>
 
             {blocks.map((block, index) => {

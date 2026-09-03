@@ -24,7 +24,7 @@ export function CareerVacancyPage({ locale, vacancy }: { locale: Locale; vacancy
   return <main className="min-h-screen overflow-x-clip bg-copad-sand">
     <SiteHeader locale={locale} transparent />
     <section ref={heroRef} dir={ar ? "rtl" : "ltr"} className="relative overflow-hidden bg-copad-deep px-5 pb-16 pt-32 text-white sm:px-8 sm:pb-20 sm:pt-36 lg:px-12 lg:pb-24 lg:pt-40">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(0,144,175,.2),transparent_35%)] rtl:bg-[radial-gradient(circle_at_22%_20%,rgba(0,144,175,.2),transparent_35%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(0,163,196,.2),transparent_35%)] rtl:bg-[radial-gradient(circle_at_22%_20%,rgba(0,163,196,.2),transparent_35%)]" />
       <motion.div style={reducedMotion ? undefined : { y: titleY, opacity: titleOpacity }} className="relative mx-auto max-w-[1320px]">
         <Link href={`/${locale}/careers#vacancies`} className="inline-flex items-center gap-2 text-[9px] font-black uppercase tracking-[.18em] text-white/52 transition hover:text-white"><span aria-hidden="true" className="rtl:rotate-180">←</span>{ar ? "العودة إلى الوظائف" : "Back to positions"}</Link>
         <div className="mt-16 grid min-w-0 gap-10 lg:grid-cols-[1fr_.72fr] lg:items-end">

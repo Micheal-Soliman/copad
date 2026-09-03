@@ -20,8 +20,8 @@ export default function Icon() {
           position: "relative",
           overflow: "hidden",
           borderRadius: 9,
-          background: "#013D60",
-          color: "#E8F5FD",
+          background: "#064F78",
+          color: "#EEF9FF",
           fontSize: 21,
           fontWeight: 800,
           letterSpacing: "-0.08em",
@@ -36,7 +36,7 @@ export default function Icon() {
             width: 5,
             height: 5,
             borderRadius: 99,
-            background: "#0090AF",
+            background: "#00A3C4",
             boxShadow: "0 0 0 2px rgba(249,252,255,.16)",
           }}
         />
@@ -48,7 +48,7 @@ export default function Icon() {
             width: 22,
             height: 22,
             borderRadius: 99,
-            border: "1px solid rgba(123,205,237,.65)",
+            border: "1px solid rgba(142,220,245,.65)",
           }}
         />
       </div>
