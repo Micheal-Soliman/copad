@@ -96,7 +96,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
           {navItems.map(([key, href]) => {
             const route = `/${locale}/${href}`;
             const active = pathname === route || pathname.startsWith(`${route}/`) || (isHomepage && activeHomeKey === key);
-            const className = `group relative px-2.5 py-3.5 text-[10px] font-bold whitespace-nowrap transition-colors 2xl:px-3 2xl:text-[11px] ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/65 hover:text-white" : "text-copad-deep/58 hover:text-copad-deep"}`;
+            const className = `group relative px-2.5 py-3.5 text-xs font-bold whitespace-nowrap transition-colors 2xl:px-3 2xl:text-[13px] ${active ? (overlay ? "text-white" : "text-copad-deep") : overlay ? "text-white/74 hover:text-white" : "text-copad-deep/70 hover:text-copad-deep"}`;
             const content = <>
                 {copy.nav[key]}
                 {active && (

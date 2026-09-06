@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } f
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
+import { getUiCopy } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
@@ -16,6 +17,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
   const reduceMotion = useReducedMotion();
   const isArabic = locale === "ar";
   const ui = siteCopy[locale].ui.therapyAreas;
+  const sharedUi = getUiCopy(locale).therapy;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const scrollDriven = isDesktop && !reduceMotion;
 
@@ -80,7 +82,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
               <div className="relative h-[59%] bg-copad-white px-5 py-3 sm:h-[54%] sm:px-7 sm:py-6">
                 <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-copad-green/55 to-transparent" />
                 <div className="mb-2 flex items-center justify-between sm:mb-5">
-                  <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic ? "الفهرس الإكلينيكي" : "Clinical index"}</span>
+                  <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{sharedUi.index}</span>
                   <span className="text-[8px] font-bold tracking-[.14em] text-copad-deep/35 uppercase">01—09</span>
                 </div>
                 <ol className="grid grid-cols-2 gap-x-4 sm:grid-cols-3 sm:gap-x-6">

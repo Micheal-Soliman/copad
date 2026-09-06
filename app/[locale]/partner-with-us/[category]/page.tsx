@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n";
 import { PartnershipCategoryPage } from "../_components/partnership-category-page";
-import { getPartnershipData, isPartnershipSlug, partnershipSlugs } from "../partnership-data";
+import { getPartnershipData, isPartnershipSlug, partnershipSlugs } from "@/content/partnerships";
 
 export const dynamicParams = false;
 

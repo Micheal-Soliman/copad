@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRef } from "react";
 import type { Section } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { getUiCopy } from "@/content/ui";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 export function PartnershipHero({ locale, content }: { locale: Locale; content: Section }) {
-  const sectionRef = useRef<HTMLElement>(null); const reducedMotion = useReducedMotion(); const isArabic = locale === "ar";
+  const sectionRef = useRef<HTMLElement>(null); const reducedMotion = useReducedMotion(); const isArabic = locale === "ar"; const ui = getUiCopy(locale).partners;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 48, damping: 28, mass: .8 });
   const sceneProgress = useTransform(progress, [0, .76], [0, 1]);
@@ -28,16 +29,16 @@ export function PartnershipHero({ locale, content }: { locale: Locale; content: 
 
       <div dir={isArabic ? "rtl" : "ltr"} className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12">
         <div className="max-w-[47rem]">
-          <p className="text-[9px] font-black uppercase tracking-[.26em] text-copad-green">{isArabic ? "نمو يبدأ من التوافق" : "Growth starts with alignment"}</p>
+          <p className="text-[9px] font-black uppercase tracking-[.26em] text-copad-green">{ui.kicker}</p>
           <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(4rem,13vw,6.4rem)] leading-[.99] tracking-[-.05em] lg:text-[clamp(5.6rem,6.8vw,7.2rem)]">
-            {isArabic ? <><span className="block">شراكة</span><span className="block">مع كوباد</span></> : <><span className="block">Partner</span><span className="block">With Us</span></>}
+            {ui.titleLines.map((line) => <span className="block" key={line}>{line}</span>)}
           </h1>
           <motion.p className="mt-8 max-w-2xl text-sm leading-7 text-white/76 sm:text-lg sm:leading-9" style={reducedMotion ? undefined : { y: introY }}>{content.intro}</motion.p>
         </div>
         <div className="absolute inset-x-5 bottom-8 sm:inset-x-8 lg:inset-x-12">
           <div className="mb-4 flex items-end justify-between gap-6 text-[8px] font-black uppercase tracking-[.2em] text-white/55">
-            <span>{isArabic ? "توزيع · تصدير · تصنيع" : "Distribution · Export · Manufacturing"}</span>
-            <span className="shrink-0">{isArabic ? "كوباد / شراكات" : "COPAD / PARTNERSHIPS"}</span>
+            <span>{ui.spectrum}</span>
+            <span className="shrink-0">{ui.mark}</span>
           </div>
           <div className="h-[2px] bg-white/20"><motion.span className="block h-full origin-start bg-copad-green rtl:origin-right" style={{ scaleX: rule }} /></div>
         </div>

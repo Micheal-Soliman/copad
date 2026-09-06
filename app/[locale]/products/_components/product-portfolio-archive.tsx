@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { ContentBlock } from "@/content/types";
+import { getUiCopy } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle, scrollSceneIndex, scrollSystem } from "@/lib/motion/scroll-system";
 
@@ -23,6 +24,7 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
   const reduceMotion = useReducedMotion();
   const lenis = useLenis();
   const isArabic = locale === "ar";
+  const ui = getUiCopy(locale).products;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
   const stagedProgress = useTransform(
@@ -54,7 +56,7 @@ export function ProductPortfolioArchive({ locale, blocks }: { locale: Locale; bl
 
   return <section id="portfolio" ref={ref} style={homeScrollSceneStyle(blocks.length)} className="relative h-[var(--scroll-scene-height)]">
     <div className="sticky top-0 h-[100svh] overflow-hidden bg-copad-sand">
-      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 text-white sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-sky uppercase">{isArabic?"رحلة داخل المحفظة":"Journey through the portfolio"}</span><span dir="ltr" className="font-display text-4xl text-white">0{active+1}<small className="ms-1 font-sans text-xs opacity-40">/04</small></span></div><div className="mt-3 h-1 bg-white/14"><motion.span className="block h-full origin-left bg-copad-sky rtl:origin-right" style={{scaleX:sceneProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition-colors duration-500 ${active===i?"text-white":"text-white/48"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-sky":"bg-white/25"}`} />{b.title}</button>)}</nav></header>
+      <header dir={isArabic?"rtl":"ltr"} className="absolute inset-x-0 top-0 z-40 mx-auto max-w-[1440px] px-4 pt-20 text-white sm:px-8 sm:pt-24 lg:px-12 lg:pt-24"><div className="flex items-end justify-between"><span className="text-[8px] font-black tracking-[.2em] text-copad-sky uppercase">{ui.journey}</span><span dir="ltr" className="font-display text-4xl text-white">0{active+1}<small className="ms-1 font-sans text-xs opacity-40">/04</small></span></div><div className="mt-3 h-1 bg-white/14"><motion.span className="block h-full origin-left bg-copad-sky rtl:origin-right" style={{scaleX:sceneProgress}} /></div><nav className="mt-3 flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{blocks.map((b,i)=><button key={b.title} onClick={()=>goTo(i)} className={`min-w-max text-[8px] font-black tracking-[.08em] transition-colors duration-500 ${active===i?"text-white":"text-white/48"}`}><span className={`me-2 inline-block size-1.5 rounded-full ${active===i?"bg-copad-sky":"bg-white/25"}`} />{b.title}</button>)}</nav></header>
 
       <motion.div aria-hidden="true" className="absolute bottom-[8%] start-0 z-30 h-px w-[160%] bg-linear-to-r from-transparent via-copad-green/55 to-transparent" style={reduceMotion?undefined:{x:horizonX}} />
       <motion.div dir="ltr" className="absolute inset-y-0 left-0 flex w-[400%]" style={reduceMotion?{x:-viewportWidth*active}:{x:trackX}}>

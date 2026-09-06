@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
+import { getUiCopy } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
@@ -18,6 +19,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
   const reduceMotion = useReducedMotion();
   const isDesktop = useDesktopLayout();
   const isArabic = locale === "ar";
+  const ui = getUiCopy(locale).manufacturing;
   const driven = isDesktop && !reduceMotion;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const titleOpacity = useTransform(scrollYProgress, [.015, .08, .3, .36, 1], [.9, 1, 1, 0, 0]);
@@ -50,7 +52,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
           <motion.div className="relative hidden aspect-[1.16] overflow-hidden rounded-[2.2rem] border border-white/18 bg-copad-deep/50 shadow-[0_38px_95px_rgba(0,0,0,.34)] lg:block" style={driven ? { opacity: sideImageOpacity, x: sideImageX, clipPath: sideImageClip } : undefined}>
             <Image src="/images/copad-cleanroom.png" alt="" fill sizes="52vw" loading="eager" className="object-cover saturate-[.82] contrast-[1.08]" />
             <div className="absolute inset-0 bg-linear-to-t from-copad-deep/72 via-transparent to-copad-deep/14" />
-            <div className="absolute inset-x-6 bottom-6 flex items-center justify-between border-t border-white/28 pt-4"><span className="text-[9px] font-black tracking-[.2em] text-white uppercase">{isArabic ? "قاعدة التصنيع" : "Manufacturing base"}</span><FactoryIcon size={29} weight="duotone" className="text-copad-green" /></div>
+            <div className="absolute inset-x-6 bottom-6 flex items-center justify-between border-t border-white/28 pt-4"><span className="text-[9px] font-black tracking-[.2em] text-white uppercase">{ui.base}</span><FactoryIcon size={29} weight="duotone" className="text-copad-green" /></div>
           </motion.div>
         </div>
 
@@ -62,6 +64,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
 
 function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: MotionValue<number> }) {
   const isArabic = locale === "ar";
+  const ui = getUiCopy(locale).manufacturing;
   const opacity = useTransform(progress, [.4, .42, .47, 1], [0, 0, 1, 1]);
   const scale = useTransform(progress, [.42, .76, 1], [.92, 1, 1]);
   const rotateY = useTransform(progress, [.42, .76, 1], [isArabic ? -7 : 7, 0, 0]);
@@ -87,12 +90,12 @@ function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: 
           <motion.span className="absolute inset-y-0 w-[16%] -skew-x-12 bg-linear-to-r from-transparent via-white/28 to-transparent blur-md" style={{ x: scanX }} />
 
           <motion.div className="absolute inset-x-7 top-7 flex items-center justify-between" style={{ opacity: chromeOpacity }}>
-            <div className="flex items-center gap-3"><span className="relative size-3 rounded-full bg-copad-green shadow-[0_0_20px_rgba(0,163,196,.95)]"><span className="absolute -inset-2 rounded-full border border-copad-green/45" /></span><span className="text-[9px] font-black tracking-[.22em] text-white uppercase">{isArabic ? "تجميع منشأة كوباد" : "COPAD facility assembly"}</span></div>
+            <div className="flex items-center gap-3"><span className="relative size-3 rounded-full bg-copad-green shadow-[0_0_20px_rgba(0,163,196,.95)]"><span className="absolute -inset-2 rounded-full border border-copad-green/45" /></span><span className="text-[9px] font-black tracking-[.22em] text-white uppercase">{ui.assembly}</span></div>
             <div className="flex gap-2"><SystemBadge Icon={FactoryIcon} /><SystemBadge Icon={GearSixIcon} /><SystemBadge Icon={ShieldCheckIcon} /></div>
           </motion.div>
 
           <motion.div className="absolute inset-x-7 bottom-7" style={{ opacity: chromeOpacity }}>
-            <div className="mb-3 flex items-center justify-between text-[9px] font-black tracking-[.18em] text-white uppercase"><span>{isArabic ? "من المخطط إلى التشغيل" : "Blueprint to operation"}</span><span className="text-copad-green">04 / 04</span></div>
+            <div className="mb-3 flex items-center justify-between text-[9px] font-black tracking-[.18em] text-white uppercase"><span>{ui.blueprint}</span><span className="text-copad-green">04 / 04</span></div>
             <div className="h-1.5 overflow-hidden rounded-full bg-white/17"><motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.85)] rtl:origin-right" style={{ scaleX: completion }} /></div>
           </motion.div>
         </motion.div>

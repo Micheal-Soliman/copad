@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
+import { getUiCopy } from "@/content/ui";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -14,6 +15,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
   const isDesktop = useDesktopLayout();
   const reduceMotion = useReducedMotion();
   const isArabic = locale === "ar";
+  const ui = getUiCopy(locale).products;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const driven = isDesktop && !reduceMotion;
   const copyY = useTransform(scrollYProgress, [0, .55, 1], [22, 0, -20]);
@@ -28,7 +30,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
 
       <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-8 px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.8fr_1.2fr] lg:gap-12 lg:px-12 lg:pt-24 lg:pb-5">
         <motion.div className="relative z-20" style={driven ? { y: copyY } : undefined}>
-          <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3 text-[9px] font-black tracking-[.22em] text-copad-green uppercase"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.8)]" />{isArabic ? "طيف المنتجات / أربع فئات" : "Product spectrum / Four categories"}</motion.p>
+          <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .08, ease }} className="flex items-center gap-3 text-[9px] font-black tracking-[.22em] text-copad-green uppercase"><span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.8)]" />{ui.spectrum}</motion.p>
           <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .78, delay: .08, ease }} className={`${isArabic ? "mt-5 font-sans text-[clamp(3.8rem,16vw,6rem)] leading-[1.1] font-black tracking-[-.035em] lg:text-[clamp(5.2rem,7.2vw,7.8rem)]" : "mt-5 text-pretty font-display text-[clamp(4.7rem,17vw,6.8rem)] leading-[1.02] tracking-[-.045em] lg:text-[clamp(6rem,8vw,8.2rem)]"}`}>{content.title}</motion.h1>
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .36, ease }} className="mt-7 max-w-xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8 lg:text-[1.02rem]">{content.intro}</motion.p>
         </motion.div>
@@ -40,7 +42,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
             <div className="absolute start-1/2 top-1/2 h-[82%] w-[38%] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] rtl:translate-x-1/2">
               {content.blocks.map((block, index) => <SpectrumBand key={block.title} title={block.title} index={index} progress={scrollYProgress} driven={driven} />)}
               <div className="absolute inset-x-[12%] top-[8%] bottom-[8%] rounded-full border border-white/20 bg-[linear-gradient(100deg,rgba(255,255,255,.18),rgba(0,163,196,.12)_38%,rgba(6,79,120,.84)_72%)] shadow-[0_38px_100px_rgba(0,0,0,.42),inset_-22px_-10px_38px_rgba(0,0,0,.25)] backdrop-blur-md [transform:translateZ(75px)]" />
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-[16%] text-center [transform:translateZ(105px)]"><span className="text-[8px] font-black tracking-[.25em] text-copad-green">COPAD / 04</span><strong className="font-display text-7xl leading-none font-normal tracking-[-.08em] sm:text-9xl">107</strong><span className="max-w-28 text-[8px] leading-4 font-black tracking-[.16em] text-white/52 uppercase">{isArabic ? "تركيبة عبر المحفظة" : "Formulations across the portfolio"}</span></div>
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-[16%] text-center [transform:translateZ(105px)]"><span className="text-[8px] font-black tracking-[.25em] text-copad-green">COPAD / 04</span><strong className="font-display text-7xl leading-none font-normal tracking-[-.08em] sm:text-9xl">107</strong><span className="max-w-28 text-[8px] leading-4 font-black tracking-[.16em] text-white/52 uppercase">{ui.formulations}</span></div>
             </div>
             {content.blocks.map((block, index) => <motion.div key={block.title} className={`absolute ${index===0?"start-[2%] top-[16%]":index===1?"end-[1%] top-[29%]":index===2?"start-[1%] bottom-[28%]":"end-[3%] bottom-[14%]"} max-w-36`} initial={reduceMotion?false:{opacity:0,scale:.75}} animate={{opacity:1,scale:1}} transition={{duration:.6,delay:.55+index*.1,ease}}><span className="block text-[8px] font-black tracking-[.16em] text-copad-green">0{index+1}</span><span className="mt-1 block text-[9px] leading-4 font-bold text-white/62">{block.title}</span></motion.div>)}
           </motion.div>

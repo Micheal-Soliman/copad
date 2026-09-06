@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "fr
 import { useEffect, useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { Section } from "@/content/types";
+import { getUiCopy } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
 import styles from "./insights-book.module.css";
@@ -15,6 +16,7 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
   const reduceMotion = useReducedMotion();
   const isDesktop = useDesktopLayout();
   const ar = locale === "ar";
+  const ui = getUiCopy(locale).insights;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 76, damping: 33, mass: 0.48 });
   const introOpacity = useTransform(progress, [0, 0.32, 0.62, 1], [1, 1, 0.35, 0.35]);
@@ -33,21 +35,22 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
         <motion.div className="relative z-20 max-w-xl" style={scrollDriven ? { opacity: introOpacity, x: introX } : undefined}>
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.08, ease }} className="flex items-center gap-3">
             <span className="size-2 rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.85)]" />
-            <p className="text-[9px] font-black tracking-[.24em] text-copad-green uppercase">{ar ? "مكتبة كوباد الطبية" : "The COPAD Medical Library"}</p>
+            <p className="text-[9px] font-black tracking-[.24em] text-copad-green uppercase">{ui.library}</p>
           </motion.div>
           <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.12, ease }} className="mt-5 font-display text-[clamp(3.75rem,15vw,6.25rem)] leading-[.95] tracking-[-.05em] lg:text-[clamp(4.75rem,6.5vw,6.8rem)]">{content.title}</motion.h1>
           <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.28, ease }} className="mt-7 max-w-lg border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8">{content.intro}</motion.p>
         </motion.div>
 
         <motion.div className="relative mx-auto h-[22rem] w-full max-w-[59rem] sm:h-[33rem] lg:h-[min(35rem,calc(100vh-7.8rem))] lg:min-h-[29rem]" style={scrollDriven ? { scale: bookScale, rotateZ: bookRotate } : undefined}>
-          <PageFlipBook ar={ar} reducedMotion={Boolean(reduceMotion)} />
+          <PageFlipBook locale={locale} reducedMotion={Boolean(reduceMotion)} />
         </motion.div>
       </div>
     </div>
   </section>;
 }
 
-function PageFlipBook({ ar, reducedMotion }: { ar: boolean; reducedMotion: boolean }) {
+function PageFlipBook({ locale, reducedMotion }: { locale: Locale; reducedMotion: boolean }) {
+  const ui = getUiCopy(locale).insights;
   const mountRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<import("page-flip").PageFlip | null>(null);
   const currentStageRef = useRef(0);
@@ -62,7 +65,7 @@ function PageFlipBook({ ar, reducedMotion }: { ar: boolean; reducedMotion: boole
     let mobileOpenTimer: number | undefined;
     const host = document.createElement("div");
     host.className = styles.host;
-    host.innerHTML = createBookPages(ar);
+    host.innerHTML = createBookPages(locale);
     mount.replaceChildren(host);
     const syncStage = () => {
       const book = bookRef.current;
@@ -144,32 +147,21 @@ function PageFlipBook({ ar, reducedMotion }: { ar: boolean; reducedMotion: boole
       if (instance) instance.destroy();
       mount.replaceChildren();
     };
-  }, [ar, reducedMotion]);
+  }, [locale, reducedMotion]);
 
-  return <div ref={mountRef} className={styles.mount} aria-label={ar ? "عدد كوباد الطبي التفاعلي" : "Interactive COPAD medical issue"} />;
+  return <div ref={mountRef} className={styles.mount} aria-label={ui.interactive} />;
 }
 
-function createBookPages(ar: boolean) {
-  const c = {
-    issue: ar ? "الإصدار الأول" : "Issue No. 01",
-    title: ar ? "رؤى كوباد" : "COPAD Insights",
-    edition: ar ? "المعرفة الصحية بوضوح" : "Healthcare knowledge, clearly considered",
-    purpose: ar ? "معرفة موثوقة، بلغة واضحة." : "Credible knowledge, clearly communicated.",
-    purposeBody: ar ? "محتوى صحي وتعليمي يساعد القارئ على فهم الموضوع قبل أي شيء آخر." : "Health and educational content designed to help readers understand the subject before anything else.",
-    inside: ar ? "داخل هذا العدد" : "Inside this issue",
-    streams: ar ? ["الوعي بالأمراض", "التغذية والعافية", "الشركة والقطاع"] : ["Disease Awareness", "Nutrition & Wellness", "Corporate & Industry"],
-    feature: ar ? "من المعلومة إلى الفهم" : "From information to understanding",
-    featureBody: ar ? "نقدّم السياق الطبي بصورة مبسطة ومسؤولة، بعيدًا عن الترويج للمنتجات." : "Medical context presented in an accessible and responsible way, without product promotion.",
-    close: ar ? "اقرأ بوعي." : "Read with perspective.",
-  };
+function createBookPages(locale: Locale) {
+  const c = getUiCopy(locale).insights.book;
   const page = (inside: string, extra = "", density = "soft") => `<div data-book-page data-density="${density}" class="${styles.page} ${extra}"><div class="${styles.pageInner}">${inside}</div></div>`;
   const header = (number: string) => `<div class="${styles.paperHeader}"><span>COPAD / INSIGHTS</span><span>${number}</span></div>`;
   return [
     page(`<div class="${styles.coverMark}">${c.issue}</div><h2 class="${styles.coverTitle}">${c.title}</h2><div class="${styles.coverFooter}"><span>${c.edition}</span><strong class="${styles.coverNumber}">01</strong></div>`, styles.cover, "hard"),
-    page(`${header("01")}<p class="${styles.kicker}">${ar ? "رؤيتنا التحريرية" : "Editorial perspective"}</p><h3 class="${styles.pageTitle}">${c.purpose}</h3><p class="${styles.body}">${c.purposeBody}</p><span class="${styles.folio}">COPAD Pharma Egypt · 1989—2026</span>`),
-    page(`${header("02")}<p class="${styles.kicker}">${c.inside}</p><h3 class="${styles.pageTitle}">${ar ? "ثلاثة مسارات للقراءة" : "Three ways into the story"}</h3><div class="${styles.streamList}">${c.streams.map((stream, index) => `<div class="${styles.stream}"><span>0${index + 1}</span>${stream}</div>`).join("")}</div><span class="${styles.folio}">The COPAD Medical Library</span>`),
-    page(`${header("03")}<p class="${styles.kicker}">${ar ? "المقال الرئيسي" : "Lead feature"}</p><h3 class="${styles.pageTitle}">${c.feature}</h3><p class="${styles.body}">${c.featureBody}</p><span class="${styles.folio}">Knowledge · Context · Responsibility</span>`),
-    page(`${header("04")}<p class="${styles.kicker}">${ar ? "كلمة أخيرة" : "Closing note"}</p><h3 class="${styles.pageTitle}">${c.close}</h3><p class="${styles.body}">${ar ? "كل موضوع بداية لفهم أعمق، وليس نهاية للحوار." : "Every topic is a starting point for deeper understanding, not the end of the conversation."}</p><span class="${styles.folio}">COPAD / Insights</span>`),
-    page(`<div class="${styles.coverMark}">COPAD Pharma Egypt</div><h2 class="${styles.coverTitle}">${ar ? "معرفة مسؤولة." : "Knowledge, responsibly shared."}</h2><div class="${styles.coverFooter}"><span>copad.com.eg</span><strong class="${styles.coverNumber}">C</strong></div>`, styles.backCover, "hard"),
+    page(`${header("01")}<p class="${styles.kicker}">${c.perspective}</p><h3 class="${styles.pageTitle}">${c.purpose}</h3><p class="${styles.body}">${c.purposeBody}</p><span class="${styles.folio}">COPAD Pharma Egypt · 1989—2026</span>`),
+    page(`${header("02")}<p class="${styles.kicker}">${c.inside}</p><h3 class="${styles.pageTitle}">${c.ways}</h3><div class="${styles.streamList}">${c.streams.map((stream, index) => `<div class="${styles.stream}"><span>0${index + 1}</span>${stream}</div>`).join("")}</div><span class="${styles.folio}">The COPAD Medical Library</span>`),
+    page(`${header("03")}<p class="${styles.kicker}">${c.lead}</p><h3 class="${styles.pageTitle}">${c.feature}</h3><p class="${styles.body}">${c.featureBody}</p><span class="${styles.folio}">Knowledge · Context · Responsibility</span>`),
+    page(`${header("04")}<p class="${styles.kicker}">${c.closing}</p><h3 class="${styles.pageTitle}">${c.close}</h3><p class="${styles.body}">${c.closeBody}</p><span class="${styles.folio}">COPAD / Insights</span>`),
+    page(`<div class="${styles.coverMark}">COPAD Pharma Egypt</div><h2 class="${styles.coverTitle}">${c.back}</h2><div class="${styles.coverFooter}"><span>copad.com.eg</span><strong class="${styles.coverNumber}">C</strong></div>`, styles.backCover, "hard"),
   ].join("");
 }

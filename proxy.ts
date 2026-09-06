@@ -5,6 +5,8 @@ const locales = ["en", "ar"] as const;
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) return;
+
   const isLocalizedPath = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );

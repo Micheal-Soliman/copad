@@ -7,6 +7,7 @@ import { RevealHeading } from "@/components/motion/reveal-heading";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
+import { getUiCopy } from "@/content/ui";
 
 type Division = {
   title: string;
@@ -29,9 +30,7 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
   const reduceMotion = useReducedMotion();
   const isDesktop = useDesktopLayout();
   const ui = siteCopy[locale].ui.home;
-  const titleLines = locale === "ar"
-    ? ["أربعة قطاعات ضمن", "هيكل مؤسسي واحد"]
-    : ["Four Divisions, One", "Corporate Structure"];
+  const titleLines = [...getUiCopy(locale).home.divisionsTitleLines];
   return (
     <section id="divisions" className="relative scroll-mt-20 overflow-hidden bg-copad-white px-4 pt-10 pb-16 sm:px-8 sm:pb-20 lg:px-12 lg:pt-12 lg:pb-24">
       <div className="relative z-10 mx-auto max-w-[1440px]">

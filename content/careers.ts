@@ -11,7 +11,7 @@ export type CareerVacancy = {
   requirements: Record<Locale, string[]>;
 };
 
-/** Update this list to keep the vacancies section and form dropdown in sync. */
+/** Central vacancy content: update once to keep listings and individual pages in sync. */
 export const careerVacancies: CareerVacancy[] = [
   {
     id: "manufacturing",

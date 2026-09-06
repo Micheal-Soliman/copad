@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 import { useLenis } from "lenis/react";
 import { useRef, useState } from "react";
 import type { ContentBlock } from "@/content/types";
+import { getUiCopy } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle, scrollSceneCenter, scrollSystem } from "@/lib/motion/scroll-system";
 
@@ -17,6 +18,7 @@ export function ManufacturingProcess({ locale, blocks }: { locale: Locale; block
   const reduceMotion = useReducedMotion();
   const lenis = useLenis();
   const isArabic = locale === "ar";
+  const ui = getUiCopy(locale).manufacturing;
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const sceneProgress = useTransform(scrollYProgress, [0, scrollSystem.scene.completion], [0, 1]);
   const smooth = useSpring(sceneProgress, { stiffness: 74, damping: 34, mass: .5 });
@@ -55,6 +57,7 @@ export function ManufacturingProcess({ locale, blocks }: { locale: Locale; block
               isArabic={isArabic}
               reduceMotion={Boolean(reduceMotion)}
               onSelect={goTo}
+              labels={ui}
             />
 
             <motion.article className="relative z-10 max-h-[57svh] min-h-[21rem] overflow-hidden rounded-[1.7rem] border border-copad-deep/10 bg-copad-white/96 p-5 shadow-[0_28px_68px_rgba(6,79,120,.14)] backdrop-blur-md sm:min-h-[23rem] sm:p-6 lg:max-h-[58svh] lg:min-h-0 lg:p-7">
@@ -82,7 +85,7 @@ export function ManufacturingProcess({ locale, blocks }: { locale: Locale; block
                   />
                   <span aria-hidden="true" className="absolute -end-4 -top-10 font-display text-[10rem] leading-none text-copad-deep/[.035] lg:text-[14rem]">0{activeIndex + 1}</span>
                   <div className="relative z-10">
-                    <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{isArabic ? "مرحلة تشغيل" : "Operating stage"} · 0{activeIndex + 1}</span>
+                    <span className="text-[8px] font-black tracking-[.2em] text-copad-green uppercase">{ui.stage} · 0{activeIndex + 1}</span>
                     <h3
                       className={`${isArabic ? "max-w-[22ch] font-sans font-black leading-[1.12]" : "max-w-[25ch] font-display leading-[1.04]"} mt-2.5 text-balance tracking-[-.035em] text-copad-deep [hyphens:none] [overflow-wrap:normal] [word-break:normal]`}
                       style={{ fontSize: "clamp(2.15rem, 3.8vw, 3.3rem)" }}
@@ -108,6 +111,7 @@ function ManufacturingFlowConsole({
   isArabic,
   reduceMotion,
   onSelect,
+  labels,
 }: {
   blocks: ContentBlock[];
   activeIndex: number;
@@ -115,6 +119,7 @@ function ManufacturingFlowConsole({
   isArabic: boolean;
   reduceMotion: boolean;
   onSelect: (index: number) => void;
+  labels: ReturnType<typeof getUiCopy>["manufacturing"];
 }) {
   const lineScale = useTransform(progress, [0, 1], [0, 1]);
   const carrierTop = useTransform(progress, [0, 1], ["0%", "calc(100% - 11px)"]);
@@ -131,7 +136,7 @@ function ManufacturingFlowConsole({
 
         <div className="relative z-10 flex h-full flex-col p-5 xl:p-6">
           <header className="border-b border-white/14 pb-4">
-            <strong className="block text-xs font-bold text-white/82">{isArabic ? "مسار التشغيل" : "Manufacturing flow"}</strong>
+            <strong className="block text-xs font-bold text-white/82">{labels.flow}</strong>
           </header>
 
           <div className="relative mt-4 flex flex-1 flex-col justify-center gap-3 ps-9">
@@ -151,7 +156,7 @@ function ManufacturingFlowConsole({
                   aria-current={active ? "step" : undefined}
                   className={`group relative min-h-[4.6rem] overflow-hidden rounded-[1.15rem] border px-4 py-3 text-start transition-[background-color,border-color,transform,box-shadow] duration-500 ${active ? "scale-[1.01] border-copad-green/55 bg-white text-copad-deep shadow-[0_16px_34px_rgba(0,0,0,.2)]" : "border-white/12 bg-white/[.055] text-white hover:border-white/28 hover:bg-white/[.09]"}`}
                 >
-                  <span className={`block text-[7px] font-black tracking-[.2em] uppercase ${active ? "text-copad-green" : complete ? "text-copad-sky" : "text-white/38"}`}>{isArabic ? "محطة" : "Station"} · 0{index + 1}</span>
+                  <span className={`block text-[7px] font-black tracking-[.2em] uppercase ${active ? "text-copad-green" : complete ? "text-copad-sky" : "text-white/38"}`}>{labels.station} · 0{index + 1}</span>
                   <strong className={`mt-1.5 block text-[11px] leading-4 font-bold xl:text-xs ${active ? "text-copad-deep" : "text-white/76"}`}>{block.title}</strong>
                   <span aria-hidden="true" className={`absolute inset-y-0 start-0 w-1 origin-bottom bg-copad-green transition-transform duration-500 ${active ? "scale-y-100" : "scale-y-0"}`} />
                 </button>
@@ -160,7 +165,7 @@ function ManufacturingFlowConsole({
           </div>
 
           <footer className="border-t border-white/14 pt-4 text-[7px] font-black tracking-[.17em] text-white/42 uppercase">
-            <span>{isArabic ? "تدفق منضبط" : "Controlled flow"}</span>
+            <span>{labels.controlled}</span>
           </footer>
         </div>
       </motion.div>
