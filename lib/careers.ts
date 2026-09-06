@@ -2,7 +2,7 @@ import "server-only";
 
 import { careerVacancies, localizeVacancy, type CareerVacancy } from "@/content/careers";
 import type { Locale } from "@/lib/i18n";
-import { isSupabaseConfigured, supabaseRequest } from "@/lib/supabase/server";
+import { supabaseReadOr } from "@/lib/supabase/server";
 
 export type CareerVacancyRow = {
   id: number;
@@ -62,9 +62,8 @@ export function careerToRow(vacancy: CareerVacancy, sortOrder: number): CareerVa
 }
 
 export async function getCareerVacancies(options: { includeDrafts?: boolean } = {}) {
-  if (!isSupabaseConfigured()) return careerVacancies;
   const filter = options.includeDrafts ? "" : "&status=eq.published";
-  const rows = await supabaseRequest<CareerVacancyRow[]>(`career_vacancies?select=*&order=sort_order.asc,created_at.asc${filter}`, { cache: "no-store" });
+  const rows = await supabaseReadOr<CareerVacancyRow[]>(`career_vacancies?select=*&order=sort_order.asc,created_at.asc${filter}`, [], { cache: "no-store" });
   return rows.length ? rows.map(vacancyFromRow) : careerVacancies;
 }
 
@@ -74,7 +73,6 @@ export async function getLocalizedCareerVacancy(locale: Locale, slug: string) {
 }
 
 export async function getCareerVacancyRows() {
-  if (!isSupabaseConfigured()) return careerVacancies.map(careerToRow);
-  const rows = await supabaseRequest<CareerVacancyRow[]>("career_vacancies?select=*&order=sort_order.asc,created_at.asc", { cache: "no-store" });
+  const rows = await supabaseReadOr<CareerVacancyRow[]>("career_vacancies?select=*&order=sort_order.asc,created_at.asc", [], { cache: "no-store" });
   return rows.length ? rows : careerVacancies.map(careerToRow);
 }

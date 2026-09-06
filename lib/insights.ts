@@ -1,7 +1,7 @@
 import "server-only";
 import { insightCategories, localizeInsight, seedInsights, type Insight, type InsightCategory, type LocalizedInsight } from "@/content/insights";
 import type { Locale } from "@/lib/i18n";
-import { isSupabaseConfigured, supabaseRequest } from "@/lib/supabase/server";
+import { supabaseReadOr } from "@/lib/supabase/server";
 
 export type InsightAdminRecord = Insight & { status: "draft" | "published"; createdAt?: string };
 
@@ -45,29 +45,26 @@ function seedAdminInsights(): InsightAdminRecord[] {
 const insightSelect = "id,slug,category,status,published_at,reading_minutes,cover_image_base64,title_en,title_ar,excerpt_en,excerpt_ar,body_en,body_ar,created_at";
 
 export async function getPublishedInsights(locale: Locale): Promise<LocalizedInsight[]> {
-  if (!isSupabaseConfigured()) return seedInsights.map((item) => localizeInsight(item, locale));
-  const rows = await supabaseRequest<InsightRow[]>(`insights?select=${insightSelect}&status=eq.published&order=published_at.desc`, { next: { revalidate: 60, tags: ["insights"] } });
-  return rows.map(rowToInsight).map((item) => localizeInsight(item, locale));
+  const rows = await supabaseReadOr<InsightRow[] | null>(`insights?select=${insightSelect}&status=eq.published&order=published_at.desc`, null, { next: { revalidate: 60, tags: ["insights"] } });
+  const insights = rows?.length ? rows.map(rowToInsight) : seedAdminInsights();
+  return insights.map((item) => localizeInsight(item, locale));
 }
 
 export async function getInsightBySlug(locale: Locale, slug: string): Promise<LocalizedInsight | null> {
-  if (!isSupabaseConfigured()) {
-    const item = seedInsights.find((insight) => insight.slug === slug);
-    return item ? localizeInsight(item, locale) : null;
-  }
-  const rows = await supabaseRequest<InsightRow[]>(`insights?select=${insightSelect}&slug=eq.${encodeURIComponent(slug)}&status=eq.published&limit=1`, { next: { revalidate: 60, tags: ["insights"] } });
-  return rows[0] ? localizeInsight(rowToInsight(rows[0]), locale) : null;
+  const seed = seedInsights.find((insight) => insight.slug === slug);
+  const rows = await supabaseReadOr<InsightRow[] | null>(`insights?select=${insightSelect}&slug=eq.${encodeURIComponent(slug)}&status=eq.published&limit=1`, null, { next: { revalidate: 60, tags: ["insights"] } });
+  if (rows?.[0]) return localizeInsight(rowToInsight(rows[0]), locale);
+  return seed ? localizeInsight(seed, locale) : null;
 }
 
 export async function getAllInsights(): Promise<InsightAdminRecord[]> {
-  if (!isSupabaseConfigured()) return seedAdminInsights();
-  const rows = await supabaseRequest<InsightRow[]>(`insights?select=${insightSelect}&order=published_at.desc`, { cache: "no-store" });
-  return rows.map(rowToInsight);
+  const rows = await supabaseReadOr<InsightRow[]>(`insights?select=${insightSelect}&order=published_at.desc`, [], { cache: "no-store" });
+  return rows.length ? rows.map(rowToInsight) : seedAdminInsights();
 }
 
 export async function getInsightById(id: string): Promise<InsightAdminRecord | null> {
-  if (!isSupabaseConfigured()) return seedAdminInsights().find((item) => item.id === id) ?? null;
-  const rows = await supabaseRequest<InsightRow[]>(`insights?select=${insightSelect}&id=eq.${encodeURIComponent(id)}&limit=1`, { cache: "no-store" });
+  const rows = await supabaseReadOr<InsightRow[]>(`insights?select=${insightSelect}&id=eq.${encodeURIComponent(id)}&limit=1`, [], { cache: "no-store" });
+  if (!rows.length) return seedAdminInsights().find((item) => item.id === id) ?? null;
   return rows[0] ? rowToInsight(rows[0]) : null;
 }
 
@@ -92,4 +89,3 @@ export function insightToRow(insight: Omit<InsightAdminRecord, "id">) {
     updated_at: new Date().toISOString(),
   };
 }
-

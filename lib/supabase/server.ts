@@ -38,3 +38,16 @@ export async function supabaseRequest<T>(path: string, options: SupabaseOptions 
   return (text ? JSON.parse(text) : undefined) as T;
 }
 
+/**
+ * Read CMS data without making the public site depend on database readiness.
+ * This keeps preview and deployments available while migrations are pending.
+ * Mutations intentionally keep using `supabaseRequest` so write failures remain visible.
+ */
+export async function supabaseReadOr<T>(path: string, fallback: T, options: SupabaseOptions = {}): Promise<T> {
+  if (!isSupabaseConfigured()) return fallback;
+  try {
+    return await supabaseRequest<T>(path, options);
+  } catch {
+    return fallback;
+  }
+}
