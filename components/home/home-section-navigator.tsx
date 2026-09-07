@@ -42,7 +42,15 @@ export function HomeSectionNavigator({ label, items }: { label: string; items: N
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(updateDockVisibility);
-    return () => window.cancelAnimationFrame(frame);
+    const delayedCheck = window.setTimeout(updateDockVisibility, 240);
+    window.addEventListener("scroll", updateDockVisibility, { passive: true });
+    window.addEventListener("hashchange", updateDockVisibility);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(delayedCheck);
+      window.removeEventListener("scroll", updateDockVisibility);
+      window.removeEventListener("hashchange", updateDockVisibility);
+    };
   }, [updateDockVisibility]);
 
   useEffect(() => {

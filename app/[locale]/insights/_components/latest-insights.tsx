@@ -30,9 +30,9 @@ export function LatestInsights({ locale, insights }: { locale: Locale; insights:
         </div>
       </header>
 
-      {featured ? <motion.div key={category} initial={reducedMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .58, ease }} className="mt-10 grid gap-5 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
+      {featured ? <motion.div key={category} initial={reducedMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .58, ease }} className={`mt-10 grid items-start gap-5 lg:gap-8 ${rest.length ? "lg:grid-cols-[1.08fr_.92fr]" : ""}`}>
         <InsightCard locale={locale} insight={featured} featured />
-        <div className="grid gap-5 sm:grid-cols-2">{rest.map((item, index) => <motion.div key={item.id} initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .5, delay: index * .06, ease }}><InsightCard locale={locale} insight={item} /></motion.div>)}</div>
+        {rest.length ? <div className="grid items-start gap-5 sm:grid-cols-2">{rest.map((item, index) => <motion.div className="self-start" key={item.id} initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .5, delay: index * .06, ease }}><InsightCard locale={locale} insight={item} /></motion.div>)}</div> : null}
       </motion.div> : <p className="py-24 text-center text-sm text-copad-deep/48">—</p>}
     </div>
   </section>;
@@ -44,7 +44,7 @@ function Filter({ active, onClick, children }: { active: boolean; onClick: () =>
 
 function InsightCard({ locale, insight, featured = false }: { locale: Locale; insight: LocalizedInsight; featured?: boolean }) {
   const copy = getDictionary(locale).insightsCms;
-  return <article className={`group h-full overflow-hidden rounded-[1.5rem] border border-copad-deep/10 bg-white transition duration-500 hover:-translate-y-1 hover:border-copad-green/30 hover:shadow-[0_24px_70px_rgba(6,79,120,.09)] ${featured ? "lg:flex lg:flex-col" : ""}`}>
+  return <article className={`group self-start overflow-hidden rounded-[1.5rem] border border-copad-deep/10 bg-white transition duration-500 hover:-translate-y-1 hover:border-copad-green/30 hover:shadow-[0_24px_70px_rgba(6,79,120,.09)] ${featured ? "lg:flex lg:flex-col" : ""}`}>
     <Link href={`/${locale}/insights/${insight.slug}`} className={`relative block overflow-hidden bg-copad-sand ${featured ? "aspect-[16/9] lg:aspect-[16/8.5]" : "aspect-[16/8]"}`}>
       <Image src={insight.coverImage} alt="" fill unoptimized={insight.coverImage.startsWith("data:")} sizes={featured ? "(max-width: 1024px) 100vw, 56vw" : "(max-width: 640px) 100vw, 28vw"} className="object-cover transition duration-700 ease-out group-hover:scale-[1.035]" />
     </Link>
@@ -61,4 +61,3 @@ function InsightCard({ locale, insight, featured = false }: { locale: Locale; in
 function formatDate(value: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale === "ar" ? "ar-EG" : "en-GB", { day: "numeric", month: "short", year: "numeric" }).format(new Date(`${value}T12:00:00Z`));
 }
-

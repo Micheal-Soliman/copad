@@ -70,8 +70,8 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
           <h2 className="mt-4 max-w-4xl text-pretty font-display text-[clamp(2.3rem,3.7vw,4.25rem)] leading-[1.06] font-bold tracking-[-0.035em] text-copad-deep">{title}</h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-7 lg:mt-5 lg:text-[15px] lg:leading-7 2xl:text-lg 2xl:leading-9">{body}</p>
 
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/therapeutic-areas`} className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-52 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(6,79,120,.17)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(0,163,196,.22)] sm:w-auto 2xl:mt-7">
-            <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-right" />
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/therapeutic-areas`} className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-52 items-center justify-center overflow-hidden rounded-full border border-copad-green bg-copad-green px-7 py-3.5 text-xs font-black text-white shadow-[0_15px_34px_rgba(0,163,196,.22)] transition duration-500 hover:-translate-y-1 hover:border-copad-deep hover:shadow-[0_22px_44px_rgba(6,79,120,.2)] sm:w-auto 2xl:mt-7">
+            <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 rtl:origin-right" />
             <span>{action}</span>
           </Link>
         </ScrollSceneItem>

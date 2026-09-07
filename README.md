@@ -65,6 +65,10 @@ npm run dev
 
 Open `http://127.0.0.1:3000`. The root URL redirects to `/en` or `/ar` based on the browser language.
 
+## Form email delivery
+
+Copy `.env.example` to `.env.local`, then configure `GMAIL_SMTP_USER` with the sending Gmail address, `GMAIL_SMTP_APP_PASSWORD` with a Google App Password, and `FORM_NOTIFICATION_EMAIL` with the inbox that should receive every Contact, Careers, and Partnership submission. These values are server-only and must also be added to the deployment environment.
+
 ## Validation
 
 ```bash

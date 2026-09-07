@@ -144,8 +144,8 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
         </div>
 
         <div className="mt-10 flex justify-center">
-          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/divisions`} className="group relative isolate inline-flex min-h-11 w-full min-w-56 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-8 py-4 text-xs font-black text-white shadow-[0_16px_36px_rgba(6,79,120,.16)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_24px_46px_rgba(0,163,196,.24)] sm:w-auto">
-            <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-y-100" />
+          <Link data-magnetic data-cursor-label={ui.interactionLabels.go} href={`/${locale}/divisions`} className="group relative isolate inline-flex min-h-11 w-full min-w-56 items-center justify-center overflow-hidden rounded-full border border-copad-green bg-copad-green px-8 py-4 text-xs font-black text-white shadow-[0_16px_36px_rgba(0,163,196,.22)] transition duration-500 hover:-translate-y-1 hover:border-copad-deep hover:shadow-[0_24px_46px_rgba(6,79,120,.2)] sm:w-auto">
+            <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-y-100" />
             <span aria-hidden="true" className="absolute top-0 -start-16 h-full w-12 skew-x-[-18deg] bg-white/25 blur-sm transition-transform duration-700 group-hover:translate-x-[19rem] rtl:group-hover:-translate-x-[19rem]" />
             <span className="relative text-center">{action}</span>
           </Link>

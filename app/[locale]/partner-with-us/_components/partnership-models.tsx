@@ -48,7 +48,7 @@ function PartnershipModelRow({ block, index, locale }: { block: ContentBlock; in
       </div>
       <div className="relative mt-10">
         <div className={`mb-6 h-px ${dark ? "bg-white/14" : "bg-copad-deep/12"}`}><motion.div style={reduceMotion ? { scaleX: 1 } : { scaleX: lineScale }} className="h-full origin-start bg-copad-green rtl:origin-end" /></div>
-        <Link href={`/${locale}/partner-with-us/${slugs[index]}`} className={`group/link inline-flex min-h-12 items-center gap-4 rounded-full border px-6 text-[9px] font-black uppercase tracking-[.14em] transition duration-300 ${dark ? "border-white/22 bg-white/7 hover:border-copad-green hover:bg-copad-green" : "border-copad-deep/14 bg-copad-sand hover:border-copad-green hover:bg-copad-green hover:text-white"}`}>{ui.explore}<span aria-hidden="true" className="transition-transform group-hover/link:translate-x-1 rtl:rotate-180 rtl:group-hover/link:-translate-x-1">→</span></Link>
+        <Link href={`/${locale}/partner-with-us/${slugs[index]}`} className={`group/link inline-flex min-h-12 items-center gap-4 rounded-full border px-6 text-[9px] font-black uppercase tracking-[.14em] shadow-[0_12px_28px_rgba(6,79,120,.12)] transition duration-300 hover:-translate-y-0.5 ${dark ? "border-white bg-white text-copad-deep hover:border-copad-sky hover:bg-copad-sand" : "border-copad-green bg-copad-green text-white hover:border-copad-deep hover:bg-copad-deep"}`}>{ui.explore}<span aria-hidden="true" className="transition-transform group-hover/link:translate-x-1 rtl:rotate-180 rtl:group-hover/link:-translate-x-1">→</span></Link>
       </div>
     </motion.div>
   </motion.article>;

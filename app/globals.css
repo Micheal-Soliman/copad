@@ -3,11 +3,12 @@
 @theme {
   /* COPAD brand palette — edit these tokens to update the full experience. */
   --breakpoint-lg: 60rem;
-  --color-copad-deep: #064f78;
-  --color-copad-green: #00a3c4;
-  --color-copad-sky: #8edcf5;
+  --color-copad-deep: #075b85;
+  --color-copad-green: #00acd0;
+  --color-copad-sky: #a8e4f7;
   --color-copad-red: #e43d48;
-  --color-copad-sand: #f6fbfe;
+  --color-copad-sand: #f8fcff;
+  --color-copad-ice: #eef9ff;
   --color-copad-white: #ffffff;
   --font-sans: var(--font-tt-norms), var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;
   --font-display: var(--font-bukra), Arial, Tahoma, "Segoe UI", sans-serif;

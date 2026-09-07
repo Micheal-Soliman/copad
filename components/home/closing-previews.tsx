@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
@@ -49,10 +50,10 @@ export function ClosingPreviews({ locale, insights, partnership }: ClosingPrevie
                     <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out lg:grid-rows-[1fr] lg:opacity-100 ${isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                       <div className="overflow-hidden">
                         <p className={`mt-4 max-w-xl text-sm leading-7 ${dark ? "text-white/64" : "text-copad-deep/62"}`}>{card.body}</p>
-                        <button type="button" aria-disabled="true" className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 cursor-default items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(6,79,120,.16)] sm:w-auto ${dark ? "bg-white text-copad-deep" : "bg-copad-deep text-white"}`}>
-                          <span aria-hidden="true" className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/button:scale-y-100" />
+                        <Link href={`/${locale}/${card.href}`} className={`group/button relative isolate mt-5 inline-flex min-h-11 w-full min-w-44 items-center justify-center overflow-hidden rounded-full border px-7 py-3.5 text-xs font-black shadow-[0_14px_32px_rgba(6,79,120,.16)] transition duration-500 hover:-translate-y-1 sm:w-auto ${dark ? "border-white bg-white text-copad-deep" : "border-copad-green bg-copad-green text-white"}`}>
+                          <span aria-hidden="true" className={`absolute inset-0 -z-10 origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/button:scale-y-100 ${dark ? "bg-copad-sand" : "bg-copad-deep"}`} />
                           <span>{card.action}</span>
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

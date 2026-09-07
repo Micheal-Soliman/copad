@@ -14,7 +14,7 @@ export function ContactPageContent({ locale }: { locale: Locale }) {
     <SiteHeader locale={locale} transparent />
 
     <section dir={ar ? "rtl" : "ltr"} className="relative overflow-hidden bg-copad-deep px-4 pb-20 pt-36 text-white sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,163,196,.2),transparent_32%),linear-gradient(145deg,#064f78_0%,#064f78_62%,#064f78_100%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,163,196,.2),transparent_32%),linear-gradient(215deg,#064f78_0%,#064f78_62%,#064f78_100%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,172,208,.3),transparent_32%),linear-gradient(145deg,#075b85_0%,#075b85_58%,#096a96_100%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,172,208,.3),transparent_32%),linear-gradient(215deg,#075b85_0%,#075b85_58%,#096a96_100%)]" />
       <div aria-hidden="true" className="absolute -end-24 -bottom-56 size-[34rem] rounded-full border border-white/6" />
       <div className="relative mx-auto max-w-[1280px]">
         <p className="text-[9px] font-black uppercase tracking-[.24em] text-copad-green">COPAD / {content.eyebrow}</p>

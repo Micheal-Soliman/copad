@@ -31,7 +31,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
   return (
     <section id="home" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(0,163,196,.2),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(232,245,253,.07),transparent_28%),linear-gradient(132deg,#064f78_0%,#064f78_56%,#064f78_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_80%_26%,rgba(0,172,208,.28),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(255,255,255,.1),transparent_28%),linear-gradient(132deg,#075b85_0%,#075b85_56%,#096a96_100%)]" />
         <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[36vw] bg-linear-to-r from-transparent via-copad-green/[.06] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-45vw", "120vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-20 h-1/2 bg-linear-to-t from-black/18 to-transparent" />
 
@@ -73,7 +73,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
                 <motion.div aria-hidden="true" className="absolute inset-0 bg-[url('/images/copad-divisions-atlas.png')] bg-[length:auto_100%] bg-left bg-no-repeat" style={scrollDriven ? { scale: photoScale } : undefined} />
                 <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,79,120,.72),rgba(6,79,120,.08)_58%,rgba(6,79,120,.2)),linear-gradient(0deg,rgba(6,79,120,.5),transparent_55%)]" />
                 <div className="absolute inset-x-5 top-5 flex items-center justify-between sm:inset-x-7 sm:top-7">
-                  <span className="rounded-full border border-white/24 bg-copad-deep/45 px-3 py-2 text-[8px] font-black tracking-[.2em] text-white/78 uppercase backdrop-blur-md">COPAD / Clinical portfolio</span>
+                  <span className="rounded-full border border-white/24 bg-copad-deep/45 px-3 py-2 text-[8px] font-black tracking-[.2em] text-white/78 uppercase backdrop-blur-md">{sharedUi.portfolioMark}</span>
                   <span className="font-display text-5xl leading-none text-white/90 sm:text-6xl">09</span>
                 </div>
                 <p className="absolute inset-x-6 bottom-5 max-w-sm text-xs leading-5 font-bold text-white/78 sm:inset-x-8 sm:bottom-7 sm:text-sm">{ui.heroMetricLabel}</p>

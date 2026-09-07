@@ -87,7 +87,7 @@ function PortfolioWorld({ locale, block, index }: { locale:Locale; block:Content
       <div className="max-w-[48rem] border-white/18 lg:border-s lg:ps-10 xl:ps-14">
         <p className="max-w-2xl text-[13px] leading-6 text-white/74 sm:text-sm sm:leading-7 lg:text-[15px] lg:leading-8">{block.body}</p>
         {block.items&&<div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">{block.items.map(item=><span key={item} className="flex gap-2 text-[9px] leading-4 font-bold text-white/70"><i className="mt-1.5 size-1 shrink-0 rounded-full bg-copad-sky" />{item}</span>)}</div>}
-        {block.cta&&block.href&&<Link href={`/${locale}/${block.href}`} className="mt-5 inline-flex min-h-10 items-center rounded-full bg-white px-5 text-[10px] font-black text-copad-deep transition duration-300 hover:-translate-y-0.5 hover:bg-copad-sky">{block.cta}</Link>}
+        {block.cta&&block.href&&<Link href={`/${locale}/${block.href}`} className="mt-5 inline-flex min-h-11 items-center rounded-full border border-white bg-white px-6 text-[10px] font-black text-copad-deep shadow-[0_12px_28px_rgba(0,0,0,.14)] transition duration-300 hover:-translate-y-0.5 hover:border-copad-sky hover:bg-copad-sand">{block.cta}</Link>}
       </div>
     </div>
   </article>;

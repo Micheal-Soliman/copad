@@ -176,12 +176,12 @@ export function HomeHero(props: HomeHeroProps) {
 function HeroButtons({ primaryHref, secondaryHref, primary, secondary, cursorLabel }: { primaryHref: string; secondaryHref: string; primary: string; secondary: string; cursorLabel: string }) {
   return (
     <>
-      <Link data-magnetic data-cursor-label={cursorLabel} className="group relative isolate w-full min-w-44 overflow-hidden rounded-full bg-white px-7 py-3.5 text-xs font-black text-copad-deep shadow-[0_15px_35px_rgba(0,0,0,.16)] transition duration-500 hover:-translate-y-1 hover:text-white sm:w-auto" href={primaryHref}>
-        <span className="absolute inset-0 -z-10 translate-y-full rounded-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
+      <Link data-magnetic data-cursor-label={cursorLabel} className="group relative isolate w-full min-w-44 overflow-hidden rounded-full border border-copad-green bg-copad-green px-7 py-3.5 text-xs font-black text-white shadow-[0_15px_35px_rgba(0,163,196,.28)] transition duration-500 hover:-translate-y-1 hover:border-white hover:shadow-[0_20px_45px_rgba(0,163,196,.36)] sm:w-auto" href={primaryHref}>
+        <span className="absolute inset-0 -z-10 translate-y-full rounded-full bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
         <span className="relative">{primary}</span>
       </Link>
-      <Link data-magnetic data-cursor-label={cursorLabel} className="group relative isolate w-full min-w-44 overflow-hidden rounded-full border border-white/50 px-7 py-3.5 text-xs font-black text-white backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-copad-green sm:w-auto" href={secondaryHref}>
-        <span className="absolute inset-y-0 start-0 -z-10 w-0 bg-white/12 transition-all duration-500 group-hover:w-full" />
+      <Link data-magnetic data-cursor-label={cursorLabel} className="group relative isolate w-full min-w-44 overflow-hidden rounded-full border border-white bg-white px-7 py-3.5 text-xs font-black text-copad-deep shadow-[0_15px_35px_rgba(0,0,0,.16)] transition duration-500 hover:-translate-y-1 hover:border-copad-sky sm:w-auto" href={secondaryHref}>
+        <span className="absolute inset-y-0 start-0 -z-10 w-0 bg-copad-sand transition-all duration-500 group-hover:w-full" />
         <span className="absolute inset-x-7 bottom-2 h-px origin-center scale-x-0 bg-copad-green transition-transform duration-500 group-hover:scale-x-100" />
         <span className="relative">{secondary}</span>
       </Link>

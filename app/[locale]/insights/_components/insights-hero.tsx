@@ -27,7 +27,7 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
 
   return <section ref={sectionRef} id="home" style={homeScrollSceneStyle(4)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-screen">
-      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_35%,rgba(0,163,196,.18),transparent_31%),radial-gradient(circle_at_16%_88%,rgba(142,220,245,.07),transparent_26%),linear-gradient(125deg,#064f78,#064f78)]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_35%,rgba(0,172,208,.28),transparent_31%),radial-gradient(circle_at_16%_88%,rgba(255,255,255,.1),transparent_26%),linear-gradient(125deg,#075b85,#096a96)]" />
       <motion.div aria-hidden="true" className="absolute inset-y-0 -z-20 w-[34vw] bg-linear-to-r from-transparent via-copad-green/[.065] to-transparent blur-3xl" animate={reduceMotion ? undefined : { x: ["-38vw", "120vw"] }} transition={{ duration: 11, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
       <div aria-hidden="true" className="absolute inset-y-0 start-[48%] hidden w-px bg-white/[.05] lg:block" />
 
@@ -155,13 +155,13 @@ function PageFlipBook({ locale, reducedMotion }: { locale: Locale; reducedMotion
 function createBookPages(locale: Locale) {
   const c = getUiCopy(locale).insights.book;
   const page = (inside: string, extra = "", density = "soft") => `<div data-book-page data-density="${density}" class="${styles.page} ${extra}"><div class="${styles.pageInner}">${inside}</div></div>`;
-  const header = (number: string) => `<div class="${styles.paperHeader}"><span>COPAD / INSIGHTS</span><span>${number}</span></div>`;
+  const header = (number: string) => `<div class="${styles.paperHeader}"><span>${c.header}</span><span>${number}</span></div>`;
   return [
     page(`<div class="${styles.coverMark}">${c.issue}</div><h2 class="${styles.coverTitle}">${c.title}</h2><div class="${styles.coverFooter}"><span>${c.edition}</span><strong class="${styles.coverNumber}">01</strong></div>`, styles.cover, "hard"),
-    page(`${header("01")}<p class="${styles.kicker}">${c.perspective}</p><h3 class="${styles.pageTitle}">${c.purpose}</h3><p class="${styles.body}">${c.purposeBody}</p><span class="${styles.folio}">COPAD Pharma Egypt · 1989—2026</span>`),
-    page(`${header("02")}<p class="${styles.kicker}">${c.inside}</p><h3 class="${styles.pageTitle}">${c.ways}</h3><div class="${styles.streamList}">${c.streams.map((stream, index) => `<div class="${styles.stream}"><span>0${index + 1}</span>${stream}</div>`).join("")}</div><span class="${styles.folio}">The COPAD Medical Library</span>`),
-    page(`${header("03")}<p class="${styles.kicker}">${c.lead}</p><h3 class="${styles.pageTitle}">${c.feature}</h3><p class="${styles.body}">${c.featureBody}</p><span class="${styles.folio}">Knowledge · Context · Responsibility</span>`),
-    page(`${header("04")}<p class="${styles.kicker}">${c.closing}</p><h3 class="${styles.pageTitle}">${c.close}</h3><p class="${styles.body}">${c.closeBody}</p><span class="${styles.folio}">COPAD / Insights</span>`),
-    page(`<div class="${styles.coverMark}">COPAD Pharma Egypt</div><h2 class="${styles.coverTitle}">${c.back}</h2><div class="${styles.coverFooter}"><span>copad.com.eg</span><strong class="${styles.coverNumber}">C</strong></div>`, styles.backCover, "hard"),
+    page(`${header("01")}<p class="${styles.kicker}">${c.perspective}</p><h3 class="${styles.pageTitle}">${c.purpose}</h3><p class="${styles.body}">${c.purposeBody}</p><span class="${styles.folio}">${c.companyFolio}</span>`),
+    page(`${header("02")}<p class="${styles.kicker}">${c.inside}</p><h3 class="${styles.pageTitle}">${c.ways}</h3><div class="${styles.streamList}">${c.streams.map((stream, index) => `<div class="${styles.stream}"><span>0${index + 1}</span>${stream}</div>`).join("")}</div><span class="${styles.folio}">${c.libraryFolio}</span>`),
+    page(`${header("03")}<p class="${styles.kicker}">${c.lead}</p><h3 class="${styles.pageTitle}">${c.feature}</h3><p class="${styles.body}">${c.featureBody}</p><span class="${styles.folio}">${c.valuesFolio}</span>`),
+    page(`${header("04")}<p class="${styles.kicker}">${c.closing}</p><h3 class="${styles.pageTitle}">${c.close}</h3><p class="${styles.body}">${c.closeBody}</p><span class="${styles.folio}">${c.insightsFolio}</span>`),
+    page(`<div class="${styles.coverMark}">${c.company}</div><h2 class="${styles.coverTitle}">${c.back}</h2><div class="${styles.coverFooter}"><span>copad.com.eg</span><strong class="${styles.coverNumber}">C</strong></div>`, styles.backCover, "hard"),
   ].join("");
 }

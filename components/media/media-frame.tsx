@@ -21,7 +21,7 @@ export function MediaFrame({ label, src, priority = false, placeholderLabel = ""
           sizes="(max-width: 768px) 100vw, 48vw"
         />
       ) : (
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,#064f78,#00a3c4)]" aria-label={`${placeholderLabel}: ${label}`} />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,#075b85,#00acd0)]" aria-label={`${placeholderLabel}: ${label}`} />
       )}
       <div className="absolute inset-0 bg-linear-to-t from-copad-deep/85 via-copad-deep/5 to-transparent" aria-hidden="true" />
       <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">

@@ -25,7 +25,7 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
 
   return <section id="home" ref={sectionRef} style={homeScrollSceneStyle(2)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_76%_42%,rgba(0,163,196,.24),transparent_28%),radial-gradient(circle_at_10%_90%,rgba(232,245,253,.08),transparent_30%),linear-gradient(135deg,#064f78,#064f78_55%,#064f78)]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_76%_42%,rgba(0,172,208,.32),transparent_28%),radial-gradient(circle_at_10%_90%,rgba(255,255,255,.11),transparent_30%),linear-gradient(135deg,#075b85,#075b85_55%,#096a96)]" />
       <motion.span aria-hidden="true" className="absolute inset-y-0 -z-20 w-[34vw] -skew-x-12 bg-linear-to-r from-transparent via-white/[.055] to-transparent blur-2xl" animate={reduceMotion ? undefined : { x: ["-40vw", "125vw"] }} transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} />
 
       <div dir={isArabic ? "rtl" : "ltr"} className="mx-auto grid min-h-[100svh] max-w-[1440px] items-center gap-8 px-4 pt-24 pb-8 sm:px-8 sm:pt-28 lg:h-screen lg:min-h-0 lg:grid-cols-[.8fr_1.2fr] lg:gap-12 lg:px-12 lg:pt-24 lg:pb-5">

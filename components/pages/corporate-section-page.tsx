@@ -42,7 +42,7 @@ export function CorporateSectionPage({
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-copad-deep/68 sm:mt-8 sm:leading-8 lg:text-lg">{content.intro}</p>
             {content.cta && (
-              <Link href={`/${locale}/contact`} className="mt-7 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-copad-deep px-6 py-3 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-copad-green sm:mt-8 sm:w-auto">
+              <Link href={`/${locale}/contact`} className="mt-7 inline-flex min-h-11 w-full items-center justify-center rounded-full border border-copad-green bg-copad-green px-6 py-3 text-xs font-black text-white shadow-[0_14px_32px_rgba(0,163,196,.2)] transition hover:-translate-y-0.5 hover:border-copad-deep hover:bg-copad-deep sm:mt-8 sm:w-auto">
                 {content.cta}
               </Link>
             )}

@@ -93,9 +93,9 @@ export function IntroductionSection({
             data-magnetic
             data-cursor-label={ui.interactionLabels.go}
             href={`/${locale}/about`}
-            className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full bg-copad-deep px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(6,79,120,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(0,163,196,.24)] sm:w-auto 2xl:mt-7"
+            className="group relative isolate mt-5 inline-flex min-h-11 w-full min-w-48 items-center justify-center overflow-hidden rounded-full border border-copad-green bg-copad-green px-7 py-3.5 text-xs font-black text-white shadow-[0_14px_32px_rgba(0,163,196,.22)] transition duration-500 hover:-translate-y-1 hover:border-copad-deep hover:shadow-[0_20px_42px_rgba(6,79,120,.2)] sm:w-auto 2xl:mt-7"
           >
-            <span className="absolute inset-0 -z-10 -translate-x-full bg-copad-green transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0 rtl:translate-x-full rtl:group-hover:translate-x-0" />
+            <span className="absolute inset-0 -z-10 -translate-x-full bg-copad-deep transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0 rtl:translate-x-full rtl:group-hover:translate-x-0" />
             <span className="relative">{action}</span>
           </Link>
         </ScrollSceneItem>
