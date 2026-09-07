@@ -22,7 +22,7 @@ export function PartnershipHero({ locale, content }: { locale: Locale; content: 
   return <section ref={sectionRef} id="home" style={homeScrollSceneStyle(2)} className="relative min-h-svh bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
     <div className="relative min-h-[100svh] overflow-hidden lg:sticky lg:top-0 lg:h-[100svh]">
       <motion.div className="absolute inset-0" style={reducedMotion ? undefined : { scale: imageScale, x: imageX }}>
-        <Image src="/images/copad-partnership-executive.png" alt="COPAD partnership strategy meeting in Cairo" fill priority className="object-cover" sizes="100vw" />
+        <Image src="/images/copad-partnership-executive.png" alt="Copad partnership strategy meeting in Cairo" fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <motion.div className="absolute inset-0 bg-copad-deep" style={{ opacity: shade }} />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,79,120,.96)_0%,rgba(6,79,120,.72)_38%,rgba(6,79,120,.04)_76%)] rtl:bg-[linear-gradient(270deg,rgba(6,79,120,.96)_0%,rgba(6,79,120,.72)_38%,rgba(6,79,120,.04)_76%)]" />

@@ -31,6 +31,21 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
             <p className="text-[10px] font-black tracking-[.22em] text-copad-green uppercase">{ui.valuesEyebrow}</p>
             <h2 className={`mt-5 max-w-4xl text-pretty font-display text-[clamp(2.35rem,4vw,4.5rem)] leading-[1.08] font-bold text-copad-deep ${isArabic ? "tracking-normal" : "tracking-[-.035em]"}`}>{content.title}</h2>
             <p className="mt-7 max-w-2xl text-sm leading-7 text-copad-deep/64 sm:text-base sm:leading-8">{content.body}</p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {[ui.mission, ui.vision].map((item, index) => (
+                <motion.article
+                  key={item.label}
+                  initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: .45 }}
+                  transition={{ duration: .55, delay: index * .08, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded-[1.35rem] border border-copad-deep/10 bg-white p-5 shadow-[0_16px_36px_rgba(6,79,120,.06)]"
+                >
+                  <span className="text-[9px] font-black tracking-[.2em] text-copad-green uppercase">{item.label}</span>
+                  <p className="mt-3 text-sm leading-6 font-bold text-copad-deep sm:text-base sm:leading-7">{item.body}</p>
+                </motion.article>
+              ))}
+            </div>
             <p className="mt-6 max-w-xl border-s border-copad-green/45 ps-4 text-[9px] leading-5 font-bold text-copad-deep/38">{ui.regulators.join(isArabic ? " • " : " · ")}</p>
           </motion.div>
 
@@ -39,9 +54,12 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
               const active = reduceMotion || index <= activeStage;
               const current = index === activeStage;
               return (
-                <motion.li key={principle} initial={false} animate={{ opacity: active ? 1 : 0.28 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }} className={`relative flex min-h-32 items-center gap-6 border-b border-copad-deep/9 px-6 py-7 transition-colors duration-700 last:border-0 sm:min-h-36 sm:px-9 ${current ? "bg-copad-deep text-white" : "text-copad-deep"}`}>
+                <motion.li key={principle.title} initial={false} animate={{ opacity: active ? 1 : 0.28 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }} className={`relative flex min-h-32 items-center gap-6 border-b border-copad-deep/9 px-6 py-7 transition-colors duration-700 last:border-0 sm:min-h-36 sm:px-9 ${current ? "bg-copad-deep text-white" : "text-copad-deep"}`}>
                   <motion.span animate={{ scale: current ? 1 : 0.9 }} transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }} className={`grid size-10 shrink-0 place-items-center rounded-full border text-[9px] font-black ${current ? "border-copad-green bg-copad-green text-white" : "border-copad-green/28 text-copad-green"}`}>0{index + 1}</motion.span>
-                  <span className={`font-display text-xl font-bold sm:text-2xl ${isArabic ? "leading-[1.35]" : "leading-tight"}`}>{principle}</span>
+                  <span>
+                    <strong className={`block font-display text-xl font-bold sm:text-2xl ${isArabic ? "leading-[1.35]" : "leading-tight"}`}>{principle.title}</strong>
+                    <span className={`mt-2 block text-xs leading-6 sm:text-sm ${current ? "text-white/68" : "text-copad-deep/56"}`}>{principle.body}</span>
+                  </span>
                   <span aria-hidden="true" className={`absolute inset-y-0 start-0 w-1 bg-copad-green transition-transform duration-500 ${current ? "scale-y-100" : "scale-y-0"}`} />
                 </motion.li>
               );

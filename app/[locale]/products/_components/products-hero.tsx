@@ -40,9 +40,9 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
             <span aria-hidden="true" className="absolute inset-[8%] rounded-[50%] border border-white/10 [transform:rotateX(68deg)_translateZ(-30px)]" />
             <span aria-hidden="true" className="absolute inset-[16%] rounded-[50%] border border-copad-green/24 [transform:rotateX(68deg)_translateZ(20px)]" />
             <div className="absolute start-1/2 top-1/2 h-[82%] w-[38%] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] rtl:translate-x-1/2">
-              {content.blocks.map((block, index) => <SpectrumBand key={block.title} title={block.title} index={index} progress={scrollYProgress} driven={driven} />)}
+              {content.blocks.map((block, index) => <SpectrumBand key={block.title} title={block.title} index={index} count={content.blocks.length} progress={scrollYProgress} driven={driven} />)}
               <div className="absolute inset-x-[12%] top-[8%] bottom-[8%] rounded-full border border-white/20 bg-[linear-gradient(100deg,rgba(255,255,255,.18),rgba(0,163,196,.12)_38%,rgba(6,79,120,.84)_72%)] shadow-[0_38px_100px_rgba(0,0,0,.42),inset_-22px_-10px_38px_rgba(0,0,0,.25)] backdrop-blur-md [transform:translateZ(75px)]" />
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-[16%] text-center [transform:translateZ(105px)]"><span className="text-[8px] font-black tracking-[.25em] text-copad-green">COPAD / 04</span><strong className="font-display text-7xl leading-none font-normal tracking-[-.08em] sm:text-9xl">107</strong><span className="max-w-28 text-[8px] leading-4 font-black tracking-[.16em] text-white/52 uppercase">{ui.formulations}</span></div>
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-[16%] text-center [transform:translateZ(105px)]"><span className="text-[8px] font-black tracking-[.25em] text-copad-green">Copad / 0{content.blocks.length}</span><strong className="font-display text-7xl leading-none font-normal tracking-[-.08em] sm:text-9xl">107</strong><span className="max-w-28 text-[8px] leading-4 font-black tracking-[.16em] text-white/52 uppercase">{ui.formulations}</span></div>
             </div>
             {content.blocks.map((block, index) => <motion.div key={block.title} className={`absolute ${index===0?"start-[2%] top-[16%]":index===1?"end-[1%] top-[29%]":index===2?"start-[1%] bottom-[28%]":"end-[3%] bottom-[14%]"} max-w-36`} initial={reduceMotion?false:{opacity:0,scale:.75}} animate={{opacity:1,scale:1}} transition={{duration:.6,delay:.55+index*.1,ease}}><span className="block text-[8px] font-black tracking-[.16em] text-copad-green">0{index+1}</span><span className="mt-1 block text-[9px] leading-4 font-bold text-white/62">{block.title}</span></motion.div>)}
           </motion.div>
@@ -52,9 +52,10 @@ export function ProductsHero({ locale, content }: { locale: Locale; content: Sec
   </section>;
 }
 
-function SpectrumBand({ title, index, progress, driven }: { title: string; index: number; progress: ReturnType<typeof useScroll>["scrollYProgress"]; driven: boolean }) {
-  const shift = useTransform(progress, [.1 + index*.05, .48 + index*.04, 1], [0, (index-1.5)*38, (index-1.5)*54]);
-  const rotate = useTransform(progress, [0, 1], [(index-1.5)*2, (index-1.5)*8]);
+function SpectrumBand({ title, index, count, progress, driven }: { title: string; index: number; count: number; progress: ReturnType<typeof useScroll>["scrollYProgress"]; driven: boolean }) {
+  const centerOffset = index - (count - 1) / 2;
+  const shift = useTransform(progress, [.1 + index*.05, .48 + index*.04, 1], [0, centerOffset*38, centerOffset*54]);
+  const rotate = useTransform(progress, [0, 1], [centerOffset*2, centerOffset*8]);
   const colors = ["from-copad-green/70 to-copad-green/10", "from-white/36 to-white/6", "from-[#eef9ff]/35 to-transparent", "from-copad-sand/28 to-transparent"];
-  return <motion.span title={title} aria-hidden="true" className={`absolute inset-x-[-18%] h-[21%] rounded-full border border-white/16 bg-linear-to-r ${colors[index]} shadow-[0_15px_35px_rgba(0,0,0,.2)] backdrop-blur-sm`} style={{ top: `${12+index*20}%`, ...(driven ? { x: shift, rotateZ: rotate, z: index*18 } : { z: index*18 }) }} />;
+  return <motion.span title={title} aria-hidden="true" className={`absolute inset-x-[-18%] h-[30%] rounded-full border border-white/16 bg-linear-to-r ${colors[index]} shadow-[0_15px_35px_rgba(0,0,0,.2)] backdrop-blur-sm`} style={{ top: `${18+index*34}%`, ...(driven ? { x: shift, rotateZ: rotate, z: index*18 } : { z: index*18 }) }} />;
 }

@@ -70,7 +70,7 @@ export function PartnershipCategoryPage({ locale, slug }: { locale: Locale; slug
         <div className="relative order-1 min-h-[40svh] overflow-hidden lg:order-2 lg:min-h-full">
           <motion.div className="absolute -inset-y-10 inset-x-0" style={reduceMotion ? undefined : { y: imageY, scale: imageScale }}><Image src={data.image} alt="" fill priority quality={100} className="object-cover" sizes="(min-width:1024px) 58vw, 100vw" /></motion.div>
           <div className="absolute inset-0 bg-linear-to-t from-copad-deep/48 via-transparent to-copad-deep/8 lg:bg-linear-to-r lg:from-copad-deep/38 lg:via-transparent lg:to-transparent rtl:lg:bg-linear-to-l" />
-          <div className="absolute bottom-5 end-5 max-w-[calc(100%_-_2.5rem)] rounded-full border border-white/24 bg-copad-deep/28 px-4 py-2 text-[8px] font-black uppercase tracking-[.16em] backdrop-blur-xl sm:bottom-6 sm:end-6 sm:px-5 sm:tracking-[.2em]"><span className="sm:hidden">COPAD</span><span className="hidden sm:inline">{ui.mark}</span></div>
+          <div className="absolute bottom-5 end-5 max-w-[calc(100%_-_2.5rem)] rounded-full border border-white/24 bg-copad-deep/28 px-4 py-2 text-[8px] font-black uppercase tracking-[.16em] backdrop-blur-xl sm:bottom-6 sm:end-6 sm:px-5 sm:tracking-[.2em]"><span className="sm:hidden">Copad</span><span className="hidden sm:inline">{ui.mark}</span></div>
         </div>
       </div>
     </section>

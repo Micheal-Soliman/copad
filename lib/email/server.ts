@@ -36,7 +36,7 @@ function emailConfig() {
     user,
     password,
     recipient,
-    fromName: process.env.FORM_EMAIL_FROM_NAME?.trim() || "COPAD Website",
+    fromName: process.env.FORM_EMAIL_FROM_NAME?.trim() || "Copad Website",
   };
 }
 
@@ -76,7 +76,7 @@ export async function sendSubmissionEmail(message: SubmissionEmail) {
     replyTo: message.replyTo,
     subject: safeHeader(message.subject),
     text: `${message.heading}\n\n${text}`,
-    html: `<div style="background:#f4f9fc;padding:28px;font-family:Arial,sans-serif"><div style="max-width:720px;margin:auto;overflow:hidden;border:1px solid #dbe8ef;border-radius:20px;background:#fff"><div style="background:#064f78;padding:24px 28px;color:#fff"><div style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#24c7df">COPAD WEBSITE</div><h1 style="margin:10px 0 0;font-size:24px;line-height:1.25">${escapeHtml(message.heading)}</h1></div><table role="presentation" style="width:100%;border-collapse:collapse"><tbody>${htmlRows}</tbody></table></div></div>`,
+    html: `<div style="background:#f4f9fc;padding:28px;font-family:Arial,sans-serif"><div style="max-width:720px;margin:auto;overflow:hidden;border:1px solid #dbe8ef;border-radius:20px;background:#fff"><div style="background:#064f78;padding:24px 28px;color:#fff"><div style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#24c7df">Copad Website</div><h1 style="margin:10px 0 0;font-size:24px;line-height:1.25">${escapeHtml(message.heading)}</h1></div><table role="presentation" style="width:100%;border-collapse:collapse"><tbody>${htmlRows}</tbody></table></div></div>`,
     attachments: message.attachments,
   });
 }

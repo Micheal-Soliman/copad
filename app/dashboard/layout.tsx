@@ -23,7 +23,7 @@ const bukra = localFont({
 });
 
 export const metadata: Metadata = {
-  title: { default: "COPAD Content Dashboard", template: "%s | COPAD Dashboard" },
+  title: { default: "Copad Content Dashboard", template: "%s | Copad Dashboard" },
   robots: { index: false, follow: false },
 };
 

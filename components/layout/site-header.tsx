@@ -153,7 +153,7 @@ export function SiteHeader({ locale, transparent = false }: { locale: Locale; tr
               animate={reduceMotion ? undefined : { opacity: [0.018, 0.05, 0.018], scale: [0.98, 1.02, 0.98] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              COPAD
+              Copad
             </motion.span>
 
             <div className="relative z-10 flex h-[4.5rem] shrink-0 items-center justify-between border-b border-white/12 px-4 sm:h-20 sm:px-8">

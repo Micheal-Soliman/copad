@@ -115,7 +115,7 @@ export function HomeHero(props: HomeHeroProps) {
     <section ref={sectionRef} style={homeScrollSceneStyle(2)} onPointerMove={handlePointerMove} onPointerLeave={resetPointerLight} id="home" className="relative min-h-svh scroll-mt-20 bg-copad-deep text-white lg:h-[var(--scroll-scene-height)]">
       <div className="relative flex min-h-svh items-center overflow-hidden px-4 pt-24 pb-14 text-center sm:px-8 sm:pb-10 lg:sticky lg:top-0 lg:h-screen lg:px-12">
         <motion.div className="absolute inset-0 transform-gpu will-change-transform" style={motionEnabled ? { y: mediaY, scale: mediaScale } : undefined}>
-          <Image className="object-cover opacity-90 saturate-[.72] contrast-[1.04]" src="/images/copad-campus-hero.png" alt={ui.heroImageAlt} fill priority sizes="100vw" />
+          <Image className="object-cover object-[center_58%] opacity-90 saturate-[.82] contrast-[1.03]" src="/images/brand/copad-building-exterior.png" alt={ui.heroImageAlt} fill priority sizes="100vw" />
         </motion.div>
         <div className="absolute inset-0 bg-copad-deep/58 mix-blend-multiply" />
         <div className="absolute inset-0 bg-copad-green/16 mix-blend-color" />

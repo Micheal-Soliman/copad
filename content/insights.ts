@@ -32,7 +32,7 @@ export const seedInsights: Insight[] = [
     title: { en: "Building Quality into Every Manufacturing Stage", ar: "ترسيخ الجودة في كل مرحلة من مراحل التصنيع" },
     excerpt: { en: "Quality is a continuous commitment built into every process, decision, and production stage.", ar: "الجودة التزام مستمر يندمج في كل عملية وقرار ومرحلة إنتاج." },
     body: {
-      en: "Quality begins before production\n\nQuality starts with carefully selected materials, clear specifications, and processes designed to protect product performance. COPAD teams combine scientific review, documentation, and risk assessment before manufacturing begins.\n\nConsistency through every stage\n\nFrom preparation and production to packaging and release, every stage follows controlled procedures and documented quality checks. This integrated approach supports reliable medicines and continuous improvement across operations.",
+      en: "Quality begins before production\n\nQuality starts with carefully selected materials, clear specifications, and processes designed to protect product performance. Copad teams combine scientific review, documentation, and risk assessment before manufacturing begins.\n\nConsistency through every stage\n\nFrom preparation and production to packaging and release, every stage follows controlled procedures and documented quality checks. This integrated approach supports reliable medicines and continuous improvement across operations.",
       ar: "تبدأ الجودة قبل الإنتاج\n\nتنطلق الجودة من اختيار المواد بعناية ووضع مواصفات واضحة وتصميم عمليات تحافظ على أداء المنتج. وتجمع فرق كوباد بين المراجعة العلمية والتوثيق وتقييم المخاطر قبل بدء التصنيع.\n\nالثبات في كل مرحلة\n\nمن التحضير والإنتاج إلى التعبئة والإفراج، تتبع كل مرحلة إجراءات محكمة وفحوصات جودة موثقة. ويدعم هذا النهج المتكامل منتجات دوائية موثوقة والتحسين المستمر في العمليات.",
     },
   },
@@ -57,10 +57,10 @@ export const seedInsights: Insight[] = [
     publishedAt: "2026-05-12",
     readingMinutes: 3,
     coverImage: "/images/copad-campus-hero.png",
-    title: { en: "COPAD Expands Its Manufacturing Capabilities", ar: "كوباد توسّع قدراتها التصنيعية" },
+    title: { en: "Copad Expands Its Manufacturing Capabilities", ar: "كوباد توسّع قدراتها التصنيعية" },
     excerpt: { en: "Continued investment supports reliable production capacity and long-term partnerships.", ar: "استثمارات متواصلة تدعم الطاقة الإنتاجية الموثوقة والشراكات طويلة الأمد." },
     body: {
-      en: "Capacity built for responsible growth\n\nCOPAD continues to develop its manufacturing base through disciplined investment in people, systems, and production capability. The objective is consistent supply and dependable long-term operations.\n\nA platform for partnership\n\nExpanded capability also strengthens collaboration with distribution, export, and contract-manufacturing partners seeking a reliable regional platform.",
+      en: "Capacity built for responsible growth\n\nCopad continues to develop its manufacturing base through disciplined investment in people, systems, and production capability. The objective is consistent supply and dependable long-term operations.\n\nA platform for partnership\n\nExpanded capability also strengthens collaboration with distribution, export, and contract-manufacturing partners seeking a reliable regional platform.",
       ar: "طاقة تدعم النمو المسؤول\n\nتواصل كوباد تطوير قاعدتها التصنيعية من خلال الاستثمار المنضبط في الأفراد والأنظمة والقدرات الإنتاجية، بهدف دعم الإمداد المستمر وعمليات موثوقة على المدى الطويل.\n\nمنصة للشراكة\n\nكما تعزز القدرات المتنامية التعاون مع شركاء التوزيع والتصدير والتصنيع التعاقدي الباحثين عن منصة إقليمية موثوقة.",
     },
   },

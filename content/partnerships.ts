@@ -14,7 +14,7 @@ const english: Record<PartnershipSlug, PartnershipPageData> = {
   "distribution-partnerships": {
     eyebrow: "Partnership route · 01",
     title: "Distribution Partnerships",
-    intro: "Build reliable access to COPAD's pharmaceutical and consumer-health portfolio through an aligned, long-term distribution model.",
+    intro: "Build reliable access to Copad's pharmaceutical and consumer-health portfolio through an aligned, long-term distribution model.",
     image: "/images/partnerships/distribution-partnerships.png",
     highlights: ["Territory and channel alignment", "Portfolio and demand planning", "Supply and commercial coordination"],
     fields: [
@@ -42,7 +42,7 @@ const english: Record<PartnershipSlug, PartnershipPageData> = {
   },
   "contract-toll-manufacturing": {
     eyebrow: "Partnership route · 03", title: "Contract & Toll Manufacturing",
-    intro: "Discuss a manufacturing requirement with COPAD's technical and business-development teams, from dosage form to production scale.",
+    intro: "Discuss a manufacturing requirement with Copad's technical and business-development teams, from dosage form to production scale.",
     image: "/images/partnerships/contract-manufacturing.png",
     highlights: ["Technical feasibility review", "Quality and regulatory alignment", "Scale, timing, and transfer planning"],
     fields: [

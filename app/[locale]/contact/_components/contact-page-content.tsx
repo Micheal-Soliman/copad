@@ -17,7 +17,7 @@ export function ContactPageContent({ locale }: { locale: Locale }) {
       <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,172,208,.3),transparent_32%),linear-gradient(145deg,#075b85_0%,#075b85_58%,#096a96_100%)] rtl:bg-[radial-gradient(circle_at_18%_18%,rgba(0,172,208,.3),transparent_32%),linear-gradient(215deg,#075b85_0%,#075b85_58%,#096a96_100%)]" />
       <div aria-hidden="true" className="absolute -end-24 -bottom-56 size-[34rem] rounded-full border border-white/6" />
       <div className="relative mx-auto max-w-[1280px]">
-        <p className="text-[9px] font-black uppercase tracking-[.24em] text-copad-green">COPAD / {content.eyebrow}</p>
+        <p className="text-[9px] font-black uppercase tracking-[.24em] text-copad-green">Copad / {content.eyebrow}</p>
         <h1 className="mt-5 font-display text-[clamp(3.5rem,8vw,7.5rem)] leading-[.95] tracking-[-.055em] text-white">{content.title}</h1>
         <p className="mt-7 max-w-3xl text-base leading-8 text-white/64 sm:text-lg sm:leading-9">{content.intro}</p>
       </div>
@@ -46,7 +46,7 @@ export function ContactPageContent({ locale }: { locale: Locale }) {
 
     <section dir={ar ? "rtl" : "ltr"} className="bg-copad-sand px-4 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
       <div className="mx-auto max-w-[1280px]">
-        <p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">COPAD / {page.locationsEyebrow}</p>
+        <p className="text-[9px] font-black uppercase tracking-[.22em] text-copad-green">Copad / {page.locationsEyebrow}</p>
         <h2 className="mt-4 font-display text-[clamp(2.4rem,4vw,4.25rem)] leading-[1.03] tracking-[-.045em] text-copad-deep">{page.locationsTitle}</h2>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {page.locations.map((location, index) => (

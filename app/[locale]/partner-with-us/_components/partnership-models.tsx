@@ -36,7 +36,7 @@ function PartnershipModelRow({ block, index, locale }: { block: ContentBlock; in
         <Image src={images[index]} alt="" fill priority={index === 0} quality={100} className="object-cover" sizes="(min-width:1024px) 58vw, 100vw" />
       </motion.div>
       <div className={`absolute inset-0 ${dark ? "bg-linear-to-t from-copad-deep/78 via-transparent to-transparent" : "bg-linear-to-t from-white/28 via-transparent to-transparent"}`} />
-      <div className="absolute start-6 top-6 rounded-full border border-white/30 bg-copad-deep/35 px-4 py-2 text-[8px] font-black uppercase tracking-[.2em] text-white backdrop-blur-md">COPAD / 0{index + 1}</div>
+      <div className="absolute start-6 top-6 rounded-full border border-white/30 bg-copad-deep/35 px-4 py-2 text-[8px] font-black uppercase tracking-[.2em] text-white backdrop-blur-md">Copad / 0{index + 1}</div>
     </div>
 
     <motion.div style={reduceMotion ? undefined : { y: copyY, opacity: copyOpacity }} className={`relative flex flex-col justify-between p-7 sm:p-10 lg:col-span-5 lg:p-12 ${index % 2 ? "lg:order-1" : ""}`}>

@@ -37,7 +37,7 @@ async function storeSubmission(table: "contact_messages" | "career_applications"
     });
   } catch (error) {
     // Email delivery is the primary submission path. A temporary CMS issue must not
-    // make visitors resend an inquiry that has already reached the COPAD inbox.
+    // make visitors resend an inquiry that has already reached the Copad inbox.
     console.error(`Could not store ${table} submission in Supabase.`, error);
   }
 }
@@ -54,7 +54,7 @@ export async function submitContactAction(_: SubmissionState, formData: FormData
       locale: localeFrom(formData),
     };
     await sendSubmissionEmail({
-      subject: `[COPAD Website] Contact — ${payload.category}`,
+      subject: `[Copad Website] Contact — ${payload.category}`,
       heading: "New contact inquiry",
       replyTo: email,
       fields: [
@@ -96,7 +96,7 @@ export async function submitCareerApplicationAction(_: SubmissionState, formData
       locale: localeFrom(formData),
     };
     await sendSubmissionEmail({
-      subject: `[COPAD Careers] ${payload.vacancy_title} — ${payload.name}`,
+      subject: `[Copad Careers] ${payload.vacancy_title} — ${payload.name}`,
       heading: "New career application",
       replyTo: email,
       fields: [
@@ -140,7 +140,7 @@ export async function submitPartnershipInquiryAction(_: SubmissionState, formDat
     const contact = values.find((field) => field.name === "contact")?.value ?? "";
     const summary = values.filter((field) => field.name !== "brief").map((field) => `${field.label}: ${field.value}`).join("\n\n");
     await sendSubmissionEmail({
-      subject: `[COPAD Partnerships] ${data.title} — ${contact}`,
+      subject: `[Copad Partnerships] ${data.title} — ${contact}`,
       heading: `New partnership inquiry: ${data.title}`,
       replyTo: email,
       fields: [

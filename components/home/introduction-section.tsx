@@ -66,9 +66,9 @@ export function IntroductionSection({
             cursorLabel={ui.interactionLabels.view}
           >
             <Image
-              className="object-cover transition-transform duration-1000 hover:scale-[1.035]"
-              src="/images/copad-campus-hero.png"
-              alt={title}
+              className="object-cover object-center transition-transform duration-1000 hover:scale-[1.035]"
+              src="/images/brand/copad-office-signage.png"
+              alt={ui.introductionImageAlt}
               fill
               sizes="(max-width: 960px) 100vw, 44vw"
             />

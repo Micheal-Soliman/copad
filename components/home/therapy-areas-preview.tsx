@@ -45,7 +45,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
             cursorLabel={ui.interactionLabels.view}
           >
             <Image
-              src="/images/about/about-researcher.png"
+              src="/images/brand/copad-scientist-microscope.jpeg"
               alt={ui.therapyImageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 48vw"

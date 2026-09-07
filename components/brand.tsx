@@ -15,12 +15,12 @@ export function Brand({
     <Link
       className="group relative inline-flex h-10 w-[7.75rem] shrink-0 overflow-hidden rounded-lg focus:outline-none sm:h-11 sm:w-[8.75rem] xl:h-12 xl:w-[9.5rem]"
       href={`/${locale}`}
-      aria-label="COPAD Pharma Egypt home"
+      aria-label="Copad Pharma Egypt home"
       onClick={onClick}
     >
       <Image
         src="/logo.png"
-        alt="COPAD Pharma"
+        alt="Copad Pharma"
         width={4500}
         height={4500}
         priority

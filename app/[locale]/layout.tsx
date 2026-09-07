@@ -45,8 +45,8 @@ const bukra = localFont({
 });
 
 export const metadata: Metadata = {
-  title: { default: "COPAD Pharma Egypt", template: "%s | COPAD Pharma Egypt" },
-  description: "COPAD Pharma Egypt corporate website.",
+  title: { default: "Copad Pharma Egypt", template: "%s | Copad Pharma Egypt" },
+  description: "Copad Pharma Egypt corporate website.",
 };
 
 export function generateStaticParams() {

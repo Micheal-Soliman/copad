@@ -48,6 +48,7 @@ export type HomeContent = {
 export type UiCopy = {
   home: {
     heroImageAlt: string;
+    introductionImageAlt: string;
     sectionNavigationLabel: string;
     sectionNavigation: Array<{ id: string; label: string }>;
     interactionLabels: { view: string; open: string; go: string };
@@ -88,7 +89,9 @@ export type UiCopy = {
     distinctionImageBody: string;
     specialties: string[];
     valuesEyebrow: string;
-    principles: string[];
+    mission: { label: string; body: string };
+    vision: { label: string; body: string };
+    principles: Array<{ title: string; body: string }>;
     complianceEyebrow: string;
     regulators: string[];
   };
