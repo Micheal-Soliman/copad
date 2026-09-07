@@ -8,6 +8,7 @@ import { AboutHero } from "./about-hero";
 import { AboutJourneyLine } from "./about-journey-line";
 import { CorporateValuesSection } from "./corporate-values-section";
 import { DifferentiatorsSection } from "./differentiators-section";
+import { LeadershipSection } from "./leadership-section";
 
 export function AboutPageContent({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale];
@@ -22,6 +23,7 @@ export function AboutPageContent({ locale }: { locale: Locale }) {
       <SnapshotBar locale={locale} intro={copy.home.body} sectionId="history" homepage={false} />
       <DifferentiatorsSection locale={locale} content={distinction} />
       <CorporateValuesSection locale={locale} content={values} />
+      <LeadershipSection locale={locale} />
       <AboutJourneyLine />
       <HomeSectionNavigator label={copy.ui.about.sectionNavigationLabel} items={copy.ui.about.sectionNavigation.filter((item) => item.id !== "direction")} />
       <SiteFooter locale={locale} />

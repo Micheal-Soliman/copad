@@ -94,6 +94,11 @@ export type UiCopy = {
     principles: Array<{ title: string; body: string }>;
     complianceEyebrow: string;
     regulators: string[];
+    leadershipEyebrow: string;
+    leadershipTitle: string;
+    leadershipBody: string;
+    leadershipPending: string;
+    leaders: Array<{ role: string; scope: string }>;
   };
   divisions: {
     sectionNavigationLabel: string;

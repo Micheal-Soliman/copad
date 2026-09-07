@@ -50,6 +50,7 @@ const english: SiteCopy = {
         { id: "direction", label: "Direction" },
         { id: "specialization", label: "Specialization" },
         { id: "values", label: "Values" },
+        { id: "leadership", label: "Leadership" },
       ],
       heroFacts: [
         { label: "Established", value: "1989" },
@@ -80,6 +81,16 @@ const english: SiteCopy = {
       ],
       complianceEyebrow: "Compliance frameworks",
       regulators: ["Egyptian Drug Authority", "National Food Safety Authority", "Ministry of Health"],
+      leadershipEyebrow: "Management Team",
+      leadershipTitle: "Leadership with clear accountability",
+      leadershipBody: "This preview establishes the final management-team presentation. Approved names, portraits, and confirmed senior titles can be added without changing the section structure.",
+      leadershipPending: "Name and portrait pending final approval",
+      leaders: [
+        { role: "Chief Executive Officer", scope: "Executive leadership" },
+        { role: "Senior Leadership", scope: "Position 01" },
+        { role: "Senior Leadership", scope: "Position 02" },
+        { role: "Senior Leadership", scope: "Position 03" },
+      ],
     },
     divisions: {
       sectionNavigationLabel: "Divisions page chapters",
@@ -253,6 +264,7 @@ const arabic: SiteCopy = {
         { id: "direction", label: "الاتجاه" },
         { id: "specialization", label: "التخصص" },
         { id: "values", label: "القيم" },
+        { id: "leadership", label: "الإدارة" },
       ],
       heroFacts: [
         { label: "تأسست", value: "1989" },
@@ -283,6 +295,16 @@ const arabic: SiteCopy = {
       ],
       complianceEyebrow: "أطر الامتثال",
       regulators: ["هيئة الدواء المصرية", "الهيئة القومية لسلامة الغذاء", "وزارة الصحة"],
+      leadershipEyebrow: "فريق الإدارة",
+      leadershipTitle: "قيادة بمسؤوليات واضحة",
+      leadershipBody: "يعرض هذا النموذج الشكل النهائي المقترح لفريق الإدارة، ويمكن إضافة الأسماء والصور والمسميات الوظيفية المعتمدة لاحقًا دون تغيير تصميم القسم.",
+      leadershipPending: "الاسم والصورة بانتظار الاعتماد النهائي",
+      leaders: [
+        { role: "الرئيس التنفيذي", scope: "القيادة التنفيذية" },
+        { role: "الإدارة العليا", scope: "المنصب 01" },
+        { role: "الإدارة العليا", scope: "المنصب 02" },
+        { role: "الإدارة العليا", scope: "المنصب 03" },
+      ],
     },
     divisions: {
       sectionNavigationLabel: "فصول صفحة القطاعات",
