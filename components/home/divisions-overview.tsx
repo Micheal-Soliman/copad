@@ -8,6 +8,7 @@ import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import { siteCopy } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { getUiCopy } from "@/content/ui";
+import { getDivisionVisualStyle } from "@/lib/division-visuals";
 
 type Division = {
   title: string;
@@ -22,8 +23,6 @@ type DivisionsOverviewProps = {
   items: Division[];
   action: string;
 };
-
-const positions = ["0%", "33.333%", "66.666%", "100%"];
 
 export function DivisionsOverview({ locale, eyebrow, title, body, items, action }: DivisionsOverviewProps) {
   const [active, setActive] = useState(0);
@@ -77,13 +76,13 @@ export function DivisionsOverview({ locale, eyebrow, title, body, items, action 
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 1 : 1.08, filter: isActive ? "brightness(1) saturate(1)" : "brightness(.72) saturate(.72)" }}
                     transition={reduceMotion ? { duration: 0 } : { duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "400% auto", backgroundPosition: `${positions[index]} center` }}
+                    style={getDivisionVisualStyle(index)}
                   />
                   <motion.div
                     className="absolute inset-0 bg-no-repeat will-change-transform"
                     animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1.015 : 1.08, filter: isActive ? "saturate(1.08)" : "saturate(1)" }}
                     transition={reduceMotion ? { duration: 0 } : { duration: 0.84, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ backgroundImage: "url('/images/copad-divisions-atlas.png')", backgroundSize: "400% auto", backgroundPosition: `${positions[index]} center` }}
+                    style={getDivisionVisualStyle(index)}
                   />
                 </div>
                 <div aria-hidden="true" className={`absolute inset-0 bg-linear-to-t from-copad-deep via-copad-deep/35 to-transparent transition-opacity duration-500 ${isActive ? "opacity-88" : "opacity-95"}`} />

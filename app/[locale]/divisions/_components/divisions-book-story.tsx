@@ -8,13 +8,13 @@ import { siteCopy } from "@/content/site";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle, scrollSceneIndex, scrollSystem } from "@/lib/motion/scroll-system";
+import { getDivisionVisualStyle } from "@/lib/division-visuals";
 
 type DivisionsBookStoryProps = {
   locale: Locale;
   divisions: ContentBlock[];
 };
 
-const imagePositions = ["0%", "33.333%", "66.666%", "100%"];
 const ease = [0.22, 1, 0.36, 1] as const;
 const fadeEase = [0.4, 0, 0.2, 1] as const;
 
@@ -100,8 +100,8 @@ export function DivisionsBookStory({ locale, divisions }: DivisionsBookStoryProp
                   animate={{ opacity: 1, clipPath: "inset(0 0 0 0)", scale: 1 }}
                   exit={reduceMotion ? undefined : { opacity: 0, scale: 1.012 }}
                   transition={{ duration: reduceMotion ? 0 : 0.82, ease }}
-                  className="absolute inset-0 transform-gpu bg-[url('/images/copad-divisions-atlas.png')] bg-no-repeat will-change-[clip-path,transform,opacity]"
-                  style={{ backgroundSize: "400% auto", backgroundPosition: `${imagePositions[activeIndex]} center` }}
+                  className="absolute inset-0 transform-gpu bg-no-repeat will-change-[clip-path,transform,opacity]"
+                  style={getDivisionVisualStyle(activeIndex)}
                 />
               </AnimatePresence>
               <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-copad-deep/76 via-copad-deep/5 to-transparent" />

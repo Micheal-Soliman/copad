@@ -70,7 +70,7 @@ export function TherapyAreasHero({ locale, title, intro, areas }: TherapyAreasHe
               className="absolute inset-0 overflow-hidden rounded-[2rem] border border-white/18 bg-copad-white text-copad-deep shadow-[0_40px_110px_rgba(0,0,0,.34)] [transform-style:preserve-3d]"
             >
               <motion.div className="relative h-[41%] overflow-hidden bg-copad-deep sm:h-[46%]">
-                <motion.div aria-hidden="true" className="absolute inset-0 bg-[url('/images/copad-divisions-atlas.png')] bg-[length:auto_100%] bg-left bg-no-repeat" style={scrollDriven ? { scale: photoScale } : undefined} />
+                <motion.div aria-hidden="true" className="absolute inset-0 bg-[url('/images/brand/copad-laboratory-team.png')] bg-cover bg-center bg-no-repeat" style={scrollDriven ? { scale: photoScale } : undefined} />
                 <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,79,120,.72),rgba(6,79,120,.08)_58%,rgba(6,79,120,.2)),linear-gradient(0deg,rgba(6,79,120,.5),transparent_55%)]" />
                 <div className="absolute inset-x-5 top-5 flex items-center justify-between sm:inset-x-7 sm:top-7">
                   <span className="rounded-full border border-white/24 bg-copad-deep/45 px-3 py-2 text-[8px] font-black tracking-[.2em] text-white/78 uppercase backdrop-blur-md">{sharedUi.portfolioMark}</span>

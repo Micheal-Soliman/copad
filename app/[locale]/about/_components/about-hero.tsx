@@ -94,7 +94,7 @@ export function AboutHero({ locale, title, intro }: AboutHeroProps) {
           <motion.div className="absolute inset-0" style={motionEnabled ? { scale: imageScale } : undefined}>
           <Image
             className="object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.025]"
-            src="/images/brand/copad-scientist-microscope.jpeg"
+            src="/images/brand/copad-laboratory-team.png"
             alt={ui.heroImageAlt}
             fill
             priority

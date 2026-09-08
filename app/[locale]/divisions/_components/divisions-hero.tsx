@@ -1,12 +1,12 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
-import Image from "next/image";
 import { useRef } from "react";
 import { useDesktopLayout } from "@/components/motion/use-desktop-layout";
 import type { ContentBlock } from "@/content/types";
 import type { Locale } from "@/lib/i18n";
 import { homeScrollSceneStyle } from "@/lib/motion/scroll-system";
+import { divisionVisuals } from "@/lib/division-visuals";
 
 type DivisionsHeroProps = {
   locale: Locale;
@@ -31,15 +31,14 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
   return (
     <section ref={sectionRef} id="home" style={homeScrollSceneStyle(3)} className="relative bg-copad-deep lg:h-[var(--scroll-scene-height)]">
       <div className="relative isolate min-h-[100svh] overflow-hidden bg-copad-deep text-white lg:sticky lg:top-0 lg:h-screen">
-        <motion.div aria-hidden="true" className="absolute inset-0 -z-20" style={motionEnabled ? { scale: imageScale } : undefined}>
-          <Image
-            src="/images/copad-divisions-atlas.png"
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+        <motion.div aria-hidden="true" className="absolute inset-0 -z-20 grid grid-cols-4 overflow-hidden" style={motionEnabled ? { scale: imageScale } : undefined}>
+          {divisionVisuals.map((visual, index) => (
+            <span
+              key={`${visual.src}-${index}`}
+              className="block h-full bg-no-repeat"
+              style={{ backgroundImage: `url('${visual.src}')`, backgroundSize: visual.size, backgroundPosition: visual.position }}
+            />
+          ))}
         </motion.div>
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(6,79,120,.55),rgba(6,79,120,.84)),linear-gradient(90deg,rgba(6,79,120,.92),transparent_50%,rgba(6,79,120,.5))]" />
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_42%,rgba(142,220,245,.08)_0%,rgba(6,79,120,.2)_46%,rgba(6,79,120,.68)_100%)]" />
