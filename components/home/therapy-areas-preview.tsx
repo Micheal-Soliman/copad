@@ -66,7 +66,7 @@ export function TherapyAreasPreview({ locale, eyebrow, title, body, action }: Th
           dir={locale === "ar" ? "rtl" : "ltr"}
           className="lg:col-start-1 lg:row-start-1"
         >
-          <p className="border-s-2 border-copad-green ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
+          <p className="border-s-2 border-copad-red ps-4 text-[10px] font-black tracking-[0.22em] text-copad-green uppercase">{eyebrow}</p>
           <h2 className="mt-4 max-w-4xl text-pretty font-display text-[clamp(2.3rem,3.7vw,4.25rem)] leading-[1.06] font-bold tracking-[-0.035em] text-copad-deep">{title}</h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-copad-deep/66 sm:mt-7 lg:mt-5 lg:text-[15px] lg:leading-7 2xl:text-lg 2xl:leading-9">{body}</p>
 

@@ -40,7 +40,7 @@ export function PartnershipHero({ locale, content }: { locale: Locale; content: 
             <span>{ui.spectrum}</span>
             <span className="shrink-0">{ui.mark}</span>
           </div>
-          <div className="h-[2px] bg-white/20"><motion.span className="block h-full origin-start bg-copad-green rtl:origin-right" style={{ scaleX: rule }} /></div>
+          <div className="h-[2px] bg-white/20"><motion.span className="block h-full origin-start bg-linear-to-r from-copad-red via-copad-green to-copad-sky rtl:origin-right" style={{ scaleX: rule }} /></div>
         </div>
       </div>
     </div>

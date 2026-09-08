@@ -60,7 +60,7 @@ export function CorporateValuesSection({ locale, content }: { locale: Locale; co
                     <strong className={`block font-display text-xl font-bold sm:text-2xl ${isArabic ? "leading-[1.35]" : "leading-tight"}`}>{principle.title}</strong>
                     <span className={`mt-2 block text-xs leading-6 sm:text-sm ${current ? "text-white/68" : "text-copad-deep/56"}`}>{principle.body}</span>
                   </span>
-                  <span aria-hidden="true" className={`absolute inset-y-0 start-0 w-1 bg-copad-green transition-transform duration-500 ${current ? "scale-y-100" : "scale-y-0"}`} />
+                  <span aria-hidden="true" className={`absolute inset-y-0 start-0 w-1 bg-linear-to-b from-copad-red via-copad-green to-copad-sky transition-transform duration-500 ${current ? "scale-y-100" : "scale-y-0"}`} />
                 </motion.li>
               );
             })}

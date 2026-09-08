@@ -58,7 +58,7 @@ export function DivisionsHero({ locale, title, intro, blocks }: DivisionsHeroPro
 
           <div
             aria-label={intro}
-            className="relative z-10 mt-7 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/72 sm:mt-9 sm:text-base sm:leading-8 lg:text-lg lg:leading-9"
+            className="relative z-10 mt-7 max-w-2xl border-s-2 border-copad-red ps-5 text-sm leading-7 text-white/72 sm:mt-9 sm:text-base sm:leading-8 lg:text-lg lg:leading-9"
           >
             {introLines.map((line, index) => (
               <HeroIntroLine key={`${line}-${index}`} index={index} reduceMotion={Boolean(reduceMotion)}>

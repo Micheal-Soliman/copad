@@ -44,7 +44,7 @@ export function ManufacturingHero({ locale, content }: { locale: Locale; content
             >
               {content.title}
             </motion.h1>
-            <motion.div className="mt-7 max-w-2xl border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/74 sm:text-base sm:leading-8" style={driven ? { opacity: copyOpacity, y: copyY } : undefined}>
+            <motion.div className="mt-7 max-w-2xl border-s-2 border-copad-red ps-5 text-sm leading-7 text-white/74 sm:text-base sm:leading-8" style={driven ? { opacity: copyOpacity, y: copyY } : undefined}>
               {splitIntro(content.intro).map((line, index) => <ScrollCopyLine key={line} index={index} progress={scrollYProgress} driven={driven}>{line}</ScrollCopyLine>)}
             </motion.div>
           </div>
@@ -96,7 +96,7 @@ function FactoryBuildSequence({ locale, progress }: { locale: Locale; progress: 
 
           <motion.div className="absolute inset-x-7 bottom-7" style={{ opacity: chromeOpacity }}>
             <div className="mb-3 flex items-center justify-between text-[9px] font-black tracking-[.18em] text-white uppercase"><span>{ui.blueprint}</span><span className="text-copad-green">04 / 04</span></div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/17"><motion.span className="block h-full origin-left rounded-full bg-copad-green shadow-[0_0_18px_rgba(0,163,196,.85)] rtl:origin-right" style={{ scaleX: completion }} /></div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-white/17"><motion.span className="block h-full origin-left rounded-full bg-linear-to-r from-copad-red via-copad-green to-copad-sky shadow-[0_0_18px_rgba(0,163,196,.7)] rtl:origin-right" style={{ scaleX: completion }} /></div>
           </motion.div>
         </motion.div>
       </div>

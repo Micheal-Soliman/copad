@@ -49,7 +49,7 @@ function LeaderCard({ leader, pending, index, featured = false, reduceMotion }: 
         <h3 className={`${featured ? "mt-3 text-2xl sm:text-3xl" : "mt-2 text-lg sm:text-xl"} font-display leading-tight font-bold tracking-[-.025em] text-copad-deep`}>{leader.role}</h3>
         <p className="mt-3 text-[10px] leading-5 font-bold text-copad-deep/38">{pending}</p>
       </div>
-      <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-copad-green transition-transform duration-700 group-hover:scale-x-100 rtl:origin-right" />
+      <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-linear-to-r from-copad-red via-copad-green to-copad-sky transition-transform duration-700 group-hover:scale-x-100 rtl:origin-right" />
     </motion.article>
   );
 }

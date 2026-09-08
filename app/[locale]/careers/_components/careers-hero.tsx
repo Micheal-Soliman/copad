@@ -28,7 +28,7 @@ export function CareersHero({ locale, content }: { locale: Locale; content: Sect
           <h1 className={`${isArabic ? "font-sans font-black" : "font-display"} mt-6 max-w-[12ch] text-[clamp(3.8rem,11vw,6.8rem)] leading-[.98] tracking-[-.055em]`}>{content.title}</h1>
           <p className="mt-8 max-w-2xl text-sm leading-7 text-white/72 sm:text-lg sm:leading-9">{content.intro}</p>
         </motion.div>
-        <div className="absolute inset-x-5 bottom-8 sm:inset-x-8 lg:inset-x-12"><div className="mb-4 flex justify-between text-[8px] font-black uppercase tracking-[.2em] text-white/50"><span>{ui.disciplines}</span><span>{ui.scroll}</span></div><div className="h-[2px] bg-white/16"><motion.span className="block h-full origin-start bg-copad-green rtl:origin-right" style={{ scaleX: reveal }} /></div></div>
+        <div className="absolute inset-x-5 bottom-8 sm:inset-x-8 lg:inset-x-12"><div className="mb-4 flex justify-between text-[8px] font-black uppercase tracking-[.2em] text-white/50"><span>{ui.disciplines}</span><span>{ui.scroll}</span></div><div className="h-[2px] bg-white/16"><motion.span className="block h-full origin-start bg-linear-to-r from-copad-red via-copad-green to-copad-sky rtl:origin-right" style={{ scaleX: reveal }} /></div></div>
       </div>
     </div>
   </section>;

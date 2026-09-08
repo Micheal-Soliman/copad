@@ -38,7 +38,7 @@ export function InsightsHero({ locale, content }: { locale: Locale; content: Sec
             <p className="text-[9px] font-black tracking-[.24em] text-copad-green uppercase">{ui.library}</p>
           </motion.div>
           <motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.12, ease }} className="mt-5 font-display text-[clamp(3.75rem,15vw,6.25rem)] leading-[.95] tracking-[-.05em] lg:text-[clamp(4.75rem,6.5vw,6.8rem)]">{content.title}</motion.h1>
-          <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.28, ease }} className="mt-7 max-w-lg border-s-2 border-copad-green ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8">{content.intro}</motion.p>
+          <motion.p initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.78, delay: 0.28, ease }} className="mt-7 max-w-lg border-s-2 border-copad-red ps-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8">{content.intro}</motion.p>
         </motion.div>
 
         <motion.div className="relative mx-auto h-[22rem] w-full max-w-[59rem] sm:h-[33rem] lg:h-[min(35rem,calc(100vh-7.8rem))] lg:min-h-[29rem]" style={scrollDriven ? { scale: bookScale, rotateZ: bookRotate } : undefined}>
